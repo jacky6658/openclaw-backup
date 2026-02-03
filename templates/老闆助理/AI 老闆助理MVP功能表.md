@@ -32,8 +32,8 @@
 
 - Drive 檔案操作（`gog drive`）
   - **實際案例**：
-    - 將本機 PDF（美德-公司簡介）上傳至 Google Drive
-    - 產生公開連結並貼到「美德醫療集團獵頭電話會議」行事曆備註
+    - 將本機 PDF 上傳至 Google Drive
+    - 產生公開連結並貼到行事曆備註
     - 會議提醒時可直接回傳該連結
   - 搜尋檔案（`search`）、取得 metadata（`get`）、取得連結（`url`）
   - Share 檔案：`gog drive share <fileId> --email 老闆 --role writer`
