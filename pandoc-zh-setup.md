@@ -84,6 +84,19 @@ pandoc 檔案.md -o 檔案.pdf \
 
 ---
 
+## 6) 最小測試檔（建議先跑一次）
+
+```bash
+cat > 測試.md <<'EOF'
+# 測試標題
+這是一段中文測試。
+EOF
+
+pandoc 測試.md -o 測試.pdf --pdf-engine=xelatex -V mainfont="PingFang TC"
+```
+
+---
+
 ## ✅ 完成標準
 
 你能成功執行以下指令，且 PDF 中文顯示正常，即完成：
