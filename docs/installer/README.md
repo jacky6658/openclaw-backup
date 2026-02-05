@@ -14,3 +14,11 @@
 - M1：安裝器只負責「安裝 OpenClaw + 驗證」
 - M2：安裝後提供「開啟 Dashboard」但不自動啟動 gateway（按下才啟動）
 - M3：UI Wizard：填 Telegram token / API key（需要明確確認才寫入/重啟）
+
+## macOS（未簽章/未公證）安裝提醒
+如果沒有 Apple Developer 帳號做簽章與 notarization：
+- 第一次雙擊 PKG 可能被 Gatekeeper 擋
+- 解法：到「系統設定 → 隱私權與安全性」往下滑，會看到『已阻擋某某安裝器』→ 點「仍要打開」
+- 或：右鍵點 PKG → 打開（Open）→ 再確認一次
+
+> 正式商品化建議：後續補上簽章 + notarization（否則一般用戶會被擋，體驗不夠一鍵）。

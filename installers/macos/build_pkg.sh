@@ -16,7 +16,11 @@ IDENTIFIER="ai.openclaw.installer"
 VERSION="0.1.0"
 PKG_NAME="OpenClaw-Installer-macOS-${VERSION}.pkg"
 
+EMPTY_ROOT="$ROOT_DIR/pkg/empty-root"
+mkdir -p "$EMPTY_ROOT"
+
 pkgbuild \
+  --root "$EMPTY_ROOT" \
   --identifier "$IDENTIFIER" \
   --version "$VERSION" \
   --scripts "$SCRIPTS_DIR" \
