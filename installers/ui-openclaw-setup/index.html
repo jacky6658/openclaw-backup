@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="/src/styles.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OpenClaw Setup</title>
+    <script type="module" src="/src/main.ts" defer></script>
+  </head>
+
+  <body>
+    <main class="container">
+      <header class="header">
+        <h1>OpenClaw Setup</h1>
+        <p class="sub">給完全不會終端機的新手：連上自己的 Telegram Bot + OpenAI。</p>
+      </header>
+
+      <section class="card">
+        <h2>1) 檢查安裝狀態</h2>
+        <button id="btn-check" type="button">檢查 OpenClaw</button>
+        <pre id="check-result" class="pre"></pre>
+      </section>
+
+      <section class="card">
+        <h2>2) 填入必要資訊</h2>
+        <form id="form-inputs" class="form">
+          <label>
+            Telegram Bot Token
+            <input id="telegram-token" type="password" autocomplete="off" placeholder="123456:ABC..." />
+          </label>
+
+          <label>
+            OpenAI API Key
+            <input id="openai-key" type="password" autocomplete="off" placeholder="sk-..." />
+          </label>
+
+          <div class="row">
+            <button id="btn-preview" type="button">預覽變更</button>
+            <button id="btn-apply" type="button">套用設定（先備份）</button>
+          </div>
+        </form>
+
+        <pre id="preview" class="pre"></pre>
+      </section>
+
+      <section class="card">
+        <h2>3) 測試與啟動（可選）</h2>
+        <div class="row">
+          <button id="btn-status" type="button">執行 openclaw status</button>
+          <button id="btn-start-gateway" type="button">啟動 gateway（需要你確認）</button>
+        </div>
+        <pre id="status-out" class="pre"></pre>
+      </section>
+
+      <footer class="footer">
+        <p class="note">安全原則：本 App 不會自動啟動/重啟 gateway，也不會自動送測試訊息。所有動作都需要你按下按鈕。</p>
+      </footer>
+    </main>
+  </body>
+</html>
