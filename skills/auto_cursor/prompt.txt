@@ -1,0 +1,9 @@
+cat > /Users/user/clawd/skills/auto_cursor/prompt.txt << 'EOF'
+幫我做一個前端網站 demo（HTML/CSS/JS），包含：
+1) hero section + CTA button
+2) 3 個功能卡片
+3) 聯絡表單（前端驗證即可，不真的送出）
+4) 深色模式切換
+輸出：index.html、style.css、script.js
+目錄：/Users/user/clawd/demo_site/
+EOF

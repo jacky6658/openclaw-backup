@@ -1,0 +1,6 @@
+{
+  "name": "pdf_generate",
+  "description": "Convert markdown file to PDF and open it",
+  "args": ["input_md", "output_pdf"]
+}
+

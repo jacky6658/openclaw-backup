@@ -1,0 +1,192 @@
+{
+  "name": "LINE ↔ Clawdbot (AI助理 v4)",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "39333e40-ceb1-4c5a-9bb5-08deb87e29a3",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "id": "webhook-node",
+      "name": "LINE Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [250, 300],
+      "webhookId": "39333e40-ceb1-4c5a-9bb5-08deb87e29a3"
+    },
+    {
+      "parameters": {
+        "jsCode": "// 解析 LINE 訊息\nconst body = $input.first().json.body || $input.first().json;\nconst events = body.events || [];\n\nif (events.length === 0) {\n  return [{ json: { skip: true } }];\n}\n\nconst event = events[0];\n\n// 只處理文字訊息\nif (event.type !== 'message' || event.message.type !== 'text') {\n  return [{ json: { skip: true } }];\n}\n\n// 取得發送目標 (群組 > 聊天室 > 個人)\nlet targetId = event.source.groupId || event.source.roomId || event.source.userId;\nlet targetType = event.source.groupId ? 'group' : (event.source.roomId ? 'room' : 'user');\n\nreturn [{\n  json: {\n    targetId: targetId,\n    targetType: targetType,\n    userId: event.source.userId,\n    text: event.message.text,\n    timestamp: event.timestamp,\n    skip: false\n  }\n}];"
+      },
+      "id": "parse-line-node",
+      "name": "解析 LINE 訊息",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [470, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "condition-1",
+              "leftValue": "={{ $json.skip }}",
+              "rightValue": false,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "if-node",
+      "name": "是否處理",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [690, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://cyber-commented-exemption-exception.trycloudflare.com/v1/chat/completions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer b2a08c1a3e70e75f03ecb1404e41da32b5eca2e51545e380"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"sonnet\",\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": {{ JSON.stringify($json.text) }}\n    }\n  ]\n}",
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "id": "clawdbot-node",
+      "name": "呼叫 Clawdbot",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [910, 200]
+    },
+    {
+      "parameters": {
+        "jsCode": "// 解析 Clawdbot 回覆\nconst response = $input.first().json;\nconst parseNode = $('解析 LINE 訊息').first().json;\n\nlet replyText = '';\nif (response.choices && response.choices[0] && response.choices[0].message) {\n  replyText = response.choices[0].message.content;\n} else if (response.error) {\n  replyText = '抱歉，AI 暫時無法回覆：' + (response.error.message || '未知錯誤');\n} else {\n  replyText = '抱歉，我暫時無法回覆。';\n}\n\n// LINE 訊息限制 5000 字元\nif (replyText.length > 4990) {\n  replyText = replyText.substring(0, 4990) + '...';\n}\n\nreturn [{\n  json: {\n    targetId: parseNode.targetId,\n    targetType: parseNode.targetType,\n    replyText: replyText\n  }\n}];"
+      },
+      "id": "parse-response-node",
+      "name": "解析 AI 回覆",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1130, 200]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.line.me/v2/bot/message/push",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer zrtBQ4X9nJ66yuHEGnmodFx5lN+tscTtTIcNN4LvQhNhLfml+zZbhas5GqZdLRZD/qBiZLmxI09DK0wtNboQf1fZaUz1gk8bFNXbFn4F5KaKR35icZoGYS0ooF7vxk2DeA4NZXX7/EUp4kWs6VyMxAdB04t89/1O/w1cDnyilFU="
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"to\": {{ JSON.stringify($json.targetId) }},\n  \"messages\": [\n    {\n      \"type\": \"text\",\n      \"text\": {{ JSON.stringify($json.replyText) }}\n    }\n  ]\n}",
+        "options": {}
+      },
+      "id": "line-push-node",
+      "name": "Push 訊息到 LINE",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1350, 200]
+    }
+  ],
+  "connections": {
+    "LINE Webhook": {
+      "main": [
+        [
+          {
+            "node": "解析 LINE 訊息",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "解析 LINE 訊息": {
+      "main": [
+        [
+          {
+            "node": "是否處理",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "是否處理": {
+      "main": [
+        [
+          {
+            "node": "呼叫 Clawdbot",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "呼叫 Clawdbot": {
+      "main": [
+        [
+          {
+            "node": "解析 AI 回覆",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "解析 AI 回覆": {
+      "main": [
+        [
+          {
+            "node": "Push 訊息到 LINE",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2026-02-02T04:00:00.000Z",
+  "versionId": "4"
+}

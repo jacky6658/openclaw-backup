@@ -1,0 +1,35 @@
+# macOS
+.DS_Store
+
+# Logs
+logs/
+*.log
+
+# Node
+node_modules/
+**/node_modules/
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Build / cache
+output/
+canvas/
+.tmp/
+tmp/
+tmp_whisper/
+
+# OpenClaw runtime/cache/media (local only)
+.openclaw/
+
+# Big project repos (handled separately)
+aijobcase-1/
+edumind-api/
+
+# Large local dumps
+file_list.txt
+
+# If you want to keep daily memory files, remove this ignore.
+# (We will keep memory/ by default)
