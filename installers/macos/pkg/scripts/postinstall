@@ -1,0 +1,31 @@
+#!/bin/bash
+set -euo pipefail
+
+# OpenClaw macOS PKG postinstall (Milestone 1)
+# - Audience: non-technical users
+# - Safe: install + verify only
+# - No gateway start/install
+# - No secrets written
+
+LOG_DIR="/Library/Logs/OpenClaw-Installer"
+mkdir -p "$LOG_DIR"
+LOG_FILE="$LOG_DIR/postinstall.log"
+
+exec > >(tee -a "$LOG_FILE") 2>&1
+
+echo "[OpenClaw Installer] postinstall start: $(date)"
+
+if ! command -v node >/dev/null 2>&1 || ! command -v npm >/dev/null 2>&1; then
+  echo "[OpenClaw Installer] Node.js/npm not found. Please install Node.js LTS from https://nodejs.org/ then re-run installer."
+  exit 1
+fi
+
+echo "[OpenClaw Installer] Installing OpenClaw via npm..."
+/usr/bin/env npm install -g openclaw
+
+echo "[OpenClaw Installer] Verifying..."
+/usr/bin/env openclaw --version
+/usr/bin/env openclaw status || true
+
+echo "[OpenClaw Installer] Done: $(date)"
+exit 0
