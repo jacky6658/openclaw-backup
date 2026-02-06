@@ -1,0 +1,42 @@
+#!/bin/bash
+# OpenClaw Installer - postinstall script
+# Runs after .pkg installation with root privileges in a proper TTY context
+
+set -e
+
+# Log everything
+exec > /tmp/openclaw-install.log 2>&1
+
+echo "=== OpenClaw Installer Started ==="
+echo "Date: $(date)"
+echo "User: $USER (running as $(whoami))"
+echo "Home: $HOME"
+
+# Detect the real user (not root)
+REAL_USER="${USER}"
+if [ "$REAL_USER" = "root" ]; then
+    # Get the user who invoked sudo (from installer)
+    REAL_USER=$(stat -f '%Su' /dev/console)
+fi
+
+REAL_HOME=$(eval echo "~$REAL_USER")
+
+echo "Target user: $REAL_USER"
+echo "Target home: $REAL_HOME"
+
+# Run the official OpenClaw installer as the real user
+# Use 'su' to run in the user's context (not root)
+echo "=== Running OpenClaw installer as $REAL_USER ==="
+
+su - "$REAL_USER" -c '/bin/bash -c "$(curl -fsSL https://openclaw.ai/install.sh)"' || {
+    echo "ERROR: Installer failed with exit code $?"
+    exit 1
+}
+
+echo "=== OpenClaw installation completed successfully ==="
+echo "Log saved to: /tmp/openclaw-install.log"
+
+# Show completion notification (optional)
+osascript -e 'display notification "OpenClaw 安裝已完成！請開啟 OpenClaw Setup 繼續設定。" with title "OpenClaw Installer"' || true
+
+exit 0

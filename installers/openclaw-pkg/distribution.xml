@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<installer-gui-script minSpecVersion="1">
+    <title>OpenClaw Installer</title>
+    <welcome file="welcome.html"/>
+    <conclusion file="conclusion.html"/>
+    <pkg-ref id="ai.openclaw.installer"/>
+    <options customize="never" require-scripts="true" rootVolumeOnly="true"/>
+    <choices-outline>
+        <line choice="default">
+            <line choice="ai.openclaw.installer"/>
+        </line>
+    </choices-outline>
+    <choice id="default"/>
+    <choice id="ai.openclaw.installer" visible="false">
+        <pkg-ref id="ai.openclaw.installer"/>
+    </choice>
+    <pkg-ref id="ai.openclaw.installer" version="1.0" onConclusion="none">openclaw-installer-component.pkg</pkg-ref>
+</installer-gui-script>
