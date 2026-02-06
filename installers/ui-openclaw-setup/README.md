@@ -39,10 +39,12 @@ Goal: a **standalone UI app** for non-technical users to enable OpenClaw.
 **或**
 - 系統設定 → 隱私權與安全性 → 在底部會看到「已阻擋 OpenClaw Setup」→ 點 **仍要打開**
 
-> 如果你下載後被標記為「來自網路的 App」導致一直被擋，可以用下面指令移除隔離標記（進階用法）：
+> 如果你下載後被標記為「來自網路的 App」導致一直被擋，可以用下面指令移除隔離標記（進階用法，**也適用遠端測試**）：
 > ```bash
 > xattr -dr com.apple.quarantine "/Applications/OpenClaw Setup.app"
 > ```
+> 
+> 補充：純 SSH/headless 的情境下，即使 `open -a` 被呼叫成功，也可能因為遠端沒有登入的 GUI session 而看不到視窗；此時可以改用直接執行 binary 來做 smoke test。
 
 ### 使用前置（你可能需要先有 OpenClaw）
 - 這個 App 會呼叫 `openclaw` CLI（例如 `openclaw --version` / `openclaw status`）
