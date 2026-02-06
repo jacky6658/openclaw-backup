@@ -76,7 +76,7 @@ fn compute_backup_path(config_path: &Path) -> PathBuf {
 }
 
 #[tauri::command]
-fn preview_apply(input: ApplyInput) -> Result<Preview, String> {
+fn preview_apply(_input: ApplyInput) -> Result<Preview, String> {
     (|| {
         let config_path = openclaw_config_path()?;
         let backup_path = compute_backup_path(&config_path);

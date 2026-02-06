@@ -28,7 +28,7 @@ function getInputs() {
 }
 
 function setPre(id: string, obj: unknown) {
-  (document.querySelector(id) as HTMLElement).textContent =
+  $(id).textContent =
     typeof obj === "string" ? obj : JSON.stringify(obj, null, 2);
 }
 

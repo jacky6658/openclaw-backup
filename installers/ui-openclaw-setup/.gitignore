@@ -9,6 +9,11 @@ lerna-debug.log*
 
 node_modules
 dist
+# Tauri/Rust build outputs
+src-tauri/target
+# Local packaging outputs
+/dist-macos
+*.dmg
 dist-ssr
 *.local
 
