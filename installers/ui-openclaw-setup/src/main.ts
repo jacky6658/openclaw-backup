@@ -47,17 +47,7 @@ async function testButton() {
 async function install() {
   console.log("install button clicked!");
   
-  const ok = confirm(
-    "將開始安裝 OpenClaw（包含 Homebrew/Node 等依賴）。\n\n過程中 macOS 會跳出管理員密碼授權視窗，請輸入密碼。\n\n安裝可能需要 10–30 分鐘，請勿關閉視窗。"
-  );
-  
-  console.log("confirm result:", ok);
-  if (!ok) {
-    setPre("#check-result", "安裝已取消");
-    return;
-  }
-
-  setPre("#check-result", "正在啟動安裝程序…\n\n請留意：macOS 會跳出「密碼授權」視窗。\n若視窗未出現，請檢查 Dock 或點擊本 app 圖示。\n\n⏳ 請稍候，安裝可能需要 10–30 分鐘…");
+  setPre("#check-result", "正在啟動安裝程序…\n\n⏳ macOS 密碼授權視窗即將跳出，請輸入密碼。\n若視窗未出現，請檢查 Dock 或點擊本 app 圖示。\n\n安裝可能需要 10–30 分鐘，請勿關閉視窗…");
   
   console.log("calling install_openclaw...");
   try {
@@ -66,7 +56,7 @@ async function install() {
     setPre("#check-result", out || "安裝完成！\n\n請按「檢查 OpenClaw」驗證安裝結果。");
   } catch (e) {
     console.error("install_openclaw error:", e);
-    setPre("#check-result", `❌ 安裝失敗：\n\n${String(e)}\n\n常見原因：\n• 取消了密碼授權\n• 帳號不是管理員\n• 網路連線問題\n\n請點「複製安裝指令」使用手動安裝。`);
+    setPre("#check-result", `❌ 安裝失敗：\n\n${String(e)}\n\n常見原因：\n• 取消了密碼授權\n• 帳號不是管理員\n• 網路連線問題\n• macOS 版本不支援自動安裝\n\n請點「複製安裝指令」使用手動安裝。`);
   }
 }
 
