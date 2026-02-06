@@ -44,9 +44,14 @@ async function install() {
   );
   if (!ok) return;
 
-  setPre("#check-result", "安裝中…（請留意是否跳出密碼授權視窗）");
-  const out = (await invoke("install_openclaw")) as string;
-  setPre("#check-result", out || "安裝完成（請再按一次『檢查 OpenClaw』驗證）");
+  setPre("#check-result", "正在啟動安裝程序…\n\n請留意：macOS 會跳出「密碼授權」視窗。\n若視窗未出現，請檢查 Dock 或點擊本 app 圖示。\n\n⏳ 請稍候，安裝可能需要 10–30 分鐘…");
+  
+  try {
+    const out = (await invoke("install_openclaw")) as string;
+    setPre("#check-result", out || "安裝完成！\n\n請按「檢查 OpenClaw」驗證安裝結果。");
+  } catch (e) {
+    setPre("#check-result", `❌ 安裝失敗：\n\n${String(e)}\n\n常見原因：\n• 取消了密碼授權\n• 帳號不是管理員\n• 網路連線問題\n\n請重新點擊「一鍵安裝」再試一次。`);
+  }
 }
 
 async function preview() {

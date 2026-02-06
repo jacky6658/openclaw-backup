@@ -187,34 +187,58 @@ fn start_gateway_confirmed() -> Result<String, String> {
 #[tauri::command]
 fn install_openclaw() -> Result<String, String> {
     // Runs the official installer using macOS' native admin prompt.
-    // This avoids requiring the user to open Terminal and type commands.
-    // Note: this still requires user interaction to enter the admin password.
+    // Strategy: use osascript with detailed error reporting and timeout handling.
     (|| {
-        let cmd = "/bin/bash -c \"$(curl -fsSL https://openclaw.ai/install.sh)\"";
+        // Build the install command
+        let install_cmd = r#"/bin/bash -c "$(curl -fsSL https://openclaw.ai/install.sh)""#;
+        
+        // Escape for AppleScript
+        let escaped_cmd = install_cmd.replace("\\", "\\\\").replace("\"", "\\\"");
+        
+        // Build AppleScript that requests admin privileges
         let script = format!(
-            "do shell script {} with administrator privileges",
-            serde_json::to_string(cmd)?
+            r#"do shell script "{}" with administrator privileges"#,
+            escaped_cmd
         );
 
+        // Log what we're about to run (for debugging)
+        eprintln!("Running osascript with admin prompt...");
+        eprintln!("AppleScript: {}", script);
+
         let out = Command::new("osascript")
-            .args(["-e", &script])
+            .arg("-e")
+            .arg(&script)
             .output()
-            .context("failed to run osascript")?;
+            .context("Failed to execute osascript. Is osascript available?")?;
 
         let stdout = String::from_utf8_lossy(&out.stdout).to_string();
         let stderr = String::from_utf8_lossy(&out.stderr).to_string();
+        
+        eprintln!("osascript exit code: {:?}", out.status.code());
+        eprintln!("stdout: {}", stdout);
+        eprintln!("stderr: {}", stderr);
+
         if !out.status.success() {
-            return Err(anyhow!(
-                "install failed (osascript exit={}): {}",
-                out.status,
-                if stderr.is_empty() { stdout } else { stderr }
-            ));
+            let exit_code = out.status.code().unwrap_or(-1);
+            
+            // Parse common osascript errors
+            let err_msg = if stderr.contains("User canceled") || stderr.contains("128") {
+                "使用者取消了密碼授權。請重新點擊「一鍵安裝」並輸入密碼。".to_string()
+            } else if stderr.contains("not allowed") || stderr.contains("not permitted") {
+                "權限被拒絕。請確認您的帳號是管理員。".to_string()
+            } else if !stderr.is_empty() {
+                format!("osascript 執行失敗 (exit code {}): {}", exit_code, stderr)
+            } else {
+                format!("osascript 執行失敗 (exit code {}): {}", exit_code, stdout)
+            };
+            
+            return Err(anyhow!(err_msg));
         }
 
         Ok(if stdout.trim().is_empty() {
-            "Installer finished.".to_string()
+            "安裝程序已完成。請按「檢查 OpenClaw」驗證。".to_string()
         } else {
-            stdout.trim().to_string()
+            format!("安裝完成：\n{}", stdout.trim())
         })
     })()
     .map_err(|e: anyhow::Error| e.to_string())
