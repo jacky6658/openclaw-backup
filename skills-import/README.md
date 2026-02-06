@@ -21,6 +21,18 @@
 - 可做：search / download / feedback / comment / submit( beta )
 
 ### desktop-control
-- 依賴（Python）：`pyautogui pillow opencv-python pygetwindow`
-- 能做：mouse/keyboard/screenshot/find_on_screen/window/clipboard
-- 有安全機制：failsafe（滑鼠移到角落中止）、approval mode
+- 這份技能包內含可用 Python 程式碼（`desktop-control-1.0.0/desktop_control/` package + `demo.py`）
+- 依賴（Python）：`pyautogui pillow opencv-python pygetwindow pyperclip`
+- macOS 權限：需授權「輔助使用（控制鍵盤滑鼠）」；截圖/找圖可能要「螢幕錄製」
+- Homebrew Python 有 PEP 668 限制 → 建議用 venv
+
+快速啟用：
+```bash
+cd /Users/user/clawd/skills-import/desktop-control-1.0.0
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -U pip
+pip install pyautogui pillow opencv-python pygetwindow pyperclip
+python -c "from desktop_control import DesktopController; dc=DesktopController(); print(dc.get_screen_size())"
+python demo.py
+```
