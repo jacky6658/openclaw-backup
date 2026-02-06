@@ -184,12 +184,49 @@ fn start_gateway_confirmed() -> Result<String, String> {
     run_cmd("openclaw", &["gateway", "start"]).map_err(|e| e.to_string())
 }
 
+#[tauri::command]
+fn install_openclaw() -> Result<String, String> {
+    // Runs the official installer using macOS' native admin prompt.
+    // This avoids requiring the user to open Terminal and type commands.
+    // Note: this still requires user interaction to enter the admin password.
+    (|| {
+        let cmd = "/bin/bash -c \"$(curl -fsSL https://openclaw.ai/install.sh)\"";
+        let script = format!(
+            "do shell script {} with administrator privileges",
+            serde_json::to_string(cmd)?
+        );
+
+        let out = Command::new("osascript")
+            .args(["-e", &script])
+            .output()
+            .context("failed to run osascript")?;
+
+        let stdout = String::from_utf8_lossy(&out.stdout).to_string();
+        let stderr = String::from_utf8_lossy(&out.stderr).to_string();
+        if !out.status.success() {
+            return Err(anyhow!(
+                "install failed (osascript exit={}): {}",
+                out.status,
+                if stderr.is_empty() { stdout } else { stderr }
+            ));
+        }
+
+        Ok(if stdout.trim().is_empty() {
+            "Installer finished.".to_string()
+        } else {
+            stdout.trim().to_string()
+        })
+    })()
+    .map_err(|e: anyhow::Error| e.to_string())
+}
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
         .plugin(tauri_plugin_opener::init())
         .invoke_handler(tauri::generate_handler![
             check_openclaw,
+            install_openclaw,
             preview_apply,
             apply_config,
             run_status,

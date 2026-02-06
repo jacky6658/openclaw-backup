@@ -38,6 +38,17 @@ async function check() {
   setPre("#check-result", res);
 }
 
+async function install() {
+  const ok = confirm(
+    "將開始安裝 OpenClaw（包含 Homebrew/Node 等依賴）。\n\n過程中 macOS 會跳出管理員密碼授權視窗，請輸入密碼。\n\n安裝可能需要 10–30 分鐘，請勿關閉視窗。"
+  );
+  if (!ok) return;
+
+  setPre("#check-result", "安裝中…（請留意是否跳出密碼授權視窗）");
+  const out = (await invoke("install_openclaw")) as string;
+  setPre("#check-result", out || "安裝完成（請再按一次『檢查 OpenClaw』驗證）");
+}
+
 async function preview() {
   const { telegramBotToken, openaiApiKey } = getInputs();
   if (!telegramBotToken || !openaiApiKey) {
@@ -87,6 +98,9 @@ async function startGateway() {
 window.addEventListener("DOMContentLoaded", () => {
   (document.querySelector("#btn-check") as HTMLButtonElement).onclick = () =>
     check().catch((e) => setPre("#check-result", String(e)));
+
+  (document.querySelector("#btn-install") as HTMLButtonElement).onclick = () =>
+    install().catch((e) => setPre("#check-result", String(e)));
 
   (document.querySelector("#btn-preview") as HTMLButtonElement).onclick = () =>
     preview().catch((e) => setPre("#preview", String(e)));
