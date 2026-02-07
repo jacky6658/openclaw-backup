@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OpenClaw Token Dashboard</title>
+  <link rel="stylesheet" href="/css/main.css">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1><i data-lucide="zap" class="icon-title"></i> OpenClaw Token Dashboard</h1>
+      <nav>
+        <button class="nav-btn active" data-page="overview"><i data-lucide="layout-dashboard" class="icon-nav"></i> 總覽</button>
+        <button class="nav-btn" data-page="quota"><i data-lucide="zap" class="icon-nav"></i> 配額詳情</button>
+        <button class="nav-btn" data-page="models"><i data-lucide="cpu" class="icon-nav"></i> 模型</button>
+        <button class="nav-btn" data-page="rate-limits"><i data-lucide="gauge" class="icon-nav"></i> 速率限制</button>
+        <button class="nav-btn" data-page="history"><i data-lucide="history" class="icon-nav"></i> 歷史</button>
+        <button class="nav-btn" data-page="cost"><i data-lucide="dollar-sign" class="icon-nav"></i> 成本</button>
+      </nav>
+    </header>
+
+    <!-- 頂部控制面板 -->
+    <div class="control-panel">
+      <div class="current-model-status">
+        <div class="status-indicator">
+          <span class="status-dot pulsing" id="gateway-status"></span>
+          <div class="status-info">
+            <small>當前模型</small>
+            <div class="model-name" id="current-model">載入中...</div>
+          </div>
+        </div>
+        
+        <div class="quota-quick-view">
+          <div class="quota-circle">
+            <svg viewBox="0 0 36 36" class="circular-chart">
+              <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#e9ecef" stroke-width="3"/>
+              <path id="quota-progress" class="circle" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#28a745" stroke-width="3" stroke-dasharray="0, 100"/>
+            </svg>
+            <div class="quota-text" id="quota-percent">--%</div>
+          </div>
+          <small>配額剩餘</small>
+        </div>
+
+        <div class="refresh-indicator">
+          <i data-lucide="timer" class="refresh-icon"></i>
+          <div>
+            <small>下次刷新</small>
+            <strong id="countdown-timer">1.0s</strong>
+          </div>
+        </div>
+        
+        <button class="btn-primary" onclick="openModelSwitcher()">
+          <i data-lucide="repeat" class="icon-btn"></i> 切換模型
+        </button>
+      </div>
+
+      <!-- 警告橫幅 -->
+      <div class="alert-banner" id="alert-banner" style="display: none;">
+        <i data-lucide="alert-triangle" class="alert-icon"></i>
+        <span id="alert-message"></span>
+        <button class="btn-alert-action" id="alert-action">處理</button>
+      </div>
+    </div>
+
+    <main id="content">
+      <!-- 動態內容由 JS 注入 -->
+    </main>
+  </div>
+
+  <!-- 模型切換 Modal -->
+  <div class="modal" id="modelSwitcherModal">
+    <div class="modal-backdrop" onclick="closeModelSwitcher()"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2><i data-lucide="repeat" class="icon-modal"></i> 切換模型</h2>
+        <button class="close-btn" onclick="closeModelSwitcher()"><i data-lucide="x"></i></button>
+      </div>
+      
+      <div class="modal-body" id="modal-body">
+        <div class="loading">載入中...</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast 通知容器 -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <script src="/js/main.js"></script>
+  <script>
+    // 初始化 Lucide Icons
+    lucide.createIcons();
+  </script>
+</body>
+</html>

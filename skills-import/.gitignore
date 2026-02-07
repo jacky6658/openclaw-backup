@@ -1,9 +1,0 @@
-# Ignore local virtualenvs and python caches
-**/.venv/
-**/__pycache__/
-**/*.pyc
-**/.DS_Store
-
-# Ignore local artifacts
-**/*.png
-**/*.log

@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>手機訪問指南 - OpenClaw Token Dashboard</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+      color: #ffffff;
+      padding: 20px;
+      min-height: 100vh;
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: linear-gradient(135deg, #0f0f0f 0%, #1a1a2e 100%);
+      border-radius: 20px;
+      padding: 40px;
+      border: 1px solid rgba(0, 240, 255, 0.3);
+      box-shadow: 
+        0 0 40px rgba(255, 0, 128, 0.3),
+        0 0 80px rgba(0, 240, 255, 0.2);
+    }
+    
+    h1 {
+      background: linear-gradient(90deg, #ff0080, #00f0ff, #00ff88);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+    
+    h2 {
+      color: #00f0ff;
+      margin: 30px 0 15px 0;
+      font-size: 1.5rem;
+      text-shadow: 0 0 10px rgba(0, 240, 255, 0.6);
+    }
+    
+    .step {
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(0, 240, 255, 0.2);
+      border-radius: 12px;
+      padding: 20px;
+      margin: 20px 0;
+    }
+    
+    .step-number {
+      display: inline-block;
+      width: 35px;
+      height: 35px;
+      background: linear-gradient(135deg, #ff0080, #7928ca);
+      border-radius: 50%;
+      text-align: center;
+      line-height: 35px;
+      font-weight: bold;
+      margin-right: 15px;
+      box-shadow: 0 0 15px rgba(255, 0, 128, 0.5);
+    }
+    
+    .step-title {
+      font-size: 1.2rem;
+      color: #00ff88;
+      margin-bottom: 10px;
+    }
+    
+    .step-content {
+      margin-left: 50px;
+      color: #ffffff;
+      line-height: 1.6;
+    }
+    
+    .code {
+      background: rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(0, 240, 255, 0.3);
+      border-radius: 8px;
+      padding: 15px;
+      margin: 10px 0;
+      font-family: 'Courier New', monospace;
+      color: #00f0ff;
+      overflow-x: auto;
+    }
+    
+    .qr-placeholder {
+      background: rgba(255, 255, 255, 0.1);
+      border: 2px dashed rgba(0, 240, 255, 0.5);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      margin: 20px 0;
+    }
+    
+    .qr-image {
+      max-width: 250px;
+      height: 250px;
+      margin: 20px auto;
+      display: block;
+      border-radius: 12px;
+      background: white;
+      padding: 10px;
+    }
+    
+    .warning {
+      background: rgba(255, 170, 0, 0.2);
+      border-left: 4px solid #ffaa00;
+      border-radius: 8px;
+      padding: 15px;
+      margin: 20px 0;
+    }
+    
+    .info {
+      background: rgba(0, 240, 255, 0.1);
+      border-left: 4px solid #00f0ff;
+      border-radius: 8px;
+      padding: 15px;
+      margin: 20px 0;
+    }
+    
+    .btn {
+      background: linear-gradient(135deg, #ff0080, #7928ca);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 0 20px rgba(255, 0, 128, 0.5);
+      transition: all 0.3s;
+    }
+    
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 30px rgba(255, 0, 128, 0.8);
+    }
+    
+    ul {
+      margin: 15px 0;
+      margin-left: 20px;
+    }
+    
+    li {
+      margin: 8px 0;
+      color: #ffffff;
+    }
+    
+    #ipAddress {
+      font-size: 1.5rem;
+      color: #00ff88;
+      font-weight: bold;
+      text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+    }
+    
+    #qrCode {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>📱 手機訪問指南</h1>
+    
+    <div class="info">
+      <strong>💡 使用情境：</strong><br>
+      想要在手機、平板上查看 Dashboard？跟著以下步驟就能輕鬆訪問！
+    </div>
+    
+    <h2>方法一：自動偵測 IP（推薦）</h2>
+    
+    <div class="step">
+      <div class="step-title">
+        <span class="step-number">1</span>
+        確認電腦和手機在同一個 WiFi
+      </div>
+      <div class="step-content">
+        <ul>
+          <li>電腦和手機必須連接到同一個 WiFi 網路</li>
+          <li>例如：都連接到「家裡的 WiFi」</li>
+          <li>⚠️ 不支援公共 WiFi（如咖啡廳）</li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="step">
+      <div class="step-title">
+        <span class="step-number">2</span>
+        取得電腦 IP 位址
+      </div>
+      <div class="step-content">
+        <button class="btn" onclick="getIPAddress()">🔍 自動偵測我的 IP</button>
+        <div class="code" id="ipResult" style="display: none; margin-top: 15px;">
+          <div>📍 您的電腦 IP 位址：<span id="ipAddress">偵測中...</span></div>
+          <div style="margin-top: 10px;">📱 手機訪問網址：</div>
+          <div id="mobileUrl" style="font-size: 1.2rem; margin-top: 5px; color: #00ff88;"></div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="step">
+      <div class="step-title">
+        <span class="step-number">3</span>
+        用 QR Code 快速訪問
+      </div>
+      <div class="step-content">
+        <div id="qrCode">
+          <div class="qr-placeholder">
+            <p style="margin-bottom: 15px; color: #00f0ff;">📸 用手機相機掃描此 QR Code</p>
+            <img id="qrImage" class="qr-image" alt="QR Code">
+            <p style="margin-top: 15px; color: #ffffff;">掃描後會自動開啟 Dashboard</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <h2>方法二：手動查詢 IP</h2>
+    
+    <div class="step">
+      <div class="step-title">
+        <span class="step-number">1</span>
+        在 macOS 查詢 IP
+      </div>
+      <div class="step-content">
+        <strong>選項 A：系統偏好設定</strong>
+        <ul>
+          <li>開啟「系統偏好設定」</li>
+          <li>點擊「網路」</li>
+          <li>選擇「Wi-Fi」</li>
+          <li>右側顯示「IP 位址：192.168.x.x」</li>
+        </ul>
+        
+        <strong style="margin-top: 15px; display: block;">選項 B：終端機命令</strong>
+        <div class="code">
+          ifconfig | grep "inet " | grep -v 127.0.0.1
+        </div>
+      </div>
+    </div>
+    
+    <div class="step">
+      <div class="step-title">
+        <span class="step-number">2</span>
+        在手機瀏覽器輸入網址
+      </div>
+      <div class="step-content">
+        <p>假設您的電腦 IP 是 <code style="color: #00ff88;">192.168.1.100</code></p>
+        <p style="margin-top: 10px;">在手機瀏覽器輸入：</p>
+        <div class="code">
+          http://192.168.1.100:3737
+        </div>
+      </div>
+    </div>
+    
+    <h2>常見問題</h2>
+    
+    <div class="warning">
+      <strong>⚠️ 無法連接？</strong><br><br>
+      <strong>1. 檢查 WiFi：</strong>
+      <ul>
+        <li>確認電腦和手機在同一個 WiFi</li>
+        <li>不是「相同名稱」就好，必須是「同一個網路」</li>
+      </ul>
+      <br>
+      <strong>2. 檢查防火牆：</strong>
+      <ul>
+        <li>系統偏好設定 > 安全性與隱私 > 防火牆</li>
+        <li>允許 Node.js 接收連線</li>
+      </ul>
+      <br>
+      <strong>3. 檢查 Dashboard：</strong>
+      <ul>
+        <li>確認電腦上的 Dashboard 正在運行</li>
+        <li>在電腦瀏覽器測試 http://localhost:3737 是否正常</li>
+      </ul>
+    </div>
+    
+    <div class="info">
+      <strong>💡 為什麼手機能訪問？</strong><br><br>
+      Dashboard 伺服器監聽電腦的 3737 端口，只要設備在同一個區域網路（WiFi），就能透過電腦的 IP 位址訪問。這是標準的區域網路連接方式，不需要雲端伺服器！
+    </div>
+    
+    <div class="info">
+      <strong>🔒 安全性說明：</strong><br><br>
+      <ul>
+        <li>✅ 只在私人 WiFi 網路中使用</li>
+        <li>✅ 數據不會傳到網際網路</li>
+        <li>✅ 只有同 WiFi 的設備能訪問</li>
+        <li>⚠️ 不要在公共 WiFi 中使用</li>
+      </ul>
+    </div>
+    
+    <h2>手機版特色</h2>
+    
+    <div class="step">
+      <div class="step-content" style="margin-left: 0;">
+        <ul>
+          <li>📱 <strong>完整響應式設計</strong> - 自動適應手機螢幕</li>
+          <li>🔄 <strong>一鍵切換模型</strong> - 在手機上也能切換</li>
+          <li>📊 <strong>即時監控</strong> - 1 秒刷新同步數據</li>
+          <li>👆 <strong>觸控優化</strong> - 按鈕大小適合手指點擊</li>
+          <li>⚡ <strong>全功能</strong> - 與桌機版完全相同</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    async function getIPAddress() {
+      const ipResult = document.getElementById('ipResult');
+      const ipAddress = document.getElementById('ipAddress');
+      const mobileUrl = document.getElementById('mobileUrl');
+      const qrCode = document.getElementById('qrCode');
+      const qrImage = document.getElementById('qrImage');
+      
+      ipResult.style.display = 'block';
+      ipAddress.textContent = '偵測中...';
+      
+      try {
+        // 使用 WebRTC 取得本地 IP
+        const pc = new RTCPeerConnection({iceServers: []});
+        pc.createDataChannel('');
+        
+        const offer = await pc.createOffer();
+        await pc.setLocalDescription(offer);
+        
+        pc.onicecandidate = (ice) => {
+          if (!ice || !ice.candidate || !ice.candidate.candidate) return;
+          
+          const regex = /([0-9]{1,3}(\.[0-9]{1,3}){3})/;
+          const match = ice.candidate.candidate.match(regex);
+          
+          if (match && match[1] && !match[1].startsWith('127.')) {
+            const ip = match[1];
+            ipAddress.textContent = ip;
+            
+            const url = `http://${ip}:3737`;
+            mobileUrl.textContent = url;
+            
+            // 顯示 QR Code
+            qrCode.style.display = 'block';
+            qrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(url)}`;
+            
+            pc.close();
+          }
+        };
+      } catch (error) {
+        ipAddress.textContent = '自動偵測失敗';
+        mobileUrl.innerHTML = '<span style="color: #ffaa00;">請使用方法二手動查詢 IP</span>';
+      }
+    }
+  </script>
+</body>
+</html>

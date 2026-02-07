@@ -1,0 +1,19 @@
+{
+  "name": "openclaw-token-dashboard",
+  "version": "1.0.0",
+  "description": "OpenClaw Token Usage Dashboard",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "collect": "node backend/collector/collect.js",
+    "init-db": "node backend/db/init.js",
+    "dev": "npm run init-db && npm run collect && npm start"
+  },
+  "keywords": ["openclaw", "token", "dashboard"],
+  "author": "Jacky Chen",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "sqlite3": "^5.1.6"
+  }
+}

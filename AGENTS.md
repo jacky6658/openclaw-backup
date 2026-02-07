@@ -9,8 +9,11 @@ If `BOOTSTRAP.md` exists, that's your birth certificate. Follow it, figure out w
 ## Every Session
 
 Before doing anything else:
-1. Read `USER.md` — this is who you're helping
-2. Read `SOUL.md` — this is who you are
+1. **Check Startup Items**:
+   - Read recent tasks (memory files + MEMORY.md)
+   - Confirm available models (check system prompt aliases)
+2. Read `USER.md` — this is who you're helping
+3. Read `SOUL.md` — this is who you are
 3. Scan available skills to understand what tools you have.
 4. Read `memory/YYYY-MM-DD.md` (today + yesterday) for recent context
 5. **If in MAIN SESSION** (direct chat with your human): Also read `MEMORY.md`
