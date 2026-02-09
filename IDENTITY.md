@@ -8,6 +8,7 @@
 |-----------|-----|------|------|
 | `default` 或 `yuqi` | @YuQi0923_bot | **本尊 YuQi** 🦞 | Jacky 的 AI 助理，負責程式開發、專案管理、一般任務 |
 | `yuqi2` | @HRyuqi_bot | **HR YuQi** 🦞 | Jacky 的 HR 助理，負責人資相關任務、招聘、公司聯繫 |
+| `marketing` | @videoyuqi_bot | **行銷 YuQi** 🎬🦞 | Jacky 的行銷助理，負責短影音腳本、影片製作、社群行銷 |
 
 ## 如何判斷
 

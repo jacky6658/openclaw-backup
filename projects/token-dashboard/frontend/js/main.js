@@ -3,31 +3,24 @@
 const API_BASE = '/api';
 let currentPage = 'overview';
 let currentFilter = 'all'; // 保存總覽頁面的 filter 狀態
-let countdownValue = 1.0;
+let countdownValue = 5.0; // 改為 5 秒刷新
 let countdownInterval;
+let isLoading = false; // 防止重複載入
+let currentAbortController = null; // 用於取消進行中的請求
 
 // 初始化
 document.addEventListener('DOMContentLoaded', () => {
   setupNavigation();
   loadPage('overview');
   updateControlPanel();
-  startCountdown();
+  // startCountdown(); // 自動刷新已停用
   
-  // 控制面板每 1 秒更新
-  setInterval(() => {
-    updateControlPanel();
-  }, 1000);
-  
-  // 其他頁面每 1 秒刷新
-  setInterval(() => {
-    if (currentPage && currentPage !== 'quota') {
-      loadPage(currentPage, false);
-    }
-  }, 1000);
+  // 自動刷新已停用
+  // 如需手動刷新，請按 F5 或點擊瀏覽器刷新按鈕
   
   // 配額詳情每 5 分鐘刷新
   setInterval(() => {
-    if (currentPage === 'quota') {
+    if (currentPage === 'quota' && !isLoading) {
       loadPage(currentPage, false);
     }
   }, 300000); // 5 分鐘 = 300000ms
@@ -48,6 +41,18 @@ function setupNavigation() {
 
 // 載入頁面
 async function loadPage(page, showLoading = true) {
+  // 如果正在載入且是自動刷新，跳過
+  if (isLoading && !showLoading) {
+    return;
+  }
+  
+  // 取消之前的請求
+  if (currentAbortController) {
+    currentAbortController.abort();
+  }
+  currentAbortController = new AbortController();
+  
+  const targetPage = page;
   currentPage = page;
   const content = document.getElementById('content');
   
@@ -55,7 +60,14 @@ async function loadPage(page, showLoading = true) {
     content.innerHTML = '<div class="loading">載入中...</div>';
   }
   
+  isLoading = true;
+  
   try {
+    // 檢查是否被切換到其他頁面
+    if (currentPage !== targetPage) {
+      return;
+    }
+    
     switch (page) {
       case 'overview':
         await renderOverview(currentFilter);
@@ -80,7 +92,16 @@ async function loadPage(page, showLoading = true) {
         break;
     }
   } catch (error) {
-    content.innerHTML = `<div class="error">載入失敗：${error.message}</div>`;
+    // 忽略 abort 錯誤
+    if (error.name === 'AbortError') {
+      return;
+    }
+    // 只有還在同一頁面才顯示錯誤
+    if (currentPage === targetPage) {
+      content.innerHTML = `<div class="error">載入失敗：${error.message}</div>`;
+    }
+  } finally {
+    isLoading = false;
   }
 }
 
@@ -89,14 +110,16 @@ async function renderOverview(filter = 'all') {
   // 保存 filter 狀態
   currentFilter = filter;
   
-  // 並行獲取：即時統計 + DB 統計 + OAuth 狀態 + API 額度
-  const [live, today, week, month, oauthStatus, quotaUsage] = await Promise.all([
+  // 並行獲取：即時統計 + DB 統計 + OAuth 狀態 + API 額度 + 速率限制 + 模型分析
+  const [live, today, week, month, oauthStatus, quotaUsage, rateLimits, modelAnalytics] = await Promise.all([
     fetch(`${API_BASE}/live-stats?filter=${filter}`).then(r => r.json()),
     fetch(`${API_BASE}/overview?period=today`).then(r => r.json()),
     fetch(`${API_BASE}/overview?period=week`).then(r => r.json()),
     fetch(`${API_BASE}/overview?period=month`).then(r => r.json()),
     fetch(`${API_BASE}/oauth-status`).then(r => r.json()).catch(() => ({ tokens: [] })),
-    fetch(`${API_BASE}/quota-usage`).then(r => r.json()).catch(() => ({ google_gemini: [], openai: [] }))
+    fetch(`${API_BASE}/quota-usage`).then(r => r.json()).catch(() => ({ google_gemini: [], openai: [] })),
+    fetch(`${API_BASE}/rate-limits`).then(r => r.json()).catch(() => ({ rate_limits: [] })),
+    fetch(`${API_BASE}/model-analytics?period=today`).then(r => r.json()).catch(() => ({ models: [] }))
   ]);
   
   const content = document.getElementById('content');
@@ -164,6 +187,35 @@ async function renderOverview(filter = 'all') {
           <div style="flex: 1;">
             <strong style="color: #ffaa00;">⚡ OpenAI 每日額度偏低</strong>
             <p style="margin: 5px 0 0 0; font-size: 0.9rem; color: #fff;">剩餘 ${openai.daily.percent_left}% | 重置於 ${openai.daily.reset_in}</p>
+          </div>
+        </div>
+      `;
+    }
+  }
+  
+  // Cooldown 狀態
+  if (rateLimits.rate_limits && rateLimits.rate_limits.length > 0) {
+    const activeCooldowns = rateLimits.rate_limits.filter(rl => {
+      if (!rl.cooldown_until) return false;
+      return new Date(rl.cooldown_until) > new Date();
+    });
+    
+    if (activeCooldowns.length > 0) {
+      const cooldownItems = activeCooldowns.map(rl => {
+        const cooldownEnd = new Date(rl.cooldown_until);
+        const now = new Date();
+        const remainingMs = cooldownEnd - now;
+        const remainingMin = Math.ceil(remainingMs / 60000);
+        const resetTime = cooldownEnd.toLocaleTimeString('zh-TW', { hour: '2-digit', minute: '2-digit' });
+        return `<strong>${rl.provider}</strong>: ${remainingMin}分鐘後解除 (${resetTime})`;
+      }).join('<br>');
+      
+      quotaWarnings += `
+        <div class="alert-banner" style="display: flex; margin-bottom: 15px; background: rgba(255, 100, 100, 0.2); border-color: #ff6464;">
+          <i data-lucide="clock" class="alert-icon" style="stroke: #ff6464;"></i>
+          <div style="flex: 1;">
+            <strong style="color: #ff6464;">⏳ API 冷卻中</strong>
+            <p style="margin: 5px 0 0 0; font-size: 0.9rem; color: #fff;">${cooldownItems}</p>
           </div>
         </div>
       `;
@@ -268,19 +320,18 @@ async function renderOverview(filter = 'all') {
     </div>
     
     <div class="section">
-      <h2><i data-lucide="cpu" style="width: 24px; height: 24px; stroke: currentColor; vertical-align: middle; margin-right: 8px;"></i>模型使用分佈 <span style="color: #00ff88; font-size: 0.8rem;">●即時</span></h2>
+      <h2><i data-lucide="cpu" style="width: 24px; height: 24px; stroke: currentColor; vertical-align: middle; margin-right: 8px;"></i>模型使用分佈 <span style="color: #00d4ff; font-size: 0.8rem;">●歷史累計</span></h2>
       <div class="chart-container">
-        ${Object.keys(live.models || {}).length > 0 
-          ? Object.entries(live.models).map(([model, tokens]) => {
-              const percentage = ((tokens / todayTokens) * 100).toFixed(1);
+        ${(modelAnalytics.models || []).length > 0 
+          ? modelAnalytics.models.map(m => {
               return `
                 <div style="margin-bottom: 10px;">
                   <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
-                    <span class="status-badge status-ok">${model}</span>
-                    <span>${formatNumber(tokens)} tokens (${percentage}%)</span>
+                    <span class="status-badge status-ok">${m.model}</span>
+                    <span>${formatNumber(m.total_tokens)} tokens (${m.percentage}%)</span>
                   </div>
                   <div class="progress-bar">
-                    <div class="progress-fill" style="width: ${percentage}%;"></div>
+                    <div class="progress-fill" style="width: ${Math.min(m.percentage, 100)}%; background: linear-gradient(90deg, #00ff88, #00d4ff);"></div>
                   </div>
                 </div>
               `;
@@ -477,6 +528,9 @@ async function renderCost() {
 
 // 工具函數
 function formatNumber(num) {
+  if (num === undefined || num === null || isNaN(num)) {
+    return '0';
+  }
   if (num >= 1000000) {
     return (num / 1000000).toFixed(2) + 'M';
   } else if (num >= 1000) {
@@ -561,7 +615,7 @@ function startCountdown() {
   countdownInterval = setInterval(() => {
     countdownValue -= 0.1;
     if (countdownValue <= 0) {
-      countdownValue = 1.0;
+      countdownValue = 5.0; // 配合 5 秒刷新間隔
     }
     if (timerEl) {
       timerEl.textContent = countdownValue.toFixed(1) + 's';
@@ -774,15 +828,98 @@ function formatCooldown(seconds) {
 
 // 渲染配額詳情頁
 async function renderQuota() {
-  const data = await fetch(`${API_BASE}/quota-status`).then(r => r.json());
+  const [data, rateLimits, modelAnalytics, costData] = await Promise.all([
+    fetch(`${API_BASE}/quota-status`).then(r => r.json()),
+    fetch(`${API_BASE}/rate-limits`).then(r => r.json()).catch(() => ({ rate_limits: [] })),
+    fetch(`${API_BASE}/model-analytics?period=today`).then(r => r.json()).catch(() => ({ models: [] })),
+    fetch(`${API_BASE}/cost?period=today`).then(r => r.json()).catch(() => ({ breakdown: [] }))
+  ]);
   const content = document.getElementById('content');
   
-  let html = '<div class="quota-details">';
+  // 按 provider 分組用量
+  const usageByProvider = {};
+  (modelAnalytics.models || []).forEach(m => {
+    const provider = m.provider || 'unknown';
+    if (!usageByProvider[provider]) {
+      usageByProvider[provider] = { tokens: 0, models: [], cost: 0 };
+    }
+    usageByProvider[provider].tokens += m.total_tokens;
+    usageByProvider[provider].models.push(m);
+  });
+  
+  // 計算成本（從 costData）
+  (costData.breakdown || []).forEach(b => {
+    const provider = b.model.split('/')[0] || 'unknown';
+    if (usageByProvider[provider]) {
+      usageByProvider[provider].cost += parseFloat(b.cost) || 0;
+    }
+  });
+  
+  let html = '';
+  
+  // Cooldown 狀態區塊
+  const activeCooldowns = (rateLimits.rate_limits || []).filter(rl => {
+    if (!rl.cooldown_until) return false;
+    return new Date(rl.cooldown_until) > new Date();
+  });
+  
+  if (activeCooldowns.length > 0) {
+    html += `
+      <div class="section" style="margin-bottom: 20px;">
+        <h2><i data-lucide="clock" style="width: 24px; height: 24px; stroke: #ff6464; vertical-align: middle; margin-right: 8px;"></i>冷卻中的 API</h2>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Provider</th>
+                <th>剩餘時間</th>
+                <th>重置時間</th>
+                <th>狀態</th>
+              </tr>
+            </thead>
+            <tbody>
+    `;
+    
+    activeCooldowns.forEach(rl => {
+      const cooldownEnd = new Date(rl.cooldown_until);
+      const now = new Date();
+      const remainingMs = cooldownEnd - now;
+      const remainingMin = Math.max(0, Math.ceil(remainingMs / 60000));
+      const resetTime = cooldownEnd.toLocaleTimeString('zh-TW', { hour: '2-digit', minute: '2-digit' });
+      const resetDate = cooldownEnd.toLocaleDateString('zh-TW', { month: 'short', day: 'numeric' });
+      
+      html += `
+        <tr>
+          <td><strong>${rl.provider}</strong></td>
+          <td><span style="color: #ff6464; font-weight: bold;">${remainingMin} 分鐘</span></td>
+          <td>${resetDate} ${resetTime}</td>
+          <td><span class="status-badge status-warning">⏳ 冷卻中</span></td>
+        </tr>
+      `;
+    });
+    
+    html += `
+            </tbody>
+          </table>
+        </div>
+      </div>
+    `;
+  }
+  
+  html += '<div class="quota-details">';
   
   if (!data.providers || Object.keys(data.providers).length === 0) {
     content.innerHTML = '<div class="error">無法獲取配額信息</div>';
     return;
   }
+  
+  // 建立 cooldown 查詢表
+  const cooldownMap = {};
+  (rateLimits.rate_limits || []).forEach(rl => {
+    if (rl.cooldown_until) {
+      cooldownMap[rl.provider] = rl.cooldown_until;
+    }
+  });
   
   // 建議優先順序
   const recommendations = {
@@ -793,17 +930,53 @@ async function renderQuota() {
   
   Object.entries(data.providers).forEach(([provider, models]) => {
     const rec = recommendations[provider] || { priority: 99, status: '❓' };
-    const statusColor = rec.priority === 1 ? '#00ff88' : rec.priority === 2 ? '#ffd700' : '#ff4444';
+    const cooldownUntil = cooldownMap[provider];
+    const isInCooldown = cooldownUntil && new Date(cooldownUntil) > new Date();
+    const providerUsage = usageByProvider[provider] || { tokens: 0, models: [], cost: 0 };
+    
+    let statusColor = rec.priority === 1 ? '#00ff88' : rec.priority === 2 ? '#ffd700' : '#ff4444';
+    let statusText = rec.status;
+    
+    if (isInCooldown) {
+      statusColor = '#ff6464';
+      const cooldownEnd = new Date(cooldownUntil);
+      const remainingMin = Math.ceil((cooldownEnd - new Date()) / 60000);
+      statusText = `⏳ 冷卻中 (${remainingMin}分鐘)`;
+    }
+    
+    // 判斷認證類型
+    const authTypes = [...new Set(models.map(m => m.authType || 'unknown'))];
+    const authLabel = authTypes.includes('oauth') ? '🔐 OAuth (訂閱制)' : 
+                      authTypes.includes('static') ? '🔑 API Key' : '❓ 未知';
+    const isFree = authTypes.includes('oauth') || authTypes.includes('static') && provider.includes('antigravity');
     
     html += `
       <div class="quota-provider" style="border-color: ${statusColor}">
-        <h3>${provider} <span style="color: ${statusColor}">${rec.status}</span></h3>
+        <h3>${provider} <span style="color: ${statusColor}">${statusText}</span></h3>
+        
+        <!-- 用量統計 -->
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 15px; padding: 15px; background: rgba(0,0,0,0.2); border-radius: 8px;">
+          <div style="text-align: center;">
+            <div style="font-size: 0.8rem; color: #888;">認證類型</div>
+            <div style="font-size: 1rem; margin-top: 5px;">${authLabel}</div>
+          </div>
+          <div style="text-align: center;">
+            <div style="font-size: 0.8rem; color: #888;">今日用量</div>
+            <div style="font-size: 1.2rem; font-weight: bold; margin-top: 5px; color: #00d4ff;">${formatNumber(providerUsage.tokens)}</div>
+          </div>
+          <div style="text-align: center;">
+            <div style="font-size: 0.8rem; color: #888;">成本</div>
+            <div style="font-size: 1.2rem; font-weight: bold; margin-top: 5px; color: ${isFree ? '#00ff88' : '#ffd700'};">${isFree ? '$0 (免費)' : '$' + (providerUsage.cost || 0).toFixed(2)}</div>
+          </div>
+        </div>
+        
         <div class="table-wrapper">
           <table class="quota-table">
             <thead>
               <tr>
-                <th>模型</th>
-                <th>配額剩餘</th>
+                <th>Profile / 模型</th>
+                <th>類型</th>
+                <th>配額</th>
                 <th>狀態</th>
               </tr>
             </thead>
@@ -811,27 +984,37 @@ async function renderQuota() {
     `;
     
     models.forEach(m => {
-      // 只顯示有配額信息的模型，跳過 OAuth/static 帳戶
-      if (m.authType && m.quota === undefined) return;
+      let statusEmoji = m.status === 'ok' ? '✅' : '⏳';
+      const modelName = m.profile || m.full_name || m.model || 'unknown';
       
-      const statusEmoji = m.status === 'ok' ? '✅' : '⏳';
-      const modelName = m.full_name || m.profile || m.model || 'unknown';
+      // 認證類型
+      let authTypeLabel = '—';
+      if (m.authType === 'oauth') authTypeLabel = '🔐 OAuth';
+      else if (m.authType === 'static') authTypeLabel = '🔑 API Key';
+      else if (m.email) authTypeLabel = `🔐 ${m.email}`;
       
-      // Static profiles（API key）或無配額數據的顯示 N/A
+      // 配額
       let quota;
       if (m.quota !== undefined) {
-        quota = `${m.quota}%`;
+        const quotaColor = m.quota > 70 ? '#00ff88' : m.quota > 30 ? '#ffd700' : '#ff4444';
+        quota = `<span style="color: ${quotaColor}; font-weight: bold;">${m.quota}%</span>`;
       } else {
-        quota = '<span style="color: #888">N/A</span>';
+        quota = '<span style="color: #888">—</span>';
       }
       
-      const statusText = m.status === 'ok' ? '可用' : m.status === 'expired' ? '已過期' : 'Cooldown';
+      let statusLabel = m.status === 'ok' ? '可用' : m.status === 'expired' ? '已過期' : 'Cooldown';
+      
+      if (isInCooldown) {
+        statusEmoji = '⏳';
+        statusLabel = '冷卻中';
+      }
       
       html += `
         <tr>
           <td><code>${modelName}</code></td>
-          <td><strong>${quota}</strong></td>
-          <td>${statusEmoji} ${statusText}</td>
+          <td>${authTypeLabel}</td>
+          <td>${quota}</td>
+          <td>${statusEmoji} ${statusLabel}</td>
         </tr>
       `;
     });
@@ -846,6 +1029,7 @@ async function renderQuota() {
   
   html += '</div>';
   content.innerHTML = html;
+  lucide.createIcons();
 }
 
 async function renderModelAnalytics() {

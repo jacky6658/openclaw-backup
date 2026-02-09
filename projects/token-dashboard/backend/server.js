@@ -144,6 +144,7 @@ async function collectUsageData() {
     
     // 讀取 sessions.json
     const sessionsPath = path.join(require('os').homedir(), '.openclaw/agents/main/sessions/sessions.json');
+    const sessionsDir = path.join(require('os').homedir(), '.openclaw/agents/main/sessions');
     
     if (!fs.existsSync(sessionsPath)) {
       console.warn('⚠️ sessions.json 不存在');
@@ -151,35 +152,77 @@ async function collectUsageData() {
     }
     
     const sessionsData = JSON.parse(fs.readFileSync(sessionsPath, 'utf8'));
-    const sessions = Object.values(sessionsData);
+    const sessions = Object.entries(sessionsData);
     
     console.log(`📋 找到 ${sessions.length} 個 sessions`);
     
-    // 累積統計 - 只統計最近 6 小時的更新
-    const sixHoursAgo = Date.now() - (6 * 60 * 60 * 1000);
-    let totalTokens = 0;
+    // 深度掃描 jsonl 文件以獲取準確的 model 使用記錄
     const modelUsage = {};
-    let skipped = { tooOld: 0, noTokens: 0 };
+    let totalTokens = 0;
+    let skipped = { tooOld: 0, noTokens: 0, noFile: 0 };
+    const sixHoursAgo = Date.now() - (6 * 60 * 60 * 1000);
     
-    sessions.forEach(session => {
+    for (const [key, session] of sessions) {
       if (!session.updatedAt || session.updatedAt < sixHoursAgo) {
         skipped.tooOld++;
-        return;
+        continue;
       }
       if (!session.totalTokens || session.totalTokens === 0) {
         skipped.noTokens++;
-        return;
+        continue;
       }
       
-      totalTokens += session.totalTokens;
-      
-      const model = session.model || 'unknown';
-      if (!modelUsage[model]) {
-        modelUsage[model] = { tokens: 0, sessions: 0 };
+      // 嘗試從 jsonl 文件中提取 model 使用記錄
+      const sessionFile = session.sessionFile;
+      if (sessionFile && fs.existsSync(sessionFile)) {
+        try {
+          const content = fs.readFileSync(sessionFile, 'utf8');
+          // 使用正則匹配所有 "model":"xxx" 模式
+          const modelMatches = content.match(/"model":"([^"]+)"/g) || [];
+          const sessionModels = {};
+          
+          modelMatches.forEach(match => {
+            const modelName = match.match(/"model":"([^"]+)"/)[1];
+            // 過濾掉非 LLM 模型
+            if (modelName.includes('embedding') || modelName === 'delivery-mirror') return;
+            sessionModels[modelName] = (sessionModels[modelName] || 0) + 1;
+          });
+          
+          // 根據 model 出現次數分配 token
+          const totalOccurrences = Object.values(sessionModels).reduce((a, b) => a + b, 0);
+          if (totalOccurrences > 0) {
+            for (const [model, count] of Object.entries(sessionModels)) {
+              const tokenShare = Math.floor(session.totalTokens * (count / totalOccurrences));
+              if (!modelUsage[model]) {
+                modelUsage[model] = { tokens: 0, sessions: 0 };
+              }
+              modelUsage[model].tokens += tokenShare;
+              modelUsage[model].sessions += 1;
+              totalTokens += tokenShare;
+            }
+          }
+        } catch (e) {
+          // 如果讀取失敗，使用 session.model
+          const model = session.model || 'unknown';
+          if (!modelUsage[model]) {
+            modelUsage[model] = { tokens: 0, sessions: 0 };
+          }
+          modelUsage[model].tokens += session.totalTokens;
+          modelUsage[model].sessions += 1;
+          totalTokens += session.totalTokens;
+        }
+      } else {
+        skipped.noFile++;
+        // 使用 session.model 作為備用
+        const model = session.model || 'unknown';
+        if (!modelUsage[model]) {
+          modelUsage[model] = { tokens: 0, sessions: 0 };
+        }
+        modelUsage[model].tokens += session.totalTokens;
+        modelUsage[model].sessions += 1;
+        totalTokens += session.totalTokens;
       }
-      modelUsage[model].tokens += session.totalTokens;
-      modelUsage[model].sessions += 1;
-    });
+    }
     
     console.log(`⏭️  跳過：${skipped.tooOld} 個過舊，${skipped.noTokens} 個無 token`);
     
