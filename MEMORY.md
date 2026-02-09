@@ -52,6 +52,19 @@
   - `references/positioning.md` — 帳號定位模板、選題矩陣、Q&A Flow
   - `references/examples.md` — 實戰範例與學習清單
 
+## 日誌標記規則（2026-02-09）
+所有進度在 `memory/YYYY-MM-DD.md` 中統一記錄，每個分身用代號標記：
+- `[YQ1]` - 本尊 YuQi 的工作
+- `[YQ2]` - HR YuQi 的工作
+- `[YQ3]` - 行銷 YuQi 的工作
+
+範例：
+```
+[YQ1] 完成港墘路公司爬蟲聯絡方式補充
+[YQ2] HR 招聘流程跟進 XX 公司
+[YQ3] 腳本撰寫「短影音引流」3 版本
+```
+
 ## 長期記憶規則
 - **資訊保留**：除了目前的既有資訊外，長期記憶中的所有內容應被保留。
 - **衝突處理**：如果遇到新的資訊與長期記憶中既有的內容發生衝突時，我必須先告知您，等待您的指示，而不是自行決定覆蓋或修改。
@@ -66,12 +79,31 @@
 ## 日報設置（2026-02-09）
 ✅ **每個分身各自每天 21:00 Taiwan Time 自動日報**
 
+**YQ2（HR YuQi）日報**
+- Cron Job ID: `def664dd-8ba1-443f-abba-984a969e5e6d`
+- 格式：`📊 日報 (YYYY-MM-DD) [YQ2] HR YuQi`
+- 內容欄位：✅ 完成 / ⏳ 進行中 / 🔴 Blocker
+- 數據來源：memory/YYYY-MM-DD.md 中 [YQ2] 標記
+- 交付方式：Telegram 直傳 Jacky
+
 **YQ3（行銷 YuQi）日報**
-- Cron Job ID: `130f45e4-b21d-4015-b7b7-8e97aad1afd4`
+- Cron Job ID: `07d47d82-efba-42ac-b791-f8fa515bcb1a`
 - 格式：`📊 日報 (YYYY-MM-DD) [YQ3] 行銷 YuQi`
 - 內容欄位：✅ 完成 / ⏳ 進行中 / 🔴 Blocker
-- 數據來源：memory/YYYY-MM-DD.md 中 [YQ3] 標記 + MEMORY.md
+- 數據來源：memory/YYYY-MM-DD.md 中 [YQ3] 標記
 - 交付方式：Telegram 直傳 Jacky
+
+**日報規則**
+1. 每欄位最多一句話（簡潔）
+2. 無進展的欄位省略（不寫「完成」就別空著）
+3. 卡住的事項寫到 Blocker
+4. 待確認或待批准的事項提一下
+
+## 常用群組（2026-02-09）
+- **每日回報群（AIJob 龍蝦社）**
+  - 群組 ID: `-1003793194829`
+  - Link: `t.me/c/3793194829`
+  - **用途**：三個分身的每日日報發送群
 
 ## 專案規劃師 - 老闆AI助理 SaaS 化考量
 
