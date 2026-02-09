@@ -1181,7 +1181,7 @@ table tbody tr:hover {
 /* 手機 */
 @media (max-width: 768px) {
   body {
-    padding: 10px;
+    padding: 5px;
   }
   
   .container {
@@ -1190,179 +1190,414 @@ table tbody tr:hover {
   
   /* Header */
   header {
-    padding: 20px;
+    padding: 16px;
   }
   
   header h1 {
-    font-size: 1.5rem;
-    flex-direction: column;
+    font-size: 1.3rem;
+    flex-direction: row;
     gap: 8px;
-    text-align: center;
+    text-align: left;
+    justify-content: flex-start;
   }
   
   .icon-title {
-    width: 28px;
-    height: 28px;
+    width: 24px;
+    height: 24px;
   }
   
   nav {
-    gap: 8px;
+    gap: 6px;
+    margin-top: 12px;
   }
   
   .nav-btn {
     flex: 1;
     min-width: 0;
-    padding: 8px 12px;
-    font-size: 0.85rem;
+    padding: 10px 8px;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    min-height: 44px; /* 觸控友好 */
   }
   
   .icon-nav {
-    width: 14px;
-    height: 14px;
-    margin-right: 4px;
+    width: 12px;
+    height: 12px;
+    margin-right: 3px;
   }
   
   /* 控制面板 */
   .control-panel {
-    padding: 15px;
+    padding: 12px;
   }
   
   .current-model-status {
     flex-direction: column;
     align-items: stretch;
-    gap: 15px;
+    gap: 12px;
   }
   
   .status-indicator {
-    justify-content: center;
+    justify-content: flex-start;
+    padding: 8px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+  }
+  
+  .status-info small {
+    font-size: 0.7rem;
+  }
+  
+  .model-name {
+    font-size: 0.9rem;
   }
   
   .quota-quick-view,
   .refresh-indicator {
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start;
+    padding: 8px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+  }
+  
+  .quota-circle {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .quota-text {
+    font-size: 0.8rem;
+  }
+  
+  .refresh-icon {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .refresh-indicator small {
+    font-size: 0.7rem;
+  }
+  
+  .refresh-indicator strong {
+    font-size: 0.9rem;
   }
   
   .btn-primary {
     width: 100%;
     padding: 14px;
-    font-size: 1.1rem;
+    font-size: 1rem;
+    min-height: 48px; /* 觸控友好 */
   }
   
   /* Main Content */
   main {
-    padding: 20px 15px;
+    padding: 12px 8px;
   }
   
   .stats-grid {
     grid-template-columns: 1fr;
-    gap: 15px;
+    gap: 12px;
+    margin-bottom: 20px;
   }
   
   .stat-card {
-    padding: 20px;
+    padding: 16px;
+  }
+  
+  .stat-card h3 {
+    font-size: 0.8rem;
+    margin-bottom: 8px;
   }
   
   .stat-card .value {
-    font-size: 2rem;
+    font-size: 1.8rem;
+    margin-bottom: 4px;
+  }
+  
+  .stat-card .label {
+    font-size: 0.75rem;
   }
   
   /* Section */
   .section {
-    padding: 20px 15px;
-    margin-bottom: 20px;
+    padding: 12px;
+    margin-bottom: 15px;
   }
   
   .section h2 {
-    font-size: 1.1rem;
+    font-size: 1rem;
+    margin-bottom: 12px;
   }
   
-  /* Table */
+  /* Table - 手機版改用卡片式顯示 */
+  .table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 8px;
+  }
+  
   table {
-    font-size: 0.85rem;
+    font-size: 0.75rem;
+    min-width: 600px; /* 確保表格有最小寬度 */
   }
   
   table th,
   table td {
-    padding: 10px 8px;
+    padding: 8px 6px;
+    white-space: nowrap;
+  }
+  
+  table th {
+    font-size: 0.7rem;
+    position: sticky;
+    top: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 10;
+  }
+  
+  /* 配額表格特殊處理 */
+  .quota-table-mobile {
+    display: block;
+  }
+  
+  .quota-table-mobile table {
+    display: none;
+  }
+  
+  .quota-card-mobile {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(0, 240, 255, 0.2);
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 10px;
+  }
+  
+  .quota-card-mobile strong {
+    display: block;
+    color: #00f0ff;
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(0, 240, 255, 0.2);
+  }
+  
+  .quota-card-mobile .quota-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    font-size: 0.8rem;
+  }
+  
+  .quota-card-mobile .quota-label {
+    color: #00f0ff;
+  }
+  
+  .quota-card-mobile .quota-value {
+    color: #ffffff;
+  }
+  
+  /* Progress Bar */
+  .progress-bar {
+    height: 24px;
+  }
+  
+  .progress-fill {
+    font-size: 0.75rem;
   }
   
   /* Modal */
   .modal-content {
-    width: 95%;
-    max-height: 90vh;
+    width: 96%;
+    max-height: 92vh;
+    border-radius: 12px;
   }
   
   .modal-header {
-    padding: 20px;
+    padding: 16px;
   }
   
   .modal-header h2 {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+  }
+  
+  .close-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 1.5rem;
   }
   
   .modal-body {
-    padding: 20px 15px;
+    padding: 12px;
+    max-height: calc(92vh - 80px);
   }
   
   .model-grid {
     grid-template-columns: 1fr;
-    gap: 15px;
+    gap: 12px;
   }
   
   .model-card {
-    padding: 15px;
+    padding: 12px;
+  }
+  
+  .model-header strong {
+    font-size: 0.85rem;
+  }
+  
+  .model-stats {
+    padding: 8px;
+    gap: 8px;
+  }
+  
+  .model-stat span {
+    font-size: 0.65rem;
+    margin-bottom: 3px;
+  }
+  
+  .model-stat strong {
+    font-size: 0.85rem;
+  }
+  
+  .btn-select {
+    padding: 10px;
+    font-size: 0.9rem;
+    min-height: 44px; /* 觸控友好 */
   }
   
   /* Recommendation */
   .recommendation {
     flex-direction: column;
-    text-align: center;
-    gap: 12px;
+    padding: 12px;
+    gap: 10px;
   }
   
   .recommendation-icon {
-    width: 28px;
-    height: 28px;
+    width: 24px;
+    height: 24px;
+  }
+  
+  .recommendation strong {
+    font-size: 0.9rem;
+  }
+  
+  .recommendation p {
+    font-size: 0.8rem;
   }
   
   .btn-primary-sm {
-    margin: 0 auto;
     width: 100%;
+    margin: 8px 0 0 0;
+    padding: 10px;
+    min-height: 44px; /* 觸控友好 */
   }
   
   /* Toast */
   .toast-container {
-    left: 10px;
-    right: 10px;
-    top: 10px;
+    left: 8px;
+    right: 8px;
+    top: 8px;
   }
   
   .toast {
     min-width: auto;
     max-width: none;
+    padding: 12px;
+  }
+  
+  .toast-icon svg {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .toast-content strong {
+    font-size: 0.9rem;
+  }
+  
+  .toast-content p {
+    font-size: 0.8rem;
   }
   
   /* Alert Banner */
   .alert-banner {
-    flex-wrap: wrap;
+    flex-direction: column;
+    padding: 10px;
+    gap: 10px;
+  }
+  
+  .alert-icon {
+    width: 20px;
+    height: 20px;
   }
   
   .btn-alert-action {
     width: 100%;
-    margin: 10px 0 0 0;
+    margin: 0;
+    padding: 10px;
+    min-height: 44px; /* 觸控友好 */
+  }
+  
+  /* Chart Container */
+  .chart-container {
+    padding: 12px;
+    font-size: 0.85rem;
+  }
+  
+  /* Status Badge */
+  .status-badge {
+    padding: 3px 8px;
+    font-size: 0.7rem;
+  }
+  
+  /* Cooldown Display */
+  .cooldown-display {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .countdown-circle {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .countdown-text {
+    font-size: 0.95rem;
+  }
+  
+  .countdown-label small {
+    font-size: 0.75rem;
+  }
+  
+  .countdown-bar {
+    width: 100%;
   }
 }
 
 /* 小手機 */
 @media (max-width: 480px) {
+  body {
+    padding: 3px;
+  }
+  
+  header {
+    padding: 12px;
+  }
+  
   header h1 {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
+  }
+  
+  .icon-title {
+    width: 20px;
+    height: 20px;
+  }
+  
+  nav {
+    gap: 4px;
   }
   
   .nav-btn {
-    padding: 8px;
-    font-size: 0.75rem;
+    padding: 8px 6px;
+    font-size: 0.7rem;
   }
   
   .icon-nav {
@@ -1370,7 +1605,7 @@ table tbody tr:hover {
   }
   
   .stat-card .value {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
   }
   
   .modal-content {
@@ -1379,7 +1614,17 @@ table tbody tr:hover {
   }
   
   .model-stat strong {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
+  }
+  
+  table {
+    font-size: 0.7rem;
+    min-width: 500px;
+  }
+  
+  table th,
+  table td {
+    padding: 6px 4px;
   }
 }
 
@@ -1392,6 +1637,10 @@ table tbody tr:hover {
   .current-model-status {
     flex-direction: row;
     flex-wrap: wrap;
+  }
+  
+  .model-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
