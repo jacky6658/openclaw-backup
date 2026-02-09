@@ -64,11 +64,13 @@
 - **防呆機制**：大任務前先預估工作量 + 詢問「開始嗎？」，不直接執行
 
 ## 日報設置（2026-02-09）
-✅ **每天 21:00 Taiwan Time 自動日報**
-- Cron Job ID: `f1cdb9d3-1cf0-4289-9670-f49db6a1b795`
-- 格式：`📊 日報 (YYYY-MM-DD) [YQ2] HR YuQi + [YQ3] 行銷 YuQi`
+✅ **每個分身各自每天 21:00 Taiwan Time 自動日報**
+
+**YQ3（行銷 YuQi）日報**
+- Cron Job ID: `130f45e4-b21d-4015-b7b7-8e97aad1afd4`
+- 格式：`📊 日報 (YYYY-MM-DD) [YQ3] 行銷 YuQi`
 - 內容欄位：✅ 完成 / ⏳ 進行中 / 🔴 Blocker
-- 數據來源：memory/YYYY-MM-DD.md + MEMORY.md
+- 數據來源：memory/YYYY-MM-DD.md 中 [YQ3] 標記 + MEMORY.md
 - 交付方式：Telegram 直傳 Jacky
 
 ## 專案規劃師 - 老闆AI助理 SaaS 化考量
