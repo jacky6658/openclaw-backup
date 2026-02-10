@@ -33,4 +33,103 @@ Skills are shared. Your setup is yours. Keeping them apart means you can update 
 
 ---
 
+## HR 履歷進件設定
+
+### 負責顧問資訊
+- **負責顧問**：待補充（請 Jacky 指定）
+- **負責職位**：全職位（待細分）
+
+**說明**：所有履歷進件通知必須包含「負責顧問」欄位，請確保此資訊已更新。
+
+---
+
+## JD（職缺）管理
+
+### 系統位置
+- **管理工具**: `/Users/user/clawd/hr-tools/jd-manager.sh`
+- **文件**: `/Users/user/clawd/hr-tools/README-JD管理.md`
+- **雲端資料夾**: [獵頭系統](https://drive.google.com/drive/folders/12lfoz7qwjhWMwbCJL_SfOf3icCOTCydS)
+- **Google Sheets**: [step1ne 職缺管理](https://docs.google.com/spreadsheets/d/1QPaeOm-slNVFCeM8Q3gg3DawKjzp2tYwyfquvdHlZFE/edit)
+
+### 快速指令
+```bash
+./jd-manager.sh list          # 列出所有職缺
+./jd-manager.sh search 'AI'   # 搜尋職缺
+./jd-manager.sh report         # 統計報表
+./jd-manager.sh add <職位> <部門> <人數> <薪資> <技能> <經驗> <學歷>
+```
+
+### 目前職缺（2026-02-10）
+- AI工程師 (技術部) — 2人，80k-120k
+- 數據分析師 (數據部) — 1人，60k-90k
+- 產品經理 (產品部) — 1人，90k-140k
+- 全端工程師 (技術部) — 3人，70k-110k
+- HR 招募專員 (人資部) — 1人，50k-70k
+
+---
+
+## 總覽看板（新增 2026-02-10）
+
+### Web 介面
+- **專案位置**: `/Users/user/clawd/projects/hr-dashboard`
+- **啟動腳本**: `/Users/user/clawd/hr-tools/start-dashboard.sh`
+- **訪問位址**: http://localhost:3000
+- **說明文件**: `/Users/user/clawd/hr-tools/README-總覽看板.md`
+
+### 功能特色
+- 即時追蹤職缺與候選人狀態
+- Pipeline 視覺化
+- 自動提醒需跟進的案件
+- 每 30 秒自動更新
+
+### 快速啟動
+```bash
+~/clawd/hr-tools/start-dashboard.sh
+```
+
+---
+
+## 履歷池管理
+
+### 群組設定
+- **履歷池群組**: HR AI招募自動化 (`-1003231629634`)
+- **主要 Topic**: 304（履歷相關操作的主要討論區）
+
+### 快速操作
+**在 Telegram 中可以直接：**
+1. 上傳履歷檔案 → YuQi 自動處理
+2. 搜尋履歷：`搜尋 [關鍵字]`
+3. 更新狀態：`更新狀態 [行數] [新狀態]`
+4. 查看報表：`履歷報表`
+
+### 系統位置
+- **管理工具**: `/Users/user/clawd/hr-tools/resume-pool.sh`
+- **文件**: `/Users/user/clawd/hr-tools/README-履歷池.md`
+- **雲端資料夾**: [獵頭系統](https://drive.google.com/drive/folders/12lfoz7qwjhWMwbCJL_SfOf3icCOTCydS)
+- **履歷存放**: [aiagent 資料夾](https://drive.google.com/drive/folders/1JkesbUFyGz51y90NWUG91n84umU33Mc5)
+- **索引**: [履歷池索引 (Google Sheets)](https://docs.google.com/spreadsheets/d/1PunpaDAFBPBL_I76AiRYGXKaXDZvMl1c262SEtxRk6Q)
+
+---
+
 Add whatever helps you do your job. This is your cheat sheet.
+
+---
+
+## BD 客戶開發自動化（新增 2026-02-10）
+
+### 觸發位置
+- **群組**：HR AI招募自動化 (`-1003231629634`)
+- **Topic 364**：「開發」
+- **觸發方式**：`@YuQi 開發客戶：<職位名稱>`
+
+### 工具位置
+- **腳本**：`~/clawd/hr-tools/bd-automation.sh`
+- **說明**：在 `/Users/user/clawd/skills/headhunter/SKILL.md` 的最後
+- **資料儲存**：`~/clawd/hr-tools/data/`
+
+### 自動執行流程
+1. 搜尋 104 招聘公司
+2. 爬取聯絡方式
+3. 整理 Google Sheets
+4. 批量寄 BD 信
+5. 回報結果到 Topic 364
