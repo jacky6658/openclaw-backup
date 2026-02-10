@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OpenClaw 落地服務產品規劃</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap');
+    
+    * {
+      font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    
+    body {
+      background: #000;
+      overflow: hidden;
+    }
+    
+    .slide {
+      width: 100vw;
+      height: 100vh;
+      display: none;
+      position: relative;
+      background: linear-gradient(135deg, #0a0a0a 0%, #111 50%, #0a0a0a 100%);
+      overflow: hidden;
+    }
+    
+    .slide.active {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    /* Animated gradient orbs */
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.3;
+      animation: float 20s ease-in-out infinite;
+    }
+    
+    .orb-1 {
+      width: 400px;
+      height: 400px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      top: -100px;
+      right: -100px;
+      animation-delay: 0s;
+    }
+    
+    .orb-2 {
+      width: 300px;
+      height: 300px;
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      bottom: -50px;
+      left: -50px;
+      animation-delay: -5s;
+    }
+    
+    .orb-3 {
+      width: 250px;
+      height: 250px;
+      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation-delay: -10s;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      25% { transform: translate(50px, -30px) scale(1.1); }
+      50% { transform: translate(-30px, 50px) scale(0.9); }
+      75% { transform: translate(-50px, -20px) scale(1.05); }
+    }
+    
+    .content {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding: 2rem;
+      max-width: 1200px;
+    }
+    
+    h1 {
+      color: #fff;
+      font-weight: 900;
+      line-height: 1.2;
+    }
+    
+    h2 {
+      color: #fff;
+      font-weight: 700;
+    }
+    
+    p, li {
+      color: #9ca3af;
+      font-weight: 300;
+    }
+    
+    .highlight {
+      color: #fff;
+      font-weight: 500;
+    }
+    
+    .accent {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .accent-orange {
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .accent-blue {
+      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    /* Progress bar */
+    .progress-container {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+      z-index: 100;
+    }
+    
+    .progress-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #333;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .progress-dot.active {
+      background: #667eea;
+      width: 24px;
+      border-radius: 4px;
+    }
+    
+    .progress-dot:hover {
+      background: #555;
+    }
+    
+    /* Page number */
+    .page-number {
+      position: fixed;
+      bottom: 20px;
+      right: 40px;
+      color: #333;
+      font-size: 14px;
+      z-index: 100;
+    }
+    
+    /* Grid layouts */
+    .grid-2x2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      max-width: 900px;
+    }
+    
+    .grid-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 2rem;
+      text-align: left;
+    }
+    
+    .grid-card h3 {
+      color: #fff;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    
+    .grid-card p {
+      font-size: 1rem;
+    }
+    
+    /* Timeline */
+    .timeline {
+      display: flex;
+      justify-content: space-between;
+      max-width: 1000px;
+      width: 100%;
+    }
+    
+    .timeline-item {
+      text-align: center;
+      flex: 1;
+      position: relative;
+    }
+    
+    .timeline-item::after {
+      content: '';
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, #667eea, #764ba2);
+    }
+    
+    .timeline-item:last-child::after {
+      display: none;
+    }
+    
+    .timeline-dot {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      margin: 0 auto 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 700;
+      position: relative;
+      z-index: 1;
+    }
+    
+    /* Pricing table */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      max-width: 1000px;
+    }
+    
+    .pricing-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 2rem;
+      text-align: center;
+    }
+    
+    .pricing-card.featured {
+      border-color: #667eea;
+      transform: scale(1.05);
+    }
+    
+    .price {
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: #fff;
+      margin: 1rem 0;
+    }
+    
+    .price span {
+      font-size: 1rem;
+      font-weight: 400;
+      color: #666;
+    }
+    
+    /* Architecture diagram */
+    .architecture {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+    }
+    
+    .arch-box {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 1.5rem 3rem;
+      text-align: center;
+    }
+    
+    .arch-box.main {
+      background: linear-gradient(135deg, rgba(102,126,234,0.2) 0%, rgba(118,75,162,0.2) 100%);
+      border-color: #667eea;
+    }
+    
+    .arch-arrow {
+      color: #667eea;
+      font-size: 2rem;
+    }
+    
+    .arch-clients {
+      display: flex;
+      gap: 1rem;
+    }
+    
+    /* Animations */
+    .fade-in {
+      animation: fadeIn 0.8s ease-out;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .slide.active .content > * {
+      animation: fadeIn 0.8s ease-out both;
+    }
+    
+    .slide.active .content > *:nth-child(1) { animation-delay: 0.1s; }
+    .slide.active .content > *:nth-child(2) { animation-delay: 0.2s; }
+    .slide.active .content > *:nth-child(3) { animation-delay: 0.3s; }
+    .slide.active .content > *:nth-child(4) { animation-delay: 0.4s; }
+    .slide.active .content > *:nth-child(5) { animation-delay: 0.5s; }
+  </style>
+</head>
+<body>
+  <!-- Slide 1: Cover -->
+  <div class="slide active">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="content">
+      <p class="text-lg text-gray-500 mb-4 tracking-widest">AIJOB 學院</p>
+      <h1 class="text-7xl mb-6">OpenClaw<br><span class="accent">落地服務</span></h1>
+      <p class="text-2xl text-gray-400">產品規劃提案</p>
+      <p class="text-gray-600 mt-8">2026.02.10</p>
+    </div>
+  </div>
+
+  <!-- Slide 2: Impact -->
+  <div class="slide">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-3"></div>
+    <div class="content">
+      <h1 class="text-6xl mb-8">AI 助理時代<br><span class="accent-orange">來了</span></h1>
+      <p class="text-2xl text-gray-400">不是聊天機器人，是真正能「做事」的 AI</p>
+    </div>
+  </div>
+
+  <!-- Slide 3: Market -->
+  <div class="slide">
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="content">
+      <p class="text-xl text-gray-500 mb-4">市場現況</p>
+      <h1 class="text-5xl mb-8">2026 全球爆紅<br><span class="accent-blue">台灣卻沒人做</span></h1>
+      <div class="grid grid-cols-3 gap-8 mt-12 max-w-4xl">
+        <div class="text-center">
+          <p class="text-5xl font-black text-white">IBM</p>
+          <p class="text-gray-500 mt-2">專題報導</p>
+        </div>
+        <div class="text-center">
+          <p class="text-5xl font-black text-white">CNBC</p>
+          <p class="text-gray-500 mt-2">頭條新聞</p>
+        </div>
+        <div class="text-center">
+          <p class="text-5xl font-black text-white">Fortune</p>
+          <p class="text-gray-500 mt-2">深度分析</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 4: Problem -->
+  <div class="slide">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="content">
+      <p class="text-xl text-gray-500 mb-4">痛點分析</p>
+      <h1 class="text-6xl mb-4">用戶在<span class="accent-orange">怕</span>什麼？</h1>
+      <p class="text-2xl text-gray-400">想用，但不敢用</p>
+    </div>
+  </div>
+
+  <!-- Slide 5: 4 Obstacles -->
+  <div class="slide">
+    <div class="orb orb-3"></div>
+    <div class="content">
+      <h2 class="text-3xl mb-8 text-gray-400">四大障礙</h2>
+      <div class="grid-2x2">
+        <div class="grid-card">
+          <h3>💰 Token 燒錢</h3>
+          <p>帳單不可控、額度突然沒</p>
+        </div>
+        <div class="grid-card">
+          <h3>🔒 資安疑慮</h3>
+          <p>公司機密會被看到？</p>
+        </div>
+        <div class="grid-card">
+          <h3>⚡ 穩定度差</h3>
+          <p>跑一跑就當機、沒人顧</p>
+        </div>
+        <div class="grid-card">
+          <h3>❓ 出事找誰</h3>
+          <p>自己裝的，沒人負責</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 6: Opportunity -->
+  <div class="slide">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="content">
+      <h1 class="text-6xl mb-4">障礙</h1>
+      <h1 class="text-7xl"><span class="accent">= 商機</span></h1>
+      <p class="text-2xl text-gray-400 mt-8">解決這些問題，就是我們的價值</p>
+    </div>
+  </div>
+
+  <!-- Slide 7: Solution -->
+  <div class="slide">
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="content">
+      <p class="text-xl text-gray-500 mb-4">解決方案</p>
+      <h1 class="text-5xl mb-12">我們提供<span class="accent-blue">完整配套</span></h1>
+      <div class="grid grid-cols-4 gap-6 max-w-4xl">
+        <div class="text-center">
+          <p class="text-4xl mb-2">📊</p>
+          <p class="text-white font-bold">用量監控</p>
+          <p class="text-sm text-gray-500">預算警報</p>
+        </div>
+        <div class="text-center">
+          <p class="text-4xl mb-2">🛡️</p>
+          <p class="text-white font-bold">資安方案</p>
+          <p class="text-sm text-gray-500">分級保護</p>
+        </div>
+        <div class="text-center">
+          <p class="text-4xl mb-2">🔄</p>
+          <p class="text-white font-bold">穩定運行</p>
+          <p class="text-sm text-gray-500">自動恢復</p>
+        </div>
+        <div class="text-center">
+          <p class="text-4xl mb-2">🤝</p>
+          <p class="text-white font-bold">服務保障</p>
+          <p class="text-sm text-gray-500">有人負責</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 8: Architecture -->
+  <div class="slide">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-3"></div>
+    <div class="content">
+      <p class="text-xl text-gray-500 mb-4">核心架構</p>
+      <h1 class="text-5xl mb-8">維運龍蝦<br><span class="accent">AI 管 AI</span></h1>
+      <div class="architecture">
+        <div class="arch-box main">
+          <p class="text-white font-bold text-xl">🦞 維運龍蝦</p>
+          <p class="text-gray-400 text-sm">自動監控 + 自動修復</p>
+        </div>
+        <div class="arch-arrow">↓</div>
+        <div class="arch-clients">
+          <div class="arch-box">
+            <p class="text-white">客戶 A</p>
+          </div>
+          <div class="arch-box">
+            <p class="text-white">客戶 B</p>
+          </div>
+          <div class="arch-box">
+            <p class="text-white">客戶 C</p>
+          </div>
+          <div class="arch-box">
+            <p class="text-white">...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 9: Efficiency -->
+  <div class="slide">
+    <div class="orb orb-2"></div>
+    <div class="content">
+      <p class="text-xl text-gray-500 mb-4">規模效益</p>
+      <h1 class="text-5xl mb-12">1 隻龍蝦<br><span class="accent-orange">服務 100+ 客戶</span></h1>
+      <div class="grid grid-cols-2 gap-16 max-w-3xl">
+        <div class="text-center">
+          <p class="text-gray-500 mb-2">純人工</p>
+          <p class="text-5xl font-black text-white">10-20</p>
+          <p class="text-gray-500">戶/人</p>
+        </div>
+        <div class="text-center">
+          <p class="text-gray-500 mb-2">維運龍蝦</p>
+          <p class="text-5xl font-black accent">100+</p>
+          <p class="text-gray-500">戶/龍蝦</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 10: Product Lines -->
+  <div class="slide">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-3"></div>
+    <div class="content">
+      <p class="text-xl text-gray-500 mb-4">產品佈局</p>
+      <h1 class="text-5xl mb-12">三條<span class="accent-blue">產品線</span></h1>
+      <div class="grid grid-cols-3 gap-8 max-w-4xl">
+        <div class="grid-card">
+          <p class="text-3xl mb-2">📚</p>
+          <h3>教育產品</h3>
+          <p>課程、工作坊、認證培訓</p>
+        </div>
+        <div class="grid-card">
+          <p class="text-3xl mb-2">🔧</p>
+          <h3>服務產品</h3>
+          <p>安裝、託管、技術支援</p>
+        </div>
+        <div class="grid-card">
+          <p class="text-3xl mb-2">🏢</p>
+          <h3>企業產品</h3>
+          <p>客製開發、私有部署、顧問</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 11: Pricing -->
+  <div class="slide">
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="content">
+      <p class="text-xl text-gray-500 mb-4">定價策略</p>
+      <h1 class="text-4xl mb-8">滿足不同需求</h1>
+      <div class="pricing-grid">
+        <div class="pricing-card">
+          <p class="text-gray-400">入門課程</p>
+          <p class="price">1,980<span>/次</span></p>
+          <p class="text-gray-500">線上自學</p>
+        </div>
+        <div class="pricing-card featured">
+          <p class="text-gray-400">標準託管</p>
+          <p class="price">3,000<span>/月</span></p>
+          <p class="text-gray-500">安裝 + 維護 + 支援</p>
+        </div>
+        <div class="pricing-card">
+          <p class="text-gray-400">企業方案</p>
+          <p class="price">面議</p>
+          <p class="text-gray-500">客製 + SLA</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 12: Timeline -->
+  <div class="slide">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="content">
+      <p class="text-xl text-gray-500 mb-4">執行計畫</p>
+      <h1 class="text-5xl mb-12"><span class="accent">4 週</span>啟動</h1>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot">1</div>
+          <p class="text-white font-bold">基礎建設</p>
+          <p class="text-gray-500 text-sm">文件 + SOP</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot">2</div>
+          <p class="text-white font-bold">產品打磨</p>
+          <p class="text-gray-500 text-sm">課程 + 流程</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot">3</div>
+          <p class="text-white font-bold">軟啟動</p>
+          <p class="text-gray-500 text-sm">種子用戶</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot">4</div>
+          <p class="text-white font-bold">正式推廣</p>
+          <p class="text-gray-500 text-sm">內容行銷</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 13: Revenue -->
+  <div class="slide">
+    <div class="orb orb-3"></div>
+    <div class="content">
+      <p class="text-xl text-gray-500 mb-4">財務預估</p>
+      <h1 class="text-5xl mb-4">6 個月目標</h1>
+      <p class="text-8xl font-black accent-orange">11萬+</p>
+      <p class="text-2xl text-gray-400 mt-4">月收入（不含企業專案）</p>
+    </div>
+  </div>
+
+  <!-- Slide 14: CTA -->
+  <div class="slide">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="content">
+      <h1 class="text-6xl mb-8">下一步</h1>
+      <div class="grid grid-cols-2 gap-8 max-w-3xl mt-8">
+        <div class="grid-card">
+          <h3>1. 確認資源</h3>
+          <p>人力、預算、時間</p>
+        </div>
+        <div class="grid-card">
+          <h3>2. 啟動 Phase 1</h3>
+          <p>完成基礎技術文件</p>
+        </div>
+        <div class="grid-card">
+          <h3>3. 找種子用戶</h3>
+          <p>從既有人脈開始</p>
+        </div>
+        <div class="grid-card">
+          <h3>4. 快速迭代</h3>
+          <p>邊做邊學，持續優化</p>
+        </div>
+      </div>
+      <p class="text-3xl text-white mt-12 font-bold">準備好了嗎？</p>
+    </div>
+  </div>
+
+  <!-- Progress dots -->
+  <div class="progress-container" id="progress"></div>
+  
+  <!-- Page number -->
+  <div class="page-number" id="pageNumber">1 / 14</div>
+
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    const progressContainer = document.getElementById('progress');
+    const pageNumber = document.getElementById('pageNumber');
+    let currentSlide = 0;
+    
+    // Create progress dots
+    slides.forEach((_, i) => {
+      const dot = document.createElement('div');
+      dot.className = `progress-dot ${i === 0 ? 'active' : ''}`;
+      dot.onclick = () => goToSlide(i);
+      progressContainer.appendChild(dot);
+    });
+    
+    function updateSlide() {
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === currentSlide);
+      });
+      
+      document.querySelectorAll('.progress-dot').forEach((dot, i) => {
+        dot.classList.toggle('active', i === currentSlide);
+      });
+      
+      pageNumber.textContent = `${currentSlide + 1} / ${slides.length}`;
+    }
+    
+    function goToSlide(index) {
+      currentSlide = Math.max(0, Math.min(slides.length - 1, index));
+      updateSlide();
+    }
+    
+    function nextSlide() {
+      if (currentSlide < slides.length - 1) {
+        currentSlide++;
+        updateSlide();
+      }
+    }
+    
+    function prevSlide() {
+      if (currentSlide > 0) {
+        currentSlide--;
+        updateSlide();
+      }
+    }
+    
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'Enter') {
+        e.preventDefault();
+        nextSlide();
+      } else if (e.key === 'ArrowLeft' || e.key === 'Backspace') {
+        e.preventDefault();
+        prevSlide();
+      } else if (e.key === 'Home') {
+        e.preventDefault();
+        goToSlide(0);
+      } else if (e.key === 'End') {
+        e.preventDefault();
+        goToSlide(slides.length - 1);
+      }
+    });
+    
+    // Touch support
+    let touchStartX = 0;
+    document.addEventListener('touchstart', (e) => {
+      touchStartX = e.touches[0].clientX;
+    });
+    
+    document.addEventListener('touchend', (e) => {
+      const touchEndX = e.changedTouches[0].clientX;
+      const diff = touchStartX - touchEndX;
+      
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) nextSlide();
+        else prevSlide();
+      }
+    });
+    
+    // Click navigation
+    document.addEventListener('click', (e) => {
+      if (e.target.closest('.progress-container')) return;
+      
+      const x = e.clientX / window.innerWidth;
+      if (x > 0.7) nextSlide();
+      else if (x < 0.3) prevSlide();
+    });
+  </script>
+</body>
+</html>

@@ -4,6 +4,10 @@
     "cellcog": {
       "version": "1.0.1",
       "installedAt": 1770216448938
+    },
+    "ppt-generator": {
+      "version": "1.0.0",
+      "installedAt": 1770704215179
     }
   }
 }
