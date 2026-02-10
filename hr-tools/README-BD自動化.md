@@ -1,7 +1,12 @@
 # BD 客戶開發信自動化
 
 ## 🎯 功能
-自動寄送合作邀請信給潛在客戶，使用 Step1ne 官方信箱 `aijessie88@step1ne.com`
+自動寄送合作邀請信給潛在客戶
+
+## 📧 預設信箱
+**所有 BD 開發信預設使用**：`aijessie88@step1ne.com`
+
+> 💡 **備註**：此為 Step1ne 官方 BD 信箱，所有獵頭顧問共用。如需使用個人信箱，請參考「進階設定」章節。
 
 ## 📧 信件類型：合作邀請信
 
@@ -140,6 +145,35 @@ YuQi 會自動：
 # 待跟進：10 封
 ```
 
+## 🔧 進階設定
+
+### 使用其他 Email 帳號
+如果你需要使用自己的 step1ne.com 信箱（例如 `consultant1@step1ne.com`）：
+
+#### 方法 1：修改設定檔
+編輯 `bd-outreach.sh`，找到這一行：
+```bash
+EMAIL_ACCOUNT="aijessie88@step1ne.com"
+```
+改成你的信箱：
+```bash
+EMAIL_ACCOUNT="consultant1@step1ne.com"
+```
+
+#### 方法 2：使用環境變數
+```bash
+export GOG_ACCOUNT="consultant1@step1ne.com"
+./bd-outreach.sh send "公司名稱" "email" "聯絡人"
+```
+
+### 自訂公司簡介 PDF
+BD 信件會自動附上 `Step1ne公司簡介.pdf`。如需替換：
+```bash
+cp /path/to/your/company-intro.pdf ~/clawd/hr-tools/Step1ne公司簡介.pdf
+```
+
+---
+
 ## 🐛 除錯
 
 ### 錯誤：找不到 gog
@@ -161,4 +195,4 @@ gog auth add aijessie88@step1ne.com --services gmail
 ---
 
 ## 📞 支援
-有問題請在 Telegram 群組詢問 YuQi
+有問題請在 Telegram 群組詢問 YuQi 或參考 [INSTALL.md](INSTALL.md)
