@@ -7,8 +7,9 @@ set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 DATA_DIR="$SCRIPT_DIR/data"
-CLIENTS_SHEET="1QPaeOm-slNVFCeM8Q3gg3DawKjzp2tYwyfquvdHlZFE" # step1ne 職缺管理（暫用）
+CLIENTS_SHEET="1bkI7_cCh_Bs4qVa3HlXiy0CFzmItZlA-DYGHSPS4InE" # BD客戶開發表
 EMAIL_ACCOUNT="aijessie88@step1ne.com"
+GOG_ACCOUNT="aiagentg888@gmail.com"
 
 # 顏色
 GREEN='\033[0;32m'
@@ -113,13 +114,30 @@ update_google_sheet() {
     
     echo -e "${BLUE}📊 步驟 3/4：整理到 Google Sheets...${NC}"
     
-    # TODO: 建立專屬的「客戶開發表」
-    # 目前先輸出到檔案
+    # 轉換 JSON 為 Sheets 格式
+    local rows=$(cat "$companies_file" | jq -r '.[] | [
+        .company,
+        .phone // "待查",
+        .email // "待查",
+        .website // "待查",
+        .job_title,
+        "104",
+        .status // "待聯繫",
+        (now | strftime("%Y-%m-%d")),
+        "待分配",
+        (.location // "" | tostring)
+    ] | @json' | jq -s '.')
+    
+    # 取得目前的資料列數
+    local last_row=$(gog sheets get "$CLIENTS_SHEET" "工作表1!A:A" --account "$GOG_ACCOUNT" --json 2>/dev/null | jq '.values | length' || echo "1")
+    local next_row=$((last_row + 1))
+    
+    # 寫入 Google Sheets
+    echo "$rows" | gog sheets append "$CLIENTS_SHEET" "工作表1!A:J" --values-json - --insert INSERT_ROWS --account "$GOG_ACCOUNT" > /dev/null 2>&1
     
     local count=$(cat "$companies_file" | jq '. | length')
-    echo -e "${GREEN}✅ 共 ${count} 筆資料${NC}"
-    echo -e "${YELLOW}💡 Google Sheets 整合開發中，目前資料儲存在：${NC}"
-    echo "   $companies_file"
+    echo -e "${GREEN}✅ 已寫入 ${count} 筆資料到 Google Sheets${NC}"
+    echo -e "${BLUE}📋 查看：https://docs.google.com/spreadsheets/d/$CLIENTS_SHEET${NC}"
 }
 
 # 步驟 4：批量寄信

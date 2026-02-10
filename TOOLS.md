@@ -126,10 +126,23 @@ Add whatever helps you do your job. This is your cheat sheet.
 - **腳本**：`~/clawd/hr-tools/bd-automation.sh`
 - **說明**：在 `/Users/user/clawd/skills/headhunter/SKILL.md` 的最後
 - **資料儲存**：`~/clawd/hr-tools/data/`
+- **Google Sheet**：[BD客戶開發表](https://docs.google.com/spreadsheets/d/1bkI7_cCh_Bs4qVa3HlXiy0CFzmItZlA-DYGHSPS4InE)
 
 ### 自動執行流程
 1. 搜尋 104 招聘公司
 2. 爬取聯絡方式
-3. 整理 Google Sheets
+3. 整理到 Google Sheets（BD客戶開發表）
 4. 批量寄 BD 信
 5. 回報結果到 Topic 364
+
+### 表格欄位
+- 公司名稱
+- 聯絡電話
+- Email
+- 網址
+- 目前職缺
+- 來源（104/LinkedIn）
+- 狀態（待聯繫/已寄信/已回覆/合作中）
+- 開發日期
+- 負責顧問
+- 備註
