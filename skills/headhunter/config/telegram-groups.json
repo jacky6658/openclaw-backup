@@ -1,0 +1,36 @@
+{
+  "hr_recruitment": {
+    "name": "HR AI招募自動化",
+    "group_id": "-1003231629634",
+    "topics": {
+      "resume_intake": {
+        "id": "4",
+        "name": "#履歷進件",
+        "description": "新履歷暫存區，YQ1 自動匹配 JD"
+      },
+      "resume_pool": {
+        "id": "304",
+        "name": "#履歷池",
+        "description": "未匹配或待用的履歷存放區"
+      },
+      "jd_list": {
+        "id": "319",
+        "name": "#JD列表",
+        "description": "現有職缺清單"
+      },
+      "dashboard": {
+        "id": "326",
+        "name": "#總覽看板",
+        "description": "所有案子狀態一覽"
+      }
+    },
+    "workflow": {
+      "description": "履歷進件 → YQ1 匹配 → 高/中/低分流 → 通知顧問 → YQ2 執行",
+      "matching_thresholds": {
+        "high": 90,
+        "mid": 70,
+        "low": 70
+      }
+    }
+  }
+}

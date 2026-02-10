@@ -22,7 +22,7 @@ list_jd() {
     echo -e "${BLUE}📋 職缺清單${NC}"
     echo "===================="
     
-    DATA=$(gog sheets get "$JD_SHEET_ID" "A1:K100" --account "$ACCOUNT" --plain 2>/dev/null || echo "")
+    DATA=$(gog sheets get "$JD_SHEET_ID" "A1:L100" --account "$ACCOUNT" --plain 2>/dev/null || echo "")
     
     if [ -z "$DATA" ] || [ "$(echo "$DATA" | wc -l)" -eq 1 ]; then
         echo -e "${YELLOW}目前沒有職缺${NC}"
@@ -39,37 +39,51 @@ list_jd() {
 # 新增職缺
 add_jd() {
     local title="$1"
-    local dept="$2"
-    local count="$3"
-    local salary="$4"
-    local skills="$5"
-    local exp="$6"
-    local edu="$7"
-    local location="${8:-台北}"
-    local status="${9:-開放中}"
+    local company="$2"
+    local dept="$3"
+    local count="$4"
+    local salary="$5"
+    local skills="$6"
+    local exp="$7"
+    local edu="$8"
+    local location="${9:-台北}"
+    local status="${10:-開放中}"
     local create_date=$(date +"%Y-%m-%d")
     local update_date="$create_date"
     
-    if [ -z "$title" ] || [ -z "$dept" ] || [ -z "$count" ]; then
+    if [ -z "$title" ] || [ -z "$company" ]; then
         echo -e "${RED}❌ 錯誤: 缺少必要欄位${NC}"
-        echo "用法: $0 add <職位名稱> <部門> <需求人數> <薪資範圍> <主要技能> <經驗要求> <學歷要求> [工作地點] [狀態]"
-        echo "範例: $0 add 'AI工程師' '技術部' '2' '80k-120k' 'Python,AI,ML' '3年以上' '大學' '台北' '開放中'"
+        echo "用法: $0 add <職位名稱> <客戶公司> <部門> <需求人數> <薪資範圍> <主要技能> <經驗要求> <學歷要求> [工作地點] [狀態]"
+        echo "範例: $0 add 'AI工程師' '美德醫療' '技術部' '2' '80k-120k' 'Python、AI、ML' '3年以上' '大學' '台北' '開放中'"
         return 1
     fi
     
+    # 預設值處理
+    dept="${dept:-待確認}"
+    count="${count:-1}"
+    salary="${salary:-面議}"
+    skills="${skills:-詳見職缺說明}"
+    exp="${exp:-不拘}"
+    edu="${edu:-不拘}"
+    
     echo -e "${BLUE}📝 新增職缺...${NC}"
     
-    gog sheets append "$JD_SHEET_ID" "A:K" \
-        "$title" "$dept" "$count" "$salary" "$skills" "$exp" "$edu" "$location" "$status" "$create_date" "$update_date" \
+    # 使用頓號分隔技能（避免逗號被當作分隔符）
+    skills_formatted=$(echo "$skills" | sed 's/,/、/g')
+    
+    # 使用 pipe 分隔欄位（gog sheets 正確格式）
+    gog sheets append "$JD_SHEET_ID" "A:L" \
+        "${title}|${company}|${dept}|${count}|${salary}|${skills_formatted}|${exp}|${edu}|${location}|${status}|${create_date}|${update_date}" \
         --account "$ACCOUNT" > /dev/null
     
     echo -e "${GREEN}✓ 職缺已新增${NC}"
     echo ""
     echo "職位: $title"
+    echo "公司: $company"
     echo "部門: $dept"
     echo "需求: $count 人"
     echo "薪資: $salary"
-    echo "技能: $skills"
+    echo "技能: $skills_formatted"
     echo "經驗: $exp"
     echo "學歷: $edu"
     echo "地點: $location"
@@ -88,7 +102,7 @@ search_jd() {
     echo -e "${BLUE}🔍 搜尋職缺: $keyword${NC}"
     echo "===================="
     
-    DATA=$(gog sheets get "$JD_SHEET_ID" "A1:K100" --account "$ACCOUNT" --plain 2>/dev/null || echo "")
+    DATA=$(gog sheets get "$JD_SHEET_ID" "A1:L100" --account "$ACCOUNT" --plain 2>/dev/null || echo "")
     
     RESULT=$(echo "$DATA" | grep -i "$keyword" || echo "")
     
@@ -127,7 +141,7 @@ report_jd() {
     echo -e "${BLUE}📊 職缺統計報表${NC}"
     echo "===================="
     
-    DATA=$(gog sheets get "$JD_SHEET_ID" "A2:K100" --account "$ACCOUNT" --plain 2>/dev/null || echo "")
+    DATA=$(gog sheets get "$JD_SHEET_ID" "A2:L100" --account "$ACCOUNT" --plain 2>/dev/null || echo "")
     
     if [ -z "$DATA" ]; then
         echo -e "${YELLOW}目前沒有職缺資料${NC}"
@@ -146,8 +160,11 @@ report_jd() {
     echo "暫停招募: $paused"
     echo "已結束: $closed"
     echo ""
-    echo -e "${BLUE}📊 各部門職缺數:${NC}"
+    echo -e "${BLUE}📊 各公司職缺數:${NC}"
     echo "$DATA" | awk -F'\t' '{print $2}' | sort | uniq -c | sort -rn
+    echo ""
+    echo -e "${BLUE}📊 各部門職缺數:${NC}"
+    echo "$DATA" | awk -F'\t' '{print $3}' | sort | uniq -c | sort -rn
     echo ""
     echo -e "${GREEN}📊 查看完整報表: https://docs.google.com/spreadsheets/d/$JD_SHEET_ID/edit${NC}"
 }
@@ -162,8 +179,8 @@ init_jd() {
         echo -e "${GREEN}✓ 表頭已存在${NC}"
     else
         echo -e "${YELLOW}⚠ 建立表頭...${NC}"
-        gog sheets update "$JD_SHEET_ID" "A1:K1" \
-            "職位名稱" "部門" "需求人數" "薪資範圍" "主要技能" "經驗要求" "學歷要求" "工作地點" "職位狀態" "建立日期" "最後更新" \
+        gog sheets update "$JD_SHEET_ID" "A1:L1" \
+            "職位名稱|客戶公司|部門|需求人數|薪資範圍|主要技能|經驗要求|學歷要求|工作地點|職位狀態|建立日期|最後更新" \
             --account "$ACCOUNT" > /dev/null
         echo -e "${GREEN}✓ 表頭已建立${NC}"
     fi

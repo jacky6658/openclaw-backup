@@ -49,15 +49,17 @@ search_companies() {
     local keyword="$1"
     local limit="${2:-20}"
     
-    echo -e "${BLUE}🔍 步驟 1/4：搜尋招聘「${keyword}」的公司...${NC}"
+    # 訊息輸出到 stderr，檔案路徑輸出到 stdout
+    echo -e "${BLUE}🔍 步驟 1/4：搜尋招聘「${keyword}」的公司...${NC}" >&2
     
     # 使用 scraper-104.py
     local output="$DATA_DIR/companies_$(date +%Y%m%d_%H%M%S).json"
     
     if [[ -f "$SCRIPT_DIR/../skills/headhunter/scripts/scraper-104.py" ]]; then
+        # Python 腳本輸出純 JSON 到 stdout，debug 訊息寫入 /tmp/104-scraper-*.log
         python3 "$SCRIPT_DIR/../skills/headhunter/scripts/scraper-104.py" "$keyword" "$limit" > "$output"
     else
-        echo -e "${YELLOW}⚠️  找不到 scraper-104.py，使用模擬資料${NC}"
+        echo -e "${YELLOW}⚠️  找不到 scraper-104.py，使用模擬資料${NC}" >&2
         cat > "$output" << 'EOF'
 [
   {
@@ -79,33 +81,50 @@ EOF
     fi
     
     local count=$(cat "$output" | jq '. | length' 2>/dev/null || echo "0")
-    echo -e "${GREEN}✅ 找到 ${count} 家公司${NC}"
-    echo "$output"
+    echo -e "${GREEN}✅ 找到 ${count} 家公司${NC}" >&2
+    echo "$output"  # 只有這行輸出到 stdout
 }
 
 # 步驟 2：爬取公司詳細資料（電話、Email、網址）
 scrape_company_details() {
     local companies_file="$1"
     
-    echo -e "${BLUE}🕷️  步驟 2/4：爬取公司詳細資料...${NC}"
-    
-    # TODO: 實作公司網站爬蟲，提取聯絡方式
-    # 目前先用簡化版：Google 搜尋公司名稱 + "聯絡我們"
+    # 訊息輸出到 stderr
+    echo -e "${BLUE}🕷️  步驟 2/4：爬取公司詳細資料...${NC}" >&2
     
     local output="${companies_file%.json}_detailed.json"
     
-    # 簡化版：直接標記為需手動查找
-    cat "$companies_file" | jq '[.[] | . + {
-        "phone": "待查",
-        "email": "待查",
-        "website": "待查",
-        "contact_person": "您好",
-        "status": "待聯繫"
-    }]' > "$output"
+    # 使用新的爬蟲腳本（自動從 104 + 官網提取聯絡方式）
+    if [[ -f "$SCRIPT_DIR/../skills/headhunter/scripts/scraper-company-contact.py" ]]; then
+        echo -e "${BLUE}📡 自動爬取聯絡方式（104 + 官網）...${NC}" >&2
+        python3 "$SCRIPT_DIR/../skills/headhunter/scripts/scraper-company-contact.py" "$companies_file" > "$output" 2>&1
+        
+        if [[ $? -eq 0 ]]; then
+            echo -e "${GREEN}✅ 已完成自動爬取${NC}" >&2
+        else
+            echo -e "${YELLOW}⚠️  自動爬取失敗，使用預設值${NC}" >&2
+            # 降級處理：使用預設值
+            cat "$companies_file" | jq '[.[] | . + {
+                "phone": "待查",
+                "email": "待查",
+                "website": "待查",
+                "contact_person": "您好",
+                "status": "待聯繫"
+            }]' > "$output"
+        fi
+    else
+        echo -e "${YELLOW}⚠️  找不到爬蟲腳本，使用預設值${NC}" >&2
+        cat "$companies_file" | jq '[.[] | . + {
+            "phone": "待查",
+            "email": "待查",
+            "website": "待查",
+            "contact_person": "您好",
+            "status": "待聯繫"
+        }]' > "$output"
+    fi
     
-    echo -e "${YELLOW}⚠️  自動爬取功能開發中，目前需手動補充聯絡方式${NC}"
-    echo -e "${GREEN}✅ 已生成公司列表：$output${NC}"
-    echo "$output"
+    echo -e "${GREEN}✅ 已生成公司列表：$output${NC}" >&2
+    echo "$output"  # 只有這行輸出到 stdout
 }
 
 # 步驟 3：整理到 Google Sheets
@@ -114,8 +133,8 @@ update_google_sheet() {
     
     echo -e "${BLUE}📊 步驟 3/4：整理到 Google Sheets...${NC}"
     
-    # 轉換 JSON 為 Sheets 格式
-    local rows=$(cat "$companies_file" | jq -r '.[] | [
+    # 轉換 JSON 為 Sheets 格式（2D 陣列）
+    local rows_json=$(cat "$companies_file" | jq '.[] | [
         .company,
         .phone // "待查",
         .email // "待查",
@@ -126,14 +145,10 @@ update_google_sheet() {
         (now | strftime("%Y-%m-%d")),
         "待分配",
         (.location // "" | tostring)
-    ] | @json' | jq -s '.')
+    ]' | jq -s '.')
     
-    # 取得目前的資料列數
-    local last_row=$(gog sheets get "$CLIENTS_SHEET" "工作表1!A:A" --account "$GOG_ACCOUNT" --json 2>/dev/null | jq '.values | length' || echo "1")
-    local next_row=$((last_row + 1))
-    
-    # 寫入 Google Sheets
-    echo "$rows" | gog sheets append "$CLIENTS_SHEET" "工作表1!A:J" --values-json - --insert INSERT_ROWS --account "$GOG_ACCOUNT" > /dev/null 2>&1
+    # 寫入 Google Sheets（使用字串參數而非 stdin）
+    gog sheets append "$CLIENTS_SHEET" "工作表1!A:J" --values-json "$rows_json" --insert INSERT_ROWS --account "$GOG_ACCOUNT" > /dev/null 2>&1
     
     local count=$(cat "$companies_file" | jq '. | length')
     echo -e "${GREEN}✅ 已寫入 ${count} 筆資料到 Google Sheets${NC}"
