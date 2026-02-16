@@ -35,11 +35,20 @@ Skills are shared. Your setup is yours. Keeping them apart means you can update 
 
 ## HR 履歷進件設定
 
-### 負責顧問資訊
-- **負責顧問**：待補充（請 Jacky 指定）
-- **負責職位**：全職位（待細分）
+### Gmail 監控信箱
+- **監控帳號**：aijessie88@step1ne.com ✅
+- **授權狀態**：已完成 OAuth（2026-02-11）
+- **篩選條件**：subject 包含「應徵」「履歷」或附件為 PDF/DOCX
 
-**說明**：所有履歷進件通知必須包含「負責顧問」欄位，請確保此資訊已更新。
+### 負責顧問自動標記規則（2026-02-11 更新）
+- **Jacky 傳送的履歷** → 獵頭顧問標記為 "Jacky"
+- **Phoebe (@behe10) 傳送的履歷** → 獵頭顧問標記為 "Phoebe"
+
+**判斷方式**：根據 Telegram 訊息的 sender (userId 或 username) 自動判斷
+- Jacky userId: 8365775688
+- Phoebe username: @behe10
+
+**說明**：所有履歷進件通知必須包含「負責顧問」欄位，系統會根據傳送者自動填寫。
 
 ---
 
@@ -86,6 +95,25 @@ Skills are shared. Your setup is yours. Keeping them apart means you can update 
 ```bash
 ~/clawd/hr-tools/start-dashboard.sh
 ```
+
+---
+
+## Pipeline 追蹤表（新增 2026-02-11）
+
+### 各顧問獨立 Sheet
+- **清單文件**: `/Users/user/clawd/hr-tools/pipeline-sheets.md`
+
+**Jacky**
+- Sheet ID: `1j9zl3Fk-X1DS4iDAFQjAldaLWJDcqybAWIjiDpYCR4M`
+- 網址: https://docs.google.com/spreadsheets/d/1j9zl3Fk-X1DS4iDAFQjAldaLWJDcqybAWIjiDpYCR4M/edit
+
+**Phobe**
+- Sheet ID: `1Fh6S5tSpCIacuDrCHs3mewWWqAEhTAPaNXSuQHt6Phk`
+- 網址: https://docs.google.com/spreadsheets/d/1Fh6S5tSpCIacuDrCHs3mewWWqAEhTAPaNXSuQHt6Phk/edit
+
+### 用途
+- 追蹤候選人在招聘流程中的狀態
+- 每週市場報告自動彙總所有顧問的 Pipeline 數據
 
 ---
 

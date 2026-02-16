@@ -1,0 +1,6 @@
+./examples/candidate-data-example.json
+./FILES.txt
+./MANIFEST.md
+./README.md
+./SKILL.md
+./templates/resume-template.html

@@ -1077,25 +1077,26 @@ app.get('/api/oauth-status', async (req, res) => {
   }
 });
 
-// 啟動伺服器
-app.listen(PORT, '0.0.0.0', async () => {
+// 啟動伺服器（只監聽本機，安全）
+app.listen(PORT, '127.0.0.1', async () => {
   const os = require('os');
   const nets = os.networkInterfaces();
-  let localIP = 'localhost';
+  let localIP = '127.0.0.1';
   
-  // 獲取區域網 IP
-  for (const name of Object.keys(nets)) {
-    for (const net of nets[name]) {
-      if (net.family === 'IPv4' && !net.internal) {
-        localIP = net.address;
-        break;
-      }
-    }
-  }
+  // 安全模式：只監聽 localhost
+  // 如需內網訪問，改為 '0.0.0.0' 並加上認證機制
+  // for (const name of Object.keys(nets)) {
+  //   for (const net of nets[name]) {
+  //     if (net.family === 'IPv4' && !net.internal) {
+  //       localIP = net.address;
+  //       break;
+  //     }
+  //   }
+  // }
   
   console.log(`🚀 Token Dashboard running at:`);
   console.log(`   - Local:   http://localhost:${PORT}`);
-  console.log(`   - Network: http://${localIP}:${PORT}`);
+  console.log(`   - 🔒 安全模式：只允許本機訪問`);
   console.log(`📊 API endpoints:`);
   console.log(`   - GET /api/config`);
   console.log(`   - GET /api/models`);

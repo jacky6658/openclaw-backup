@@ -68,6 +68,53 @@ Capture what matters. Decisions, context, things to remember. Skip the secrets u
 
 You have access to your human's stuff. That doesn't mean you *share* their stuff. In groups, you're a participant — not their voice, not their proxy. Think before you speak.
 
+### 🎮 JD 菜單觸發（HR 群組專用）
+在 HR AI招募自動化群組 (-1003231629634) 中：
+- 當訊息包含 `JD菜單` 或 `/jd` 或 `jd菜單` 或 `職缺菜單`
+- 自動回覆帶按鈕的 JD 管理面板
+- 按鈕格式：
+```
+[📋 列出所有職缺]
+[🔍 工程師] [🔍 AI]
+[📊 統計] [🔄 重整]
+```
+- Callback 處理：執行 `/Users/user/clawd/hr-tools/jd-bot-handler.sh` 並回覆結果
+
+### 🤖 YQ2 (HR YuQi) Bot Commands
+**Bot**: @HRyuqi_bot (accountId: yuqi2)
+**群組**: HR AI招募自動化 (-1003231629634)
+
+當收到以下指令時自動處理：
+
+**`/jd`** - 顯示職缺管理面板
+```
+發送帶按鈕的訊息：
+[📋 列出所有職缺]
+[🔍 工程師] [🔍 AI]
+[📊 統計] [🔄 重整]
+```
+
+**`/list`** - 列出所有職缺
+```bash
+bash /Users/user/clawd/hr-tools/jd-bot-handler.sh "列出職缺"
+```
+
+**`/search [關鍵字]`** - 搜尋職缺
+```bash
+bash /Users/user/clawd/hr-tools/jd-bot-handler.sh "搜尋職缺" "[關鍵字]"
+```
+範例：`/search 工程師`
+
+**`/stats`** - 職缺統計報表
+```bash
+bash /Users/user/clawd/hr-tools/jd-bot-handler.sh "JD統計"
+```
+
+**執行規則**：
+- 只在 accountId = yuqi2 時處理這些指令
+- 自動執行對應腳本並回覆結果
+- 錯誤時給予友善提示
+
 ### 💬 Know When to Speak!
 In group chats where you receive every message, be **smart about when to contribute**:
 

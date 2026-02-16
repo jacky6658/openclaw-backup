@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>龍蝦團隊分工</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap');
+    
+    * { font-family: 'Noto Sans TC', sans-serif; }
+    body { background: #000; overflow: hidden; }
+    
+    .slide {
+      width: 100vw;
+      height: 100vh;
+      display: none;
+      position: relative;
+      background: linear-gradient(135deg, #0a0a0a 0%, #111 50%, #0a0a0a 100%);
+      overflow: hidden;
+    }
+    
+    .slide.active {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.3;
+      animation: float 20s ease-in-out infinite;
+    }
+    
+    .orb-1 { width: 400px; height: 400px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); top: -100px; right: -100px; }
+    .orb-2 { width: 300px; height: 300px; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); bottom: -50px; left: -50px; animation-delay: -5s; }
+    .orb-3 { width: 250px; height: 250px; background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); top: 50%; left: 50%; transform: translate(-50%, -50%); animation-delay: -10s; }
+    
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      25% { transform: translate(50px, -30px) scale(1.1); }
+      50% { transform: translate(-30px, 50px) scale(0.9); }
+      75% { transform: translate(-50px, -20px) scale(1.05); }
+    }
+    
+    .content { position: relative; z-index: 10; text-align: center; padding: 2rem; max-width: 1200px; }
+    h1 { color: #fff; font-weight: 900; line-height: 1.2; }
+    h2 { color: #fff; font-weight: 700; }
+    p, li { color: #9ca3af; font-weight: 300; }
+    
+    .accent { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .accent-orange { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .accent-blue { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .accent-green { background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    
+    .progress-container { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 100; }
+    .progress-dot { width: 8px; height: 8px; border-radius: 50%; background: #333; cursor: pointer; transition: all 0.3s ease; }
+    .progress-dot.active { background: #667eea; width: 24px; border-radius: 4px; }
+    .page-number { position: fixed; bottom: 20px; right: 40px; color: #333; font-size: 14px; z-index: 100; }
+    
+    .lobster-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px;
+      padding: 2rem;
+      text-align: left;
+      max-width: 800px;
+    }
+    
+    .lobster-card.paid { border-color: rgba(247, 144, 9, 0.5); }
+    .lobster-card.free { border-color: rgba(16, 185, 129, 0.5); }
+    .lobster-card.paused { border-color: rgba(107, 114, 128, 0.5); opacity: 0.7; }
+    
+    .tag {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+    
+    .tag-paid { background: rgba(247, 144, 9, 0.2); color: #f79009; }
+    .tag-free { background: rgba(16, 185, 129, 0.2); color: #10b981; }
+    .tag-paused { background: rgba(107, 114, 128, 0.2); color: #6b7280; }
+    
+    .duty-list { list-style: none; padding: 0; margin: 1rem 0; }
+    .duty-list li { padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); color: #d1d5db; }
+    .duty-list li:last-child { border-bottom: none; }
+    
+    .model-badge {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      background: rgba(255,255,255,0.05);
+      border-radius: 8px;
+      font-size: 0.875rem;
+      color: #9ca3af;
+    }
+    
+    .cost-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 1.5rem;
+      text-align: center;
+    }
+    
+    .fade-in { animation: fadeIn 0.8s ease-out; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .slide.active .content > * { animation: fadeIn 0.8s ease-out both; }
+    .slide.active .content > *:nth-child(1) { animation-delay: 0.1s; }
+    .slide.active .content > *:nth-child(2) { animation-delay: 0.2s; }
+    .slide.active .content > *:nth-child(3) { animation-delay: 0.3s; }
+  </style>
+</head>
+<body>
+  <!-- Slide 1: Cover -->
+  <div class="slide active">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="content">
+      <p class="text-6xl mb-6">🦞</p>
+      <h1 class="text-6xl mb-6">龍蝦團隊<br><span class="accent">分工規劃</span></h1>
+      <p class="text-xl text-gray-400">4 隻龍蝦 × 各司其職</p>
+    </div>
+  </div>
+
+  <!-- Slide 2: Overview -->
+  <div class="slide">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-3"></div>
+    <div class="content">
+      <h1 class="text-4xl mb-12">團隊總覽</h1>
+      <div class="grid grid-cols-4 gap-6 max-w-4xl">
+        <div class="text-center">
+          <p class="text-4xl mb-2">🦞</p>
+          <p class="text-white font-bold">YQ1 本尊</p>
+          <p class="text-sm text-gray-500">創業夥伴</p>
+          <span class="tag tag-free mt-2">✅ 免費*</span>
+        </div>
+        <div class="text-center">
+          <p class="text-4xl mb-2">🦞</p>
+          <p class="text-white font-bold">YQ2 HR</p>
+          <p class="text-sm text-gray-500">行政助理</p>
+          <span class="tag tag-free mt-2">✅ 免費</span>
+        </div>
+        <div class="text-center opacity-50">
+          <p class="text-4xl mb-2">🦞</p>
+          <p class="text-white font-bold">YQ3 行銷</p>
+          <p class="text-sm text-gray-500">行銷客服</p>
+          <span class="tag tag-paused mt-2">⏸️ 暫停</span>
+        </div>
+        <div class="text-center">
+          <p class="text-4xl mb-2">🦞</p>
+          <p class="text-white font-bold">美佳</p>
+          <p class="text-sm text-gray-500">程式助手</p>
+          <span class="tag tag-free mt-2">✅ 免費</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 3: YQ1 -->
+  <div class="slide">
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="content">
+      <div class="lobster-card free">
+        <div class="flex justify-between items-start mb-4">
+          <div>
+            <h2 class="text-3xl font-bold">🦞 YQ1 本尊</h2>
+            <p class="text-gray-400">@YuQi0923_bot</p>
+          </div>
+          <span class="tag tag-free">✅ 免費*</span>
+        </div>
+        
+        <div class="model-badge mb-6">
+          🧠 Claude Sonnet 4.5 (Google Antigravity OAuth) · 免費*<br>
+          <span class="text-xs text-gray-500">帳號：aijessie88@gmail.com</span>
+        </div>
+        
+        <p class="text-xl text-white font-bold mb-2">定位：創業夥伴 + 技術主管</p>
+        
+        <ul class="duty-list">
+          <li>🎯 <strong>專案管理</strong> — 統籌客戶專案進度、資源調配</li>
+          <li>💡 <strong>商業討論</strong> — 商業模式建議、賺錢方向</li>
+          <li>💻 <strong>程式撰寫</strong> — 客戶專案核心開發</li>
+          <li>📚 <strong>課程製作</strong> — 線上課程內容撰寫</li>
+          <li>🔍 <strong>技術決策</strong> — 方案評估、技術選型</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 4: YQ2 -->
+  <div class="slide">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-3"></div>
+    <div class="content">
+      <div class="lobster-card free">
+        <div class="flex justify-between items-start mb-4">
+          <div>
+            <h2 class="text-3xl font-bold">🦞 YQ2 HR</h2>
+            <p class="text-gray-400">@HRyuqi_bot</p>
+          </div>
+          <span class="tag tag-free">✅ 免費</span>
+        </div>
+        
+        <div class="model-badge mb-6">
+          🧠 Gemini 3 Pro (Google) · $0/月<br>
+          <span class="text-xs text-gray-500">帳號：aijessie88@gmail.com</span>
+        </div>
+        
+        <p class="text-xl text-white font-bold mb-2">定位：行政文書助理</p>
+        
+        <ul class="duty-list">
+          <li>📧 <strong>發信發通知</strong> — Email 聯繫、訊息通知</li>
+          <li>📋 <strong>案件管理</strong> — aijobcase API 管理案件</li>
+          <li>⏰ <strong>進度提醒</strong> — Deadline、跟進提醒</li>
+          <li>📝 <strong>行政文書</strong> — 報價、合約、發票</li>
+          <li>💰 <strong>成本/利潤</strong> — 記錄專案收支</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 5: YQ3 -->
+  <div class="slide">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="content">
+      <div class="lobster-card paused">
+        <div class="flex justify-between items-start mb-4">
+          <div>
+            <h2 class="text-3xl font-bold">🦞 YQ3 行銷</h2>
+            <p class="text-gray-400">@videoyuqi_bot</p>
+          </div>
+          <span class="tag tag-paused">⏸️ 暫停</span>
+        </div>
+        
+        <div class="model-badge mb-6">
+          🧠 Gemini 3 Pro (Google) · $0/月<br>
+          <span class="text-xs text-gray-500">帳號：aijessie88@gmail.com</span>
+        </div>
+        
+        <p class="text-xl text-white font-bold mb-2">定位：行銷 + SEO + 未來客服</p>
+        
+        <ul class="duty-list">
+          <li>📢 <strong>對外曝光</strong> — SEO、社群行銷</li>
+          <li>🎬 <strong>短影音腳本</strong> — Reels / TikTok / 小紅書</li>
+          <li>📱 <strong>社群內容</strong> — FB / IG / LinkedIn</li>
+          <li>🎧 <strong>未來客服</strong> — 需串接 LINE 官方帳號</li>
+        </ul>
+        
+        <p class="text-yellow-500 mt-4 text-sm">⚠️ 等業務穩定後再啟用</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 6: 美佳 -->
+  <div class="slide">
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="content">
+      <div class="lobster-card free">
+        <div class="flex justify-between items-start mb-4">
+          <div>
+            <h2 class="text-3xl font-bold">🦞 美佳</h2>
+            <p class="text-gray-400">獨立 OpenClaw 實例</p>
+          </div>
+          <span class="tag tag-free">✅ 免費</span>
+        </div>
+        
+        <div class="model-badge mb-6">
+          🧠 GPT-5.2 (OpenAI Codex OAuth) · $0/月
+        </div>
+        
+        <p class="text-xl text-white font-bold mb-2">定位：程式助手</p>
+        
+        <ul class="duty-list">
+          <li>💻 <strong>接案程式</strong> — 協助 YQ1 執行客戶專案</li>
+          <li>🔧 <strong>基礎開發</strong> — 重複性、模板化程式碼</li>
+          <li>🐛 <strong>測試 Debug</strong> — 協助測試、修復問題</li>
+          <li>📄 <strong>文件撰寫</strong> — 技術文件、API 文件</li>
+        </ul>
+        
+        <p class="text-blue-400 mt-4 text-sm">🔮 未來：OpenClaw 落地服務啟動後轉為維運龍蝦</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 7: Cost -->
+  <div class="slide">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="content">
+      <h1 class="text-4xl mb-8">成本分析</h1>
+      <div class="grid grid-cols-4 gap-6 max-w-4xl mb-8">
+        <div class="cost-card">
+          <p class="text-gray-400 mb-2">YQ1 本尊</p>
+          <p class="text-3xl font-bold accent-green">$0*</p>
+          <p class="text-gray-500 text-sm">OAuth 免費</p>
+        </div>
+        <div class="cost-card">
+          <p class="text-gray-400 mb-2">YQ2 HR</p>
+          <p class="text-3xl font-bold accent-green">$0</p>
+          <p class="text-gray-500 text-sm">/月</p>
+        </div>
+        <div class="cost-card">
+          <p class="text-gray-400 mb-2">YQ3 行銷</p>
+          <p class="text-3xl font-bold accent-green">$0</p>
+          <p class="text-gray-500 text-sm">/月</p>
+        </div>
+        <div class="cost-card">
+          <p class="text-gray-400 mb-2">美佳</p>
+          <p class="text-3xl font-bold accent-green">$0</p>
+          <p class="text-gray-500 text-sm">/月</p>
+        </div>
+      </div>
+      <div class="cost-card inline-block px-12">
+        <p class="text-gray-400 mb-2">總月成本</p>
+        <p class="text-5xl font-black accent-green">$0</p>
+        <p class="text-gray-500 text-sm mt-2">*全部使用 OAuth 免費方案，有速率限制</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 8: Architecture -->
+  <div class="slide">
+    <div class="orb orb-3"></div>
+    <div class="content">
+      <h1 class="text-4xl mb-8">協作架構</h1>
+      <div class="text-left max-w-3xl mx-auto">
+        <pre class="text-gray-300 text-lg leading-loose">
+┌─────────────────────────────────────────┐
+│            Jacky（老闆）                 │
+└───────────────────┬─────────────────────┘
+                    │
+    ┌───────────────┼───────────────┐
+    ▼               ▼               ▼
+┌─────────┐   ┌─────────┐   ┌─────────┐
+│ YQ1本尊 │   │ YQ2 HR  │   │ YQ3行銷 │
+│ Claude  │   │ Gemini  │   │ Gemini  │
+│OAuth免費│   │ OAuth   │   │  ⏸️    │
+└────┬────┘   └─────────┘   └─────────┘
+     │
+     │ 協作
+     ▼
+┌─────────┐
+│  美佳   │
+│GPT OAuth│
+└─────────┘
+
+📧 帳號總覽（統一用 aijessie88@gmail.com）：
+• Claude: aijessie88@gmail.com (Google Antigravity)
+• Gemini: aijessie88@gmail.com (Google)
+• GPT: OpenAI Codex OAuth
+        </pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 9: Summary -->
+  <div class="slide">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="content">
+      <h1 class="text-5xl mb-8">總結</h1>
+      <div class="grid grid-cols-2 gap-8 max-w-3xl">
+        <div class="cost-card text-left">
+          <h3 class="text-white font-bold mb-4">✅ 目前運作</h3>
+          <p class="text-gray-400">• YQ1 本尊 — 專案 + 商業</p>
+          <p class="text-gray-400">• YQ2 HR — 行政管理</p>
+          <p class="text-gray-400">• 美佳 — 程式協助</p>
+        </div>
+        <div class="cost-card text-left">
+          <h3 class="text-white font-bold mb-4">⏸️ 待啟用</h3>
+          <p class="text-gray-400">• YQ3 行銷 — 等業務穩定</p>
+          <p class="text-gray-400">• LINE 官方帳號串接</p>
+          <p class="text-gray-400">• 美佳→維運龍蝦轉型</p>
+        </div>
+      </div>
+      <p class="text-3xl text-white mt-12 font-bold">4 隻龍蝦，月成本 <span class="accent-green">$0</span>（OAuth 免費）</p>
+    </div>
+  </div>
+
+  <!-- Progress dots -->
+  <div class="progress-container" id="progress"></div>
+  <div class="page-number" id="pageNumber">1 / 9</div>
+
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    const progressContainer = document.getElementById('progress');
+    const pageNumber = document.getElementById('pageNumber');
+    let currentSlide = 0;
+    
+    slides.forEach((_, i) => {
+      const dot = document.createElement('div');
+      dot.className = `progress-dot ${i === 0 ? 'active' : ''}`;
+      dot.onclick = () => goToSlide(i);
+      progressContainer.appendChild(dot);
+    });
+    
+    function updateSlide() {
+      slides.forEach((slide, i) => slide.classList.toggle('active', i === currentSlide));
+      document.querySelectorAll('.progress-dot').forEach((dot, i) => dot.classList.toggle('active', i === currentSlide));
+      pageNumber.textContent = `${currentSlide + 1} / ${slides.length}`;
+    }
+    
+    function goToSlide(index) { currentSlide = Math.max(0, Math.min(slides.length - 1, index)); updateSlide(); }
+    function nextSlide() { if (currentSlide < slides.length - 1) { currentSlide++; updateSlide(); } }
+    function prevSlide() { if (currentSlide > 0) { currentSlide--; updateSlide(); } }
+    
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); nextSlide(); }
+      else if (e.key === 'ArrowLeft') { e.preventDefault(); prevSlide(); }
+    });
+    
+    let touchStartX = 0;
+    document.addEventListener('touchstart', (e) => touchStartX = e.touches[0].clientX);
+    document.addEventListener('touchend', (e) => {
+      const diff = touchStartX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) { if (diff > 0) nextSlide(); else prevSlide(); }
+    });
+    
+    document.addEventListener('click', (e) => {
+      if (e.target.closest('.progress-container')) return;
+      const x = e.clientX / window.innerWidth;
+      if (x > 0.7) nextSlide(); else if (x < 0.3) prevSlide();
+    });
+  </script>
+</body>
+</html>

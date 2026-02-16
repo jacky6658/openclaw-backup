@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>獵頭顧問自動化流程圖</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap');
+    * { font-family: 'Noto Sans TC', sans-serif; }
+    body { background: #0a0a0a; overflow: hidden; }
+    .slide { width: 100vw; height: 100vh; display: none; position: relative; background: linear-gradient(135deg, #0a0a0a 0%, #111 50%, #0a0a0a 100%); overflow: hidden; }
+    .slide.active { display: flex; flex-direction: column; justify-content: center; align-items: center; }
+    .orb { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.2; }
+    .orb-1 { width: 400px; height: 400px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); top: -100px; right: -100px; }
+    .orb-2 { width: 300px; height: 300px; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); bottom: -50px; left: -50px; }
+    .content { position: relative; z-index: 10; text-align: center; padding: 1rem; max-width: 1400px; width: 100%; }
+    .accent { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .accent-green { background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .accent-orange { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .progress-container { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; z-index: 100; }
+    .progress-dot { width: 8px; height: 8px; border-radius: 50%; background: #333; cursor: pointer; transition: all 0.3s ease; }
+    .progress-dot.active { background: #667eea; width: 20px; border-radius: 4px; }
+    .page-number { position: fixed; bottom: 20px; right: 30px; color: #444; font-size: 12px; z-index: 100; }
+    
+    .flow-box { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1rem; }
+    .flow-box.jacky { border-color: rgba(251, 191, 36, 0.5); background: rgba(251, 191, 36, 0.05); }
+    .flow-box.yq1 { border-color: rgba(102, 126, 234, 0.5); background: rgba(102, 126, 234, 0.05); }
+    .flow-box.yq2 { border-color: rgba(16, 185, 129, 0.5); background: rgba(16, 185, 129, 0.05); }
+    .flow-box.auto { border-color: rgba(139, 92, 246, 0.5); background: rgba(139, 92, 246, 0.05); }
+    
+    .arrow { color: #4b5563; font-size: 1.5rem; }
+    .arrow-down { writing-mode: vertical-lr; }
+    
+    .role-badge { display: inline-block; padding: 0.25rem 0.5rem; border-radius: 6px; font-size: 0.7rem; font-weight: bold; }
+    .role-jacky { background: rgba(251, 191, 36, 0.2); color: #fbbf24; }
+    .role-yq1 { background: rgba(102, 126, 234, 0.2); color: #667eea; }
+    .role-yq2 { background: rgba(16, 185, 129, 0.2); color: #10b981; }
+    .role-auto { background: rgba(139, 92, 246, 0.2); color: #8b5cf6; }
+  </style>
+</head>
+<body>
+
+  <!-- Slide 1: Cover -->
+  <div class="slide active">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="content">
+      <p class="text-5xl mb-4">🔄</p>
+      <h1 class="text-4xl font-black text-white mb-4">獵頭顧問<br><span class="accent">自動化流程圖</span></h1>
+      <p class="text-lg text-gray-400">Jacky × YQ1 × YQ2 協作指南</p>
+      <div class="flex justify-center gap-4 mt-8">
+        <span class="role-badge role-jacky">👤 Jacky 人工</span>
+        <span class="role-badge role-yq1">🦞 YQ1 分析</span>
+        <span class="role-badge role-yq2">🦞 YQ2 執行</span>
+        <span class="role-badge role-auto">⚡ 自動觸發</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 2: 角色分工 -->
+  <div class="slide">
+    <div class="orb orb-1"></div>
+    <div class="content">
+      <h1 class="text-3xl font-bold text-white mb-6">角色分工總覽</h1>
+      <div class="grid grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <div class="flow-box jacky">
+          <p class="text-3xl mb-2">👤</p>
+          <p class="text-yellow-400 font-bold text-xl">Jacky</p>
+          <p class="text-gray-400 text-sm mb-3">關係 × 談判</p>
+          <ul class="text-left text-gray-300 text-sm space-y-1">
+            <li>📞 電話開發/拜訪</li>
+            <li>📝 簽約談判</li>
+            <li>💬 跟人選談意願</li>
+            <li>🎤 人工面試</li>
+            <li>💰 Offer 談判</li>
+            <li>✅ 確認推薦</li>
+          </ul>
+        </div>
+        <div class="flow-box yq1">
+          <p class="text-3xl mb-2">🦞</p>
+          <p class="text-indigo-400 font-bold text-xl">YQ1 本尊</p>
+          <p class="text-gray-400 text-sm mb-3">分析 × 生成</p>
+          <ul class="text-left text-gray-300 text-sm space-y-1">
+            <li>🔍 收集公司名單</li>
+            <li>📝 寫開發信</li>
+            <li>🎯 JD 分析 + 人才畫像</li>
+            <li>📊 履歷匹配分析</li>
+            <li>📄 匿名履歷製作</li>
+            <li>✉️ 推薦信生成</li>
+            <li>❓ 面試問題生成</li>
+          </ul>
+        </div>
+        <div class="flow-box yq2">
+          <p class="text-3xl mb-2">🦞</p>
+          <p class="text-green-400 font-bold text-xl">YQ2 HR</p>
+          <p class="text-gray-400 text-sm mb-3">執行 × 追蹤</p>
+          <ul class="text-left text-gray-300 text-sm space-y-1">
+            <li>📧 發送開發信</li>
+            <li>📧 發送推薦信</li>
+            <li>📧 發送面試通知</li>
+            <li>📢 傳到內部群組</li>
+            <li>⏰ 設定跟進提醒</li>
+            <li>📅 面試排程</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 3: 業務開發流程 -->
+  <div class="slide">
+    <div class="orb orb-2"></div>
+    <div class="content">
+      <h1 class="text-2xl font-bold text-white mb-4">1️⃣ 業務開發流程</h1>
+      <div class="flex items-center justify-center gap-2 flex-wrap max-w-6xl mx-auto">
+        <div class="flow-box jacky text-center" style="min-width:140px">
+          <span class="role-badge role-jacky">Jacky</span>
+          <p class="text-white text-sm mt-2">指定產業</p>
+          <p class="text-gray-500 text-xs">「開發半導體」</p>
+        </div>
+        <span class="arrow">→</span>
+        <div class="flow-box yq1 text-center" style="min-width:140px">
+          <span class="role-badge role-yq1">YQ1</span>
+          <p class="text-white text-sm mt-2">收集名單</p>
+          <p class="text-gray-500 text-xs">公司+HR+職缺</p>
+        </div>
+        <span class="arrow">→</span>
+        <div class="flow-box yq1 text-center" style="min-width:140px">
+          <span class="role-badge role-yq1">YQ1</span>
+          <p class="text-white text-sm mt-2">寫開發信</p>
+          <p class="text-gray-500 text-xs">每間客製化</p>
+        </div>
+        <span class="arrow">→</span>
+        <div class="flow-box yq2 text-center" style="min-width:140px">
+          <span class="role-badge role-yq2">YQ2</span>
+          <p class="text-white text-sm mt-2">發送 Email</p>
+          <p class="text-gray-500 text-xs">gog skill</p>
+        </div>
+        <span class="arrow">→</span>
+        <div class="flow-box jacky text-center" style="min-width:140px">
+          <span class="role-badge role-jacky">Jacky</span>
+          <p class="text-white text-sm mt-2">電話跟進</p>
+          <p class="text-gray-500 text-xs">人工拜訪</p>
+        </div>
+        <span class="arrow">→</span>
+        <div class="flow-box jacky text-center" style="min-width:140px">
+          <span class="role-badge role-jacky">Jacky</span>
+          <p class="text-white text-sm mt-2">簽約</p>
+          <p class="text-gray-500 text-xs">拿到 JD ✓</p>
+        </div>
+      </div>
+      <div class="mt-6 p-4 bg-yellow-900/20 rounded-lg max-w-4xl mx-auto">
+        <p class="text-yellow-400 text-sm">💡 <b>Jacky 只需要：</b>指定產業 → 電話跟進 → 簽約。中間全部 AI 自動。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 4: 人才搜尋流程 -->
+  <div class="slide">
+    <div class="orb orb-1"></div>
+    <div class="content">
+      <h1 class="text-2xl font-bold text-white mb-4">2️⃣ 人才搜尋 + 3️⃣ 篩選流程</h1>
+      <div class="flex items-start justify-center gap-2 flex-wrap max-w-6xl mx-auto">
+        <div class="flow-box jacky text-center" style="min-width:120px">
+          <span class="role-badge role-jacky">Jacky</span>
+          <p class="text-white text-sm mt-2">提供 JD</p>
+        </div>
+        <span class="arrow mt-4">→</span>
+        <div class="flow-box auto text-center" style="min-width:150px">
+          <span class="role-badge role-auto">⚡ 自動</span>
+          <p class="text-white text-sm mt-2">YQ1 分析 JD</p>
+          <p class="text-gray-500 text-xs">人才畫像<br>Boolean String</p>
+        </div>
+        <span class="arrow mt-4">→</span>
+        <div class="flow-box yq1 text-center" style="min-width:120px">
+          <span class="role-badge role-yq1">YQ1</span>
+          <p class="text-white text-sm mt-2">搜尋履歷</p>
+        </div>
+        <span class="arrow mt-4">→</span>
+        <div class="flow-box auto text-center" style="min-width:150px">
+          <span class="role-badge role-auto">⚡ 自動</span>
+          <p class="text-white text-sm mt-2">YQ1 匹配分析</p>
+          <p class="text-gray-500 text-xs">履歷 vs JD<br>匹配度評分</p>
+        </div>
+        <span class="arrow mt-4">→</span>
+        <div class="flow-box" style="min-width:150px; border-color: rgba(139, 92, 246, 0.8);">
+          <p class="text-purple-400 text-sm font-bold">匹配度 ≥ 70%?</p>
+          <div class="flex gap-2 mt-2 text-xs">
+            <span class="text-green-400">✓ 是</span>
+            <span class="text-gray-500">|</span>
+            <span class="text-red-400">✗ 否→繼續找</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="mt-4 flex items-center justify-center gap-2 flex-wrap max-w-5xl mx-auto">
+        <div class="text-purple-400">↓ 匹配 OK</div>
+      </div>
+      
+      <div class="mt-2 flex items-center justify-center gap-2 flex-wrap max-w-6xl mx-auto">
+        <div class="flow-box auto text-center" style="min-width:180px">
+          <span class="role-badge role-auto">⚡ 自動生成</span>
+          <p class="text-white text-sm mt-2">YQ1 產出 4 件</p>
+          <ul class="text-gray-400 text-xs text-left mt-1">
+            <li>1. 匿名履歷</li>
+            <li>2. 候選人摘要</li>
+            <li>3. 推薦信草稿</li>
+            <li>4. 面試問題（給 Jacky）</li>
+          </ul>
+        </div>
+        <span class="arrow">→</span>
+        <div class="flow-box yq2 text-center" style="min-width:140px">
+          <span class="role-badge role-yq2">YQ2</span>
+          <p class="text-white text-sm mt-2">傳到內部群組</p>
+          <p class="text-gray-500 text-xs">等 Jacky 確認</p>
+        </div>
+        <span class="arrow">→</span>
+        <div class="flow-box jacky text-center" style="min-width:120px">
+          <span class="role-badge role-jacky">Jacky</span>
+          <p class="text-white text-sm mt-2">確認推薦</p>
+          <p class="text-gray-500 text-xs">說「推」</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 5: 推薦+面試流程 -->
+  <div class="slide">
+    <div class="orb orb-2"></div>
+    <div class="content">
+      <h1 class="text-2xl font-bold text-white mb-4">5️⃣ 推薦客戶 + 6️⃣ 面試協調</h1>
+      
+      <div class="flex items-center justify-center gap-2 flex-wrap max-w-6xl mx-auto mb-4">
+        <div class="flow-box jacky text-center" style="min-width:120px">
+          <span class="role-badge role-jacky">Jacky</span>
+          <p class="text-white text-sm mt-2">說「推」</p>
+        </div>
+        <span class="arrow">→</span>
+        <div class="flow-box yq2 text-center" style="min-width:160px">
+          <span class="role-badge role-yq2">YQ2</span>
+          <p class="text-white text-sm mt-2">發推薦信給客戶</p>
+          <p class="text-gray-500 text-xs">附匿名履歷</p>
+        </div>
+        <span class="arrow">→</span>
+        <div class="flow-box yq2 text-center" style="min-width:140px">
+          <span class="role-badge role-yq2">YQ2</span>
+          <p class="text-white text-sm mt-2">傳到內部群組</p>
+          <p class="text-gray-500 text-xs">備份紀錄</p>
+        </div>
+        <span class="arrow">→</span>
+        <div class="flow-box auto text-center" style="min-width:140px">
+          <span class="role-badge role-auto">⚡ 自動</span>
+          <p class="text-white text-sm mt-2">設定提醒</p>
+          <p class="text-gray-500 text-xs">3 天後跟進</p>
+        </div>
+      </div>
+
+      <div class="border-t border-gray-800 my-4 max-w-5xl mx-auto"></div>
+      
+      <p class="text-gray-400 mb-4">客戶要面試 ↓</p>
+
+      <div class="flex items-center justify-center gap-2 flex-wrap max-w-6xl mx-auto">
+        <div class="flow-box jacky text-center" style="min-width:140px">
+          <span class="role-badge role-jacky">Jacky</span>
+          <p class="text-white text-sm mt-2">提供面試時間</p>
+        </div>
+        <span class="arrow">→</span>
+        <div class="flow-box yq2 text-center" style="min-width:150px">
+          <span class="role-badge role-yq2">YQ2</span>
+          <p class="text-white text-sm mt-2">發面試通知</p>
+          <p class="text-gray-500 text-xs">給候選人+客戶</p>
+        </div>
+        <span class="arrow">→</span>
+        <div class="flow-box auto text-center" style="min-width:140px">
+          <span class="role-badge role-auto">⚡ 自動</span>
+          <p class="text-white text-sm mt-2">設定提醒</p>
+          <p class="text-gray-500 text-xs">面試前一天</p>
+        </div>
+        <span class="arrow">→</span>
+        <div class="flow-box jacky text-center" style="min-width:120px">
+          <span class="role-badge role-jacky">Jacky</span>
+          <p class="text-white text-sm mt-2">人工面試</p>
+        </div>
+        <span class="arrow">→</span>
+        <div class="flow-box jacky text-center" style="min-width:120px">
+          <span class="role-badge role-jacky">Jacky</span>
+          <p class="text-white text-sm mt-2">Offer 談判</p>
+          <p class="text-gray-500 text-xs">人工處理</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 6: 完整迴圈 -->
+  <div class="slide">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="content">
+      <h1 class="text-2xl font-bold text-white mb-4">🔄 完整執行迴圈</h1>
+      <div class="max-w-4xl mx-auto text-left">
+        <pre class="text-gray-300 text-sm leading-relaxed bg-black/30 p-4 rounded-lg overflow-x-auto">
+┌─────────────────────────────────────────────────────────────────────┐
+│  <span class="text-yellow-400">【業務開發迴圈】</span>                                                  │
+│                                                                     │
+│  <span class="text-yellow-400">Jacky</span> 指定產業                                                    │
+│       ↓                                                             │
+│  <span class="text-indigo-400">YQ1</span> 收集公司名單 → <span class="text-indigo-400">YQ1</span> 寫開發信 → <span class="text-green-400">YQ2</span> 發送                       │
+│       ↓                                                             │
+│  <span class="text-yellow-400">Jacky</span> 電話跟進 → 簽約成功？                                        │
+│                        │                                            │
+│              ┌────────┴────────┐                                   │
+│              ↓ 是              ↓ 否                                 │
+│         拿到 JD            下一間公司                                │
+│              ↓                                                      │
+└──────────────┼──────────────────────────────────────────────────────┘
+               ↓
+┌──────────────┼──────────────────────────────────────────────────────┐
+│  <span class="text-purple-400">【人才搜尋迴圈】</span>                                                  │
+│              ↓                                                      │
+│  <span class="text-indigo-400">YQ1</span> 分析 JD → 人才畫像 + Boolean                                   │
+│       ↓                                                             │
+│  <span class="text-indigo-400">YQ1</span> 搜尋履歷 / <span class="text-yellow-400">Jacky</span> 提供履歷                                      │
+│       ↓                                                             │
+│  <span class="text-indigo-400">YQ1</span> 匹配分析 → 匹配度 ≥ 70%？                                       │
+│                        │                                            │
+│              ┌────────┴────────┐                                   │
+│              ↓ 是              ↓ 否                                 │
+│  <span class="text-indigo-400">YQ1</span> 自動生成：         繼續搜尋                                     │
+│  • 匿名履歷                                                          │
+│  • 推薦信                                                            │
+│  • 面試問題                                                          │
+│       ↓                                                             │
+│  <span class="text-green-400">YQ2</span> 傳到群組 → <span class="text-yellow-400">Jacky</span> 確認「推」→ <span class="text-green-400">YQ2</span> 發給客戶                     │
+│                                      ↓                              │
+└──────────────────────────────────────┼──────────────────────────────┘
+                                       ↓
+┌──────────────────────────────────────┼──────────────────────────────┐
+│  <span class="text-green-400">【面試迴圈】</span>                          ↓                              │
+│                                                                     │
+│  客戶要面試 → <span class="text-yellow-400">Jacky</span> 提供時間 → <span class="text-green-400">YQ2</span> 發通知 + 設提醒               │
+│       ↓                                                             │
+│  <span class="text-yellow-400">Jacky</span> 面試 → Offer？                                               │
+│                   │                                                 │
+│         ┌────────┴────────┐                                        │
+│         ↓ 是              ↓ 否                                      │
+│    <span class="text-yellow-400">Jacky</span> 談判        回到搜尋迴圈                                    │
+│         ↓                                                           │
+│       成交 ✓                                                        │
+└─────────────────────────────────────────────────────────────────────┘
+        </pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 7: 下一步執行 -->
+  <div class="slide">
+    <div class="orb orb-1"></div>
+    <div class="content">
+      <h1 class="text-2xl font-bold text-white mb-6">🚀 接下來要做的事</h1>
+      <div class="grid grid-cols-2 gap-6 max-w-4xl mx-auto">
+        <div class="flow-box">
+          <p class="text-red-400 font-bold mb-3">🔴 立即設定（今天）</p>
+          <ul class="text-left text-gray-300 text-sm space-y-2">
+            <li class="flex items-start gap-2">
+              <span>1.</span>
+              <span><b>YQ2 連結 gog skill</b><br><span class="text-gray-500">才能發 Email</span></span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span>2.</span>
+              <span><b>提供內部群組 ID</b><br><span class="text-gray-500">才能傳資料</span></span>
+            </li>
+          </ul>
+        </div>
+        <div class="flow-box">
+          <p class="text-yellow-400 font-bold mb-3">🟡 測試流程（本週）</p>
+          <ul class="text-left text-gray-300 text-sm space-y-2">
+            <li class="flex items-start gap-2">
+              <span>1.</span>
+              <span><b>跑一次業務開發</b><br><span class="text-gray-500">收集 → 寫信 → 發送</span></span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span>2.</span>
+              <span><b>跑一次人才搜尋</b><br><span class="text-gray-500">JD → 分析 → 匹配</span></span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span>3.</span>
+              <span><b>跑一次推薦流程</b><br><span class="text-gray-500">生成 → 確認 → 發送</span></span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="mt-6 p-4 bg-green-900/20 rounded-lg max-w-4xl mx-auto">
+        <p class="text-green-400 font-bold mb-2">✅ 設定完成後，Jacky 只需要：</p>
+        <div class="flex justify-center gap-4 text-gray-300 text-sm">
+          <span>1. 指定產業</span>
+          <span>→</span>
+          <span>2. 電話跟進</span>
+          <span>→</span>
+          <span>3. 說「推」</span>
+          <span>→</span>
+          <span>4. 面試談判</span>
+        </div>
+        <p class="text-gray-500 text-xs mt-2">其他全部 AI 自動處理 🦞</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 8: Jacky 操作指南 -->
+  <div class="slide">
+    <div class="orb orb-2"></div>
+    <div class="content">
+      <h1 class="text-2xl font-bold text-white mb-6">📱 Jacky 日常操作</h1>
+      <div class="max-w-3xl mx-auto">
+        <div class="flow-box mb-4">
+          <p class="text-yellow-400 font-bold mb-2">🔷 開發新客戶</p>
+          <div class="bg-black/30 p-3 rounded text-left">
+            <p class="text-gray-400 text-sm">Jacky 說：</p>
+            <p class="text-white">「幫我開發 <u>OO 產業</u> 的客戶，找 <u>20</u> 間公司」</p>
+            <p class="text-gray-500 text-xs mt-2">→ AI 會自動：收集名單 → 寫開發信 → 發送</p>
+          </div>
+        </div>
+        
+        <div class="flow-box mb-4">
+          <p class="text-yellow-400 font-bold mb-2">🔷 新 JD 進來</p>
+          <div class="bg-black/30 p-3 rounded text-left">
+            <p class="text-gray-400 text-sm">Jacky 說：</p>
+            <p class="text-white">「新 JD：[貼內容]，客戶：XX 公司，HR：xxx@xx.com」</p>
+            <p class="text-gray-500 text-xs mt-2">→ AI 會自動：分析 JD → 人才畫像 → Boolean String</p>
+          </div>
+        </div>
+        
+        <div class="flow-box mb-4">
+          <p class="text-yellow-400 font-bold mb-2">🔷 履歷進來</p>
+          <div class="bg-black/30 p-3 rounded text-left">
+            <p class="text-gray-400 text-sm">Jacky 說：</p>
+            <p class="text-white">「這份履歷 [貼內容] 跟 XX 職缺匹配嗎？」</p>
+            <p class="text-gray-500 text-xs mt-2">→ AI 會自動：匹配分析 → (OK 的話) 生成匿名履歷 + 推薦信 + 面試問題</p>
+          </div>
+        </div>
+        
+        <div class="flow-box mb-4">
+          <p class="text-yellow-400 font-bold mb-2">🔷 確認推薦</p>
+          <div class="bg-black/30 p-3 rounded text-left">
+            <p class="text-gray-400 text-sm">Jacky 說：</p>
+            <p class="text-white">「推」或「OK，發給客戶」</p>
+            <p class="text-gray-500 text-xs mt-2">→ AI 會自動：發推薦信 → 傳群組 → 設跟進提醒</p>
+          </div>
+        </div>
+        
+        <div class="flow-box">
+          <p class="text-yellow-400 font-bold mb-2">🔷 安排面試</p>
+          <div class="bg-black/30 p-3 rounded text-left">
+            <p class="text-gray-400 text-sm">Jacky 說：</p>
+            <p class="text-white">「XX 公司要面試，時間 2/20 下午 3 點」</p>
+            <p class="text-gray-500 text-xs mt-2">→ AI 會自動：發通知給候選人 → 設提醒</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="progress-container" id="progress"></div>
+  <div class="page-number" id="pageNumber">1 / 8</div>
+
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    const progressContainer = document.getElementById('progress');
+    const pageNumber = document.getElementById('pageNumber');
+    let currentSlide = 0;
+    slides.forEach((_, i) => { const dot = document.createElement('div'); dot.className = `progress-dot ${i === 0 ? 'active' : ''}`; dot.onclick = () => goToSlide(i); progressContainer.appendChild(dot); });
+    function updateSlide() { slides.forEach((slide, i) => slide.classList.toggle('active', i === currentSlide)); document.querySelectorAll('.progress-dot').forEach((dot, i) => dot.classList.toggle('active', i === currentSlide)); pageNumber.textContent = `${currentSlide + 1} / ${slides.length}`; }
+    function goToSlide(index) { currentSlide = Math.max(0, Math.min(slides.length - 1, index)); updateSlide(); }
+    function nextSlide() { if (currentSlide < slides.length - 1) { currentSlide++; updateSlide(); } }
+    function prevSlide() { if (currentSlide > 0) { currentSlide--; updateSlide(); } }
+    document.addEventListener('keydown', (e) => { if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); nextSlide(); } else if (e.key === 'ArrowLeft') { e.preventDefault(); prevSlide(); } });
+    document.addEventListener('click', (e) => { if (e.target.closest('.progress-container')) return; const x = e.clientX / window.innerWidth; if (x > 0.7) nextSlide(); else if (x < 0.3) prevSlide(); });
+  </script>
+</body>
+</html>

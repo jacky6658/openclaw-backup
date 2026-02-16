@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>獵頭顧問執行手冊</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap');
+    * { font-family: 'Noto Sans TC', sans-serif; }
+    body { background: #0a0a0a; overflow: hidden; }
+    .slide { width: 100vw; height: 100vh; display: none; position: relative; background: linear-gradient(135deg, #0a0a0a 0%, #111 50%, #0a0a0a 100%); overflow: hidden; }
+    .slide.active { display: flex; flex-direction: column; justify-content: center; align-items: center; }
+    .orb { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.25; animation: float 20s ease-in-out infinite; }
+    .orb-1 { width: 400px; height: 400px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); top: -100px; right: -100px; }
+    .orb-2 { width: 300px; height: 300px; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); bottom: -50px; left: -50px; animation-delay: -5s; }
+    @keyframes float { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(-30px, 50px) scale(0.9); } }
+    .content { position: relative; z-index: 10; text-align: center; padding: 1.5rem; max-width: 1200px; width: 100%; }
+    h1 { color: #fff; font-weight: 900; }
+    .accent { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .progress-container { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; z-index: 100; }
+    .progress-dot { width: 8px; height: 8px; border-radius: 50%; background: #333; cursor: pointer; transition: all 0.3s ease; }
+    .progress-dot.active { background: #667eea; width: 20px; border-radius: 4px; }
+    .page-number { position: fixed; bottom: 20px; right: 30px; color: #444; font-size: 12px; z-index: 100; }
+    .step-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1rem; text-align: left; }
+    .step-row { display: flex; align-items: center; padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .step-row:last-child { border-bottom: none; }
+    .step-num { width: 28px; height: 28px; background: rgba(102, 126, 234, 0.2); color: #667eea; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: bold; margin-right: 0.75rem; flex-shrink: 0; }
+    .tag { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 9999px; font-size: 0.65rem; font-weight: 500; margin-left: 0.5rem; }
+    .tag-yq1 { background: rgba(102, 126, 234, 0.2); color: #667eea; }
+    .tag-yq2 { background: rgba(16, 185, 129, 0.2); color: #10b981; }
+    .tag-jacky { background: rgba(251, 191, 36, 0.2); color: #fbbf24; }
+    .tag-tool { background: rgba(139, 92, 246, 0.2); color: #8b5cf6; }
+    .example-box { background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 1rem; font-family: monospace; font-size: 0.8rem; color: #9ca3af; text-align: left; white-space: pre-wrap; }
+  </style>
+</head>
+<body>
+  <!-- Slide 1: Cover -->
+  <div class="slide active">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="content">
+      <p class="text-5xl mb-4">📋</p>
+      <h1 class="text-4xl mb-4">獵頭顧問<br><span class="accent">執行手冊</span></h1>
+      <p class="text-lg text-gray-400">每個階段怎麼做、誰來做、用什麼工具</p>
+      <p class="text-sm text-gray-600 mt-4">YQ1 + YQ2 + Step1ne AI</p>
+    </div>
+  </div>
+
+  <!-- Slide 2: 角色分工 -->
+  <div class="slide">
+    <div class="orb orb-1"></div>
+    <div class="content">
+      <h1 class="text-3xl mb-6">角色分工</h1>
+      <div class="grid grid-cols-3 gap-6 max-w-4xl mx-auto">
+        <div class="step-card">
+          <p class="text-3xl mb-2">🦞</p>
+          <p class="text-white font-bold">YQ1 本尊</p>
+          <p class="text-gray-500 text-sm mt-2">技術 + 分析</p>
+          <ul class="text-gray-400 text-xs mt-3 space-y-1">
+            <li>• Step1ne AI 操作</li>
+            <li>• 履歷分析</li>
+            <li>• 報告撰寫</li>
+            <li>• 模板生成</li>
+          </ul>
+        </div>
+        <div class="step-card">
+          <p class="text-3xl mb-2">🦞</p>
+          <p class="text-white font-bold">YQ2 HR</p>
+          <p class="text-gray-500 text-sm mt-2">執行 + 行政</p>
+          <ul class="text-gray-400 text-xs mt-3 space-y-1">
+            <li>• 發 Email</li>
+            <li>• 排程提醒</li>
+            <li>• 狀態追蹤</li>
+            <li>• 自動跟進</li>
+          </ul>
+        </div>
+        <div class="step-card">
+          <p class="text-3xl mb-2">👤</p>
+          <p class="text-white font-bold">Jacky</p>
+          <p class="text-gray-500 text-sm mt-2">關係 + 談判</p>
+          <ul class="text-gray-400 text-xs mt-3 space-y-1">
+            <li>• 客戶拜訪</li>
+            <li>• 電話溝通</li>
+            <li>• 薪資談判</li>
+            <li>• 最終決策</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 3: Phase 1 BD -->
+  <div class="slide">
+    <div class="orb orb-2"></div>
+    <div class="content">
+      <h1 class="text-2xl mb-4">1️⃣ 業務開發 <span class="text-gray-500 text-lg">BD</span></h1>
+      <div class="step-card max-w-3xl mx-auto mb-4">
+        <div class="step-row"><div class="step-num">1</div><span class="text-gray-300 text-sm">研究目標產業/公司</span><span class="tag tag-yq1">YQ1</span></div>
+        <div class="step-row"><div class="step-num">2</div><span class="text-gray-300 text-sm">產出潛在客戶名單</span><span class="tag tag-yq1">YQ1</span></div>
+        <div class="step-row"><div class="step-num">3</div><span class="text-gray-300 text-sm">撰寫 Cold Email</span><span class="tag tag-yq1">YQ1</span></div>
+        <div class="step-row"><div class="step-num">4</div><span class="text-gray-300 text-sm">發送開發信</span><span class="tag tag-yq2">YQ2</span><span class="tag tag-tool">gog</span></div>
+        <div class="step-row"><div class="step-num">5</div><span class="text-gray-300 text-sm">客戶拜訪 / 簽約</span><span class="tag tag-jacky">Jacky</span></div>
+      </div>
+      <div class="example-box max-w-3xl mx-auto">
+Jacky → YQ1：「幫我研究半導體產業的 HR 主管，列出 10 間公司」
+Jacky → YQ2：「發這封開發信給 xxx@company.com」</div>
+    </div>
+  </div>
+
+  <!-- Slide 4: Phase 2 Sourcing -->
+  <div class="slide">
+    <div class="orb orb-1"></div>
+    <div class="content">
+      <h1 class="text-2xl mb-4">2️⃣ 人才搜尋 <span class="text-gray-500 text-lg">Sourcing</span></h1>
+      <div class="step-card max-w-3xl mx-auto mb-4">
+        <div class="step-row"><div class="step-num">1</div><span class="text-gray-300 text-sm">JD 分析 + 人才畫像</span><span class="tag tag-yq1">YQ1</span><span class="tag tag-tool">PersonaGenerator</span></div>
+        <div class="step-row"><div class="step-num">2</div><span class="text-gray-300 text-sm">搜尋策略 + Boolean String</span><span class="tag tag-yq1">YQ1</span><span class="tag tag-tool">TalentSearch</span></div>
+        <div class="step-row"><div class="step-num">3</div><span class="text-gray-300 text-sm">LinkedIn 搜尋執行</span><span class="tag tag-jacky">Jacky</span></div>
+        <div class="step-row"><div class="step-num">4</div><span class="text-gray-300 text-sm">開發信撰寫</span><span class="tag tag-yq1">YQ1</span><span class="tag tag-tool">OutreachWriter</span></div>
+        <div class="step-row"><div class="step-num">5</div><span class="text-gray-300 text-sm">發送 InMail / Email</span><span class="tag tag-yq2">YQ2</span></div>
+      </div>
+      <div class="example-box max-w-3xl mx-auto">
+Jacky → YQ1：「這是新的 JD [貼內容]，幫我做人才畫像和搜尋策略」
+YQ1 回覆：人才畫像 + Boolean String + 建議管道</div>
+    </div>
+  </div>
+
+  <!-- Slide 5: Phase 3 Screening -->
+  <div class="slide">
+    <div class="orb orb-2"></div>
+    <div class="content">
+      <h1 class="text-2xl mb-4">3️⃣ 初步篩選 <span class="text-gray-500 text-lg">Screening</span></h1>
+      <div class="step-card max-w-3xl mx-auto mb-4">
+        <div class="step-row"><div class="step-num">1</div><span class="text-gray-300 text-sm">履歷 vs JD 匹配分析</span><span class="tag tag-yq1">YQ1</span><span class="tag tag-tool">InterviewCopilot</span></div>
+        <div class="step-row"><div class="step-num">2</div><span class="text-gray-300 text-sm">列出 Must-Have 缺口</span><span class="tag tag-yq1">YQ1</span></div>
+        <div class="step-row"><div class="step-num">3</div><span class="text-gray-300 text-sm">建議預審問題</span><span class="tag tag-yq1">YQ1</span></div>
+        <div class="step-row"><div class="step-num">4</div><span class="text-gray-300 text-sm">電話初篩</span><span class="tag tag-jacky">Jacky</span></div>
+        <div class="step-row"><div class="step-num">5</div><span class="text-gray-300 text-sm">記錄篩選結果</span><span class="tag tag-yq2">YQ2</span></div>
+      </div>
+      <div class="example-box max-w-3xl mx-auto">
+Jacky → YQ1：「這份履歷 [貼內容] 跟 JD 匹配度如何？」
+YQ1 回覆：匹配度 85% ✅符合 ⚠️缺口 + 建議問題</div>
+    </div>
+  </div>
+
+  <!-- Slide 6: Phase 4 Engagement -->
+  <div class="slide">
+    <div class="orb orb-1"></div>
+    <div class="content">
+      <h1 class="text-2xl mb-4">4️⃣ 人選經營 <span class="text-gray-500 text-lg">Engagement</span></h1>
+      <div class="step-card max-w-3xl mx-auto mb-4">
+        <div class="step-row"><div class="step-num">1</div><span class="text-gray-300 text-sm">職缺詳細說明</span><span class="tag tag-jacky">Jacky</span></div>
+        <div class="step-row"><div class="step-num">2</div><span class="text-gray-300 text-sm">確認意願 + 期望薪資</span><span class="tag tag-jacky">Jacky</span></div>
+        <div class="step-row"><div class="step-num">3</div><span class="text-gray-300 text-sm">履歷優化建議</span><span class="tag tag-yq1">YQ1</span></div>
+        <div class="step-row"><div class="step-num">4</div><span class="text-gray-300 text-sm">撰寫候選人摘要</span><span class="tag tag-yq1">YQ1</span></div>
+      </div>
+      <div class="example-box max-w-3xl mx-auto">
+Jacky → YQ1：「這個候選人要推給客戶，幫我寫候選人摘要」
+YQ1 回覆：姓名/現職/年資/優勢/動機/期望/可到職日</div>
+    </div>
+  </div>
+
+  <!-- Slide 7: Phase 5 Submission ⭐ -->
+  <div class="slide">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="content">
+      <h1 class="text-2xl mb-4">5️⃣ 推薦客戶 <span class="text-gray-500 text-lg">Submission</span> <span class="text-yellow-400">⭐ 關鍵</span></h1>
+      <div class="step-card max-w-3xl mx-auto mb-4">
+        <div class="step-row"><div class="step-num">1</div><span class="text-gray-300 text-sm">履歷格式化</span><span class="tag tag-yq1">YQ1</span></div>
+        <div class="step-row"><div class="step-num">2</div><span class="text-gray-300 text-sm">推薦報告生成</span><span class="tag tag-yq1">YQ1</span></div>
+        <div class="step-row"><div class="step-num">3</div><span class="text-gray-300 text-sm">撰寫推薦 Email</span><span class="tag tag-yq1">YQ1</span></div>
+        <div class="step-row"><div class="step-num">4</div><span class="text-gray-300 text-sm">發送給客戶</span><span class="tag tag-yq2">YQ2</span><span class="tag tag-tool">gog + 附件</span></div>
+        <div class="step-row"><div class="step-num">5</div><span class="text-gray-300 text-sm">設定 3 天跟進提醒</span><span class="tag tag-yq2">YQ2</span><span class="tag tag-tool">cron</span></div>
+      </div>
+      <div class="example-box max-w-3xl mx-auto">
+Jacky → YQ1：「格式化履歷 + 寫推薦信給 hr@client.com」
+Jacky → YQ2：「發這封信，附件是履歷，3天後提醒我跟進」</div>
+    </div>
+  </div>
+
+  <!-- Slide 8: Phase 6 Interview -->
+  <div class="slide">
+    <div class="orb orb-2"></div>
+    <div class="content">
+      <h1 class="text-2xl mb-4">6️⃣ 面試協調 <span class="text-gray-500 text-lg">Interview</span></h1>
+      <div class="step-card max-w-3xl mx-auto mb-4">
+        <div class="step-row"><div class="step-num">1</div><span class="text-gray-300 text-sm">協調面試時間</span><span class="tag tag-yq2">YQ2</span></div>
+        <div class="step-row"><div class="step-num">2</div><span class="text-gray-300 text-sm">發送面試通知</span><span class="tag tag-yq2">YQ2</span><span class="tag tag-tool">gog</span></div>
+        <div class="step-row"><div class="step-num">3</div><span class="text-gray-300 text-sm">面試準備資料</span><span class="tag tag-yq1">YQ1</span><span class="tag tag-tool">InterviewCopilot</span></div>
+        <div class="step-row"><div class="step-num">4</div><span class="text-gray-300 text-sm">面試前提醒</span><span class="tag tag-yq2">YQ2</span></div>
+        <div class="step-row"><div class="step-num">5</div><span class="text-gray-300 text-sm">收集面試反饋</span><span class="tag tag-jacky">Jacky</span></div>
+      </div>
+      <div class="example-box max-w-3xl mx-auto">
+Jacky → YQ2：「確認候選人 2/15 下午 2 點可以，發確認信」
+Jacky → YQ1：「幫候選人準備面試，公司是 XXX」</div>
+    </div>
+  </div>
+
+  <!-- Slide 9: Phase 7 & 8 -->
+  <div class="slide">
+    <div class="orb orb-1"></div>
+    <div class="content">
+      <h1 class="text-2xl mb-4">7️⃣ Offer + 8️⃣ 報到跟進</h1>
+      <div class="grid grid-cols-2 gap-4 max-w-4xl mx-auto">
+        <div class="step-card">
+          <p class="text-white font-bold mb-2">7️⃣ Offer 談判</p>
+          <div class="step-row"><span class="text-gray-300 text-sm">傳達 Offer</span><span class="tag tag-jacky">Jacky</span></div>
+          <div class="step-row"><span class="text-gray-300 text-sm">薪資談判</span><span class="tag tag-jacky">Jacky</span></div>
+          <div class="step-row"><span class="text-gray-300 text-sm">離職指導模板</span><span class="tag tag-yq1">YQ1</span></div>
+          <div class="step-row"><span class="text-gray-300 text-sm">確認報到日</span><span class="tag tag-yq2">YQ2</span></div>
+        </div>
+        <div class="step-card">
+          <p class="text-white font-bold mb-2">8️⃣ 報到跟進</p>
+          <div class="step-row"><span class="text-gray-300 text-sm">Day-1 關懷信</span><span class="tag tag-yq2">YQ2</span><span class="tag tag-tool">auto</span></div>
+          <div class="step-row"><span class="text-gray-300 text-sm">Week-1 Check-in</span><span class="tag tag-yq2">YQ2</span><span class="tag tag-tool">auto</span></div>
+          <div class="step-row"><span class="text-gray-300 text-sm">Month-1 Check-in</span><span class="tag tag-yq2">YQ2</span><span class="tag tag-tool">auto</span></div>
+          <div class="step-row"><span class="text-gray-300 text-sm">請款提醒</span><span class="tag tag-yq2">YQ2</span><span class="tag tag-tool">cron</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 10: Summary -->
+  <div class="slide">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="content">
+      <h1 class="text-3xl mb-6">執行摘要</h1>
+      <div class="grid grid-cols-3 gap-4 max-w-3xl mx-auto mb-6">
+        <div class="step-card text-center">
+          <p class="text-4xl font-bold accent">YQ1</p>
+          <p class="text-gray-400 text-sm">分析 + 報告</p>
+          <p class="text-white text-xs mt-2">Step1ne AI<br>履歷分析<br>模板生成</p>
+        </div>
+        <div class="step-card text-center">
+          <p class="text-4xl font-bold text-green-400">YQ2</p>
+          <p class="text-gray-400 text-sm">執行 + 追蹤</p>
+          <p class="text-white text-xs mt-2">發 Email<br>排程提醒<br>自動跟進</p>
+        </div>
+        <div class="step-card text-center">
+          <p class="text-4xl font-bold text-yellow-400">Jacky</p>
+          <p class="text-gray-400 text-sm">關係 + 談判</p>
+          <p class="text-white text-xs mt-2">電話溝通<br>客戶拜訪<br>Offer 談判</p>
+        </div>
+      </div>
+      <div class="bg-white/5 rounded-xl p-4 max-w-2xl mx-auto">
+        <p class="text-white font-bold">🚀 今天就能開始</p>
+        <p class="text-gray-400 text-sm mt-2">1. YQ2 連結 gog → 2. 複製模板 → 3. 跑第一個案子</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="progress-container" id="progress"></div>
+  <div class="page-number" id="pageNumber">1 / 10</div>
+
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    const progressContainer = document.getElementById('progress');
+    const pageNumber = document.getElementById('pageNumber');
+    let currentSlide = 0;
+    slides.forEach((_, i) => { const dot = document.createElement('div'); dot.className = `progress-dot ${i === 0 ? 'active' : ''}`; dot.onclick = () => goToSlide(i); progressContainer.appendChild(dot); });
+    function updateSlide() { slides.forEach((slide, i) => slide.classList.toggle('active', i === currentSlide)); document.querySelectorAll('.progress-dot').forEach((dot, i) => dot.classList.toggle('active', i === currentSlide)); pageNumber.textContent = `${currentSlide + 1} / ${slides.length}`; }
+    function goToSlide(index) { currentSlide = Math.max(0, Math.min(slides.length - 1, index)); updateSlide(); }
+    function nextSlide() { if (currentSlide < slides.length - 1) { currentSlide++; updateSlide(); } }
+    function prevSlide() { if (currentSlide > 0) { currentSlide--; updateSlide(); } }
+    document.addEventListener('keydown', (e) => { if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); nextSlide(); } else if (e.key === 'ArrowLeft') { e.preventDefault(); prevSlide(); } });
+    document.addEventListener('click', (e) => { if (e.target.closest('.progress-container')) return; const x = e.clientX / window.innerWidth; if (x > 0.7) nextSlide(); else if (x < 0.3) prevSlide(); });
+  </script>
+</body>
+</html>

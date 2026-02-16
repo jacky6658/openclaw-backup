@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>獵頭顧問 AI 工作流程</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap');
+    
+    * { font-family: 'Noto Sans TC', sans-serif; }
+    body { background: #000; overflow: hidden; }
+    
+    .slide {
+      width: 100vw;
+      height: 100vh;
+      display: none;
+      position: relative;
+      background: linear-gradient(135deg, #0a0a0a 0%, #111 50%, #0a0a0a 100%);
+      overflow: hidden;
+    }
+    
+    .slide.active {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.3;
+      animation: float 20s ease-in-out infinite;
+    }
+    
+    .orb-1 { width: 400px; height: 400px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); top: -100px; right: -100px; }
+    .orb-2 { width: 300px; height: 300px; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); bottom: -50px; left: -50px; animation-delay: -5s; }
+    .orb-3 { width: 250px; height: 250px; background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); top: 50%; left: 50%; transform: translate(-50%, -50%); animation-delay: -10s; }
+    .orb-green { width: 300px; height: 300px; background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); top: 20%; right: 10%; animation-delay: -7s; }
+    
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      25% { transform: translate(50px, -30px) scale(1.1); }
+      50% { transform: translate(-30px, 50px) scale(0.9); }
+      75% { transform: translate(-50px, -20px) scale(1.05); }
+    }
+    
+    .content { position: relative; z-index: 10; text-align: center; padding: 2rem; max-width: 1400px; width: 100%; }
+    h1 { color: #fff; font-weight: 900; line-height: 1.2; }
+    h2 { color: #fff; font-weight: 700; }
+    p, li { color: #9ca3af; font-weight: 300; }
+    
+    .accent { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .accent-orange { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .accent-blue { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .accent-green { background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    
+    .progress-container { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 100; }
+    .progress-dot { width: 8px; height: 8px; border-radius: 50%; background: #333; cursor: pointer; transition: all 0.3s ease; }
+    .progress-dot.active { background: #667eea; width: 24px; border-radius: 4px; }
+    .page-number { position: fixed; bottom: 20px; right: 40px; color: #333; font-size: 14px; z-index: 100; }
+    
+    .phase-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 1.5rem;
+      text-align: left;
+    }
+    
+    .phase-card.current { border-color: rgba(102, 126, 234, 0.5); }
+    .phase-card.done { border-color: rgba(16, 185, 129, 0.5); }
+    .phase-card.future { border-color: rgba(251, 191, 36, 0.5); }
+    
+    .tag {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+    
+    .tag-ai { background: rgba(102, 126, 234, 0.2); color: #667eea; }
+    .tag-human { background: rgba(251, 191, 36, 0.2); color: #fbbf24; }
+    .tag-done { background: rgba(16, 185, 129, 0.2); color: #10b981; }
+    .tag-todo { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
+    
+    .task-list { list-style: none; padding: 0; margin: 0.5rem 0; }
+    .task-list li { 
+      padding: 0.4rem 0; 
+      border-bottom: 1px solid rgba(255,255,255,0.05); 
+      color: #d1d5db;
+      font-size: 0.9rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .task-list li:last-child { border-bottom: none; }
+    
+    .workflow-step {
+      background: rgba(255,255,255,0.05);
+      border-radius: 12px;
+      padding: 1rem;
+      text-align: center;
+      position: relative;
+    }
+    
+    .workflow-arrow {
+      color: #4b5563;
+      font-size: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .fade-in { animation: fadeIn 0.8s ease-out; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .slide.active .content > * { animation: fadeIn 0.8s ease-out both; }
+    .slide.active .content > *:nth-child(1) { animation-delay: 0.1s; }
+    .slide.active .content > *:nth-child(2) { animation-delay: 0.2s; }
+    .slide.active .content > *:nth-child(3) { animation-delay: 0.3s; }
+  </style>
+</head>
+<body>
+  <!-- Slide 1: Cover -->
+  <div class="slide active">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="content">
+      <p class="text-6xl mb-6">🎯</p>
+      <h1 class="text-5xl mb-6">獵頭顧問<br><span class="accent">AI 工作流程</span></h1>
+      <p class="text-xl text-gray-400">Step1ne AI 招募系統 × 自動化升級</p>
+    </div>
+  </div>
+
+  <!-- Slide 2: Overview -->
+  <div class="slide">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-3"></div>
+    <div class="content">
+      <h1 class="text-4xl mb-8">八大階段總覽</h1>
+      <div class="grid grid-cols-8 gap-2 max-w-6xl">
+        <div class="workflow-step">
+          <p class="text-2xl mb-2">1️⃣</p>
+          <p class="text-white text-sm font-bold">業務開發</p>
+          <p class="text-xs text-gray-500">BD</p>
+        </div>
+        <div class="workflow-arrow">→</div>
+        <div class="workflow-step">
+          <p class="text-2xl mb-2">2️⃣</p>
+          <p class="text-white text-sm font-bold">人才搜尋</p>
+          <p class="text-xs text-gray-500">Sourcing</p>
+        </div>
+        <div class="workflow-arrow">→</div>
+        <div class="workflow-step">
+          <p class="text-2xl mb-2">3️⃣</p>
+          <p class="text-white text-sm font-bold">初步篩選</p>
+          <p class="text-xs text-gray-500">Screening</p>
+        </div>
+        <div class="workflow-arrow">→</div>
+        <div class="workflow-step">
+          <p class="text-2xl mb-2">4️⃣</p>
+          <p class="text-white text-sm font-bold">人選經營</p>
+          <p class="text-xs text-gray-500">Engagement</p>
+        </div>
+        <div class="text-transparent">.</div>
+      </div>
+      <div class="grid grid-cols-8 gap-2 max-w-6xl mt-4">
+        <div class="workflow-step">
+          <p class="text-2xl mb-2">5️⃣</p>
+          <p class="text-white text-sm font-bold">推薦客戶</p>
+          <p class="text-xs text-gray-500">Submission</p>
+        </div>
+        <div class="workflow-arrow">→</div>
+        <div class="workflow-step">
+          <p class="text-2xl mb-2">6️⃣</p>
+          <p class="text-white text-sm font-bold">面試協調</p>
+          <p class="text-xs text-gray-500">Interview</p>
+        </div>
+        <div class="workflow-arrow">→</div>
+        <div class="workflow-step">
+          <p class="text-2xl mb-2">7️⃣</p>
+          <p class="text-white text-sm font-bold">Offer談判</p>
+          <p class="text-xs text-gray-500">Closing</p>
+        </div>
+        <div class="workflow-arrow">→</div>
+        <div class="workflow-step">
+          <p class="text-2xl mb-2">8️⃣</p>
+          <p class="text-white text-sm font-bold">報到跟進</p>
+          <p class="text-xs text-gray-500">Post-Placement</p>
+        </div>
+        <div class="text-transparent">.</div>
+      </div>
+      <p class="text-gray-400 mt-8">目標：每個階段都有 AI 助力 🤖</p>
+    </div>
+  </div>
+
+  <!-- Slide 3: Phase 1 BD -->
+  <div class="slide">
+    <div class="orb orb-2"></div>
+    <div class="orb orb-green"></div>
+    <div class="content">
+      <h1 class="text-3xl mb-6">1️⃣ 業務開發 <span class="text-gray-500 text-xl">Business Development</span></h1>
+      <div class="grid grid-cols-2 gap-6 max-w-4xl mx-auto">
+        <div class="phase-card">
+          <h3 class="text-white font-bold mb-3">🤖 可自動化</h3>
+          <ul class="task-list">
+            <li>市場調研、產業趨勢分析 <span class="tag tag-ai">AI</span></li>
+            <li>目標客戶名單建立 <span class="tag tag-ai">AI</span></li>
+            <li>Cold Email 模板生成 <span class="tag tag-ai">AI</span></li>
+            <li>JD 收集與整理 <span class="tag tag-done">✅ JDGenerator</span></li>
+          </ul>
+        </div>
+        <div class="phase-card">
+          <h3 class="text-white font-bold mb-3">👤 需人工處理</h3>
+          <ul class="task-list">
+            <li>客戶拜訪、建立關係 <span class="tag tag-human">人工</span></li>
+            <li>合約談判 <span class="tag tag-human">人工</span></li>
+            <li>費率協商 <span class="tag tag-human">人工</span></li>
+            <li>簽約 <span class="tag tag-human">人工</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="mt-6 p-4 bg-yellow-900/20 rounded-lg max-w-4xl mx-auto">
+        <p class="text-yellow-400">💡 建議：AI 產出客戶開發名單 + 初次聯繫信，人工負責關係經營</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 4: Phase 2 Sourcing -->
+  <div class="slide">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-3"></div>
+    <div class="content">
+      <h1 class="text-3xl mb-6">2️⃣ 人才搜尋 <span class="text-gray-500 text-xl">Sourcing</span></h1>
+      <div class="grid grid-cols-2 gap-6 max-w-4xl mx-auto">
+        <div class="phase-card done">
+          <h3 class="text-green-400 font-bold mb-3">✅ 已完成功能</h3>
+          <ul class="task-list">
+            <li>JD 分析 & 人才畫像 <span class="tag tag-done">PersonaGenerator</span></li>
+            <li>搜尋策略 & Boolean String <span class="tag tag-done">TalentSearch</span></li>
+            <li>開發信撰寫 <span class="tag tag-done">OutreachWriter</span></li>
+          </ul>
+        </div>
+        <div class="phase-card future">
+          <h3 class="text-yellow-400 font-bold mb-3">⏳ 待開發</h3>
+          <ul class="task-list">
+            <li>人才庫管理系統 <span class="tag tag-todo">TODO</span></li>
+            <li>LinkedIn 自動搜尋 <span class="tag tag-todo">TODO</span></li>
+            <li>批量履歷解析入庫 <span class="tag tag-todo">TODO</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="mt-6 p-4 bg-green-900/20 rounded-lg max-w-4xl mx-auto">
+        <p class="text-green-400">🎉 這階段自動化程度最高！Step1ne AI 核心功能所在</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 5: Phase 3 Screening -->
+  <div class="slide">
+    <div class="orb orb-2"></div>
+    <div class="orb orb-1"></div>
+    <div class="content">
+      <h1 class="text-3xl mb-6">3️⃣ 初步篩選 <span class="text-gray-500 text-xl">Screening</span></h1>
+      <div class="grid grid-cols-2 gap-6 max-w-4xl mx-auto">
+        <div class="phase-card done">
+          <h3 class="text-green-400 font-bold mb-3">✅ 已完成功能</h3>
+          <ul class="task-list">
+            <li>履歷-JD 匹配分析 <span class="tag tag-done">InterviewCopilot</span></li>
+            <li>預審問題建議 <span class="tag tag-done">InterviewCopilot</span></li>
+          </ul>
+        </div>
+        <div class="phase-card future">
+          <h3 class="text-yellow-400 font-bold mb-3">⏳ 待開發</h3>
+          <ul class="task-list">
+            <li>批量履歷篩選（上傳 N 份，排序匹配度）<span class="tag tag-todo">高優先</span></li>
+            <li>自動標記 Must-Have / Nice-to-Have <span class="tag tag-todo">TODO</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="mt-6 p-4 bg-blue-900/20 rounded-lg max-w-4xl mx-auto">
+        <p class="text-blue-400">🚀 高優先：批量履歷匹配 — 大幅節省篩選時間</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 6: Phase 4 Engagement -->
+  <div class="slide">
+    <div class="orb orb-3"></div>
+    <div class="orb orb-green"></div>
+    <div class="content">
+      <h1 class="text-3xl mb-6">4️⃣ 人選經營 <span class="text-gray-500 text-xl">Candidate Engagement</span></h1>
+      <div class="grid grid-cols-2 gap-6 max-w-4xl mx-auto">
+        <div class="phase-card">
+          <h3 class="text-white font-bold mb-3">🤖 可自動化</h3>
+          <ul class="task-list">
+            <li>履歷優化 / 格式化 <span class="tag tag-todo">高優先</span></li>
+            <li>候選人推薦報告生成 <span class="tag tag-todo">高優先</span></li>
+            <li>職缺說明信生成 <span class="tag tag-ai">AI</span></li>
+          </ul>
+        </div>
+        <div class="phase-card">
+          <h3 class="text-white font-bold mb-3">👤 需人工處理</h3>
+          <ul class="task-list">
+            <li>動機評估 <span class="tag tag-human">人工</span></li>
+            <li>期望對齊（薪資、地點）<span class="tag tag-human">人工</span></li>
+            <li>關係維護 <span class="tag tag-human">人工</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 7: Phase 5 Submission -->
+  <div class="slide">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="content">
+      <h1 class="text-3xl mb-6">5️⃣ 推薦給客戶 <span class="text-gray-500 text-xl">Client Submission</span></h1>
+      <div class="grid grid-cols-3 gap-4 max-w-5xl mx-auto">
+        <div class="phase-card future">
+          <h3 class="text-yellow-400 font-bold mb-3">📄 履歷格式化</h3>
+          <ul class="task-list text-sm">
+            <li>統一格式模板</li>
+            <li>匿名處理</li>
+            <li>重點標註</li>
+          </ul>
+          <span class="tag tag-todo mt-2">待開發</span>
+        </div>
+        <div class="phase-card future">
+          <h3 class="text-yellow-400 font-bold mb-3">📝 推薦報告</h3>
+          <ul class="task-list text-sm">
+            <li>候選人摘要</li>
+            <li>優缺點分析</li>
+            <li>匹配度說明</li>
+          </ul>
+          <span class="tag tag-todo mt-2">待開發</span>
+        </div>
+        <div class="phase-card future">
+          <h3 class="text-yellow-400 font-bold mb-3">📧 自動發送</h3>
+          <ul class="task-list text-sm">
+            <li>Email 模板</li>
+            <li>附件打包</li>
+            <li>跟進提醒</li>
+          </ul>
+          <span class="tag tag-todo mt-2">待開發</span>
+        </div>
+      </div>
+      <div class="mt-6 p-4 bg-red-900/20 rounded-lg max-w-5xl mx-auto">
+        <p class="text-red-400">🔴 關鍵缺口：這階段目前沒有自動化，每次都要手動整理履歷和發信</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 8: Phase 6 Interview -->
+  <div class="slide">
+    <div class="orb orb-3"></div>
+    <div class="orb orb-1"></div>
+    <div class="content">
+      <h1 class="text-3xl mb-6">6️⃣ 面試協調 <span class="text-gray-500 text-xl">Interview Coordination</span></h1>
+      <div class="grid grid-cols-2 gap-6 max-w-4xl mx-auto">
+        <div class="phase-card done">
+          <h3 class="text-green-400 font-bold mb-3">✅ 已完成功能</h3>
+          <ul class="task-list">
+            <li>面試問題生成 <span class="tag tag-done">InterviewCopilot</span></li>
+            <li>候選人面試準備 <span class="tag tag-done">InterviewCopilot</span></li>
+          </ul>
+        </div>
+        <div class="phase-card future">
+          <h3 class="text-yellow-400 font-bold mb-3">⏳ 待開發</h3>
+          <ul class="task-list">
+            <li>日曆整合（Google Calendar）<span class="tag tag-todo">TODO</span></li>
+            <li>自動發送面試邀請 <span class="tag tag-todo">TODO</span></li>
+            <li>面試反饋收集表單 <span class="tag tag-todo">TODO</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 9: Phase 7 & 8 -->
+  <div class="slide">
+    <div class="orb orb-2"></div>
+    <div class="orb orb-green"></div>
+    <div class="content">
+      <h1 class="text-3xl mb-6">7️⃣ Offer 談判 & 8️⃣ 報到跟進</h1>
+      <div class="grid grid-cols-2 gap-6 max-w-4xl mx-auto">
+        <div class="phase-card">
+          <h3 class="text-white font-bold mb-3">7️⃣ Offer & Closing</h3>
+          <ul class="task-list">
+            <li>Offer 溝通 <span class="tag tag-human">人工</span></li>
+            <li>薪資談判 <span class="tag tag-human">人工</span></li>
+            <li>Counter-Offer 處理 <span class="tag tag-human">人工</span></li>
+            <li>離職指導模板 <span class="tag tag-ai">可自動化</span></li>
+          </ul>
+          <p class="text-gray-500 text-sm mt-2">💡 這階段主要靠人的談判技巧</p>
+        </div>
+        <div class="phase-card">
+          <h3 class="text-white font-bold mb-3">8️⃣ Post-Placement</h3>
+          <ul class="task-list">
+            <li>Day-1 自動關懷信 <span class="tag tag-ai">可自動化</span></li>
+            <li>試用期定期 Check-in <span class="tag tag-ai">可自動化</span></li>
+            <li>保證期提醒 <span class="tag tag-ai">可自動化</span></li>
+            <li>請款 / Invoice <span class="tag tag-ai">可自動化</span></li>
+          </ul>
+          <p class="text-gray-500 text-sm mt-2">💡 設定自動排程，不怕忘記跟進</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 10: Current vs Future -->
+  <div class="slide">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-3"></div>
+    <div class="content">
+      <h1 class="text-3xl mb-8">Step1ne AI 現況 vs 目標</h1>
+      <div class="grid grid-cols-2 gap-8 max-w-5xl mx-auto">
+        <div class="phase-card done">
+          <h3 class="text-green-400 font-bold text-xl mb-4">✅ 已有功能</h3>
+          <ul class="task-list">
+            <li>PersonaGenerator <span class="text-gray-500">人才畫像</span></li>
+            <li>TalentSearch <span class="text-gray-500">搜尋策略</span></li>
+            <li>JDGenerator <span class="text-gray-500">JD 生成</span></li>
+            <li>OutreachWriter <span class="text-gray-500">開發信</span></li>
+            <li>InterviewCopilot <span class="text-gray-500">面試助手</span></li>
+            <li>AgentChat <span class="text-gray-500">AI 對話</span></li>
+          </ul>
+          <p class="text-green-400 font-bold mt-4">覆蓋階段：2️⃣3️⃣6️⃣</p>
+        </div>
+        <div class="phase-card future">
+          <h3 class="text-yellow-400 font-bold text-xl mb-4">⏳ 待開發功能</h3>
+          <ul class="task-list">
+            <li>批量履歷匹配 <span class="text-red-400">高優先</span></li>
+            <li>履歷格式化 <span class="text-red-400">高優先</span></li>
+            <li>推薦報告生成 <span class="text-red-400">高優先</span></li>
+            <li>自動發送推薦信 <span class="text-red-400">高優先</span></li>
+            <li>人才庫 CRM <span class="text-yellow-400">中優先</span></li>
+            <li>報到後自動跟進 <span class="text-yellow-400">中優先</span></li>
+          </ul>
+          <p class="text-yellow-400 font-bold mt-4">補齊階段：1️⃣4️⃣5️⃣7️⃣8️⃣</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 11: Priority Roadmap -->
+  <div class="slide">
+    <div class="orb orb-2"></div>
+    <div class="orb orb-green"></div>
+    <div class="content">
+      <h1 class="text-3xl mb-8">開發優先級 Roadmap</h1>
+      <div class="grid grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <div class="phase-card" style="border-color: rgba(239, 68, 68, 0.5);">
+          <h3 class="text-red-400 font-bold mb-4">🔴 Phase 1（本週）</h3>
+          <p class="text-white font-bold mb-2">推薦流程自動化</p>
+          <ul class="task-list text-sm">
+            <li>1. 批量履歷上傳 & 匹配</li>
+            <li>2. 履歷格式化模板</li>
+            <li>3. 推薦報告一鍵生成</li>
+            <li>4. Email 發送整合</li>
+          </ul>
+          <p class="text-gray-500 text-xs mt-3">目標：推一個人選從 2hr → 15min</p>
+        </div>
+        <div class="phase-card" style="border-color: rgba(251, 191, 36, 0.5);">
+          <h3 class="text-yellow-400 font-bold mb-4">🟡 Phase 2（下週）</h3>
+          <p class="text-white font-bold mb-2">跟進自動化</p>
+          <ul class="task-list text-sm">
+            <li>1. 跟進提醒系統</li>
+            <li>2. 報到後自動關懷</li>
+            <li>3. 保證期追蹤</li>
+            <li>4. 請款提醒</li>
+          </ul>
+          <p class="text-gray-500 text-xs mt-3">目標：不漏掉任何跟進</p>
+        </div>
+        <div class="phase-card" style="border-color: rgba(16, 185, 129, 0.5);">
+          <h3 class="text-green-400 font-bold mb-4">🟢 Phase 3（未來）</h3>
+          <p class="text-white font-bold mb-2">CRM + 資料庫</p>
+          <ul class="task-list text-sm">
+            <li>1. 人才庫管理</li>
+            <li>2. 客戶 CRM</li>
+            <li>3. 日曆整合</li>
+            <li>4. 業績報表</li>
+          </ul>
+          <p class="text-gray-500 text-xs mt-3">目標：一站式管理</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 12: Summary -->
+  <div class="slide">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="content">
+      <h1 class="text-4xl mb-8">總結</h1>
+      <div class="grid grid-cols-3 gap-6 max-w-4xl mx-auto mb-8">
+        <div class="text-center">
+          <p class="text-5xl font-black accent">8</p>
+          <p class="text-gray-400">個工作階段</p>
+        </div>
+        <div class="text-center">
+          <p class="text-5xl font-black accent-green">6</p>
+          <p class="text-gray-400">個已有功能</p>
+        </div>
+        <div class="text-center">
+          <p class="text-5xl font-black accent-orange">4</p>
+          <p class="text-gray-400">個高優先待開發</p>
+        </div>
+      </div>
+      <div class="bg-white/5 rounded-2xl p-6 max-w-3xl mx-auto">
+        <p class="text-2xl text-white font-bold mb-4">下一步行動</p>
+        <p class="text-gray-300">Phase 1：<span class="accent-orange font-bold">推薦流程自動化</span></p>
+        <p class="text-gray-400 mt-2">讓「篩履歷 → 整理 → 發給客戶」這段變成 15 分鐘搞定</p>
+      </div>
+      <p class="text-3xl text-white mt-8">🎯 目標：讓 AI 處理重複工作，<br>你專注在<span class="accent">談判</span>和<span class="accent">關係經營</span></p>
+    </div>
+  </div>
+
+  <!-- Progress dots -->
+  <div class="progress-container" id="progress"></div>
+  <div class="page-number" id="pageNumber">1 / 12</div>
+
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    const progressContainer = document.getElementById('progress');
+    const pageNumber = document.getElementById('pageNumber');
+    let currentSlide = 0;
+    
+    slides.forEach((_, i) => {
+      const dot = document.createElement('div');
+      dot.className = `progress-dot ${i === 0 ? 'active' : ''}`;
+      dot.onclick = () => goToSlide(i);
+      progressContainer.appendChild(dot);
+    });
+    
+    function updateSlide() {
+      slides.forEach((slide, i) => slide.classList.toggle('active', i === currentSlide));
+      document.querySelectorAll('.progress-dot').forEach((dot, i) => dot.classList.toggle('active', i === currentSlide));
+      pageNumber.textContent = `${currentSlide + 1} / ${slides.length}`;
+    }
+    
+    function goToSlide(index) { currentSlide = Math.max(0, Math.min(slides.length - 1, index)); updateSlide(); }
+    function nextSlide() { if (currentSlide < slides.length - 1) { currentSlide++; updateSlide(); } }
+    function prevSlide() { if (currentSlide > 0) { currentSlide--; updateSlide(); } }
+    
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); nextSlide(); }
+      else if (e.key === 'ArrowLeft') { e.preventDefault(); prevSlide(); }
+    });
+    
+    let touchStartX = 0;
+    document.addEventListener('touchstart', (e) => touchStartX = e.touches[0].clientX);
+    document.addEventListener('touchend', (e) => {
+      const diff = touchStartX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) { if (diff > 0) nextSlide(); else prevSlide(); }
+    });
+    
+    document.addEventListener('click', (e) => {
+      if (e.target.closest('.progress-container')) return;
+      const x = e.clientX / window.innerWidth;
+      if (x > 0.7) nextSlide(); else if (x < 0.3) prevSlide();
+    });
+  </script>
+</body>
+</html>

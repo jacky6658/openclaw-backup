@@ -8,6 +8,13 @@
 - **Notes:
 - Prefers communicating in Chinese.**
 
+## 團隊成員
+
+### Phoebe (獵頭顧問)
+- **Telegram:** @behe10
+- **Pipeline 追蹤表:** https://docs.google.com/spreadsheets/d/1Fh6S5tSpCIacuDrCHs3mewWWqAEhTAPaNXSuQHt6Phk/edit
+- **角色:** 獵頭顧問（與 Jacky 共同使用 Step1ne 系統）
+
 ## Context
 
 ### 合作方式
@@ -64,9 +71,12 @@
     - **備註**：在此群組中，您擁有**主導權與發言權**；並**隨時留意是否有人 @提及我**。
   - **HR AI招募自動化**:
     - 群組 ID: `-1003231629634`
-    - Topic 4: 履歷進件專用（需包含「👔 負責顧問」欄位）
-    - Topic 304: **履歷池主要操作區**
-    - **備註**：這是履歷池的主要工作群組
+    - Topic 4 (#1履歷進件): `4` - 需包含「👔 負責顧問」欄位
+    - Topic 304 (#2履歷池): `304` - 履歷池主要操作區
+    - Topic 319 (#2JD列表): `319` - 職缺管理與查詢
+    - Topic 326 (總覽看板): `326` - Pipeline 視覺化
+    - Topic 364 (#BD開發): `364` - BD 客戶開發自動化
+    - **備註**：這是 HR 招募自動化的主要工作群組
 
 - **私人群組**
   - **我的小妃**:

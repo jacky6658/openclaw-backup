@@ -1,0 +1,23 @@
+{
+  "generated_at": "2026-02-10T18:48:23.300329",
+  "summary": {
+    "total_jobs": 0,
+    "active_jobs": 0,
+    "total_candidates": 0,
+    "in_pool": 0,
+    "in_process": 0,
+    "placed": 0
+  },
+  "pipeline": {
+    "new": 0,
+    "matching": 0,
+    "recommended": 0,
+    "interview": 0,
+    "offer": 0,
+    "placed": 0,
+    "closed": 0,
+    "pool": 0
+  },
+  "need_followup": 0,
+  "recent_activity": []
+}

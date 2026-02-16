@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>候選人搜尋與匯入流程圖 v2.0（含公司背景分析）</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <style>
+        body {
+            font-family: 'Microsoft JhengHei', Arial, sans-serif;
+            max-width: 1400px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .version {
+            text-align: center;
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        .mermaid {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .legend {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .legend h3 {
+            margin-top: 0;
+            color: #333;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+        .legend-color {
+            width: 40px;
+            height: 20px;
+            margin-right: 10px;
+            border-radius: 3px;
+        }
+        .green { background: #90EE90; }
+        .yellow { background: #FFD700; }
+        .red { background: #FFB6C1; }
+        .blue { background: #87CEEB; }
+        .purple { background: #DDA0DD; }
+        .update-note {
+            background: #FFF3CD;
+            border-left: 4px solid #FFC107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        .update-note strong {
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+    <h1>候選人搜尋與匯入流程圖 v2.0</h1>
+    <div class="version">2026-02-14 更新：新增公司背景研究與文化契合度評估</div>
+    
+    <div class="update-note">
+        <strong>🆕 v2.0 更新內容：</strong><br>
+        • 新增「公司背景研究」步驟（步驟 1A）<br>
+        • 擴充「人才畫像」包含產品/文化契合度（步驟 2）<br>
+        • 新增「為什麼候選人會想來」分析<br>
+        • 新增「什麼樣的人會成功」評估<br>
+        • 總步驟數：9 → 11
+    </div>
+    
+    <div class="mermaid">
+graph TB
+    Start([開始：收到職缺需求]) --> Step1[步驟1：讀取職缺資訊<br/>公司、職位、技能、經驗、地點]
+    
+    Step1 --> Step1A[步驟1A：公司背景研究<br/>🔍 官網、LinkedIn、104<br/>🔍 產品服務、企業文化<br/>🔍 技術環境、員工評價]
+    
+    Step1A --> CompanyAnalysis{公司分析完成?}
+    CompanyAnalysis -->|需要更多資訊| WebResearch[🌐 web_search 搜尋<br/>• 公司介紹 產品服務<br/>• 企業文化 工作環境<br/>• 技術棧 團隊規模]
+    CompanyAnalysis -->|✅ 資訊充足| Step2
+    
+    WebResearch --> Step2[步驟2：建立完整人才畫像<br/>📋 基本條件<br/>🎯 產品契合度<br/>🏢 文化契合度<br/>❓ 為什麼候選人會想來?<br/>✅ 什麼樣的人會成功?]
+    
+    Step2 --> UserReview1{用戶確認人才畫像?}
+    UserReview1 -->|❌ 需要調整| Step2
+    UserReview1 -->|✅ 確認 OK| Step3
+    
+    Step3 --> Check1{確認關鍵條件}
+    Check1 -->|台灣本地?| Check2{經驗範圍?}
+    Check2 -->|2-5年初中階| Check3{產業背景?}
+    Check2 -->|5-10年中高階| Check3
+    Check3 -->|遊戲/科技/其他| Check4{文化契合?}
+    Check4 -->|✅ 符合公司文化| Step4[步驟3：選擇搜尋管道]
+    
+    Step4 --> Channel{職位類型?}
+    Channel -->|技術職| GitHub[GitHub Talent Search<br/>✓ 確認 location=Taiwan<br/>✓ 產業背景符合<br/>✗ 排除國外開發者]
+    Channel -->|設計職| CakeResume[CakeResume<br/>台灣本地求職者<br/>產業經驗優先]
+    Channel -->|管理職| LinkedIn[LinkedIn 公開搜尋<br/>產業背景優先]
+    Channel -->|通用| Multi[多管道組合<br/>LinkedIn + GitHub/CakeResume]
+    
+    GitHub --> Collect[步驟4：收集候選人資料]
+    CakeResume --> Collect
+    LinkedIn --> Collect
+    Multi --> Collect
+    
+    Collect --> Step5[步驟5：清理資料<br/>1️⃣ 移除 newline<br/>2️⃣ 將逗號替換成 pipe<br/>3️⃣ 驗證 12 欄位<br/>4️⃣ 評估產品/文化契合度]
+    
+    Step5 --> Validate{驗證通過?}
+    Validate -->|❌ 有 newline| Step5
+    Validate -->|❌ 欄位數錯誤| Step5
+    Validate -->|❌ 不符合文化| FilterOut[排除不適合候選人]
+    Validate -->|✅ 格式正確 + 文化契合| Step6[步驟6：測試匯入 1 筆<br/>匯入到履歷池最後一行+1]
+    
+    FilterOut --> Collect
+    
+    Step6 --> Check5{檢查匯入結果}
+    Check5 -->|❌ 被拆成多行| Fix1[修正：確認逗號已替換成 pipe]
+    Check5 -->|❌ 欄位錯位| Fix2[修正：重新清理資料]
+    Check5 -->|✅ 格式正確| Step7[步驟7：展示給用戶確認<br/>📝 第1筆完整資料<br/>👤 候選人背景是否符合<br/>🎯 產品/文化契合度評估]
+    
+    Fix1 --> Step5
+    Fix2 --> Step5
+    
+    Step7 --> UserConfirm{用戶回覆?}
+    UserConfirm -->|❌ 不符合| Restart[重新調整人才畫像]
+    UserConfirm -->|⏸️ 調整條件| Restart
+    UserConfirm -->|✅ 確認 OK| Step8[步驟8：批量匯入剩餘候選人<br/>逐筆匯入，每5筆回報進度]
+    
+    Restart --> Step2
+    
+    Step8 --> Progress{匯入進度}
+    Progress -->|每5筆| Report[📊 進度回報：已匯入 X/Y]
+    Progress -->|全部完成| Step9[步驟9：驗證最終結果<br/>✓ 檢查總行數<br/>✓ 驗證最後一行格式<br/>✓ 確認無重複資料]
+    
+    Report --> Progress
+    
+    Step9 --> Final{驗證結果}
+    Final -->|❌ 有錯誤| Rollback[回滾錯誤資料]
+    Final -->|✅ 全部正確| Step10[步驟10：通知 Telegram<br/>Topic 304 履歷池<br/>✅ 已匯入 XX 位候選人<br/>📊 產業分布、優先級統計]
+    
+    Rollback --> Fix3[手動修正或重新匯入]
+    
+    Step10 --> Step11[步驟11：記錄到日誌<br/>📝 搜尋條件、候選人來源<br/>📝 產品/文化契合度分析<br/>📝 後續追蹤建議]
+    
+    Step11 --> End([完成])
+    
+    Fix3 --> End
+    
+    style Start fill:#90EE90
+    style End fill:#90EE90
+    style Step1A fill:#DDA0DD
+    style Step2 fill:#DDA0DD
+    style UserReview1 fill:#FFB6C1
+    style Step5 fill:#FFD700
+    style Step6 fill:#FFD700
+    style Step7 fill:#FFB6C1
+    style UserConfirm fill:#FFB6C1
+    style Step9 fill:#FFD700
+    style Validate fill:#87CEEB
+    style Check5 fill:#87CEEB
+    style Final fill:#87CEEB
+    style CompanyAnalysis fill:#87CEEB
+    style Check4 fill:#87CEEB
+    </div>
+    
+    <div class="legend">
+        <h3>圖例說明</h3>
+        <div class="legend-item">
+            <div class="legend-color green"></div>
+            <div><strong>綠色</strong>：開始/結束節點</div>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color purple"></div>
+            <div><strong>紫色</strong>：公司研究與人才畫像（v2.0 新增）</div>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color yellow"></div>
+            <div><strong>黃色</strong>：關鍵步驟（資料清理、測試、驗證）</div>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color red"></div>
+            <div><strong>紅色</strong>：需要用戶確認的步驟</div>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color blue"></div>
+            <div><strong>藍色</strong>：自動驗證檢查點</div>
+        </div>
+        
+        <h3 style="margin-top: 30px;">關鍵控制點（v2.0 更新）</h3>
+        <ul>
+            <li><strong>步驟1A（新增）</strong>：公司背景研究（產品、服務、文化、技術環境）</li>
+            <li><strong>步驟2（擴充）</strong>：建立完整人才畫像
+                <ul>
+                    <li>✅ 產品契合度（優先產業經驗）</li>
+                    <li>✅ 文化契合度（價值觀、工作風格）</li>
+                    <li>✅ 為什麼候選人會想來？（吸引力分析）</li>
+                    <li>✅ 什麼樣的人會成功？（成功特質）</li>
+                </ul>
+            </li>
+            <li><strong>步驟2 用戶確認（新增）</strong>：<span style="color: red; font-weight: bold;">人才畫像必須經用戶確認才能搜尋</span></li>
+            <li><strong>步驟5</strong>：強制執行資料清理（移除 newline + 替換逗號）</li>
+            <li><strong>步驟6-7</strong>：測試 1 筆 + 等用戶確認才批量</li>
+            <li><strong>步驟9</strong>：最終驗證，有錯誤立刻回滾</li>
+        </ul>
+        
+        <h3 style="margin-top: 30px;">v2.0 新增檢查點</h3>
+        <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+            <tr style="background: #f0f0f0;">
+                <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">檢查點</th>
+                <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">檢查內容</th>
+                <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">失敗處理</th>
+            </tr>
+            <tr>
+                <td style="padding: 10px; border: 1px solid #ddd;">公司分析完成</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">是否了解產品、文化、技術環境？</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">執行 web_search 補充資訊</td>
+            </tr>
+            <tr>
+                <td style="padding: 10px; border: 1px solid #ddd;">用戶確認人才畫像</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">畫像是否符合公司需求？</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">調整畫像重新提交</td>
+            </tr>
+            <tr>
+                <td style="padding: 10px; border: 1px solid #ddd;">文化契合度</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">候選人是否符合企業文化？</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">排除不符合候選人</td>
+            </tr>
+        </table>
+        
+        <h3 style="margin-top: 30px;">常見失敗點與防護（v2.0 更新）</h3>
+        <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+            <tr style="background: #f0f0f0;">
+                <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">失敗點</th>
+                <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">原因</th>
+                <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">v2.0 防護措施</th>
+            </tr>
+            <tr style="background: #FFF3CD;">
+                <td style="padding: 10px; border: 1px solid #ddd;"><strong>找到不符合公司文化的人</strong></td>
+                <td style="padding: 10px; border: 1px solid #ddd;"><strong>未研究公司背景</strong></td>
+                <td style="padding: 10px; border: 1px solid #ddd;"><strong>步驟1A 強制公司研究</strong></td>
+            </tr>
+            <tr>
+                <td style="padding: 10px; border: 1px solid #ddd;">找到國外開發者</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">未確認 location</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">步驟2 強制確認「台灣本地」</td>
+            </tr>
+            <tr>
+                <td style="padding: 10px; border: 1px solid #ddd;">資料被拆成多行</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">逗號被當成換行</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">步驟5 強制 replace(', ', ' | ')</td>
+            </tr>
+            <tr>
+                <td style="padding: 10px; border: 1px solid #ddd;">欄位錯位</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">newline 字元殘留</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">步驟5 驗證無 newline</td>
+            </tr>
+            <tr>
+                <td style="padding: 10px; border: 1px solid #ddd;">批量匯入失敗</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">未測試就批量</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">步驟6-7 測試1筆+用戶確認</td>
+            </tr>
+        </table>
+        
+        <h3 style="margin-top: 30px;">完整人才畫像範本（v2.0）</h3>
+        <div style="background: #f9f9f9; padding: 15px; border-radius: 5px; margin-top: 10px;">
+            <h4 style="margin-top: 0;">公司背景分析</h4>
+            <ul>
+                <li>公司名稱、規模、產業</li>
+                <li>主要產品與服務</li>
+                <li>企業文化與價值觀</li>
+                <li>技術環境與團隊</li>
+            </ul>
+            
+            <h4>為什麼候選人會想來？</h4>
+            <ul>
+                <li>產業地位與品牌</li>
+                <li>產品挑戰與成長機會</li>
+                <li>企業文化吸引力</li>
+                <li>職涯發展空間</li>
+            </ul>
+            
+            <h4>什麼樣的人會成功？</h4>
+            <ul>
+                <li>產品契合度（產業經驗）</li>
+                <li>文化契合度（價值觀、工作風格）</li>
+                <li>技能要求（必備 + 加分）</li>
+                <li>成功特質（主動、溝通、學習力）</li>
+            </ul>
+            
+            <h4>目標候選人畫像</h4>
+            <ul>
+                <li>基本條件（地點、年資、語言）</li>
+                <li>經驗背景（職位、產業）</li>
+                <li>技能要求（必備 + 加分）</li>
+                <li>排除條件（太資深、國外、不符合文化）</li>
+            </ul>
+        </div>
+    </div>
+    
+    <script>
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'default',
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true,
+                curve: 'basis'
+            }
+        });
+    </script>
+</body>
+</html>
