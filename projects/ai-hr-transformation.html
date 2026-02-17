@@ -1,0 +1,1903 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 驅動的人資全面轉型藍圖 | Step1ne Vision 2026</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        header .subtitle {
+            font-size: 1.3em;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+        
+        header .meta {
+            font-size: 0.95em;
+            opacity: 0.8;
+            margin-top: 20px;
+        }
+        
+        .hero-quote {
+            background: rgba(255,255,255,0.1);
+            border-left: 4px solid #76ff03;
+            padding: 20px;
+            margin: 30px 0;
+            font-style: italic;
+            font-size: 1.1em;
+        }
+        
+        nav {
+            background: #f8f9fa;
+            padding: 20px 40px;
+            border-bottom: 2px solid #e0e0e0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        
+        nav a {
+            color: #1e3c72;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: all 0.3s;
+        }
+        
+        nav a:hover {
+            background: #1e3c72;
+            color: white;
+        }
+        
+        main {
+            padding: 60px 40px;
+        }
+        
+        section {
+            margin-bottom: 80px;
+        }
+        
+        h2 {
+            font-size: 2em;
+            color: #1e3c72;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #667eea;
+        }
+        
+        h3 {
+            font-size: 1.5em;
+            color: #2a5298;
+            margin: 30px 0 20px;
+        }
+        
+        h4 {
+            font-size: 1.2em;
+            color: #4a5568;
+            margin: 20px 0 15px;
+        }
+        
+        .card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 20px 0;
+            border-left: 5px solid #667eea;
+        }
+        
+        .highlight {
+            background: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+            border-radius: 8px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+        
+        .warning {
+            background: #fff3cd;
+            border-left: 5px solid #ffc107;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .success {
+            background: #d4edda;
+            border-left: 5px solid #28a745;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .grid-item {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 25px;
+            transition: all 0.3s;
+        }
+        
+        .grid-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-color: #667eea;
+        }
+        
+        .grid-item h4 {
+            color: #667eea;
+            margin-top: 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        th {
+            background: #1e3c72;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+            margin: 30px 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: #667eea;
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+            padding-left: 30px;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -43px;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #667eea;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px #667eea;
+        }
+        
+        .pill {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin: 5px;
+        }
+        
+        .pill-primary { background: #e3f2fd; color: #1976d2; }
+        .pill-success { background: #e8f5e9; color: #388e3c; }
+        .pill-warning { background: #fff3e0; color: #f57c00; }
+        .pill-danger { background: #ffebee; color: #d32f2f; }
+        
+        .mermaid {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        code {
+            background: #f4f4f4;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+        
+        .quote {
+            border-left: 4px solid #667eea;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        
+        footer {
+            background: #1e3c72;
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin: 10px;
+        }
+        
+        .btn:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        @media print {
+            body { background: white; padding: 0; }
+            .container { box-shadow: none; }
+            nav { position: static; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚀 AI 驅動的人資全面轉型藍圖</h1>
+            <div class="subtitle">從傳統人資到 AI-First 人資科技公司</div>
+            <div class="hero-quote">
+                "你不會被 AI 取代，但會被使用 AI 的人取代。<br>
+                不要當第一個，但絕對不要當最後一個。"<br>
+                — Jensen Huang, NVIDIA CEO
+            </div>
+            <div class="meta">
+                Step1ne Vision 2026 | 規劃者：Jacky Chen × YuQi AI<br>
+                啟發來源：Cisco AI Summit - Jensen Huang Fireside Chat
+            </div>
+        </header>
+
+        <nav>
+            <ul>
+                <li><a href="#vision">願景定位</a></li>
+                <li><a href="#framework">六大模塊</a></li>
+                <li><a href="#roadmap">實施路線圖</a></li>
+                <li><a href="#pain-points">痛點分析</a></li>
+                <li><a href="#tech">技術架構</a></li>
+                <li><a href="#business">商業模式</a></li>
+                <li><a href="#roi">投資回報</a></li>
+            </ul>
+        </nav>
+
+        <main>
+            <!-- 第一章：願景與定位 -->
+            <section id="vision">
+                <h2>📖 第一章：願景與定位</h2>
+
+                <h3>1.1 核心願景</h3>
+                <div class="highlight">
+                    <h4>🎯 我們要成為：</h4>
+                    <p><strong>"台灣第一家 AI-First 人資科技公司"</strong></p>
+                    <p>不是「獵頭公司用 AI」，而是「<strong>AI 公司專注人資領域</strong>」</p>
+                </div>
+
+                <h3>1.2 Jensen Huang 的啟發</h3>
+                <div class="grid">
+                    <div class="grid-item">
+                        <h4>⚡ Abundance Mindset</h4>
+                        <p>假設速度=光速、成本=0、人力無限，重新設計整個人資流程</p>
+                    </div>
+                    <div class="grid-item">
+                        <h4>🎯 Focus on Essence</h4>
+                        <p>聚焦人資核心工作：選育用留薪，用 AI 革命化每一個環節</p>
+                    </div>
+                    <div class="grid-item">
+                        <h4>🌸 Let Flowers Bloom</h4>
+                        <p>先實驗、後聚焦，快速迭代找出最佳方案</p>
+                    </div>
+                    <div class="grid-item">
+                        <h4>🔧 Tool Use</h4>
+                        <p>AI 使用現有工具（HRIS, ATS），不重新發明輪子</p>
+                    </div>
+                </div>
+
+                <h3>1.3 市場定位轉變</h3>
+                <div class="card">
+                    <h4>從傳統人資到 AI-First 人資</h4>
+                    <table>
+                        <tr>
+                            <th>維度</th>
+                            <th>傳統人資</th>
+                            <th>AI-First 人資（我們）</th>
+                        </tr>
+                        <tr>
+                            <td><strong>核心競爭力</strong></td>
+                            <td>人脈、經驗、判斷力</td>
+                            <td>AI 技術 + 人資專業</td>
+                        </tr>
+                        <tr>
+                            <td><strong>服務對象</strong></td>
+                            <td>特定客戶（5-10家）</td>
+                            <td>全產業（小企業→大型科技業）</td>
+                        </tr>
+                        <tr>
+                            <td><strong>規模化能力</strong></td>
+                            <td>線性成長（+1人=+10案）</td>
+                            <td>指數成長（+1 AI=+100案）</td>
+                        </tr>
+                        <tr>
+                            <td><strong>收費模式</strong></td>
+                            <td>按成功收費（20-30%）</td>
+                            <td>SaaS 訂閱 + 成功費</td>
+                        </tr>
+                        <tr>
+                            <td><strong>技術投入</strong></td>
+                            <td>工具採購者</td>
+                            <td>技術開發者</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <h3>1.4 目標客戶</h3>
+                <div class="grid">
+                    <div class="grid-item">
+                        <h4>🏭 傳統產業（製造業）</h4>
+                        <ul>
+                            <li>痛點：招募效率低、人才流失率高</li>
+                            <li>需求：基礎 AI 化（選育用留）</li>
+                            <li>規模：10-500 人</li>
+                        </ul>
+                    </div>
+                    <div class="grid-item">
+                        <h4>🏢 中小企業（服務業）</h4>
+                        <ul>
+                            <li>痛點：沒有專職 HR、成本敏感</li>
+                            <li>需求：All-in-One HR SaaS</li>
+                            <li>規模：5-100 人</li>
+                        </ul>
+                    </div>
+                    <div class="grid-item">
+                        <h4>💻 科技業（新創）</h4>
+                        <ul>
+                            <li>痛點：快速擴張、人才競爭激烈</li>
+                            <li>需求：AI 招募 + 數據分析</li>
+                            <li>規模：20-200 人</li>
+                        </ul>
+                    </div>
+                    <div class="grid-item">
+                        <h4>🏦 大型企業（上市公司）</h4>
+                        <ul>
+                            <li>痛點：流程複雜、數據分散</li>
+                            <li>需求：企業級 AI HR 整合</li>
+                            <li>規模：500+ 人</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 第二章：六大人資模塊 AI 化方案 -->
+            <section id="framework">
+                <h2>🎯 第二章：六大人資模塊 AI 化方案</h2>
+
+                <div class="quote">
+                    "AI 降低了智慧的成本，創造了智慧的豐裕。<br>
+                    過去要一年的事，現在一天就能完成。" — Jensen Huang
+                </div>
+
+                <!-- 模塊 1：選（招募） -->
+                <h3>模塊 1：選（招募） - AI Recruiting</h3>
+                <div class="card">
+                    <h4>🎯 目標：從 1 週找 10 人 → 1 天找 1000 人</h4>
+                    
+                    <h4>AI 化流程：</h4>
+                    <div class="mermaid">
+graph LR
+    A[收到職缺需求] --> B[AI 解析 JD]
+    B --> C[多管道搜尋]
+    C --> D[AI 配對評分]
+    D --> E[生成推薦報告]
+    E --> F[自動發送開發信]
+    F --> G[AI 追蹤回覆]
+    G --> H[安排面試]
+    H --> I[人工決策]
+                    </div>
+
+                    <h4>技術實現：</h4>
+                    <table>
+                        <tr>
+                            <th>階段</th>
+                            <th>傳統做法</th>
+                            <th>AI 做法</th>
+                            <th>時間節省</th>
+                        </tr>
+                        <tr>
+                            <td>搜尋候選人</td>
+                            <td>手動搜尋 LinkedIn/104（1-2天）</td>
+                            <td>AI 多管道自動搜尋（10分鐘）</td>
+                            <td>⏱️ 99%</td>
+                        </tr>
+                        <tr>
+                            <td>履歷篩選</td>
+                            <td>人工閱讀 100 份（4-6小時）</td>
+                            <td>AI 批量解析+評分（5分鐘）</td>
+                            <td>⏱️ 98%</td>
+                        </tr>
+                        <tr>
+                            <td>配對評分</td>
+                            <td>憑經驗判斷（2-3小時）</td>
+                            <td>AI 多維度評分（1分鐘）</td>
+                            <td>⏱️ 97%</td>
+                        </tr>
+                        <tr>
+                            <td>發送開發信</td>
+                            <td>手動撰寫 20 封（2-3小時）</td>
+                            <td>AI 個人化生成（5分鐘）</td>
+                            <td>⏱️ 97%</td>
+                        </tr>
+                        <tr>
+                            <td>追蹤回覆</td>
+                            <td>手動記錄+提醒（持續）</td>
+                            <td>AI 自動追蹤（自動）</td>
+                            <td>⏱️ 95%</td>
+                        </tr>
+                    </table>
+
+                    <h4>已完成（Step1ne 現況）：</h4>
+                    <div class="success">
+                        <ul>
+                            <li>✅ 多管道搜尋（GitHub, LinkedIn, 104, 履歷池）</li>
+                            <li>✅ AI 配對系統（模糊匹配 + 多維度評分）</li>
+                            <li>✅ 自動化 BD（每天 6 次）</li>
+                            <li>✅ LinkedIn 自動發職缺</li>
+                            <li>✅ 履歷自動歸檔</li>
+                        </ul>
+                    </div>
+
+                    <h4>待開發：</h4>
+                    <div class="warning">
+                        <ul>
+                            <li>🔜 AI 面試安排（自動協調時間）</li>
+                            <li>🔜 視訊面試 AI 助理（記錄+分析）</li>
+                            <li>🔜 候選人意向預測（流失風險評估）</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 模塊 2：育（培訓） -->
+                <h3>模塊 2：育（培訓） - AI Learning & Development</h3>
+                <div class="card">
+                    <h4>🎯 目標：個人化學習路徑 + 技能缺口自動偵測</h4>
+
+                    <h4>AI 化流程：</h4>
+                    <div class="mermaid">
+graph LR
+    A[員工技能盤點] --> B[AI 分析缺口]
+    B --> C[生成學習路徑]
+    C --> D[推薦課程/導師]
+    D --> E[追蹤學習進度]
+    E --> F[AI 考核評估]
+    F --> G[調整學習計畫]
+                    </div>
+
+                    <h4>核心功能：</h4>
+                    <div class="grid">
+                        <div class="grid-item">
+                            <h4>📊 技能圖譜</h4>
+                            <ul>
+                                <li>自動建立公司技能樹</li>
+                                <li>員工技能自動評估</li>
+                                <li>技能缺口視覺化</li>
+                            </ul>
+                        </div>
+                        <div class="grid-item">
+                            <h4>🎓 個人化學習</h4>
+                            <ul>
+                                <li>AI 生成學習路徑</li>
+                                <li>適性推薦課程</li>
+                                <li>內部導師配對</li>
+                            </ul>
+                        </div>
+                        <div class="grid-item">
+                            <h4>🤖 AI 導師</h4>
+                            <ul>
+                                <li>24/7 即時解答</li>
+                                <li>模擬練習場景</li>
+                                <li>錯誤自動糾正</li>
+                            </ul>
+                        </div>
+                        <div class="grid-item">
+                            <h4>📈 效果追蹤</h4>
+                            <ul>
+                                <li>學習進度儀表板</li>
+                                <li>技能提升量化</li>
+                                <li>ROI 自動計算</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h4>實際應用場景：</h4>
+                    <pre>
+範例：新人 Onboarding
+
+Day 1: AI 分析新人背景 → 生成客製化訓練計畫
+Day 2-7: AI 導師引導完成必修課程
+Day 8-14: AI 配對內部 Mentor + 模擬實戰
+Day 15-30: AI 追蹤學習進度 + 每週小測驗
+Day 30: AI 生成能力評估報告 → 主管審核
+
+結果：Onboarding 時間從 60 天 → 30 天
+      新人留存率從 70% → 85%
+                    </pre>
+                </div>
+
+                <!-- 模塊 3：用（績效管理） -->
+                <h3>模塊 3：用（績效管理） - AI Performance Management</h3>
+                <div class="card">
+                    <h4>🎯 目標：持續績效追蹤 + 即時回饋 + 數據驅動決策</h4>
+
+                    <h4>AI 化流程：</h4>
+                    <div class="mermaid">
+graph LR
+    A[設定 OKR/KPI] --> B[AI 自動追蹤]
+    B --> C[多維度數據收集]
+    C --> D[AI 分析績效]
+    D --> E[生成改善建議]
+    E --> F[即時回饋機制]
+    F --> G[績效預測]
+    G --> H[人工決策]
+                    </div>
+
+                    <h4>核心功能：</h4>
+                    <table>
+                        <tr>
+                            <th>功能</th>
+                            <th>說明</th>
+                            <th>AI 角色</th>
+                        </tr>
+                        <tr>
+                            <td><strong>目標設定助手</strong></td>
+                            <td>AI 協助設定 SMART 目標</td>
+                            <td>分析歷史數據 + 行業標竿</td>
+                        </tr>
+                        <tr>
+                            <td><strong>持續追蹤</strong></td>
+                            <td>自動收集工作數據（Git, Jira, CRM）</td>
+                            <td>整合多系統數據</td>
+                        </tr>
+                        <tr>
+                            <td><strong>360度回饋</strong></td>
+                            <td>AI 協助收集同儕/客戶回饋</td>
+                            <td>自動發送問卷 + 情感分析</td>
+                        </tr>
+                        <tr>
+                            <td><strong>績效預測</strong></td>
+                            <td>提前 30 天預測績效風險</td>
+                            <td>機器學習預測模型</td>
+                        </tr>
+                        <tr>
+                            <td><strong>改善建議</strong></td>
+                            <td>個人化績效提升方案</td>
+                            <td>基於成功案例推薦</td>
+                        </tr>
+                    </table>
+
+                    <h4>消除痛點：</h4>
+                    <div class="success">
+                        <ul>
+                            <li>✅ 年度考核變成持續對話（不再只看年底）</li>
+                            <li>✅ 數據驅動取代主觀印象（公平性提升）</li>
+                            <li>✅ 即時介入問題員工（不等到離職才發現）</li>
+                            <li>✅ 高績效員工自動識別（留才策略）</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 模塊 4：留（留才策略） -->
+                <h3>模塊 4：留（留才策略） - AI Retention</h3>
+                <div class="card">
+                    <h4>🎯 目標：提前預測離職風險 + 主動留才</h4>
+
+                    <h4>AI 離職預測模型：</h4>
+                    <div class="mermaid">
+graph TD
+    A[數據收集] --> B{AI 分析}
+    B --> C[低風險 <20%]
+    B --> D[中風險 20-60%]
+    B --> E[高風險 >60%]
+    D --> F[主管面談]
+    E --> G[HR 緊急介入]
+    F --> H[調整策略]
+    G --> H
+    H --> I[持續監控]
+                    </div>
+
+                    <h4>AI 分析的離職信號：</h4>
+                    <div class="grid">
+                        <div class="grid-item">
+                            <h4>📉 績效數據</h4>
+                            <ul>
+                                <li>產出突然下降</li>
+                                <li>會議參與度降低</li>
+                                <li>項目延遲增加</li>
+                            </ul>
+                        </div>
+                        <div class="grid-item">
+                            <h4>💬 溝通模式</h4>
+                            <ul>
+                                <li>Slack/Email 活躍度下降</li>
+                                <li>負面情緒用詞增加</li>
+                                <li>社交互動減少</li>
+                            </ul>
+                        </div>
+                        <div class="grid-item">
+                            <h4>🕐 行為改變</h4>
+                            <ul>
+                                <li>打卡時間異常</li>
+                                <li>請假頻率增加</li>
+                                <li>LinkedIn 活躍度上升</li>
+                            </ul>
+                        </div>
+                        <div class="grid-item">
+                            <h4>📊 外部信號</h4>
+                            <ul>
+                                <li>市場薪資調查</li>
+                                <li>同業招聘動態</li>
+                                <li>產業趨勢變化</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h4>主動留才策略：</h4>
+                    <pre>
+AI 自動執行：
+1. 高風險員工每週報告（主管 Dashboard）
+2. 推薦留才方案（加薪/升職/轉調/培訓）
+3. 自動安排 1-on-1（HR + 主管）
+4. 追蹤改善效果（30/60/90 天）
+
+人工決策：
+- 最終留才方案批准
+- 關鍵人才特殊待遇
+- 文化與心理層面關懷
+                    </pre>
+
+                    <h4>ROI 估算：</h4>
+                    <div class="highlight">
+                        <p><strong>假設：</strong></p>
+                        <ul>
+                            <li>公司 100 人，平均年薪 80 萬</li>
+                            <li>離職率從 20% → 10%（降低 10%）</li>
+                            <li>招募+訓練成本 = 年薪 1.5 倍 = 120 萬</li>
+                        </ul>
+                        <p><strong>年節省：</strong> 10 人 × 120 萬 = <span style="color: #28a745; font-size: 1.5em;">1200 萬元</span></p>
+                    </div>
+                </div>
+
+                <!-- 模塊 5：薪酬 -->
+                <h3>模塊 5：薪酬管理 - AI Compensation</h3>
+                <div class="card">
+                    <h4>🎯 目標：市場競爭力 + 內部公平性 + 成本優化</h4>
+
+                    <h4>AI 薪酬系統架構：</h4>
+                    <table>
+                        <tr>
+                            <th>模組</th>
+                            <th>功能</th>
+                            <th>數據來源</th>
+                        </tr>
+                        <tr>
+                            <td><strong>市場薪資分析</strong></td>
+                            <td>即時薪資行情（職位/地區/產業）</td>
+                            <td>104/LinkedIn/政府統計/爬蟲</td>
+                        </tr>
+                        <tr>
+                            <td><strong>內部公平性</strong></td>
+                            <td>同職級薪資差異分析</td>
+                            <td>內部薪資資料庫</td>
+                        </tr>
+                        <tr>
+                            <td><strong>績效連結</strong></td>
+                            <td>AI 推薦加薪幅度</td>
+                            <td>績效數據 + 市場數據</td>
+                        </tr>
+                        <tr>
+                            <td><strong>薪資談判助手</strong></td>
+                            <td>Offer 談判建議</td>
+                            <td>候選人背景 + 市場行情</td>
+                        </tr>
+                        <tr>
+                            <td><strong>成本預測</strong></td>
+                            <td>未來 12 個月薪資成本</td>
+                            <td>歷史數據 + 擴編計畫</td>
+                        </tr>
+                    </table>
+
+                    <h4>實際應用：</h4>
+                    <pre>
+情境 1：新人 Offer
+輸入：職位 = "AI工程師", 經驗 = 3年, 學歷 = 碩士
+AI 輸出：
+  - 市場行情：80k - 120k（中位數 95k）
+  - 內部參考：同職級平均 92k
+  - 建議 Offer：90k（可談判至 100k）
+  - 風險評估：Offer 低於 85k，接受率 <30%
+
+情境 2：年度調薪
+AI 自動分析：
+  - 績效 A 級（30%員工）→ 建議調薪 8-12%
+  - 績效 B 級（50%員工）→ 建議調薪 3-5%
+  - 績效 C 級（20%員工）→ 建議不調或 0-2%
+  - 總成本控制在預算 5% 內
+                    </pre>
+                </div>
+
+                <!-- 模塊 6：員工福利 -->
+                <h3>模塊 6：員工福利 - AI Benefits & Wellness</h3>
+                <div class="card">
+                    <h4>🎯 目標：個人化福利 + 主動健康管理 + 提升滿意度</h4>
+
+                    <h4>AI 福利推薦系統：</h4>
+                    <div class="grid">
+                        <div class="grid-item">
+                            <h4>🎁 福利個人化</h4>
+                            <ul>
+                                <li>AI 分析員工偏好（年齡/家庭狀況）</li>
+                                <li>推薦最有感福利（健身/托育/進修）</li>
+                                <li>福利使用率追蹤</li>
+                            </ul>
+                        </div>
+                        <div class="grid-item">
+                            <h4>💪 健康管理</h4>
+                            <ul>
+                                <li>整合穿戴裝置數據</li>
+                                <li>AI 健康風險預警</li>
+                                <li>主動關懷高風險員工</li>
+                            </ul>
+                        </div>
+                        <div class="grid-item">
+                            <h4>🧠 心理健康</h4>
+                            <ul>
+                                <li>壓力指數監測（工作量+情緒）</li>
+                                <li>AI 聊天機器人（初步諮詢）</li>
+                                <li>轉介專業心理師</li>
+                            </ul>
+                        </div>
+                        <div class="grid-item">
+                            <h4>📊 滿意度分析</h4>
+                            <ul>
+                                <li>AI 分析匿名反饋</li>
+                                <li>福利 ROI 計算</li>
+                                <li>改善建議生成</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h4>創新福利：AI 工作生活平衡助手</h4>
+                    <pre>
+功能：
+✅ 會議密度分析 → 自動建議 Focus Time
+✅ 工作量預測 → 提前調配資源
+✅ 休假最佳時機 → AI 推薦（避開專案高峰）
+✅ Work-from-home 建議 → 基於任務性質
+✅ 家庭活動提醒 → 整合行事曆
+
+效果：
+- 員工滿意度 ↑15%
+- 加班時數 ↓20%
+- 離職率 ↓8%
+                    </pre>
+                </div>
+            </section>
+
+            <!-- 第三章：實施路線圖 -->
+            <section id="roadmap">
+                <h2>🗺️ 第三章：18 個月實施路線圖</h2>
+
+                <div class="quote">
+                    "不要當第一個採用 AI 的公司，但絕對不要當最後一個。" — Jensen Huang
+                </div>
+
+                <h3>階段劃分與里程碑</h3>
+
+                <!-- Phase 1 -->
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h3>📍 Phase 1：基礎建設（月 1-3）</h3>
+                        <span class="pill pill-primary">Let a Thousand Flowers Bloom</span>
+                        
+                        <h4>目標：建立 AI 基礎設施 + MVP 驗證</h4>
+
+                        <table>
+                            <tr>
+                                <th>週</th>
+                                <th>任務</th>
+                                <th>交付物</th>
+                            </tr>
+                            <tr>
+                                <td>Week 1-2</td>
+                                <td>
+                                    ✅ 完善現有找人選系統<br>
+                                    ✅ 建立數據倉庫（Google Sheets → Database）
+                                </td>
+                                <td>
+                                    - 找人選系統 v2.0<br>
+                                    - PostgreSQL 資料庫架構
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Week 3-4</td>
+                                <td>
+                                    🔜 開發 AI 履歷解析<br>
+                                    🔜 AI 面試安排助手
+                                </td>
+                                <td>
+                                    - 履歷解析 API<br>
+                                    - Calendly 整合
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Week 5-8</td>
+                                <td>
+                                    🔜 招募模組 Beta 版<br>
+                                    🔜 5 家測試客戶
+                                </td>
+                                <td>
+                                    - 招募 SaaS MVP<br>
+                                    - 客戶反饋報告
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Week 9-12</td>
+                                <td>
+                                    🔜 根據反饋迭代<br>
+                                    🔜 開始規劃培訓模組
+                                </td>
+                                <td>
+                                    - 招募模組 v1.0<br>
+                                    - 培訓模組設計文件
+                                </td>
+                            </tr>
+                        </table>
+
+                        <div class="success">
+                            <strong>里程碑：</strong>
+                            <ul>
+                                <li>✅ 招募模組上線（5 家客戶使用）</li>
+                                <li>✅ AI 配對準確度 >60%</li>
+                                <li>✅ 客戶滿意度 >4.0/5.0</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Phase 2 -->
+                    <div class="timeline-item">
+                        <h3>📍 Phase 2：產品化（月 4-9）</h3>
+                        <span class="pill pill-warning">Curate the Garden</span>
+
+                        <h4>目標：完整 6 大模組 + 付費客戶 50 家</h4>
+
+                        <table>
+                            <tr>
+                                <th>月份</th>
+                                <th>開發重點</th>
+                                <th>商業目標</th>
+                            </tr>
+                            <tr>
+                                <td>月 4-5</td>
+                                <td>
+                                    培訓模組開發<br>
+                                    績效模組設計
+                                </td>
+                                <td>
+                                    招募客戶：20 家<br>
+                                    MRR：50 萬
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>月 6-7</td>
+                                <td>
+                                    績效 + 留才模組開發<br>
+                                    數據分析 Dashboard
+                                </td>
+                                <td>
+                                    招募客戶：35 家<br>
+                                    MRR：100 萬
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>月 8-9</td>
+                                <td>
+                                    薪酬 + 福利模組開發<br>
+                                    整合測試
+                                </td>
+                                <td>
+                                    招募客戶：50 家<br>
+                                    MRR：150 萬
+                                </td>
+                            </tr>
+                        </table>
+
+                        <div class="success">
+                            <strong>里程碑：</strong>
+                            <ul>
+                                <li>✅ 6 大模組全部上線</li>
+                                <li>✅ 50 家付費客戶</li>
+                                <li>✅ MRR 達 150 萬</li>
+                                <li>✅ 客戶續約率 >80%</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Phase 3 -->
+                    <div class="timeline-item">
+                        <h3>📍 Phase 3：規模化（月 10-18）</h3>
+                        <span class="pill pill-success">Scale & Optimize</span>
+
+                        <h4>目標：200 家客戶 + 產業標竿</h4>
+
+                        <table>
+                            <tr>
+                                <th>月份</th>
+                                <th>優化重點</th>
+                                <th>商業目標</th>
+                            </tr>
+                            <tr>
+                                <td>月 10-12</td>
+                                <td>
+                                    企業版開發（大型客戶）<br>
+                                    API 開放（整合其他 HRIS）
+                                </td>
+                                <td>
+                                    客戶數：100 家<br>
+                                    MRR：300 萬<br>
+                                    首個企業客戶
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>月 13-15</td>
+                                <td>
+                                    行業客製化（製造/科技/服務）<br>
+                                    AI 模型持續優化
+                                </td>
+                                <td>
+                                    客戶數：150 家<br>
+                                    MRR：500 萬<br>
+                                    3 個垂直產業方案
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>月 16-18</td>
+                                <td>
+                                    Physical AI（機器人面試官）<br>
+                                    預測式 HR（6 個月預測）
+                                </td>
+                                <td>
+                                    客戶數：200 家<br>
+                                    MRR：800 萬<br>
+                                    NPS >50
+                                </td>
+                            </tr>
+                        </table>
+
+                        <div class="success">
+                            <strong>里程碑：</strong>
+                            <ul>
+                                <li>✅ 200 家客戶（含 5 家大型企業）</li>
+                                <li>✅ ARR 破億（8000 萬 → 1 億）</li>
+                                <li>✅ 成為台灣 AI HR 市場第一品牌</li>
+                                <li>✅ 準備 A 輪融資</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>資源需求</h3>
+                <div class="grid">
+                    <div class="grid-item">
+                        <h4>💰 Phase 1（月 1-3）</h4>
+                        <ul>
+                            <li>人力：3-5 人</li>
+                            <li>資金：50-100 萬</li>
+                            <li>Tech Stack 建置</li>
+                        </ul>
+                    </div>
+                    <div class="grid-item">
+                        <h4>💰 Phase 2（月 4-9）</h4>
+                        <ul>
+                            <li>人力：8-12 人</li>
+                            <li>資金：300-500 萬</li>
+                            <li>銷售 + 客服團隊</li>
+                        </ul>
+                    </div>
+                    <div class="grid-item">
+                        <h4>💰 Phase 3（月 10-18）</h4>
+                        <ul>
+                            <li>人力：20-30 人</li>
+                            <li>資金：1000-1500 萬</li>
+                            <li>A 輪融資（目標 5000 萬）</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 第四章：痛點與阻礙分析 -->
+            <section id="pain-points">
+                <h2>⚠️ 第四章：痛點與阻礙分析</h2>
+
+                <h3>4.1 技術層面挑戰</h3>
+                <div class="card">
+                    <table>
+                        <tr>
+                            <th>痛點</th>
+                            <th>影響</th>
+                            <th>解決方案</th>
+                            <th>優先級</th>
+                        </tr>
+                        <tr>
+                            <td><strong>AI 模型準確度</strong></td>
+                            <td>配對錯誤 → 客戶不信任</td>
+                            <td>
+                                1. 持續訓練（每週迭代）<br>
+                                2. 人工回饋機制<br>
+                                3. A/B Testing
+                            </td>
+                            <td><span class="pill pill-danger">🔴 P0</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>數據品質問題</strong></td>
+                            <td>履歷池資料不完整/錯誤</td>
+                            <td>
+                                1. 自動資料清洗<br>
+                                2. 欄位驗證規則<br>
+                                3. 定期審計
+                            </td>
+                            <td><span class="pill pill-danger">🔴 P0</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>系統整合複雜</strong></td>
+                            <td>客戶現有 HRIS 難整合</td>
+                            <td>
+                                1. 開放 API<br>
+                                2. 預設整合 Top 10 HRIS<br>
+                                3. CSV 匯入/匯出
+                            </td>
+                            <td><span class="pill pill-warning">🟡 P1</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>效能與規模化</strong></td>
+                            <td>客戶增加 → 系統變慢</td>
+                            <td>
+                                1. 雲端架構（AWS/GCP）<br>
+                                2. 快取機制<br>
+                                3. 非同步處理
+                            </td>
+                            <td><span class="pill pill-warning">🟡 P1</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>反爬蟲機制</strong></td>
+                            <td>LinkedIn/104 封鎖 IP</td>
+                            <td>
+                                1. 付費 API（優先）<br>
+                                2. 代理池 + 延遲<br>
+                                3. 用戶授權 OAuth
+                            </td>
+                            <td><span class="pill pill-warning">🟡 P1</span></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <h3>4.2 商業模式挑戰</h3>
+                <div class="card">
+                    <table>
+                        <tr>
+                            <th>痛點</th>
+                            <th>影響</th>
+                            <th>解決方案</th>
+                            <th>優先級</th>
+                        </tr>
+                        <tr>
+                            <td><strong>客戶不信任 AI</strong></td>
+                            <td>傳統 HR 抗拒新工具</td>
+                            <td>
+                                1. ROI 案例研究<br>
+                                2. 免費試用 30 天<br>
+                                3. 人工+AI 混合模式
+                            </td>
+                            <td><span class="pill pill-danger">🔴 P0</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>定價策略</strong></td>
+                            <td>太貴 → 小企業買不起<br>太便宜 → 難獲利</td>
+                            <td>
+                                1. 分級定價（小/中/大）<br>
+                                2. 按人數收費<br>
+                                3. 功能模組化選購
+                            </td>
+                            <td><span class="pill pill-danger">🔴 P0</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>銷售週期長</strong></td>
+                            <td>B2B 決策慢（3-6個月）</td>
+                            <td>
+                                1. PLG（Product-Led Growth）<br>
+                                2. 免費工具引流<br>
+                                3. 快速 POC（2 週驗證）
+                            </td>
+                            <td><span class="pill pill-warning">🟡 P1</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>客戶成功成本高</strong></td>
+                            <td>每個客戶需要 onboarding</td>
+                            <td>
+                                1. 自助式 Onboarding<br>
+                                2. AI 客服機器人<br>
+                                3. 知識庫 + 影片教學
+                            </td>
+                            <td><span class="pill pill-warning">🟡 P1</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>競爭對手</strong></td>
+                            <td>國際大廠（Workday, SAP）</td>
+                            <td>
+                                1. 聚焦台灣中小企業<br>
+                                2. 在地化（語言+法規）<br>
+                                3. 價格優勢
+                            </td>
+                            <td><span class="pill pill-primary">🔵 P2</span></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <h3>4.3 法規與倫理挑戰</h3>
+                <div class="warning">
+                    <h4>⚖️ 必須注意的法律問題</h4>
+                    <ul>
+                        <li><strong>個資法</strong>：履歷資料收集、儲存、使用需合法授權</li>
+                        <li><strong>就業服務法</strong>：招募廣告不得歧視（性別/年齡/種族）</li>
+                        <li><strong>AI 偏見</strong>：演算法可能隱含歧視（需定期審計）</li>
+                        <li><strong>資料安全</strong>：員工薪資、績效屬敏感資料（需加密）</li>
+                        <li><strong>歐盟 GDPR</strong>：若拓展海外市場需符合</li>
+                    </ul>
+
+                    <h4>✅ 防範措施</h4>
+                    <ol>
+                        <li>聘請法律顧問審查所有流程</li>
+                        <li>AI 決策留審計軌跡（Explainable AI）</li>
+                        <li>定期偏見檢測（公平性測試）</li>
+                        <li>取得 ISO 27001 資安認證</li>
+                        <li>明確告知用戶「AI 輔助決策，最終由人決定」</li>
+                    </ol>
+                </div>
+
+                <h3>4.4 組織變革阻力</h3>
+                <div class="card">
+                    <h4>典型反對聲音 & 應對話術</h4>
+
+                    <table>
+                        <tr>
+                            <th>反對意見</th>
+                            <th>背後恐懼</th>
+                            <th>應對策略</th>
+                        </tr>
+                        <tr>
+                            <td>"AI 會取代我的工作"</td>
+                            <td>失業焦慮</td>
+                            <td>
+                                強調 AI 是助手，不是替代品<br>
+                                展示：HR 從行政變策略夥伴<br>
+                                提供轉型培訓
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>"AI 不懂人性"</td>
+                            <td>專業被貶低</td>
+                            <td>
+                                承認 AI 限制<br>
+                                強調「人機協作」模式<br>
+                                展示 AI 處理不了的場景
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>"我們一直這樣做，為何要改？"</td>
+                            <td>習慣 + 風險規避</td>
+                            <td>
+                                數據說話（ROI 案例）<br>
+                                小範圍試點（低風險）<br>
+                                漸進式改變，不一次到位
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>"系統太複雜，學不會"</td>
+                            <td>技術恐懼</td>
+                            <td>
+                                簡化 UI（像 iPhone 一樣簡單）<br>
+                                手把手教學<br>
+                                24/7 客服支援
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>"成本太高，划不來"</td>
+                            <td>短期思維</td>
+                            <td>
+                                展示 18 個月 ROI<br>
+                                提供分期付款<br>
+                                成功案例見證
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <h3>4.5 風險矩陣</h3>
+                <div class="mermaid">
+quadrantChart
+    title 風險影響 vs 發生機率
+    x-axis 低機率 --> 高機率
+    y-axis 低影響 --> 高影響
+    quadrant-1 立即處理
+    quadrant-2 密切關注
+    quadrant-3 保持警覺
+    quadrant-4 接受風險
+    AI模型準確度不足: [0.7, 0.9]
+    客戶不信任AI: [0.6, 0.8]
+    資料外洩: [0.3, 0.95]
+    法規變更: [0.4, 0.7]
+    競爭對手: [0.5, 0.6]
+    技術人才流失: [0.5, 0.7]
+    現金流斷裂: [0.3, 0.9]
+    系統當機: [0.4, 0.6]
+                </div>
+            </section>
+
+            <!-- 第五章：技術架構 -->
+            <section id="tech">
+                <h2>🏗️ 第五章：技術架構</h2>
+
+                <h3>5.1 整體架構圖</h3>
+                <div class="mermaid">
+graph TB
+    subgraph "用戶層"
+        A1[Web 應用]
+        A2[Mobile App]
+        A3[API 客戶端]
+    end
+    
+    subgraph "應用層"
+        B1[招募模組]
+        B2[培訓模組]
+        B3[績效模組]
+        B4[留才模組]
+        B5[薪酬模組]
+        B6[福利模組]
+    end
+    
+    subgraph "AI 引擎層"
+        C1[履歷解析引擎]
+        C2[配對評分引擎]
+        C3[離職預測引擎]
+        C4[薪資分析引擎]
+        C5[NLP 引擎]
+    end
+    
+    subgraph "數據層"
+        D1[(PostgreSQL)]
+        D2[(Redis Cache)]
+        D3[(Vector DB)]
+    end
+    
+    subgraph "整合層"
+        E1[LinkedIn API]
+        E2[104 API]
+        E3[GitHub API]
+        E4[Email API]
+        E5[Calendar API]
+    end
+    
+    A1 --> B1
+    A2 --> B1
+    A3 --> B1
+    B1 --> C1
+    B1 --> C2
+    B4 --> C3
+    B5 --> C4
+    C1 --> D1
+    C2 --> D3
+    C3 --> D1
+    B1 --> E1
+    B1 --> E2
+                </div>
+
+                <h3>5.2 技術棧選擇</h3>
+                <div class="grid">
+                    <div class="grid-item">
+                        <h4>前端</h4>
+                        <ul>
+                            <li><strong>Framework:</strong> Next.js 14 + React</li>
+                            <li><strong>UI:</strong> Tailwind CSS + shadcn/ui</li>
+                            <li><strong>State:</strong> Zustand / TanStack Query</li>
+                            <li><strong>Charts:</strong> Recharts / D3.js</li>
+                        </ul>
+                    </div>
+                    <div class="grid-item">
+                        <h4>後端</h4>
+                        <ul>
+                            <li><strong>API:</strong> FastAPI (Python)</li>
+                            <li><strong>Auth:</strong> Supabase Auth</li>
+                            <li><strong>Queue:</strong> Celery + Redis</li>
+                            <li><strong>Background:</strong> OpenClaw Agent</li>
+                        </ul>
+                    </div>
+                    <div class="grid-item">
+                        <h4>AI/ML</h4>
+                        <ul>
+                            <li><strong>LLM:</strong> Claude 4.5 / GPT-5</li>
+                            <li><strong>Embedding:</strong> OpenAI text-embedding-3</li>
+                            <li><strong>Vector DB:</strong> Pinecone / Weaviate</li>
+                            <li><strong>ML:</strong> scikit-learn / XGBoost</li>
+                        </ul>
+                    </div>
+                    <div class="grid-item">
+                        <h4>基礎設施</h4>
+                        <ul>
+                            <li><strong>Cloud:</strong> AWS / GCP</li>
+                            <li><strong>DB:</strong> PostgreSQL + pgvector</li>
+                            <li><strong>Cache:</strong> Redis</li>
+                            <li><strong>CDN:</strong> Cloudflare</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>5.3 AI 模型架構</h3>
+                <div class="card">
+                    <h4>核心 AI 引擎設計</h4>
+
+                    <pre>
+1. 履歷解析引擎
+   Input: PDF/DOCX 履歷
+   Process:
+     - OCR (Tesseract) → 提取文字
+     - NER (Named Entity Recognition) → 姓名/公司/技能/學歷
+     - LLM Structured Output → JSON 格式
+   Output: 結構化履歷資料
+
+2. 配對評分引擎
+   Input: 候選人 JSON + JD JSON
+   Process:
+     - Embedding 相似度 (30%)
+     - 技能匹配模糊比對 (40%)
+     - 經驗年資計算 (20%)
+     - 產業相關性 (10%)
+   Output: 0-100 分 + 信心等級 (P0/P1/P2/REJECT)
+
+3. 離職預測引擎
+   Input: 員工多維度數據（績效/打卡/溝通/外部信號）
+   Model: XGBoost Classifier
+   Features: 50+ 特徵工程
+   Output: 離職機率 0-100% + 風險因子排序
+
+4. 薪資分析引擎
+   Input: 職位/產業/地區/經驗
+   Process:
+     - 爬蟲市場數據（104/LinkedIn）
+     - 內部薪資資料庫
+     - 統計分析 (P25/P50/P75)
+   Output: 薪資建議範圍 + 市場競爭力分析
+                    </pre>
+                </div>
+
+                <h3>5.4 數據流與安全</h3>
+                <div class="warning">
+                    <h4>🔒 資安措施（必須）</h4>
+                    <ul>
+                        <li>✅ 所有傳輸 HTTPS（TLS 1.3）</li>
+                        <li>✅ 敏感資料加密儲存（AES-256）</li>
+                        <li>✅ 定期備份（每日自動）</li>
+                        <li>✅ 存取日誌（Audit Trail）</li>
+                        <li>✅ RBAC 權限控制（Role-Based Access Control）</li>
+                        <li>✅ 定期滲透測試（每季）</li>
+                        <li>✅ ISO 27001 認證（18 個月內取得）</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 第六章：商業模式 -->
+            <section id="business">
+                <h2>💼 第六章：商業模式</h2>
+
+                <h3>6.1 收入模式</h3>
+                <div class="grid">
+                    <div class="grid-item">
+                        <h4>💰 SaaS 訂閱</h4>
+                        <ul>
+                            <li><strong>小企業版：</strong>9,900/月（5-50人）</li>
+                            <li><strong>中企業版：</strong>29,900/月（51-200人）</li>
+                            <li><strong>大企業版：</strong>99,900/月（201+人）</li>
+                            <li><strong>年約優惠：</strong>10 個月價格</li>
+                        </ul>
+                    </div>
+                    <div class="grid-item">
+                        <h4>🎯 成功費（招募）</h4>
+                        <ul>
+                            <li><strong>標準職位：</strong>年薪 15%</li>
+                            <li><strong>高階主管：</strong>年薪 20-25%</li>
+                            <li><strong>保證期：</strong>90 天</li>
+                            <li><strong>退款機制：</strong>階梯式</li>
+                        </ul>
+                    </div>
+                    <div class="grid-item">
+                        <h4>🔧 客製化服務</h4>
+                        <ul>
+                            <li><strong>行業方案：</strong>50-200 萬/次</li>
+                            <li><strong>系統整合：</strong>30-100 萬/次</li>
+                            <li><strong>數據移轉：</strong>20-50 萬/次</li>
+                            <li><strong>顧問諮詢：</strong>8,000/小時</li>
+                        </ul>
+                    </div>
+                    <div class="grid-item">
+                        <h4>📚 培訓 & 認證</h4>
+                        <ul>
+                            <li><strong>HR AI 認證：</strong>29,900/人</li>
+                            <li><strong>企業內訓：</strong>80,000/天</li>
+                            <li><strong>線上課程：</strong>3,990/人</li>
+                            <li><strong>社群會員：</strong>999/月</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>6.2 定價策略（分級模組化）</h3>
+                <div class="card">
+                    <table>
+                        <tr>
+                            <th>功能模組</th>
+                            <th>Starter<br>9,900/月</th>
+                            <th>Professional<br>29,900/月</th>
+                            <th>Enterprise<br>99,900/月</th>
+                        </tr>
+                        <tr>
+                            <td><strong>招募（選）</strong></td>
+                            <td>✅ 基礎配對<br>✅ 5 個職缺/月</td>
+                            <td>✅ 進階配對<br>✅ 20 個職缺/月</td>
+                            <td>✅ AI 面試官<br>✅ 無限職缺</td>
+                        </tr>
+                        <tr>
+                            <td><strong>培訓（育）</strong></td>
+                            <td>❌</td>
+                            <td>✅ 學習路徑<br>✅ 50 人</td>
+                            <td>✅ AI 導師<br>✅ 無限</td>
+                        </tr>
+                        <tr>
+                            <td><strong>績效（用）</strong></td>
+                            <td>❌</td>
+                            <td>✅ 基礎追蹤</td>
+                            <td>✅ 360 回饋<br>✅ 預測分析</td>
+                        </tr>
+                        <tr>
+                            <td><strong>留才</strong></td>
+                            <td>❌</td>
+                            <td>✅ 離職預測</td>
+                            <td>✅ 主動留才<br>✅ 風險儀表板</td>
+                        </tr>
+                        <tr>
+                            <td><strong>薪酬</strong></td>
+                            <td>✅ 市場行情</td>
+                            <td>✅ 內部分析</td>
+                            <td>✅ AI 談判助手<br>✅ 成本預測</td>
+                        </tr>
+                        <tr>
+                            <td><strong>福利</strong></td>
+                            <td>❌</td>
+                            <td>✅ 福利管理</td>
+                            <td>✅ 個人化推薦<br>✅ 健康管理</td>
+                        </tr>
+                        <tr>
+                            <td><strong>支援</strong></td>
+                            <td>Email（48h）</td>
+                            <td>Chat（24h）</td>
+                            <td>專屬客戶成功經理</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <h3>6.3 GTM（Go-to-Market）策略</h3>
+                <div class="highlight">
+                    <h4>🚀 三階段市場進入策略</h4>
+
+                    <h4>Phase 1：種子客戶（月 1-3）</h4>
+                    <ul>
+                        <li><strong>目標：</strong>5 家測試客戶（免費/低價）</li>
+                        <li><strong>來源：</strong>現有獵頭客戶、人脈</li>
+                        <li><strong>重點：</strong>打磨產品 + 收集案例</li>
+                    </ul>
+
+                    <h4>Phase 2：早期採用者（月 4-9）</h4>
+                    <ul>
+                        <li><strong>目標：</strong>50 家付費客戶</li>
+                        <li><strong>策略：</strong>
+                            <ul>
+                                <li>內容行銷（SEO 部落格 + LinkedIn）</li>
+                                <li>免費工具引流（薪資查詢工具、履歷健檢）</li>
+                                <li>產業活動（HRIS 研討會、HR Tech Day）</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <h4>Phase 3：規模化（月 10-18）</h4>
+                    <ul>
+                        <li><strong>目標：</strong>200 家客戶</li>
+                        <li><strong>策略：</strong>
+                            <ul>
+                                <li>PLG（Product-Led Growth）- 自助註冊 + Free Trial</li>
+                                <li>合作夥伴（會計師事務所、顧問公司）</li>
+                                <li>數位廣告（Google Ads + Facebook 精準投放）</li>
+                                <li>成功案例白皮書 + PR 報導</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <h3>6.4 競爭優勢</h3>
+                <div class="card">
+                    <h4>vs 傳統獵頭公司</h4>
+                    <ul>
+                        <li>✅ 速度快 100 倍（1 天 vs 2 週）</li>
+                        <li>✅ 覆蓋率高 10 倍（搜尋所有平台）</li>
+                        <li>✅ 成本低 50%（AI 取代人力）</li>
+                        <li>✅ 數據透明（配對分數可解釋）</li>
+                    </ul>
+
+                    <h4>vs 國際 HR SaaS（Workday, SAP SuccessFactors）</h4>
+                    <ul>
+                        <li>✅ 價格親民（1/10 價格）</li>
+                        <li>✅ 在地化（繁體中文 + 台灣法規）</li>
+                        <li>✅ 易用性（無需 IT 支援）</li>
+                        <li>✅ 客製化（中小企業友善）</li>
+                    </ul>
+
+                    <h4>vs 其他台灣 HR Tech（518, 1111）</h4>
+                    <ul>
+                        <li>✅ AI-First（不是加個聊天機器人）</li>
+                        <li>✅ 完整 6 大模組（不只招募）</li>
+                        <li>✅ 預測能力（離職/績效預測）</li>
+                        <li>✅ 技術領先（OpenClaw Agent 架構）</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 第七章：投資回報分析 -->
+            <section id="roi">
+                <h2>📈 第七章：投資回報分析（ROI）</h2>
+
+                <h3>7.1 18 個月財務預測</h3>
+                <div class="card">
+                    <table>
+                        <tr>
+                            <th>月份</th>
+                            <th>客戶數</th>
+                            <th>MRR（月經常性收入）</th>
+                            <th>成功費收入</th>
+                            <th>總收入</th>
+                            <th>成本</th>
+                            <th>淨利</th>
+                        </tr>
+                        <tr>
+                            <td>月 3</td>
+                            <td>5</td>
+                            <td>5 萬</td>
+                            <td>30 萬</td>
+                            <td>35 萬</td>
+                            <td>40 萬</td>
+                            <td>-5 萬</td>
+                        </tr>
+                        <tr>
+                            <td>月 6</td>
+                            <td>20</td>
+                            <td>50 萬</td>
+                            <td>100 萬</td>
+                            <td>150 萬</td>
+                            <td>80 萬</td>
+                            <td>+70 萬</td>
+                        </tr>
+                        <tr>
+                            <td>月 9</td>
+                            <td>50</td>
+                            <td>150 萬</td>
+                            <td>200 萬</td>
+                            <td>350 萬</td>
+                            <td>150 萬</td>
+                            <td>+200 萬</td>
+                        </tr>
+                        <tr>
+                            <td>月 12</td>
+                            <td>100</td>
+                            <td>300 萬</td>
+                            <td>300 萬</td>
+                            <td>600 萬</td>
+                            <td>250 萬</td>
+                            <td>+350 萬</td>
+                        </tr>
+                        <tr>
+                            <td>月 18</td>
+                            <td>200</td>
+                            <td>800 萬</td>
+                            <td>500 萬</td>
+                            <td>1,300 萬</td>
+                            <td>500 萬</td>
+                            <td>+800 萬</td>
+                        </tr>
+                    </table>
+
+                    <div class="success">
+                        <h4>累計 18 個月：</h4>
+                        <ul>
+                            <li><strong>總收入：</strong>8,500 萬</li>
+                            <li><strong>總成本：</strong>3,000 萬</li>
+                            <li><strong>淨利：</strong>5,500 萬</li>
+                            <li><strong>ARR（年經常性收入）：</strong>9,600 萬</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>7.2 客戶 ROI（他們的投資回報）</h3>
+                <div class="highlight">
+                    <h4>案例：100 人科技公司</h4>
+                    
+                    <h4>投資成本：</h4>
+                    <ul>
+                        <li>SaaS 訂閱：29,900/月 × 12 = 35.88 萬/年</li>
+                        <li>導入成本：10 萬（一次性）</li>
+                        <li>培訓成本：5 萬</li>
+                        <li><strong>總計：50.88 萬/年</strong></li>
+                    </ul>
+
+                    <h4>節省成本：</h4>
+                    <table>
+                        <tr>
+                            <th>項目</th>
+                            <th>傳統做法</th>
+                            <th>AI 做法</th>
+                            <th>節省</th>
+                        </tr>
+                        <tr>
+                            <td>招募成本</td>
+                            <td>10 人離職 × 120 萬</td>
+                            <td>5 人離職 × 120 萬</td>
+                            <td>600 萬</td>
+                        </tr>
+                        <tr>
+                            <td>HR 人力成本</td>
+                            <td>3 人 × 60 萬</td>
+                            <td>2 人 × 60 萬</td>
+                            <td>60 萬</td>
+                        </tr>
+                        <tr>
+                            <td>培訓成本</td>
+                            <td>100 萬</td>
+                            <td>50 萬（效率提升）</td>
+                            <td>50 萬</td>
+                        </tr>
+                        <tr>
+                            <td>績效損失</td>
+                            <td>低績效員工未發現</td>
+                            <td>提前介入改善</td>
+                            <td>100 萬</td>
+                        </tr>
+                    </table>
+
+                    <h4>總節省：810 萬/年</h4>
+                    <h4>ROI：(810 - 50.88) / 50.88 = <span style="color: #28a745; font-size: 1.8em;">1493%</span></h4>
+                    <p>投入 1 元，回收 14.9 元！</p>
+                </div>
+
+                <h3>7.3 融資規劃</h3>
+                <div class="card">
+                    <h4>Pre-Seed Round（現在）</h4>
+                    <ul>
+                        <li><strong>目標金額：</strong>500 萬</li>
+                        <li><strong>用途：</strong>MVP 開發 + 前 5 個客戶</li>
+                        <li><strong>來源：</strong>天使投資人 / 自籌</li>
+                        <li><strong>估值：</strong>2,000 萬（pre-money）</li>
+                    </ul>
+
+                    <h4>Seed Round（月 9）</h4>
+                    <ul>
+                        <li><strong>目標金額：</strong>3,000 萬</li>
+                        <li><strong>用途：</strong>產品完整化 + 團隊擴編</li>
+                        <li><strong>來源：</strong>創投（AppWorks, CXI）</li>
+                        <li><strong>估值：</strong>1.2 億（pre-money）</li>
+                    </ul>
+
+                    <h4>Series A（月 18）</h4>
+                    <ul>
+                        <li><strong>目標金額：</strong>5,000 萬 - 1 億</li>
+                        <li><strong>用途：</strong>市場擴張 + 海外布局</li>
+                        <li><strong>來源：</strong>國際創投</li>
+                        <li><strong>估值：</strong>5-8 億（pre-money）</li>
+                    </ul>
+                </div>
+
+                <h3>7.4 關鍵指標（North Star Metrics）</h3>
+                <div class="grid">
+                    <div class="grid-item">
+                        <h4>📊 產品指標</h4>
+                        <ul>
+                            <li>AI 配對準確度 >70%</li>
+                            <li>離職預測準確度 >80%</li>
+                            <li>系統 Uptime >99.9%</li>
+                        </ul>
+                    </div>
+                    <div class="grid-item">
+                        <h4>💼 商業指標</h4>
+                        <ul>
+                            <li>MRR 成長率 >20%/月</li>
+                            <li>CAC < LTV × 3</li>
+                            <li>Churn Rate <5%/月</li>
+                        </ul>
+                    </div>
+                    <div class="grid-item">
+                        <h4>😊 客戶指標</h4>
+                        <ul>
+                            <li>NPS >50</li>
+                            <li>續約率 >85%</li>
+                            <li>客戶滿意度 >4.5/5</li>
+                        </ul>
+                    </div>
+                    <div class="grid-item">
+                        <h4>⚡ 效率指標</h4>
+                        <ul>
+                            <li>招募時間 ↓70%</li>
+                            <li>HR 工時節省 ↓60%</li>
+                            <li>離職率 ↓50%</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 行動呼籲 -->
+            <section>
+                <h2>🚀 下一步行動</h2>
+                
+                <div class="highlight">
+                    <h3>立刻開始的 3 件事：</h3>
+                    
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <h4>1️⃣ 本週（完善現有系統）</h4>
+                            <ul>
+                                <li>優化找人選系統（提高準確度到 70%）</li>
+                                <li>建立 PostgreSQL 資料庫架構</li>
+                                <li>撰寫商業計畫書（給投資人）</li>
+                            </ul>
+                        </div>
+
+                        <div class="timeline-item">
+                            <h4>2️⃣ 本月（MVP 開發）</h4>
+                            <ul>
+                                <li>開發招募模組 Web UI</li>
+                                <li>找 3 家測試客戶（現有獵頭客戶）</li>
+                                <li>建立品牌（公司名、Logo、網站）</li>
+                            </ul>
+                        </div>
+
+                        <div class="timeline-item">
+                            <h4>3️⃣ 第一季（驗證 PMF）</h4>
+                            <ul>
+                                <li>完成招募模組 Beta 版</li>
+                                <li>取得前 5 個付費客戶</li>
+                                <li>準備 Pre-Seed 融資提案</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="text-align: center; margin-top: 40px;">
+                    <h3>💡 記住 Jensen Huang 的話</h3>
+                    <div class="quote" style="font-size: 1.2em; margin: 30px 0;">
+                        "Don't be the first company to take advantage of AI,<br>
+                        but <strong>don't be the last</strong>."
+                    </div>
+                    <p style="margin-top: 30px; font-size: 1.1em;">
+                        現在開始，用 <strong>Abundance Mindset</strong> 重新想像人資產業。<br>
+                        我們不是在改良舊系統，而是在<strong>重新發明整個產業</strong>。
+                    </p>
+
+                    <div style="margin-top: 40px;">
+                        <a href="#vision" class="btn">📖 重新閱讀願景</a>
+                        <a href="#roadmap" class="btn">🗺️ 查看路線圖</a>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>© 2026 Step1ne AI HR Transformation Blueprint</p>
+            <p>Created by Jacky Chen × YuQi AI | Inspired by Jensen Huang</p>
+            <p style="margin-top: 20px; opacity: 0.8;">
+                "創新不總是在掌控中，但這正是它的美妙之處。"
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'neutral'
+        });
+    </script>
+</body>
+</html>
