@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10分鐘完整腳本 | 月賺 $50K 的 AI 招聘系統</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #1a1a1a;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .meta {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            font-size: 0.9em;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        main {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .timecode {
+            font-weight: bold;
+            color: #667eea;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .duration {
+            background: #667eea;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            font-weight: bold;
+        }
+
+        .script {
+            background: #252525;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-size: 0.95em;
+            line-height: 1.8;
+        }
+
+        .directions {
+            background: #1a3a3a;
+            border-left: 4px solid #17a2b8;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            font-size: 0.9em;
+            color: #a8d8de;
+        }
+
+        .directions-title {
+            font-weight: bold;
+            color: #17a2b8;
+            margin-bottom: 8px;
+        }
+
+        .hook {
+            background: linear-gradient(135deg, #ffc107 0%, #ff9800 100%);
+            color: #000;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            font-weight: bold;
+            font-size: 0.95em;
+        }
+
+        .beat {
+            background: #2d3142;
+            border-left: 4px solid #28a745;
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            font-size: 0.9em;
+            color: #a8d8e0;
+        }
+
+        .beat-title {
+            font-weight: bold;
+            color: #28a745;
+        }
+
+        .transition {
+            text-align: center;
+            margin: 20px 0;
+            padding: 20px;
+            background: #252525;
+            border-radius: 4px;
+            font-style: italic;
+            color: #667eea;
+        }
+
+        .thumbnails {
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 2px solid #667eea;
+        }
+
+        .thumbnail-item {
+            background: #252525;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .thumbnail-title {
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .thumbnail-detail {
+            font-size: 0.9em;
+            line-height: 1.8;
+        }
+
+        .seo-section {
+            background: #1a3a1a;
+            padding: 25px;
+            border-radius: 8px;
+            margin-top: 30px;
+            border-left: 4px solid #28a745;
+        }
+
+        .seo-title {
+            color: #28a745;
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .copy-box {
+            background: #0a0a0a;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            word-wrap: break-word;
+            font-size: 0.9em;
+        }
+
+        .copy-label {
+            color: #28a745;
+            font-weight: bold;
+            font-size: 0.9em;
+            margin-bottom: 8px;
+        }
+
+        .footer {
+            background: #252525;
+            padding: 25px;
+            text-align: center;
+            color: #999;
+            margin-top: 40px;
+            border-radius: 8px;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.5em;
+            }
+
+            main {
+                padding: 20px;
+            }
+
+            .meta {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎬 10 分鐘完整腳本</h1>
+            <p>我的 AI 招聘系統月賺 $50K | MrBeast 風格</p>
+            <div class="meta">
+                <div class="meta-item">⏱️ <strong>10:00</strong></div>
+                <div class="meta-item">🎯 <strong>DAY-IN-THE-LIFE</strong></div>
+                <div class="meta-item">📊 <strong>高能量 + 教育</strong></div>
+            </div>
+        </header>
+
+        <main>
+            <!-- 0:00-0:30 開場 -->
+            <div class="section">
+                <div class="timecode">
+                    <span>⏰ 0:00</span>
+                    <span class="duration">30 秒</span>
+                </div>
+
+                <div class="hook">
+                    🎣 HOOK（開場 30 秒 - 必須停住觀眾）
+                </div>
+
+                <div class="script">過去 3 個月，我的 AI 招聘系統幫 20 個企業節省了 $1 百萬。
+
+我從中賺了多少？$50,000。
+
+而且，這個系統完全自動化，我每週只花 5 小時維護。
+
+今天，我要拆解這個商業模式，告訴你：
+怎樣建立一個，能自動幫企業省錢的系統？</span>
+
+                <div class="directions">
+                    <div class="directions-title">🎥 分鏡指示</div>
+                    • 超近特寫：你看相機，眼神銳利（0:00-0:03）
+                    • 文字卡：「$1,000,000 已節省」（紅色大字）
+                    • 快速切換：銀行截圖 + 數據圖表閃過（0:05-0:10）
+                    • 你指向相機：「告訴你秘密」（0:10-0:15）
+                    • 背景模糊淡出，進入主題（0:25-0:30）
+                </div>
+
+                <div class="beat">
+                    <div class="beat-title">情感節奏：</div>
+                    驚訝 + 期待 → 吸引點擊（好奇心滿足承諾）
+                </div>
+            </div>
+
+            <!-- 0:30-1:00 背景故事 -->
+            <div class="section">
+                <div class="timecode">
+                    <span>⏰ 0:30</span>
+                    <span class="duration">30 秒</span>
+                </div>
+
+                <div class="script">故事要回到 3 個月前。
+
+我在做招聘顧問的工作，幫企業找 AI 工程師。
+
+每一次，我都看到同樣的問題：
+企業花 50 萬台幣請獵頭，但找不到人。
+
+有時候，甚至找到的人根本不適合。
+
+我就想：為什麼不能用 AI 自動化這個過程？
+
+所以，我開始寫代碼。</div>
+
+                <div class="directions">
+                    <div class="directions-title">🎥 分鏡指示</div>
+                    • B-roll：你在辦公室工作（0:30-0:35）
+                    • 蒙太奇：企業 HR 困擾的表情（0:35-0:40）
+                    • 文字卡：「企業平均花 $50K 找人」
+                    • 你坐在電腦前，開始打字（0:45-0:50）
+                    • 鏡頭拉遠：代碼在螢幕上飛快閃過（0:50-1:00）
+                </div>
+
+                <div class="beat">
+                    <div class="beat-title">情感節奏：</div>
+                    同情共鳴 → 問題建立 → 承諾解決
+                </div>
+            </div>
+
+            <!-- 1:00-1:30 系統介紹 -->
+            <div class="section">
+                <div class="timecode">
+                    <span>⏰ 1:00</span>
+                    <span class="duration">30 秒</span>
+                </div>
+
+                <div class="script">第一個版本很爛，根本不行。
+
+但我不斷改進。
+
+現在，系統做這些事：
+
+第一步：自動在 GitHub、LinkedIn 上搜索符合要求的人才。
+第二步：用 AI 評估他們的技能和契合度。
+第三步：自動發送邀請信。
+第四步：跟蹤誰有興趣，誰沒興趣。
+
+整個流程，完全自動。
+
+客戶只需要輸入職位要求，系統就開始跑。</div>
+
+                <div class="directions">
+                    <div class="directions-title">🎥 分鏡指示</div>
+                    • 動畫圖表：4 個步驟逐一出現（1:00-1:15）
+                    • 每個步驟配合你的手勢解釋（1:15-1:25）
+                    • 系統運作的螢幕錄影（1:25-1:30）
+                </div>
+
+                <div class="beat">
+                    <div class="beat-title">情感節奏：</div>
+                    驚訝（系統複雜性）→ 理解（步驟簡單）
+                </div>
+            </div>
+
+            <!-- 1:30-2:00 成果展示 -->
+            <div class="section">
+                <div class="timecode">
+                    <span>⏰ 1:30</span>
+                    <span class="duration">30 秒</span>
+                </div>
+
+                <div class="hook">
+                    ✨ 保留鉤子（2 分鐘時揭露數據）
+                </div>
+
+                <div class="script">到底有多有效？
+
+我的第一個客戶，是一家科技公司。
+
+他們之前用獵頭，3 個月花了 $80,000，才找到 3 個人。
+
+用我的系統？15 天，0 成本，找到 12 個合適的候選人。
+
+他們馬上買單。
+
+我開始收 $3,000 一個月的訂閱費。
+
+1 個客戶就有 $3,000。
+
+2 個月內，我有了 20 個客戶。
+
+月收入：$60,000。
+
+扣掉成本，淨利潤：$50,000。</div>
+
+                <div class="directions">
+                    <div class="directions-title">🎥 分鏡指示</div>
+                    • 客戶截圖和推薦信（1:30-1:40）
+                    • 對比圖表：獵頭 vs 系統（1:40-1:50）
+                    • 數據動畫：$60,000 → $50,000（1:50-2:00）
+                    • 你看相機，笑著點頭（2:00）
+                </div>
+
+                <div class="beat">
+                    <div class="beat-title">情感節奏：</div>
+                    驚訝（成果快速）→ 興奮（賺錢快速）→ 嫉妒（觀眾想也做）
+                </div>
+            </div>
+
+            <!-- 2:00-2:45 系統如何運作（詳細版） -->
+            <div class="section">
+                <div class="timecode">
+                    <span>⏰ 2:00</span>
+                    <span class="duration">45 秒</span>
+                </div>
+
+                <div class="script">但這裡是關鍵：為什麼有效？
+
+傳統招聘流程：
+企業 → 獵頭 → 搜尋 → 篩選 → 聯繫 → 協商 → 成交
+耗時：3-6 個月
+成本：$50-100K
+成功率：30-40%
+
+我的系統：
+企業 → AI 自動搜尋 → AI 篩選 → AI 聯繫 → 人工跟進 → 成交
+耗時：2-4 週
+成本：$0-3K
+成功率：60-70%
+
+怎樣做到？
+
+用 GitHub API 和 LinkedIn 數據，我建立了一個技能資料庫。
+當企業輸入職位要求時，系統自動比對最合適的人。
+
+例如：企業要找「LLM 工程師」
+系統就找：
+- GitHub 上有 LLM 相關 repo 的人
+- 技能匹配度最高的
+- 最可能有興趣的人
+
+然後自動發邀請。
+
+不是垃圾郵件，而是高度個性化的邀請。</div>
+
+                <div class="directions">
+                    <div class="directions-title">🎥 分鏡指示</div>
+                    • 流程對比圖：上下兩排（2:00-2:15）
+                    • 左邊（傳統）逐漸變紅、變慢（2:15-2:25）
+                    • 右邊（AI）逐漸變綠、變快（2:25-2:35）
+                    • 系統實際運作的螢幕記錄（2:35-2:45）
+                    • 郵件例子在螢幕上顯示（個性化內容）
+                </div>
+
+                <div class="beat">
+                    <div class="beat-title">情感節奏：</div>
+                    理解（清楚的對比）→ 敬佩（技術優越性）→ 啟發（「我也能做」）
+                </div>
+            </div>
+
+            <!-- 2:45-4:00 商業模式拆解 -->
+            <div class="section">
+                <div class="timecode">
+                    <span>⏰ 2:45</span>
+                    <span class="duration">75 秒</span>
+                </div>
+
+                <div class="script">所以，商業模式是什麼？
+
+很簡單：
+企業的痛點 = 招人貴、慢、成功率低
+我的解決方案 = 便宜、快、高成功率
+我的收入 = 訂閱費（月費）
+
+但這不是全部。
+
+我還做了一件事：建立社群。
+
+我有 1,200 個 HR 和創業者在我的 Discord，
+每天都在討論招聘、AI、職業發展。
+
+這個社群，本身就變成了一個商品。
+
+我用它來：
+1. 獲得用戶反饋（改進系統）
+2. 建立信任（客戶更願意付錢）
+3. 賣進階產品（$9,999 的企業方案）
+
+所以，我的收入流是：
+- 基礎訂閱：$3,000/月 × 20 客戶 = $60,000
+- 企業方案：$10,000/月 × 2 客戶 = $20,000
+- 諮詢服務：臨時案件 = $5,000/月
+總計：$85,000/月
+
+扣掉伺服器成本、人力，我的淨利潤是 $50-60,000/月。</div>
+
+                <div class="directions">
+                    <div class="directions-title">🎥 分鏡指示</div>
+                    • 白板圖：痛點 → 解決方案 → 收入（2:45-3:00）
+                    • Discord 截圖和成員互動（3:00-3:15）
+                    • 你拿著筆，邊畫邊解釋商業模式（3:15-3:30）
+                    • 收入流的動畫分解圖（3:30-3:50）
+                    • 最終數字大螢幕顯示：$50-60K/月（3:50-4:00）
+                </div>
+
+                <div class="beat">
+                    <div class="beat-title">情感節奏：</div>
+                    驚訝（收入來源這麼多）→ 佩服（系統化思維）→ 渴望（「我想學」）
+                </div>
+            </div>
+
+            <!-- 4:00-6:00 步驟分解（可複製） -->
+            <div class="section">
+                <div class="timecode">
+                    <span>⏰ 4:00</span>
+                    <span class="duration">120 秒</span>
+                </div>
+
+                <div class="hook">
+                    🔓 「可複製步驟」（會讓觀眾想自己做）
+                </div>
+
+                <div class="script">現在，你可能想：「我能做嗎？」
+
+答案是：可以。但需要 3 個東西。
+
+第一：技術基礎
+你需要會一點代碼。Python 足夠。
+或者，你可以用 No-Code 工具（Zapier、Make）來自動化。
+我用 Python，但我不是說你一定要。
+
+第二：數據來源
+GitHub API、LinkedIn API、公開職位資料庫。
+這些都是免費的。
+
+第三：AI 模型
+我用 Claude 和 ChatGPT API 來做篩選和邀請生成。
+成本：一個月 $100-200。
+
+所以，技術成本其實很低。
+
+困難的部分不是技術，是找到初期客戶。
+
+我怎樣做的？
+
+第一個月，我免費提供系統給 3 個朋友的公司。
+他們看到效果，開始幫我推薦。
+
+第二個月，我主動聯繫了 50 個 HR 決策者。
+用我自己的系統生成的邀請信（有點諷刺，對吧？）
+
+回覆率：32%
+簽約率：15%
+
+這樣，我拿到了 6 個客戶。
+
+加上朋友介紹，我很快達到 20 個。
+
+關鍵是：一開始不要貪，先證明有效。</div>
+
+                <div class="directions">
+                    <div class="directions-title">🎥 分鏡指示</div>
+                    • 三個步驟卡片逐一出現（4:00-4:20）
+                    • 代碼和 API 文件的螢幕截圖（4:20-4:40）
+                    • 你的笑容和手勢（「不難」）（4:40-4:50）
+                    • 銷售流程的動畫（4:50-5:30）
+                    • 郵件截圖和回覆統計（5:30-5:50）
+                    • 你看相機，認真說話：「先證明效果」（5:50-6:00）
+                </div>
+
+                <div class="beat">
+                    <div class="beat-title">情感節奏：</div>
+                    困惑（這很難嗎？）→ 希望（其實可以做）→ 行動慾望（「開始吧」）
+                </div>
+            </div>
+
+            <!-- 6:00-8:00 挑戰與反思 -->
+            <div class="section">
+                <div class="timecode">
+                    <span>⏰ 6:00</span>
+                    <span class="duration">120 秒</span>
+                </div>
+
+                <div class="script">但，我要說實話。
+
+這不是一帆風順。
+
+第一個大問題：客戶期望管理。
+有些企業期望系統能找到「完美候選人」。
+但沒有完美，只有「夠好」。
+我花了 2 個月，才教會客戶什麼叫「及格」。
+
+第二個問題：數據品質。
+GitHub 上的數據不完整。
+有人已經換工作，但 GitHub 沒更新。
+有人根本不看邀請信。
+
+我的解決方案：加入「人工跟進」步驟。
+專業人員親自跟進前 30% 的候選人。
+這增加了成本，但也提高了成功率。
+
+第三個問題：競爭。
+現在有很多 SaaS 招聘工具。
+但我的優勢是：我懂 HR，我懂 AI，我懂企業痛點。
+大多數競爭者，只懂技術。
+
+所以，我還在堅持。
+
+現在，我的目標是擴張。
+計畫在 6 個月內，達到 50 個客戶。
+年收入：$1.2 百萬。
+
+但關鍵不是數字，是影響力。
+
+我想改變招聘的未來。
+讓 AI 和人類一起工作，而不是互相競爭。
+
+這是我 2026 年的願景。</div>
+
+                <div class="directions">
+                    <div class="directions-title">🎥 分鏡指示</div>
+                    • 你認真的表情（6:00-6:05）
+                    • 文字卡：「問題 1：期望管理」（紅色警告）
+                    • B-roll：困惑的 HR 看著電腦（6:05-6:20）
+                    • 你坐著，邊想邊說（認真狀態）（6:20-6:40）
+                    • 「人工跟進」流程圖（6:40-7:00）
+                    • 競爭者列表閃過（7:00-7:10）
+                    • 你自信地看相機（7:10-7:20）
+                    • 成長圖表動畫：客戶數上升（7:20-7:40）
+                    • 最後，你看遠方，鏡頭拉遠（7:40-8:00）夢想感十足
+                </div>
+
+                <div class="beat">
+                    <div class="beat-title">情感節奏：</div>
+                    謙虛（承認問題）→ 堅毅（解決問題）→ 夢想（更大的願景）
+                </div>
+            </div>
+
+            <!-- 8:00-9:30 教學 & 資源 -->
+            <div class="section">
+                <div class="timecode">
+                    <span>⏰ 8:00</span>
+                    <span class="duration">90 秒</span>
+                </div>
+
+                <div class="script">如果你想自己試試，我在下面留了資源。
+
+第一：GitHub 上，我公開了系統的基礎代碼。
+不是完整版本，但足夠你開始。
+Link 在下面。
+
+第二：我開了一個免費課程。
+3 堂課，教你怎樣用 AI 和自動化來做招聘。
+課程完全免費，只需要註冊。
+Link 也在下面。
+
+第三：加入我的 Discord 社群。
+1,200 個 HR 和創業者，每天討論這些東西。
+你能問問題，能學習，能找到合夥人。
+
+第四：如果你想直接學習我的完整系統，
+我有一個付費課程：$297，涵蓋所有細節。
+這是我的主要收入來源之一（除了 SaaS 訂閱外）。
+
+現在，我有一個提議給你。
+
+前 100 個人，如果你買付費課程，我會給你 50% 折扣。
+再加上，我會親自在 Discord 裡和你一對一聊天，幫你構建系統。
+
+這個提議只有 48 小時有效。
+
+所以，如果你有興趣，現在就行動。</div>
+
+                <div class="directions">
+                    <div class="directions-title">🎥 分鏡指示</div>
+                    • 白色背景上，資源逐一出現（8:00-8:20）
+                    • GitHub 截圖（代碼）（8:20-8:30）
+                    • 課程頁面截圖（8:30-8:40）
+                    • Discord 社群截圖（活躍討論）（8:40-8:50）
+                    • 付費課程銷售頁面大螢幕顯示（8:50-9:00）
+                    • 你坐著，認真但友善地說話（9:00-9:15）
+                    • 倒計時動畫：「48 小時」（紅色閃爍）（9:15-9:25）
+                    • 特寫：你指向相機「現在就行動」（9:25-9:30）
+                </div>
+
+                <div class="beat">
+                    <div class="beat-title">情感節奏：</div>
+                    幫助（提供資源）→ 期待（限時優惠）→ 緊迫感（行動現在）
+                </div>
+            </div>
+
+            <!-- 9:30-10:00 結尾 & CTA -->
+            <div class="section">
+                <div class="timecode">
+                    <span>⏰ 9:30</span>
+                    <span class="duration">30 秒</span>
+                </div>
+
+                <div class="hook">
+                    🎯 強力 CTA（必須有情感 & 行動指令）
+                </div>
+
+                <div class="script">最後，我想說一句話。
+
+2026 年，AI 不是未來，是現在。
+
+人們害怕 AI 會搶走工作。
+但如果你學會用 AI 來做生意，你就贏了。
+
+我用 AI 月賺 $50K，不是因為我聰明。
+我只是先開始了。
+
+你現在也可以。
+
+所以：
+一、點讚。幫我推薦這支影片。
+二、留言告訴我：你會用 AI 做什麼生意？
+三、訂閱。我下週會放新影片：怎樣用 AI 自動化任何生意。
+四、點下面的連結。不管是課程、社群還是代碼，先去看看。
+
+感謝你看到這裡。
+
+我們下支影片再見。</div>
+
+                <div class="directions">
+                    <div class="directions-title">🎥 分鏡指示</div>
+                    • 你靠近相機，眼神銳利（9:30-9:35）
+                    • 背景音樂漸強（動力感）
+                    • 你邊說邊用手指點數（4 個動作）（9:35-9:50）
+                    • 「點讚」→ 手指點讚（9:35）
+                    • 「留言」→ 心形浮起（9:40）
+                    • 「訂閱」→ 鈴鐺搖晃（9:45）
+                    • 「連結」→ 點擊光效（9:50）
+                    • 你笑著揮手再見（9:55-10:00）
+                    • 黑屏 + 末屏卡片（下支影片預告）
+                </div>
+
+                <div class="beat">
+                    <div class="beat-title">情感節奏：</div>
+                    啟發（AI 機會）→ 授權（你也能做）→ 友善（再見）
+                </div>
+            </div>
+
+            <div class="transition">
+                ═══════════════════════════════════════
+                影片結束 | 末屏卡片 (10:00-10:05)
+                ═══════════════════════════════════════
+            </div>
+
+            <!-- 縮圖設計 -->
+            <div class="thumbnails">
+                <h2 style="color: #667eea; margin-bottom: 25px;">🎨 3 個縮圖變化</h2>
+
+                <div class="thumbnail-item">
+                    <div class="thumbnail-title">縮圖 1：驚訝感（最高點擊率）</div>
+                    <div class="thumbnail-detail">
+                        <strong>主視覺：</strong> 你張大嘴巴，指著 $50K（手勢向外）<br>
+                        <strong>表情：</strong> 眉毛上揚，眼睛瞪大（WOW 表情）<br>
+                        <strong>背景：</strong> 模糊的銀行轉帳截圖<br>
+                        <strong>文字：</strong> 
+                        - 大字「$50K/月」（黃色或紅色）
+                        - 小字「AI 招聘系統」（白色）
+                        <strong>顏色：</strong> 黃色背景 + 紅色文字（對比高）
+                    </div>
+                </div>
+
+                <div class="thumbnail-item">
+                    <div class="thumbnail-title">縮圖 2：教育感（專業風格）</div>
+                    <div class="thumbnail-detail">
+                        <strong>主視覺：</strong> 你穿正式一點，指著電腦螢幕上的圖表<br>
+                        <strong>表情：</strong> 認真但自信的微笑<br>
+                        <strong>分屏：</strong> 左邊「傳統獵頭」（紅 X），右邊「AI 系統」（綠勾）<br>
+                        <strong>文字：</strong> 
+                        - 「AI 招聘終極指南」
+                        - 「如何月賺 $50K」
+                        <strong>顏色：</strong> 藍色 + 綠色（專業感）
+                    </div>
+                </div>
+
+                <div class="thumbnail-item">
+                    <div class="thumbnail-title">縮圖 3：故事感（數據對比）</div>
+                    <div class="thumbnail-detail">
+                        <strong>主視覺：</strong> 你拿著手機或截圖，開心笑容<br>
+                        <strong>表情：</strong> 燦爛笑容，像在看好消息<br>
+                        <strong>背景：</strong> 左邊「獵頭：3 個月 $80K」，右邊「AI：15 天 0 成本」<br>
+                        <strong>文字：</strong>
+                        - 「我放棄獵頭的理由」
+                        - 或 「15 天 vs 3 個月」
+                        <strong>顏色：</strong> 綠色 vs 紅色對比
+                    </div>
+                </div>
+            </div>
+
+            <!-- 末屏卡片 -->
+            <div class="section" style="margin-top: 40px;">
+                <h2 style="color: #667eea; margin-bottom: 20px;">📺 末屏卡片設置</h2>
+                <div class="seo-section">
+                    <div class="seo-title">End Screen（10:00-10:05）</div>
+                    <div class="thumbnail-detail">
+                        <strong>左上：</strong> 訂閱按鈕<br>
+                        <strong>右上：</strong> 觀看下支影片（縮圖 + 標題）<br>
+                        <strong>下方：</strong> 播放清單或推薦影片
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEO & 發佈資訊 -->
+            <div class="seo-section">
+                <div class="seo-title">📝 標題 + 描述 + 標籤</div>
+
+                <div style="margin-bottom: 20px;">
+                    <div class="copy-label">✅ YouTube 標題（建議版）</div>
+                    <div class="copy-box">
+我的 AI 招聘系統月賺 $50K | 拆解商業模式 + 手把手教學
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <div class="copy-label">✅ YouTube 描述（前 150 字，最關鍵）</div>
+                    <div class="copy-box">
+過去 3 個月，我用 AI 系統幫 20 個企業節省了 $1 百萬。我從中賺了 $50K。
+
+今天，我完全拆解這個商業模式：
+✓ 怎樣建立系統
+✓ 怎樣找初期客戶
+✓ 怎樣月賺 $50K
+✓ 完整代碼和課程資源
+
+如果你想開始，下面有免費資源和限時課程折扣（前 100 人 50% off）。
+
+⏰ 限時優惠：48 小時有效
+💻 免費代碼：GitHub 連結
+📚 免費課程：3 堂課，完全免費
+🤝 Discord 社群：加入 1,200+ HR 和創業者
+
+📌 資源連結（全在下面）
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <div class="copy-label">✅ 完整描述（放在 YouTube 描述欄）</div>
+                    <div class="copy-box">
+【完整內容】
+
+0:00 - 開場鉤子（$50K 月收入揭露）
+0:30 - 背景故事（為什麼創建系統）
+1:00 - 系統介紹（4 個自動化步驟）
+1:30 - 成果展示（實際數據和客戶成績）
+2:00 - 系統深入（為什麼有效）
+2:45 - 商業模式（收入來源拆解）
+4:00 - 可複製步驟（你能做到的方法）
+6:00 - 挑戰與反思（真實困難和解決方案）
+8:00 - 資源和優惠（課程、代碼、社群）
+9:30 - 結尾 CTA（訂閱、點讚、留言）
+
+【相關資源】
+
+📌 GitHub 免費代碼：
+https://github.com/[your-username]/ai-recruitment-system
+
+📌 免費課程（3 堂）：
+https://[your-site]/free-course
+
+📌 加入 Discord 社群：
+https://discord.gg/[your-server]
+
+📌 付費完整課程（限時 50% 折扣）：
+https://[your-site]/course
+Code: FIRST100（前 100 人有效）
+
+💬 時間戳：
+0:00 Hook
+0:30 背景
+1:00 系統介紹
+1:30 成果
+2:00 深入
+2:45 商業模式
+4:00 步驟
+6:00 反思
+8:00 資源
+9:30 結尾
+
+#AI工程師 #招聘 #SaaS創業 #自動化 #被動收入 #AI人才 #創業 #月賺50k #招聘系統 #AI應用
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <div class="copy-label">✅ YouTube 標籤（Tags）</div>
+                    <div class="copy-box">
+AI招聘, AI系統, SaaS創業, 被動收入, 自動化, AI工程師, 招聘技巧, 創業, 商業模式, 月賺50k, AI應用, 企業自動化, 招聘成本, AI人才, 技術創業, 副業, 線上賺錢, AI課程, 招聘系統, 創業故事
+                    </div>
+                </div>
+
+                <div>
+                    <div class="copy-label">✅ 建議發佈時間</div>
+                    <div class="copy-box">
+星期四或星期五早上 9:00-11:00
+（工作日，HR 和創業者都在上班，更容易點擊）
+
+首 48 小時很關鍵：
+- 發佈後 1 小時內回覆所有留言（演算法加分）
+- 邀請 Discord 社群成員首先觀看和分享
+- 考慮付費推廣（YouTube Ads）前 $500 預算
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>✅ 完整 10 分鐘腳本已完成</p>
+                <p>下一步：</p>
+                <p>1. 記下關鍵時間戳和視覺指示</p>
+                <p>2. 準備 B-roll 素材（屏幕錄製、人物鏡頭、數據圖表）</p>
+                <p>3. 使用 Kling 3.0 或 Adobe 剪輯製作</p>
+                <p>4. 按時間戳同步音頻和視頻</p>
+                <p>5. 導出 1080p 解析度，發佈到 YouTube</p>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

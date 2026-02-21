@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HR 招聘系統問卷調查</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft JhengHei", sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 14px;
+            opacity: 0.95;
+            line-height: 1.6;
+        }
+
+        .form-section {
+            padding: 30px;
+        }
+
+        .question-block {
+            margin-bottom: 35px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .question-block:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .question-number {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 28px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .question-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+            color: #222;
+        }
+
+        .question-hint {
+            font-size: 12px;
+            color: #999;
+            margin-top: 5px;
+            font-weight: normal;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-left: 38px;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .option:hover {
+            background: #f5f5f5;
+        }
+
+        .option input[type="radio"],
+        .option input[type="checkbox"] {
+            margin-right: 12px;
+            cursor: pointer;
+            width: 18px;
+            height: 18px;
+        }
+
+        .option label {
+            cursor: pointer;
+            flex: 1;
+            font-size: 14px;
+            margin: 0;
+        }
+
+        .text-input {
+            margin-left: 38px;
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d0d0d0;
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: inherit;
+            resize: vertical;
+            min-height: 40px;
+        }
+
+        .text-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        textarea.text-input {
+            min-height: 100px;
+        }
+
+        .form-actions {
+            padding: 30px;
+            background: #f9f9f9;
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            flex: 1;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-submit:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-reset {
+            background: #e0e0e0;
+            color: #333;
+        }
+
+        .btn-reset:hover {
+            background: #d0d0d0;
+        }
+
+        .success-message {
+            display: none;
+            background: #d4edda;
+            color: #155724;
+            padding: 20px;
+            border-radius: 6px;
+            margin: 20px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .required {
+            color: #e74c3c;
+        }
+
+        .footer {
+            padding: 20px 30px;
+            background: #fafafa;
+            text-align: center;
+            font-size: 12px;
+            color: #999;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        @media (max-width: 600px) {
+            .header {
+                padding: 30px 20px;
+            }
+
+            .header h1 {
+                font-size: 22px;
+            }
+
+            .form-section {
+                padding: 20px;
+            }
+
+            .form-actions {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .question-block {
+                margin-bottom: 25px;
+                padding-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 HR 招聘系統問卷調查</h1>
+            <p>親愛的 HR 朋友，感謝你花 5 分鐘填寫這份問卷。你的真實反饋對我們理解招聘痛點非常寶貴。</p>
+            <p style="margin-top: 10px; font-size: 12px;">💡 你可以選擇匿名填寫</p>
+        </div>
+
+        <form id="surveyForm" class="form-section">
+            <!-- Q1 -->
+            <div class="question-block">
+                <div class="question-title">
+                    <span class="question-number">1</span>
+                    <div>
+                        你的企業有多少員工？
+                        <div class="question-hint">必填</div>
+                    </div>
+                </div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q1" value="10-50 人" required> <span>10-50 人</span></label>
+                    <label class="option"><input type="radio" name="q1" value="50-100 人"> <span>50-100 人</span></label>
+                    <label class="option"><input type="radio" name="q1" value="100-300 人"> <span>100-300 人</span></label>
+                    <label class="option"><input type="radio" name="q1" value="300-500 人"> <span>300-500 人</span></label>
+                    <label class="option"><input type="radio" name="q1" value="500-1000 人"> <span>500-1000 人</span></label>
+                    <label class="option"><input type="radio" name="q1" value="1000+ 人"> <span>1000+ 人</span></label>
+                </div>
+            </div>
+
+            <!-- Q2 -->
+            <div class="question-block">
+                <div class="question-title">
+                    <span class="question-number">2</span>
+                    <div>
+                        你在 HR 的職位是？
+                        <div class="question-hint">必填</div>
+                    </div>
+                </div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q2" value="HR 專員" required> <span>HR 專員</span></label>
+                    <label class="option"><input type="radio" name="q2" value="HR 經理"> <span>HR 經理</span></label>
+                    <label class="option"><input type="radio" name="q2" value="HR 主管/總監"> <span>HR 主管/總監</span></label>
+                    <label class="option"><input type="radio" name="q2" value="Recruiter（招聘專員）"> <span>Recruiter（招聘專員）</span></label>
+                    <label class="option"><input type="radio" name="q2" value="HR Director / VP"> <span>HR Director / VP</span></label>
+                </div>
+            </div>
+
+            <!-- Q3 -->
+            <div class="question-block">
+                <div class="question-title">
+                    <span class="question-number">3</span>
+                    <div>
+                        你們公司的招聘需求量？
+                        <div class="question-hint">必填</div>
+                    </div>
+                </div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q3" value="每月 1-2 人" required> <span>每月 1-2 人</span></label>
+                    <label class="option"><input type="radio" name="q3" value="每月 3-5 人"> <span>每月 3-5 人</span></label>
+                    <label class="option"><input type="radio" name="q3" value="每月 5-10 人"> <span>每月 5-10 人</span></label>
+                    <label class="option"><input type="radio" name="q3" value="每月 10+ 人"> <span>每月 10+ 人</span></label>
+                </div>
+            </div>
+
+            <!-- Q4 -->
+            <div class="question-block">
+                <div class="question-title">
+                    <span class="question-number">4</span>
+                    <div>
+                        你們現在主要用什麼招聘渠道？
+                        <div class="question-hint">可複選</div>
+                    </div>
+                </div>
+                <div class="options">
+                    <label class="option"><input type="checkbox" name="q4" value="LinkedIn"> <span>LinkedIn</span></label>
+                    <label class="option"><input type="checkbox" name="q4" value="104 職位網站"> <span>104 職位網站</span></label>
+                    <label class="option"><input type="checkbox" name="q4" value="獵頭 / 人力仲介"> <span>獵頭 / 人力仲介</span></label>
+                    <label class="option"><input type="checkbox" name="q4" value="校園招聘"> <span>校園招聘</span></label>
+                    <label class="option"><input type="checkbox" name="q4" value="員工轉介"> <span>員工轉介</span></label>
+                    <label class="option"><input type="checkbox" name="q4" value="其他"> <span>其他</span></label>
+                </div>
+            </div>
+
+            <!-- Q5 -->
+            <div class="question-block">
+                <div class="question-title">
+                    <span class="question-number">5</span>
+                    <div>
+                        你們有在用以下系統嗎？
+                        <div class="question-hint">可複選</div>
+                    </div>
+                </div>
+                <div class="options">
+                    <label class="option"><input type="checkbox" name="q5" value="LinkedIn Recruiter"> <span>LinkedIn Recruiter</span></label>
+                    <label class="option"><input type="checkbox" name="q5" value="104 招聘工具"> <span>104 招聘工具</span></label>
+                    <label class="option"><input type="checkbox" name="q5" value="Breezy HR"> <span>Breezy HR</span></label>
+                    <label class="option"><input type="checkbox" name="q5" value="Workday"> <span>Workday</span></label>
+                    <label class="option"><input type="checkbox" name="q5" value="其他 HRIS"> <span>其他 HRIS</span></label>
+                    <label class="option"><input type="checkbox" name="q5" value="都沒有（純手工）"> <span>都沒有（純手工）</span></label>
+                </div>
+            </div>
+
+            <!-- Q6 -->
+            <div class="question-block">
+                <div class="question-title">
+                    <span class="question-number">6</span>
+                    <div>
+                        如果用 LinkedIn，你們有多滿意？
+                        <div class="question-hint">單選</div>
+                    </div>
+                </div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q6" value="很滿意（我們用得很爽）"> <span>很滿意（我們用得很爽）</span></label>
+                    <label class="option"><input type="radio" name="q6" value="滿意（還可以，但有改進空間）"> <span>滿意（還可以，但有改進空間）</span></label>
+                    <label class="option"><input type="radio" name="q6" value="普通（勉強用）"> <span>普通（勉強用）</span></label>
+                    <label class="option"><input type="radio" name="q6" value="不滿意（考慮換）"> <span>不滿意（考慮換）</span></label>
+                    <label class="option"><input type="radio" name="q6" value="沒用過"> <span>沒用過</span></label>
+                </div>
+            </div>
+
+            <!-- Q7 -->
+            <div class="question-block">
+                <div class="question-title">
+                    <span class="question-number">7</span>
+                    <div>
+                        為什麼？
+                        <div class="question-hint">選填</div>
+                    </div>
+                </div>
+                <textarea class="text-input" name="q7" placeholder="請分享你的看法..."></textarea>
+            </div>
+
+            <!-- Q8 -->
+            <div class="question-block">
+                <div class="question-title">
+                    <span class="question-number">8</span>
+                    <div>
+                        你們招聘最大的痛點是什麼？
+                        <div class="question-hint">可複選</div>
+                    </div>
+                </div>
+                <div class="options">
+                    <label class="option"><input type="checkbox" name="q8" value="找人太慢"> <span>找人太慢（要花幾個月）</span></label>
+                    <label class="option"><input type="checkbox" name="q8" value="人選品質差"> <span>人選品質差（收很多垃圾履歷）</span></label>
+                    <label class="option"><input type="checkbox" name="q8" value="回應率低"> <span>回應率低（投了 100 個郵件，只有 5% 回應）</span></label>
+                    <label class="option"><input type="checkbox" name="q8" value="篩選太費時"> <span>篩選太費時（要手工檢查每一份履歷）</span></label>
+                    <label class="option"><input type="checkbox" name="q8" value="成本高"> <span>成本高（獵頭費很貴）</span></label>
+                    <label class="option"><input type="checkbox" name="q8" value="軟體太複雜"> <span>軟體太複雜（LinkedIn/104 太難用）</span></label>
+                    <label class="option"><input type="checkbox" name="q8" value="缺乏被動招聘"> <span>缺乏被動招聘（都是人來應徵，主動找人很難）</span></label>
+                    <label class="option"><input type="checkbox" name="q8" value="其他"> <span>其他</span></label>
+                </div>
+            </div>
+
+            <!-- Q9 -->
+            <div class="question-block">
+                <div class="question-title">
+                    <span class="question-number">9</span>
+                    <div>
+                        招聘一個合適的員工，現在要花多長時間？
+                        <div class="question-hint">必填</div>
+                    </div>
+                </div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q9" value="< 2 週" required> <span>&lt; 2 週</span></label>
+                    <label class="option"><input type="radio" name="q9" value="2-4 週"> <span>2-4 週</span></label>
+                    <label class="option"><input type="radio" name="q9" value="1-2 個月"> <span>1-2 個月</span></label>
+                    <label class="option"><input type="radio" name="q9" value="2-3 個月"> <span>2-3 個月</span></label>
+                    <label class="option"><input type="radio" name="q9" value="3+ 個月"> <span>3+ 個月</span></label>
+                </div>
+            </div>
+
+            <!-- Q10 -->
+            <div class="question-block">
+                <div class="question-title">
+                    <span class="question-number">10</span>
+                    <div>
+                        招聘一個員工，現在花多少成本？
+                        <div class="question-hint">必填</div>
+                    </div>
+                </div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q10" value="< $5,000" required> <span>&lt; $5,000</span></label>
+                    <label class="option"><input type="radio" name="q10" value="$5,000-$15,000"> <span>$5,000-$15,000</span></label>
+                    <label class="option"><input type="radio" name="q10" value="$15,000-$30,000"> <span>$15,000-$30,000</span></label>
+                    <label class="option"><input type="radio" name="q10" value="$30,000-$50,000"> <span>$30,000-$50,000</span></label>
+                    <label class="option"><input type="radio" name="q10" value="$50,000+"> <span>$50,000+</span></label>
+                    <label class="option"><input type="radio" name="q10" value="不清楚"> <span>不清楚</span></label>
+                </div>
+            </div>
+
+            <!-- Q11 -->
+            <div class="question-block">
+                <div class="question-title">
+                    <span class="question-number">11</span>
+                    <div>
+                        最困擾你的具體場景是什麼？
+                        <div class="question-hint">選填</div>
+                    </div>
+                </div>
+                <textarea class="text-input" name="q11" placeholder="例：我們最需要的是 AI 工程師，但 LinkedIn 上搜到 500 人，手工篩選要花一週"></textarea>
+            </div>
+
+            <!-- Q12 -->
+            <div class="question-block">
+                <div class="question-title">
+                    <span class="question-number">12</span>
+                    <div>
+                        如果有個系統能幫你做以下事情，哪個對你最重要？
+                        <div class="question-hint">單選</div>
+                    </div>
+                </div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q12" value="自動搜尋被動候選人"> <span>自動從 GitHub / LinkedIn 找到「有真實技能」的被動候選人</span></label>
+                    <label class="option"><input type="radio" name="q12" value="自動篩選履歷"> <span>自動篩選履歷，縮小候選人池</span></label>
+                    <label class="option"><input type="radio" name="q12" value="自動發邀請信"> <span>自動發個性化邀請信</span></label>
+                    <label class="option"><input type="radio" name="q12" value="自動跟進"> <span>自動跟進無回應的候選人</span></label>
+                    <label class="option"><input type="radio" name="q12" value="與現有系統整合"> <span>與 Workday / 104 系統整合</span></label>
+                </div>
+            </div>
+
+            <!-- Q13 -->
+            <div class="question-block">
+                <div class="question-title">
+                    <span class="question-number">13</span>
+                    <div>
+                        如果我們的系統能幫你節省多少時間，你會考慮用？
+                        <div class="question-hint">必填</div>
+                    </div>
+                </div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q13" value="節省 10%" required> <span>節省 10%（一點點改進）</span></label>
+                    <label class="option"><input type="radio" name="q13" value="節省 30%"> <span>節省 30%（明顯改進）</span></label>
+                    <label class="option"><input type="radio" name="q13" value="節省 50%"> <span>節省 50%（影響很大）</span></label>
+                    <label class="option"><input type="radio" name="q13" value="節省 70%+"> <span>節省 70%+（改變遊戲規則）</span></label>
+                </div>
+            </div>
+
+            <!-- Q14 -->
+            <div class="question-block">
+                <div class="question-title">
+                    <span class="question-number">14</span>
+                    <div>
+                        如果這個系統能幫你節省 30-50% 的招聘成本，你願意每月付多少？
+                        <div class="question-hint">必填</div>
+                    </div>
+                </div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q14" value="$2,000-$3,000/月" required> <span>$2,000-$3,000/月</span></label>
+                    <label class="option"><input type="radio" name="q14" value="$3,000-$5,000/月"> <span>$3,000-$5,000/月</span></label>
+                    <label class="option"><input type="radio" name="q14" value="$5,000-$10,000/月"> <span>$5,000-$10,000/月</span></label>
+                    <label class="option"><input type="radio" name="q14" value="$10,000+/月"> <span>$10,000+/月</span></label>
+                    <label class="option"><input type="radio" name="q14" value="不會為軟體付費"> <span>我們不會為軟體付費</span></label>
+                </div>
+            </div>
+
+            <!-- Q15 -->
+            <div class="question-block">
+                <div class="question-title">
+                    <span class="question-number">15</span>
+                    <div>
+                        你們現在的軟體預算是多少？
+                        <div class="question-hint">必填</div>
+                    </div>
+                </div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q15" value="< $50,000/年" required> <span>&lt; $50,000/年</span></label>
+                    <label class="option"><input type="radio" name="q15" value="$50,000-$100,000/年"> <span>$50,000-$100,000/年</span></label>
+                    <label class="option"><input type="radio" name="q15" value="$100,000-$200,000/年"> <span>$100,000-$200,000/年</span></label>
+                    <label class="option"><input type="radio" name="q15" value="$200,000-$500,000/年"> <span>$200,000-$500,000/年</span></label>
+                    <label class="option"><input type="radio" name="q15" value="$500,000+/年"> <span>$500,000+/年</span></label>
+                </div>
+            </div>
+
+            <!-- Q16 -->
+            <div class="question-block">
+                <div class="question-title">
+                    <span class="question-number">16</span>
+                    <div>
+                        如果有一個新系統聲稱能幫你快 30%、便宜 30%，你多久會試試？
+                        <div class="question-hint">必填</div>
+                    </div>
+                </div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q16" value="下週馬上試" required> <span>下週馬上試（很感興趣）</span></label>
+                    <label class="option"><input type="radio" name="q16" value="1 個月內試"> <span>1 個月內試（有興趣，但要看看）</span></label>
+                    <label class="option"><input type="radio" name="q16" value="不太想試"> <span>不太想試（寧願用現在的）</span></label>
+                    <label class="option"><input type="radio" name="q16" value="不會試"> <span>不會試（習慣現在的系統了）</span></label>
+                </div>
+            </div>
+
+            <!-- Q17 -->
+            <div class="question-block">
+                <div class="question-title">
+                    <span class="question-number">17</span>
+                    <div>
+                        你決定選新招聘系統，主要看什麼？
+                        <div class="question-hint">單選</div>
+                    </div>
+                </div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q17" value="價格"> <span>價格（便宜最重要）</span></label>
+                    <label class="option"><input type="radio" name="q17" value="功能"> <span>功能（能解決我們的問題）</span></label>
+                    <label class="option"><input type="radio" name="q17" value="易用性"> <span>易用性（不想花時間學新系統）</span></label>
+                    <label class="option"><input type="radio" name="q17" value="整合度"> <span>整合度（能和現有系統配合）</span></label>
+                    <label class="option"><input type="radio" name="q17" value="品牌信任"> <span>品牌信任（大公司？有口碑？）</span></label>
+                </div>
+            </div>
+
+            <!-- Q18 -->
+            <div class="question-block">
+                <div class="question-title">
+                    <span class="question-number">18</span>
+                    <div>
+                        如果考慮買我們的系統，你最擔心的是什麼？
+                        <div class="question-hint">可複選</div>
+                    </div>
+                </div>
+                <div class="options">
+                    <label class="option"><input type="checkbox" name="q18" value="價格太貴"> <span>價格太貴</span></label>
+                    <label class="option"><input type="checkbox" name="q18" value="功能不足"> <span>功能不足</span></label>
+                    <label class="option"><input type="checkbox" name="q18" value="難以整合"> <span>難以整合</span></label>
+                    <label class="option"><input type="checkbox" name="q18" value="公司太小"> <span>公司太小，不可靠</span></label>
+                    <label class="option"><input type="checkbox" name="q18" value="轉換成本高"> <span>轉換成本太高</span></label>
+                    <label class="option"><input type="checkbox" name="q18" value="其他"> <span>其他</span></label>
+                </div>
+            </div>
+
+            <!-- Q19 -->
+            <div class="question-block">
+                <div class="question-title">
+                    <span class="question-number">19</span>
+                    <div>
+                        你有試過我的系統或類似產品嗎？
+                        <div class="question-hint">必填</div>
+                    </div>
+                </div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q19" value="現在在用" required> <span>是，我現在在用</span></label>
+                    <label class="option"><input type="radio" name="q19" value="試過沒續約"> <span>是，我試過但沒續約</span></label>
+                    <label class="option"><input type="radio" name="q19" value="沒試過"> <span>沒有</span></label>
+                </div>
+            </div>
+
+            <!-- Q20 -->
+            <div class="question-block">
+                <div class="question-title">
+                    <span class="question-number">20</span>
+                    <div>
+                        如果試過，為什麼沒續約？
+                        <div class="question-hint">選填</div>
+                    </div>
+                </div>
+                <textarea class="text-input" name="q20" placeholder="請分享你的想法..."></textarea>
+            </div>
+
+            <!-- Q21 -->
+            <div class="question-block">
+                <div class="question-title">
+                    <span class="question-number">21</span>
+                    <div>
+                        你對我的系統有什麼建議？
+                        <div class="question-hint">選填</div>
+                    </div>
+                </div>
+                <textarea class="text-input" name="q21" placeholder="任何建議都歡迎..."></textarea>
+            </div>
+
+            <!-- Q22 -->
+            <div class="question-block">
+                <div class="question-title">
+                    <span class="question-number">22</span>
+                    <div>
+                        如果我完成這個系統，我可以聯繫你試用嗎？
+                        <div class="question-hint">必填</div>
+                    </div>
+                </div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q22" value="可以，很感興趣" required> <span>可以，我很感興趣</span></label>
+                    <label class="option"><input type="radio" name="q22" value="可能，先看功能"> <span>可能，但先看看功能</span></label>
+                    <label class="option"><input type="radio" name="q22" value="不用"> <span>不用，謝謝</span></label>
+                </div>
+            </div>
+
+            <!-- Q23 -->
+            <div class="question-block">
+                <div class="question-title">
+                    <span class="question-number">23</span>
+                    <div>
+                        你的聯絡方式（Email 或 Phone）
+                        <div class="question-hint">選填</div>
+                    </div>
+                </div>
+                <input type="email" class="text-input" name="q23" placeholder="your.email@company.com 或 +886-XXXXXXXXX">
+            </div>
+        </form>
+
+        <div class="success-message" id="successMessage">
+            ✅ 感謝你的回覆！你的答卷已成功提交。
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-submit" onclick="submitForm(event)">
+                📤 提交問卷
+            </button>
+            <button type="reset" class="btn btn-reset" onclick="resetForm(event)">
+                🔄 清空
+            </button>
+        </div>
+
+        <div class="footer">
+            <p>感謝你花時間填寫！你的反饋對我們非常寶貴。</p>
+            <p>如有任何疑問，歡迎直接聯繫我們。</p>
+        </div>
+    </div>
+
+    <script>
+        function submitForm(event) {
+            event.preventDefault();
+            
+            const form = document.getElementById('surveyForm');
+            const formData = new FormData(form);
+            
+            // 轉換為 JSON 物件
+            const data = {
+                timestamp: new Date().toISOString(),
+                responses: {}
+            };
+            
+            // 處理單選和文字輸入
+            for (let [key, value] of formData.entries()) {
+                if (!data.responses[key]) {
+                    data.responses[key] = value;
+                } else {
+                    // 如果是複選題，轉換為陣列
+                    if (Array.isArray(data.responses[key])) {
+                        data.responses[key].push(value);
+                    } else {
+                        data.responses[key] = [data.responses[key], value];
+                    }
+                }
+            }
+            
+            // 驗證必填項
+            const required = ['q1', 'q2', 'q3', 'q9', 'q10', 'q13', 'q14', 'q15', 'q16', 'q19', 'q22'];
+            for (let field of required) {
+                if (!data.responses[field]) {
+                    alert('❌ 請填寫所有必填項目');
+                    return;
+                }
+            }
+            
+            // 模擬提交（在實際環境中應發送到後端）
+            console.log('問卷資料：', data);
+            
+            // 顯示成功訊息
+            document.getElementById('successMessage').style.display = 'block';
+            
+            // 禁用提交按鈕
+            document.querySelector('.btn-submit').disabled = true;
+            
+            // 3 秒後隱藏成功訊息
+            setTimeout(() => {
+                alert('✅ 您的答卷已記錄。感謝！');
+                // 可選：重定向或清空表單
+                // window.location.href = '/thank-you';
+            }, 1500);
+            
+            // 複製資料到剪貼板以便測試
+            const jsonStr = JSON.stringify(data, null, 2);
+            navigator.clipboard.writeText(jsonStr).then(() => {
+                console.log('✓ 問卷資料已複製到剪貼板');
+            });
+        }
+        
+        function resetForm(event) {
+            event.preventDefault();
+            document.getElementById('surveyForm').reset();
+            document.getElementById('successMessage').style.display = 'none';
+            document.querySelector('.btn-submit').disabled = false;
+        }
+        
+        // Enter 鍵快速提交（Ctrl+Enter）
+        document.addEventListener('keydown', (e) => {
+            if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+                submitForm(e);
+            }
+        });
+    </script>
+</body>
+</html>

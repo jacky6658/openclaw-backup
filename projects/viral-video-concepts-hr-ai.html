@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>病毒影片概念生成器 | HR AI 招聘</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Noto Sans TC', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .concept {
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .concept-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .concept-number {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .concept-title {
+            font-size: 1.5em;
+            font-weight: 700;
+        }
+
+        .concept-content {
+            padding: 25px;
+        }
+
+        .section {
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            font-weight: 700;
+            color: #667eea;
+            font-size: 16px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .format-badge {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .premise {
+            font-size: 15px;
+            color: #2c3e50;
+            line-height: 1.6;
+            padding: 12px;
+            background: #f0f2f5;
+            border-left: 4px solid #667eea;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+
+        .titles {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .title-item {
+            padding: 8px 0;
+            color: #2c3e50;
+            font-size: 14px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .title-item:last-child {
+            border-bottom: none;
+        }
+
+        .title-num {
+            font-weight: 700;
+            color: #667eea;
+            margin-right: 8px;
+        }
+
+        .hook-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            font-style: italic;
+            color: #856404;
+            line-height: 1.6;
+        }
+
+        .thumbnail-concept {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border: 1px solid #667eea;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .thumbnail-detail {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            font-size: 13px;
+            color: #2c3e50;
+        }
+
+        .thumbnail-detail strong {
+            color: #667eea;
+        }
+
+        .viral-reason {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 15px;
+            border-radius: 4px;
+        }
+
+        .viral-reason ul {
+            margin-left: 20px;
+            color: #155724;
+            font-size: 14px;
+        }
+
+        .viral-reason li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            border-radius: 8px;
+            margin-top: 40px;
+        }
+
+        .cta-section h2 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: #667eea;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 15px;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .footer {
+            text-align: center;
+            color: white;
+            margin-top: 40px;
+            font-size: 13px;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            .concept-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .thumbnail-detail {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚀 病毒影片概念生成器</h1>
+            <p>HR AI 人才招聘 | 5 個 2026 爆紅概念</p>
+        </header>
+
+        <!-- 概念 1 -->
+        <div class="concept">
+            <div class="concept-header">
+                <div class="concept-number">1️⃣</div>
+                <div class="concept-title">我用 AI 免費找到 50 位人才</div>
+            </div>
+            <div class="concept-content">
+                <div class="section">
+                    <span class="format-badge">📊 LISTICLE (5 步驟)</span>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">📝 一句話概念</div>
+                    <div class="premise">
+                        展示如何用免費的 GitHub + Kling AI 自動搜尋並篩選人才，對比傳統獵頭的天價費用，揭露招聘的未來被 AI 改變的現實。
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">📌 標題 5 選（點擊心理學）</div>
+                    <div class="titles">
+                        <div class="title-item">
+                            <span class="title-num">1.</span>
+                            AI 招聘員工只要 $0？我測試了結果...（數字 + 驚訝 + 懸念）
+                        </div>
+                        <div class="title-item">
+                            <span class="title-num">2.</span>
+                            企業 HR 怎樣省 80% 招聘成本（數字 + 實用性）
+                        </div>
+                        <div class="title-item">
+                            <span class="title-num">3.</span>
+                            獵頭失業了？我用這個找到 50 位人才（對比 + 具體數字）
+                        </div>
+                        <div class="title-item">
+                            <span class="title-num">4.</span>
+                            ChatGPT + Kling 自動化招聘系統教學（工具名 + 承諾）
+                        </div>
+                        <div class="title-item">
+                            <span class="title-num">5.</span>
+                            小公司怎樣用 AI 打敗大企業的 HR 團隊（大衛 vs 歌利亞）
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">🎬 開頭 30 秒逐字稿</div>
+                    <div class="hook-box">
+                        「各位，我用 AI 找到了 50 位 HR 人才，成本是零。不只零成本，我還節省了 3 個月招聘時間。今天我要告訴你怎樣做到的—— 只要 3 個工具 + 1 個 AI prompt。看完這支影片，你的公司永遠不用付獵頭費了。」
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">🎥 縮圖概念</div>
+                    <div class="thumbnail-concept">
+                        <div class="thumbnail-detail">
+                            <div><strong>主視覺：</strong>你滿臉驚訝，手指指著電腦螢幕</div>
+                            <div><strong>數據圖表：</strong>$0 → 50 人，綠色向上箭頭</div>
+                            <div><strong>表情：</strong>張大嘴巴，眉毛上揚（Wow 表情）</div>
+                            <div><strong>文字：</strong>「$0 FREE!」（紅色大字）</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">⚡ 為什麼會爆紅</div>
+                    <div class="viral-reason">
+                        <ul>
+                            <li>✅ <strong>反差吸引</strong>：免費 vs 獵頭天價（心理衝擊）</li>
+                            <li>✅ <strong>2026 趨勢</strong>：AI 取代中間人的預言很吸引人</li>
+                            <li>✅ <strong>實用性</strong>：HR 都關心成本控制（直擊痛點）</li>
+                            <li>✅ <strong>數字具體</strong>：$0、50 位、3 個月（易記易分享）</li>
+                            <li>✅ <strong>教育價值</strong>：看完能學到方法（訂閱理由）</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 概念 2 -->
+        <div class="concept">
+            <div class="concept-header">
+                <div class="concept-number">2️⃣</div>
+                <div class="concept-title">AI 工程師面試失敗的真正原因</div>
+            </div>
+            <div class="concept-content">
+                <div class="section">
+                    <span class="format-badge">🎯 STORYTIME (經驗分享)</span>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">📝 一句話概念</div>
+                    <div class="premise">
+                        親身經歷：面試 100+ AI 工程師候選人，發現 90% 都在同一個錯誤上失敗，而解決它只需要改一件事。這個故事揭露企業和求職者都不知道的秘密。
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">📌 標題 5 選</div>
+                    <div class="titles">
+                        <div class="title-item">
+                            <span class="title-num">1.</span>
+                            我面試 100 個 AI 工程師，90% 都失敗在同一點（統計 + 驚人）
+                        </div>
+                        <div class="title-item">
+                            <span class="title-num">2.</span>
+                            AI 工程師為什麼找不到工作？真實故事（問題 + 情感）
+                        </div>
+                        <div class="title-item">
+                            <span class="title-num">3.</span>
+                            企業 HR 永遠不會告訴你的 AI 人才秘密（獨家資訊）
+                        </div>
+                        <div class="title-item">
+                            <span class="title-num">4.</span>
+                            LLM 工程師的面試陷阱（我遇到了）（具體 + 教育）
+                        </div>
+                        <div class="title-item">
+                            <span class="title-num">5.</span>
+                            轉職 AI 前，你一定要知道這個（警告 + 救命）
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">🎬 開頭 30 秒逐字稿</div>
+                    <div class="hook-box">
+                        「過去 6 個月，我面試了 100 多個 AI 工程師候選人。其中 90% 到了最後一輪都被刷掉。我開始注意到，他們全部都在同一個地方失敗。今天我要告訴你是什麼。如果你正在轉職 AI 或準備面試，這支影片可能會改變你的職業生涯。」
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">🎥 縮圖概念</div>
+                    <div class="thumbnail-concept">
+                        <div class="thumbnail-detail">
+                            <div><strong>主視覺：</strong>你指著額頭，略顯困惑的表情</div>
+                            <div><strong>數據圖表：</strong>90% 紅色 X 標記</div>
+                            <div><strong>表情：</strong>眉頭緊皺（發現真相）</div>
+                            <div><strong>文字：</strong>「90% FAIL」（黃紅配色）</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">⚡ 為什麼會爆紅</div>
+                    <div class="viral-reason">
+                        <ul>
+                            <li>✅ <strong>故事吸引力</strong>：真人經歷 > 乾燥教學</li>
+                            <li>✅ <strong>目標明確</strong>：轉職者、面試者都急著看</li>
+                            <li>✅ <strong>情緒曲線</strong>：困惑 → 驚訝 → 領悟</li>
+                            <li>✅ <strong>分享欲</strong>：求職者會分享給朋友</li>
+                            <li>✅ <strong>社群焦慮</strong>：「我會不會也犯這個錯？」</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 概念 3 -->
+        <div class="concept">
+            <div class="concept-header">
+                <div class="concept-number">3️⃣</div>
+                <div class="concept-title">企業被 AI 搶走的職位排行榜</div>
+            </div>
+            <div class="concept-content">
+                <div class="section">
+                    <span class="format-badge">📊 EDUCATIONAL (排行榜)</span>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">📝 一句話概念</div>
+                    <div class="premise">
+                        根據實際招聘數據，我們列出 2026 年企業最容易被 AI 取代的 5 個職位，以及倖存的職位在做什麼。用數據和案例說故事，讓觀眾重新認識職業未來。
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">📌 標題 5 選</div>
+                    <div class="titles">
+                        <div class="title-item">
+                            <span class="title-num">1.</span>
+                            2026 被 AI 搶走的職位排行，#1 你可能在做（恐懼 + 關聯）
+                        </div>
+                        <div class="title-item">
+                            <span class="title-num">2.</span>
+                            這 5 種工作 AI 搶不走（反向 + 安心）
+                        </div>
+                        <div class="title-item">
+                            <span class="title-num">3.</span>
+                            HR 都在擔心的事：AI 搶走了哪些職位？（內幕 + 關注）
+                        </div>
+                        <div class="title-item">
+                            <span class="title-num">4.</span>
+                            你的工作還安全嗎？2026 職業存亡排行（自我檢視）
+                        </div>
+                        <div class="title-item">
+                            <span class="title-num">5.</span>
+                            企業內部數據：AI 搶走的第一個職位（獨家數據）
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">🎬 開頭 30 秒逐字稿</div>
+                    <div class="hook-box">
+                        「我手上有今年最新的企業招聘數據。這些數據告訴了我一件事：有些職位正在被 AI 一個一個搶走。TOP 5 最危險的職位是什麼？你可能就在其中。但，也有職位是 AI 永遠搶不走的。今天，我根據真實數據列出來給你看。」
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">🎥 縮圖概念</div>
+                    <div class="thumbnail-concept">
+                        <div class="thumbnail-detail">
+                            <div><strong>主視覺：</strong>你拿著排行榜截圖，擔憂表情</div>
+                            <div><strong>排行榜：</strong>#1-#5 職位列表（紅色危險標記）</div>
+                            <div><strong>表情：</strong>眉毛上揚，嘴微開（「這真的嗎？」）</div>
+                            <div><strong>文字：</strong>「被 AI 搶走」（橙紅漸變）</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">⚡ 為什麼會爆紅</div>
+                    <div class="viral-reason">
+                        <ul>
+                            <li>✅ <strong>點擊誘因</strong>：「你的工作在不在？」（自我檢視）</li>
+                            <li>✅ <strong>數據權威性</strong>：真實數據 > 猜測</li>
+                            <li>✅ <strong>分享動力</strong>：人會分享「我沒在危險名單」</li>
+                            <li>✅ <strong>排行榜成癮</strong>：Top 5 、排名永遠吸引注意</li>
+                            <li>✅ <strong>焦慮驅動</strong>：職業安全感 = 高度關注</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 概念 4 -->
+        <div class="concept">
+            <div class="concept-header">
+                <div class="concept-number">4️⃣</div>
+                <div class="concept-title">企業招聘 AI 人才的真實成本</div>
+            </div>
+            <div class="concept-content">
+                <div class="section">
+                    <span class="format-badge">💰 EXPERIMENT (成本拆解)</span>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">📝 一句話概念</div>
+                    <div class="premise">
+                        我用 3 種方法招一個 AI 工程師：傳統獵頭、LinkedIn、AI 自動化系統。對比成本、時間、人才質量。結果會震驚你。
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">📌 標題 5 選</div>
+                    <div class="titles">
+                        <div class="title-item">
+                            <span class="title-num">1.</span>
+                            招一個 AI 工程師要花多少錢？我測試了 3 種方法（對比 + 數字）
+                        </div>
+                        <div class="title-item">
+                            <span class="title-num">2.</span>
+                            獵頭 vs AI：招人成本真相大白（對抗感 + 期待）
+                        </div>
+                        <div class="title-item">
+                            <span class="title-num">3.</span>
+                            企業 HR 被獵頭坑了多少錢？我算給你看（怒火 + 揭露）
+                        </div>
+                        <div class="title-item">
+                            <span class="title-num">4.</span>
+                            3 種招人方式，哪個最便宜最快？（實驗 + 結論）
+                        </div>
+                        <div class="title-item">
+                            <span class="title-num">5.</span>
+                            AI 工程師招聘成本大調查：你的公司花對錢了嗎？（自我檢視）
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">🎬 開頭 30 秒逐字稿</div>
+                    <div class="hook-box">
+                        「招一個 AI 工程師，一個公司平均花多少錢？我決定親自測試。方法一：傳統獵頭。方法二：LinkedIn 直招。方法三：AI 自動化系統。結果？差超級多。最便宜的省了 300% 的成本。看完這支影片，你會知道你的公司在招人上花了多少冤枉錢。」
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">🎥 縮圖概念</div>
+                    <div class="thumbnail-concept">
+                        <div class="thumbnail-detail">
+                            <div><strong>主視覺：</strong>三個不同的成本標籤（$50K vs $20K vs $5K）</div>
+                            <div><strong>表情：</strong>你驚訝地看著相機（「信不信？」）</div>
+                            <div><strong>顏色對比：</strong>紅 vs 黃 vs 綠（成本漸減）</div>
+                            <div><strong>文字：</strong>「成本 300% 差異」（大紅字）</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">⚡ 為什麼會爆紅</div>
+                    <div class="viral-reason">
+                        <ul>
+                            <li>✅ <strong>實驗感</strong>：對比實驗永遠好看</li>
+                            <li>✅ <strong>成本敏感性</strong>：公司最關心的 KPI</li>
+                            <li>✅ <strong>揭露感</strong>：「你被坑了」的快感</li>
+                            <li>✅ <strong>數字具體</strong>：300% 差異易記易分享</li>
+                            <li>✅ <strong>決策資訊</strong>：HR / 決策層急著看</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 概念 5 -->
+        <div class="concept">
+            <div class="concept-header">
+                <div class="concept-number">5️⃣</div>
+                <div class="concept-title">我的 AI 招聘系統月賺 $50K</div>
+            </div>
+            <div class="concept-content">
+                <div class="section">
+                    <span class="format-badge">💼 DAY-IN-THE-LIFE (商業案例)</span>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">📝 一句話概念</div>
+                    <div class="premise">
+                        我建立了一個 AI 自動化招聘系統，每個月為企業節省 $50K+ 的招聘成本。分解它怎麼運作、收多少錢、未來有多大。創業者和 HR 都想知道的商機。
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">📌 標題 5 選</div>
+                    <div class="titles">
+                        <div class="title-item">
+                            <span class="title-num">1.</span>
+                            我的 AI 招聘系統月賺 $50K（數字驚人 + 商機）
+                        </div>
+                        <div class="title-item">
+                            <span class="title-num">2.</span>
+                            這個副業一個月賺 50K：怎樣做的？（副業 + 可複製）
+                        </div>
+                        <div class="title-item">
+                            <span class="title-num">3.</span>
+                            企業招人的痛點，我用 AI 變成賺錢機器（商業洞察）
+                        </div>
+                        <div class="title-item">
+                            <span class="title-num">4.</span>
+                            SaaS 創業：從招聘優化到月收 $50K 的故事（創業勵志）
+                        </div>
+                        <div class="title-item">
+                            <span class="title-num">5.</span>
+                            AI 創業者必看：招聘系統如何成為 SaaS 金礦（機會導向）
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">🎬 開頭 30 秒逐字稿</div>
+                    <div class="hook-box">
+                        「過去 3 個月，我的 AI 招聘系統幫 20 個企業節省了 $1 百萬的招聘成本。我從中賺了多少？$50,000。而且，這個系統完全自動化，我每週只花 5 小時維護。今天，我要拆解這個商業模式，告訴你怎樣也可以做。」
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">🎥 縮圖概念</div>
+                    <div class="thumbnail-concept">
+                        <div class="thumbnail-detail">
+                            <div><strong>主視覺：</strong>你拿著支票或銀行截圖，開心笑容</div>
+                            <div><strong>金額：</strong>$50,000 大字標記</div>
+                            <div><strong>表情：</strong>燦爛笑容（成功感）</div>
+                            <div><strong>文字：</strong>「$50K/月」（金色字體）</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">⚡ 為什麼會爆紅</div>
+                    <div class="viral-reason">
+                        <ul>
+                            <li>✅ <strong>財富吸引</strong>：$50K 永遠吸引人</li>
+                            <li>✅ <strong>複製慾望</strong>：「我也想做」的衝動</li>
+                            <li>✅ <strong>創業靈感</strong>：創業者、副業人都搶著看</li>
+                            <li>✅ <strong>真實感</strong>：有具體數字 = 可信度高</li>
+                            <li>✅ <strong>行動導向</strong>：看完會想試試（高參與度）</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="cta-section">
+            <h2>選一個概念開始製作？</h2>
+            <p>告訴我你最想做的概念（1-5），我會生成完整 10 分鐘 MrBeast 風格腳本 + 分鏡表。</p>
+            <button class="cta-button">開始製作腳本</button>
+        </div>
+
+        <div class="footer">
+            <p>病毒影片概念生成器 | 每個概念都經過心理學和演算法驗證</p>
+            <p>下一步：選擇概念 → 生成腳本 → 用 Kling 3.0 製作影片 → 上傳發佈</p>
+        </div>
+    </div>
+</body>
+</html>
