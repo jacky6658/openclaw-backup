@@ -38,3 +38,7 @@ file_list.txt
 
 # If you want to keep daily memory files, remove this ignore.
 # (We will keep memory/ by default)
+*.db
+node_modules/
+tmp/
+output/
