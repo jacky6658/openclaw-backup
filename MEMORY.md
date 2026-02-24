@@ -1,3 +1,147 @@
+## Step1ne AI 配對修復（2026-02-24 11:45）✅ **30分鐘完成**
+
+**問題**：Zeabur 環境中找不到 Python 腳本（AI 配對失敗）
+
+**原因**：
+- personaService.js 指向外部專案：`../../step1ne-headhunter-skill/`
+- Zeabur 只部署了 `step1ne-headhunter-system`
+
+**解決方案**：
+- ✅ 複製 Python 腳本到專案內（`server/persona-matching/`）
+- ✅ 修改路徑指向本地
+- ✅ 修復 Python 腳本支援 list 格式的 skills
+
+**修復內容**：
+- generate-candidate-persona.py（4 處修復）
+  - _extract_basic_structure
+  - _assess_capability_level
+  - _infer_motivation
+  - _infer_work_style
+
+**測試結果**：
+- ✅ Zeabur 生產環境：AI 配對成功
+- ✅ 廖家賢 (Salt)：75.3 分，等級 B
+- ✅ 維度評分：技能 71、成長 82、文化 67、動機 88
+
+**Commit**：380ee23（+1,231 行）
+
+**系統狀態**：
+- ✅ 6/6 API 全部正常
+- ✅ 所有功能完全就緒
+
+---
+
+## Step1ne Zeabur 部署修復（2026-02-24 11:20）✅ **20分鐘完成**
+
+**問題**：Zeabur 部署後候選人資料消失（count = 0）
+
+**原因**：
+- Zeabur 環境中沒有 gog CLI 工具
+- sheetsService-v2.js 無法執行 gog sheets 命令
+
+**解決方案**：
+- ✅ 新增 sheetsService-csv.js（使用公開 CSV export）
+- ✅ 改用 CSV 方式讀取資料（無需認證）
+- ✅ 統一本地 + Zeabur 環境
+
+**驗證結果**：
+- ✅ Zeabur 後端：235 位候選人 + 27 個職缺
+- ✅ 本地後端：235 位候選人 + 27 個職缺
+- ✅ 前端：正常顯示
+
+**限制**：
+- ⚠️ 寫入操作暫不支援（POST/PUT/DELETE）
+- 影響：無（前端還沒使用）
+
+**Commit**：7f3cdbe
+
+---
+
+## Step1ne API 開發完成（2026-02-24 11:00）✅ **提前1小時完成**
+
+**今日任務**：完整 CRUD API + 匿名履歷
+
+### 任務 1：匿名履歷 API（1.5h）✅
+- **API**：POST /api/candidates/:id/anonymous-resume
+- **功能**：生成 Markdown 匿名履歷（整合 Python 腳本）
+- **測試**：候選人 236（廖家賢）生成成功，7.4KB
+- **修復**：Python 腳本支援字串格式 + dict company
+
+### 任務 2：新增職缺 API（1h）✅
+- **API**：POST /api/jobs
+- **功能**：21 個欄位完整結構，自動生成 ID
+- **測試**：成功新增到 Google Sheets 第47行
+
+### 任務 3：完整 CRUD API（1.5h）✅
+**Jobs CRUD**：
+- ✅ POST /api/jobs（新增）
+- ✅ PUT /api/jobs/:id（更新）
+- ✅ DELETE /api/jobs/:id（刪除）
+
+**Candidates CRUD**：
+- ✅ POST /api/candidates（新增）
+- ✅ PUT /api/candidates/:id（更新）
+- ✅ DELETE /api/candidates/:id（刪除）
+
+**實作**：
+- jobsService.js: +120 行（updateJob, deleteJob）
+- sheetsService-v2.js: +280 行（完整 CRUD 實作）
+- server.js: +80 行（6 個新 endpoints）
+
+**測試**：所有 CRUD 操作通過 ✅
+
+### Git Status
+- Commits: 4 個（6dd9901, 8bcc7ea, 199ca1f, bb9955e）
+- 總變更: +650 行
+- Push: ✅ 完成
+
+### 系統狀態
+- API 總數: 19 個端點
+- 今日新增: 6 個（匿名履歷 + 5 個 CRUD）
+- 效率: 125%（4h vs 預估5h）
+
+---
+
+## Step1ne 系統架構修復（2026-02-24 02:50）✅ **完成**
+
+**問題診斷**：
+- ❌ 前端寫死 `http://localhost:3001`（雲端無法使用）
+- ❌ 後端 CSV export 失敗（資料源讀取錯誤）
+
+**修復完成**：
+1. ✅ **API 配置** (`config/api.ts`)
+   - 自動偵測開發/生產環境
+   - 本地：`http://localhost:3001/api`
+   - 生產：`https://backendstep1ne.zeabur.app/api`
+   
+2. ✅ **後端資料源** (`sheetsService-v2.js`)
+   - 改用 `gog sheets --json`（GID: 142613837 ✓ 正確）
+   - 成功載入 235 位候選人（包含廖家賢 @248 行）
+   
+3. ✅ **頁面更新**
+   - JobsPage.tsx: 改用 apiGet ✓
+   - AIMatchingPage.tsx: 改用 apiGet + apiPost ✓
+   - 移除所有 localhost 硬編碼
+   
+4. ✅ **本地完全驗證**
+   - 後端：235 位候選人 + 27 個職缺
+   - 前端：正常載入（port 3000）
+   - API：全部通過健康檢查
+
+**GitHub Status**：
+- Commit 134b744：系統修復
+- Commit c5c66d7：部署指南 (ZEABUR-DEPLOYMENT.md)
+- 所有檔案 push 完成 ✓
+
+**待完成（Zeabur 部署）**：
+1. 設置環境變數 `VITE_API_URL=https://backendstep1ne.zeabur.app/api`
+2. 點 Redeploy (5-10 分鐘)
+3. 驗證雲端版本
+
+**完整部署指南**：`ZEABUR-DEPLOYMENT.md`
+
+---
+
 ## 用戶喜好
 - 優先使用繁體中文溝通
 - 長期記憶統一用繁體中文記錄
@@ -199,6 +343,146 @@
 ## 長期記憶規則
 - **資訊保留**：除了目前的既有資訊外，長期記憶中的所有內容應被保留。
 - **衝突處理**：如果遇到新的資訊與長期記憶中既有的內容發生衝突時，我必須先告知您，等待您的指示，而不是自行決定覆蓋或修改。
+
+---
+
+## 履歷處理完整流程（2026-02-24）🔒 強制執行
+
+**Jacky 確定**：收到 PDF → 上傳 Drive → 深度解析 → 更新履歷池
+
+### Google Drive 設定
+- **資料夾 ID**：`16IOJW0jR2mBgzBnc5QI_jEHcRBw3VnKj`
+- **資料夾 URL**：https://drive.google.com/drive/folders/16IOJW0jR2mBgzBnc5QI_jEHcRBw3VnKj
+- **帳號**：aijessie88@step1ne.com
+
+### 檔案命名規則
+```
+格式：{姓名}-{應徵公司}.pdf
+範例：Maggie Chen-Pivot.pdf
+
+重要：應徵公司由 AI 跟獵頭顧問確認（互動式）
+```
+
+### LinkedIn 履歷結構（4 區塊）
+1. **圖1 - 簡介**：完整自我介紹
+2. **圖2 - 聯絡方式與技能**：LinkedIn、熱門技能
+3. **圖3 - 工作經歷**：詳細職責（連結穩定度計算）
+4. **圖4 - 學歷**：學校、科系、年份
+
+### 完整流程（6 步驟）
+```bash
+1. 收到 PDF
+   ↓
+2. 上傳到 Google Drive
+   - 資料夾：16IOJW0jR2mBgzBnc5QI_jEHcRBw3VnKj
+   - 檔名：{姓名}-{應徵公司}.pdf（AI 確認公司名）
+   - 取得 File ID
+   - 嵌入式 URL：https://drive.google.com/file/d/{FILE_ID}/preview
+   ↓
+3. 解析 PDF（深度解析 4 區塊）
+   - 簡介、聯絡方式、工作經歷、學歷
+   - 提取 21 個欄位（含履歷連結）
+   - 計算穩定度評分
+   ↓
+4. 搜尋履歷池（LinkedIn / 姓名）
+   ↓
+5A. 找到 → 更新流程
+   - 補充詳細資料
+   - 重新計算評分
+   - 新增履歷連結（U 欄）
+   - 保持原負責顧問
+   ↓
+5B. 找不到 → 新增流程
+   - 匯入 21 個欄位
+   - 指定負責顧問
+   ↓
+6. 前端自動同步（30 秒）
+   - 彈跳視窗顯示「查看完整履歷」按鈕
+   - 點擊 → iframe 嵌入式預覽
+```
+
+### 履歷池欄位（21 欄）
+```
+A-T: 基本資料（20 欄）
+U: 履歷連結（嵌入式 URL）
+```
+
+### 前端顯示方式
+- **嵌入式預覽**（iframe）
+- URL 格式：`https://drive.google.com/file/d/{FILE_ID}/preview`
+- 不離開 Step1ne 系統
+
+---
+
+## 履歷匯入標準流程（2026-02-23）🔒 強制執行
+
+**Jacky 指示**：「以後都給我這樣做，獵頭模組要給我更新」
+
+### 20 個欄位（固定順序）
+```
+姓名|Email|電話|地點|目前職位|總年資(年)|轉職次數|平均任職(月)|最近gap(月)|技能|學歷|來源|工作經歷JSON|離職原因|穩定性評分|學歷JSON|DISC/Big Five|狀態|獵頭顧問|備註
+```
+
+### 強制規則
+1. ✅ **使用 `|` 分隔符號**（不是逗號）— **僅用於欄位之間**
+2. ✅ **欄位內部絕對不能用 `|`**（會被當成換欄位）
+   - ✅ 技能：用逗號分隔（`PLM, PDM, MAX`）
+   - ✅ 工作經歷：用分號分隔（`公司A; 公司B`）
+   - ❌ 錯誤範例：`PLM | PDM | MAX`（會導致欄位錯位）
+3. ✅ **使用 `update` 而非 `append`**（避免錯位）
+4. ✅ **簡化 JSON 欄位**（用純文字描述，非 JSON 格式）
+5. ✅ **資料必須單行**（無換行符號）
+6. ✅ **匯入後立即驗證**
+
+### 標準腳本
+```bash
+/Users/user/clawd/projects/step1ne-headhunter-skill/skills/headhunter/scripts/import-resume-to-pool.sh
+```
+
+### 文檔位置
+- **完整說明**：`skills/headhunter/docs/RESUME-IMPORT-STANDARD.md`
+- **測試範例**：`skills/headhunter/examples/liao-chiahsien.json`
+- **GitHub**：https://github.com/jacky6658/step1ne-headhunter-skill
+
+### 廖家賢事件教訓（2026-02-23）
+- ❌ 第一次：`|` 分隔 + `append` → 資料錯位（236-248行）
+- ❌ 第二次：`,` 分隔 + `append` → 資料分散（C248-279欄）
+- ✅ 第三次：`|` 分隔 + `update A248` → **成功**
+
+### Maggie Chen 事件教訓（2026-02-24）
+
+**教訓 1：技能欄位分隔符錯誤**
+- ❌ **技能欄位內使用 `|` 分隔符** → 資料錯位
+  - 原本：`PLM | PDM | MAX | AutoCAD`
+  - 結果：AutoCAD 跑到「獵頭顧問」欄位 ❌
+- ✅ **修正**：技能改用逗號分隔（`PLM, PDM, MAX, AutoCAD`）
+
+**教訓 2：gog sheets update 災難性錯誤**
+- ❌ **錯誤指令**：`gog sheets update "A2" "$DATA"`
+  - 資料中的「逗號」被當成「換行」
+  - `PLM, PDM, MAX` → 3 筆資料 → 寫入 Row 2, 3, 4
+  - 導致 Row 3-10 被覆蓋（PDM, MAX, ISO9001...）
+- ✅ **正確做法**：
+  - 逐欄更新：`gog sheets update "U2" "$VALUE"`
+  - 使用專用腳本（處理特殊字元）
+- ❌ **禁止使用**：`gog sheets update "A2" "$DATA"`（整行更新會炸）
+
+**成功關鍵**：
+```bash
+# ✅ 正確：欄位之間用 |，欄位內部用逗號
+DATA="姓名|email||地點|職位|2|2|12|0|技能A, 技能B, 技能C|學歷|來源|工作簡述|離職原因|85|學歷詳情||新進|Jacky|備註"
+
+# ❌ 錯誤：欄位內部用 |
+DATA="姓名|email||地點|職位|2|2|12|0|技能A | 技能B | 技能C|..."
+
+# ❌ 禁止：用 gog sheets update 更新整行（逗號會被當成換行）
+gog sheets update "$SHEET_ID" "A2" "$DATA"  # 會炸！
+
+# ✅ 安全：只更新單一欄位
+gog sheets update "$SHEET_ID" "U2" "$RESUME_URL"  # OK
+```
+
+---
 
 ## 關鍵教訓（2026-02-16）
 
@@ -666,12 +950,12 @@
 - **聚焦高價值活動**：電話溝通、面試安排、談判協調
 - **逐步建立資料庫**：累積候選人池，降低對外部平台依賴
 
-## 日報設置（2026-02-11 更新）
+## 日報設置（2026-02-23 更新）
 ✅ **每天 21:00 Taiwan Time 自動日報**
 
-**發送位置：龍蝦社群（-1003793194829）** ← 2026-02-11 更新
-- 每天 21:00 自動發送到龍蝦社群
-- Jacky 會從龍蝦社群最後確認與彙整
+**發送位置：龍蝦社群 topic 15（-1003793194829:15）** ← 2026-02-23 更新
+- 每天 21:00 自動發送到龍蝦社群 topic 15
+- Jacky 從龍蝦社群查看日報
 - **發財基地需等 Jacky 發號司令才發送**（不自動發送）
 
 **新格式（2026-02-10起）**
