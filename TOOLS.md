@@ -36,7 +36,7 @@ Skills are shared. Your setup is yours. Keeping them apart means you can update 
 ## HR 履歷進件設定
 
 ### Gmail 監控信箱
-- **監控帳號**：aijessie88@step1ne.com ✅
+- **監控帳號**：aiagentg888@gmail.com ✅
 - **授權狀態**：已完成 OAuth（2026-02-11）
 - **篩選條件**：subject 包含「應徵」「履歷」或附件為 PDF/DOCX
 
