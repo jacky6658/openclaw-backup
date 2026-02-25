@@ -1,3 +1,51 @@
+## GitHub 人選搜尋系統完成（2026-02-25 12:25）✅ **已正式啟用**
+
+**重要成果**：
+- ✅ GitHub 搜尋完全正常（使用新 Token：ghp_U4p9...）
+- ✅ 已找到 5 位台灣 Python 開發者（測試成功）
+- ✅ 統一搜尋腳本：`unified-talent-search-v3.py`
+
+**GitHub Token 設定**：
+```bash
+# 已保存到 ~/.zshrc
+export GITHUB_TOKEN="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"
+```
+
+**腳本位置**：
+- `/Users/user/clawd/hr-tools/unified-talent-search-v3.py`
+
+**使用方式**：
+```bash
+# GitHub 搜尋
+python3 unified-talent-search-v3.py --keywords "Python" --location "Taiwan" --max-results 20 --github-only
+
+# 未來 LinkedIn 搜尋（暫時跳過，反爬蟲困難）
+python3 unified-talent-search-v3.py --keywords "AI Engineer" --location "Taiwan" --max-results 20 --linkedin-only
+
+# 完整搜尋（LinkedIn + GitHub）
+python3 unified-talent-search-v3.py --keywords "Python Engineer" --location "Taiwan" --max-results 20
+```
+
+**測試結果**（Python 搜尋）：
+1. vinta (9K followers) - TypeScript, Python, PHP
+2. twtrubiks (2.3K followers) - Python, Rust, JavaScript, Go
+3. hoochanlon (1.4K followers) - JavaScript, HTML, TypeScript
+4. moskytw (1.3K followers) - Python, Shell, HTML
+5. uranusjr (1.1K followers) - Python, Rust
+
+**LinkedIn 困境**：
+- ❌ Bing site: 搜尋無結果（site restriction 被擋）
+- ❌ Google site: 返回驗證頁面（CAPTCHA）
+- ⏳ 需要 agent-browser + 代理 IP 才能破解
+- 決策：暫時跳過 LinkedIn，優先用 GitHub
+
+**下一步**：
+- 整合到人選搜尋流程
+- 匯入履歷池 Google Sheets
+- 測試 E2E 完整流程
+
+---
+
 ## Step1ne AI 配對修復（2026-02-24 11:45）✅ **30分鐘完成**
 
 **問題**：Zeabur 環境中找不到 Python 腳本（AI 配對失敗）
