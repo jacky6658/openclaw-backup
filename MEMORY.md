@@ -1256,3 +1256,122 @@ fi
    - 發送測試履歷驗證自動處理
 3. **LinkedIn 爬蟲方案決策**（P1）
    - 繼續投入 or 暫時手動 or 放棄
+
+---
+
+## Step1ne 獵頭系統操作指南（2026-03-09）
+
+### 基本設定
+- **後端 URL**：`https://backendstep1ne.zeabur.app`
+- **認證**：無需 Token，所有端點公開
+- **我的身份**：`Jacky-aibot`（每次 API 呼叫都要帶）
+
+### 主要端點一覽
+
+| 功能 | 方法 | 端點 |
+|------|------|------|
+| 健康檢查 | GET | `/api/health` |
+| 所有候選人 | GET | `/api/candidates` |
+| 今日新增 | GET | `/api/candidates?created_today=true` |
+| 單一候選人 | GET | `/api/candidates/:id` |
+| 新增候選人 | POST | `/api/candidates` |
+| 批量匯入 | POST | `/api/candidates/bulk` |
+| 更新 Pipeline | PUT | `/api/candidates/:id/pipeline-status` |
+| 局部更新 | PATCH | `/api/candidates/:id` |
+| 批量更新狀態 | PATCH | `/api/candidates/batch-status` |
+| 刪除候選人 | DELETE | `/api/candidates/:id` |
+| 所有職缺 | GET | `/api/jobs` |
+| 主動獵才 | POST | `/api/talent-sourcing/find-candidates` |
+| 操作日誌 | GET | `/api/system-logs` |
+| 顧問聯絡資訊 | GET | `/api/users/:name/contact` |
+
+### Pipeline 狀態值
+`未開始` → `已聯繫` → `已面試` → `Offer` → `已上職` / `婉拒` / `其他`
+- 特殊：`備選人才`（需用 PATCH，不能用 PUT pipeline-status）
+
+### 評分規則
+**穩定度（stability_score）**：基礎 70 分，依年資/轉職次數/任職時長加減
+**綜合評級（talent_level）**：S(90+) / A+(80-89) / A(70-79) / B(60-69) / C(<60)
+
+### 重要規則
+1. 更新 Pipeline → 用 `PUT /pipeline-status`（自動追加進度記錄）
+2. 更新其他欄位（notes/recruiter/talent_level）→ 用 `PATCH`
+3. notes/progressTracking 都是整個覆蓋，不是追加！追加要先 GET 再 PATCH
+4. 備選人才需同時滿足：status="備選人才" + talent_level有值 + progressTracking最後事件="備選人才"
+5. 所有 API 呼叫帶 `actor: "Jacky-aibot"`
+
+### 主動獵才流程
+```
+POST /api/talent-sourcing/find-candidates
+{ company, jobTitle, actor, github_token, brave_api_key, pages }
+```
+收到回應後直接回傳 `full_summary` 給顧問
+
+### 爬蟲系統（headhunter-crawler）
+- **Repo**：https://github.com/jacky6658/headhunter-crawler
+- Web UI：`http://localhost:5000`（Flask）
+- LinkedIn 4 層備援：Playwright → Google → Bing → Brave API
+- 結果存 Google Sheets，可一鍵推送到 Step1ne
+
+---
+
+## 已簽約客戶名單（2026-03-09）
+
+共 29 家，以下為已簽好合約的客戶：
+
+1. 睿聲光電
+2. 速聯 SRAM
+3. HackMD（嗨筆記股份有限公司）
+4. 格拉墨科技
+5. 伊諾科技股份有限公司
+6. 大儀股份有限公司
+7. 財聖國際保險經紀人股份有限公司
+8. 遊悅科技
+9. 富聯國際
+10. 天旭國際科技
+11. 統一數網股份有限公司
+12. 睿世軟體科技股份有限公司
+13. 比特數字科技
+14. 布納星科技
+15. Joint Venture
+16. 一通數位
+17. 經緯智慧科技股份有限公司
+18. HTC 宏達國際電子
+19. 宏願數位股份公司（HTC 集團公司）
+20. 畢博科技股份有限公司
+21. 財團法人均一平台教育基金會
+22. 通量三維股份有限公司
+23. 星裕國際股份有限公司
+24. 蓋亞資訊有限公司
+25. 全亞國際實業有限公司
+26. 全曜財經資訊股份有限公司（CMoney）
+27. 眾鼎有限公司
+28. 仁大資訊股份有限公司
+29. 蟻力股份有限公司（遊戲橘子旗下）
+
+---
+
+## 客戶名單更新（2026-03-09）
+
+### 新增簽約客戶（系統有職缺但原名單未收錄）
+30. 士芃科技股份有限公司
+31. 律准科技股份有限公司
+32. 瑞典商英鉑科股份有限公司台灣分公司
+33. 創樂科技有限公司
+
+**→ 簽約客戶共 33 家**
+
+### 系統其他公司狀態
+- **AIJob內部**：內部使用，忽略不管
+- **志邦企業**：BD 開發中（尚未簽約）
+- **美德醫療**：合約洽談中（尚未簽約）
+- **優服**：狀態未確認
+
+### 補充：優服
+- **優服**：遊戲橘子旗下公司，狀態待確認（尚未確認是否簽約）
+- 系統中已有職缺，但合約狀態需 Jacky 確認
+
+### 遊戲橘子集團合約說明
+- **遊戲橘子集團**、**蟻力股份有限公司**、**優服** → 三家公司共用同一份合約
+- 優服已更新為「合作中」（已簽約）
+- 簽約客戶總數更新為 **34 家**
