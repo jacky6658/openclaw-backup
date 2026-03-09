@@ -1,0 +1,20 @@
+[
+  {
+    "name": "範例科技公司",
+    "email": "hr@example.com",
+    "contactPerson": "張經理",
+    "source": "104",
+    "status": "待開發",
+    "notes": "從104抓取，有AI工程師職缺",
+    "addedAt": "2026-02-10"
+  },
+  {
+    "name": "SOLU M",
+    "email": "wjkang@solu-m.com",
+    "contactPerson": "Woojin Kang",
+    "source": "名片（Jacky提供）",
+    "status": "待開發",
+    "notes": "T:+82 (31) 8006 8438; M:+82 (10) 9050 3634; Title: Vice President of Technology, Power Biz Development Unit / Embedded Power Solution Group; Address: 16914, A-Tower 4 Floor, 357 Guseong-ro, Giheung-gu, Yongin-si, Gyeonggi-do, Republic of Korea; Website: solum-group.com / solumesl.com",
+    "addedAt": "2026-02-11"
+  }
+]

@@ -1,0 +1,37 @@
+# 候選人履歷 - 李小華
+
+## 基本資訊
+- 姓名：李小華
+- Email: lisa.lee@example.com
+- 電話：0987-654-321
+- 目前職位：全端工程師
+- 工作年資：3 年
+- 期望薪資：75k-95k
+
+## 工作經歷
+
+### 全端工程師 | DEF 電商公司 (2022-現在)
+- 使用 React + Node.js 開發電商平台
+- 負責前後端功能開發與維護
+- 整合第三方金流與物流 API
+- 優化網站效能，將載入時間減少 40%
+- 參與 Agile/Scrum 開發流程
+
+### Junior 前端工程師 | GHI 軟體公司 (2021-2022)
+- 使用 Vue.js 開發 SaaS 產品前端
+- 與設計師協作完成 UI/UX 實作
+- 撰寫單元測試與整合測試
+
+## 技能
+**前端**: React, Vue.js, TypeScript, Next.js, HTML5, CSS3, Tailwind
+**後端**: Node.js, Express, NestJS
+**資料庫**: MySQL, PostgreSQL, MongoDB, Redis
+**其他**: Docker, Git, REST API, GraphQL, Webpack
+
+## 學歷
+- 國立成功大學 資訊工程學系 學士 (2017-2021)
+
+## 其他
+- 英文：中上（TOEIC 850）
+- 有個人技術部落格，文章瀏覽量 10萬+
+- 參與多個開源專案貢獻

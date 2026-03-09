@@ -1,0 +1,15 @@
+{
+  "jd_id": 7,
+  "job_title": "財會主管",
+  "location": "Cambodia",
+  "search_time": "2026-02-12T20:06:51+08:00",
+  "total_found": 10,
+  "candidates": [
+    {
+      "name": "候選人範例 1",
+      "score": 87,
+      "company": "範例公司 A",
+      "source": "linkedin_public"
+    }
+  ]
+}

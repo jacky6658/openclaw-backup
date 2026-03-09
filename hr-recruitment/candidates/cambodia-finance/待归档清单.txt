@@ -1,0 +1,67 @@
+# 柬埔寨财会候选人履历对应清单
+# 请告诉我每个档案对应的候选人姓名
+
+## 已确认
+file_622 = Hor Chhunly (P2)
+
+## 待确认（共38个）
+file_601 = ?
+file_602 = ?
+file_603 = ?
+file_606 = ?
+file_623 = ?
+file_624 = ?
+file_625 = ?
+file_626 = ?
+file_627 = ?
+file_628 = ?
+file_629 = ?
+file_630 = ?
+file_631 = ?
+file_632 = ?
+file_633 = ?
+file_634 = ?
+file_635 = ?
+file_636 = ?
+file_637 = ?
+file_638 = ?
+file_639 = ?
+file_640 = ?
+file_641 = ?
+file_642 = ?
+file_643 = ?
+file_644 = ?
+file_645 = ?
+file_646 = ?
+file_647 = ?
+file_648 = ?
+file_649 = ?
+file_650 = ?
+file_651 = ?
+file_652 = ?
+file_653 = ?
+file_654 = ?
+file_655 = ?
+file_656 = ?
+
+---
+候选人分类参考：
+
+P0 优先联系（3位）：
+- Soun Mara
+- Ingrid Ren
+- Malita Hout
+
+P1 待确认（3位）：
+- Chong Chhe Chhit
+- Mao Veasna
+- Chanmolen Chen
+
+P2 备选（5位）：
+- Nang Y Daly
+- Hor Chhunly ✅
+- Sona Rath
+- SO Panharath
+- Sann Cheng
+
+其他：剩余候选人

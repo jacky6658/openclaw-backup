@@ -1,0 +1,321 @@
+[
+  {
+    "name": "Wei-Ning Huang",
+    "github_url": "https://github.com/aitjcize",
+    "source": "GitHub",
+    "platforms": [
+      "github"
+    ],
+    "skills": [
+      "Python",
+      "Linux",
+      "Crypto",
+      "Wallet",
+      "Blockchain",
+      "Shell",
+      "Red-Light-Therapy",
+      "E-Ink",
+      "Cryptocurrency",
+      "Golang",
+      "Photoframe",
+      "Homeassistant-Integration",
+      "Rust",
+      "JavaScript",
+      "Go",
+      "Ethereum",
+      "Bash",
+      "E-Ink-Frame",
+      "Terra-Luna",
+      "Homekit",
+      "Polkadot",
+      "AI",
+      "Home-Assistant",
+      "Blockbluelight",
+      "Epaper-Displays",
+      "E-Paperdisplay",
+      "Epaper",
+      "Node.js",
+      "Homeassistant",
+      "E-Ink-Display"
+    ],
+    "languages": {
+      "Python": 5,
+      "Go": 1,
+      "JavaScript": 1,
+      "Rust": 1,
+      "Shell": 1
+    },
+    "bio_source": "github_inference",
+    "fingerprint": "wei-ninghuang_"
+  },
+  {
+    "name": "Yi Lin Tsai ",
+    "github_url": "https://github.com/andy6804tw",
+    "source": "GitHub",
+    "platforms": [
+      "github"
+    ],
+    "skills": [
+      "AI",
+      "Bash",
+      "Python",
+      "Machine-Learning",
+      "Linux",
+      "Java",
+      "Data Science",
+      "Shell",
+      "Machine Learning"
+    ],
+    "languages": {
+      "Jupyter Notebook": 4,
+      "Shell": 1,
+      "Java": 1
+    },
+    "bio_source": "github_inference",
+    "fingerprint": "yilintsai_"
+  },
+  {
+    "name": "A-baoYang",
+    "github_url": "https://github.com/A-baoYang",
+    "source": "GitHub",
+    "platforms": [
+      "github"
+    ],
+    "skills": [
+      "Deep Learning",
+      "AI",
+      "Instruction-Following",
+      "Lora",
+      "Chatgpt",
+      "Python",
+      "TypeScript",
+      "Fine-Tuning",
+      "PyTorch",
+      "Datasets",
+      "Alpaca",
+      "Deep-Learning",
+      "Nlp",
+      "爬蟲",
+      "Pytorch",
+      "Llm"
+    ],
+    "languages": {
+      "Python": 4,
+      "TypeScript": 1
+    },
+    "bio_source": "github_inference",
+    "fingerprint": "a-baoyang_"
+  },
+  {
+    "name": "Haowen Jiang",
+    "github_url": "https://github.com/howard-haowen",
+    "source": "GitHub",
+    "platforms": [
+      "github"
+    ],
+    "skills": [
+      "Linguistics",
+      "Translation",
+      "Language-Learning",
+      "Python",
+      "Customer-Reviews",
+      "Github-Pages",
+      "Text-Classification",
+      "Data-Science",
+      "Sentence-Pairs",
+      "Spacy-Nlp",
+      "Crawling",
+      "Streamlit",
+      "English",
+      "Machine Learning",
+      "Pca-Analysis",
+      "Morphology",
+      "Word2Vec-Embeddinngs",
+      "Forums",
+      "Spacy",
+      "FastAPI",
+      "Text-Similarity",
+      "Formosan",
+      "Jupyter-Notebook",
+      "Reavealjs",
+      "Database",
+      "Typology",
+      "Git",
+      "Marp",
+      "Chinese-Traditional",
+      "Tfidf-Vectorizer",
+      "Machine-Learning",
+      "Academic-Website",
+      "Chinese",
+      "Taiwan",
+      "Data Science",
+      "Japanese",
+      "Llm",
+      "Indigenous-Languages",
+      "AI",
+      "Genai",
+      "Syntax",
+      "Austronesian",
+      "Personal-Portfolio",
+      "Slides",
+      "Nlp",
+      "Sentiment-Analysis",
+      "Transformer"
+    ],
+    "languages": {
+      "Jupyter Notebook": 1,
+      "Python": 1
+    },
+    "bio_source": "github_inference",
+    "fingerprint": "haowenjiang_"
+  },
+  {
+    "name": "Bogdan Buduroiu",
+    "github_url": "https://github.com/bruvduroiu",
+    "source": "GitHub",
+    "platforms": [
+      "github"
+    ],
+    "skills": [
+      "Dotfiles-Macos",
+      "Golang",
+      "Config",
+      "AI",
+      "Dotfiles-Linux",
+      "Linux",
+      "Nix",
+      "Github-Config",
+      "Dotfiles",
+      "Go",
+      "Nixos"
+    ],
+    "languages": {
+      "Go": 1
+    },
+    "bio_source": "github_inference",
+    "fingerprint": "bogdanbuduroiu_"
+  },
+  {
+    "name": "kiwi946",
+    "github_url": "https://github.com/handsomekiwi",
+    "source": "GitHub",
+    "platforms": [
+      "github"
+    ],
+    "skills": [
+      ".NET",
+      "C#",
+      "AI"
+    ],
+    "languages": {
+      "C#": 1
+    },
+    "bio_source": "github_inference",
+    "fingerprint": "kiwi946_"
+  },
+  {
+    "name": "Chen, Yu-Jie",
+    "github_url": "https://github.com/cyj407",
+    "source": "GitHub",
+    "platforms": [
+      "github"
+    ],
+    "skills": [
+      "AI",
+      "Python",
+      "Java",
+      "Data Science",
+      "JavaScript",
+      "Node.js",
+      "Machine Learning"
+    ],
+    "languages": {
+      "Python": 6,
+      "JavaScript": 2,
+      "Jupyter Notebook": 1,
+      "Java": 1
+    },
+    "bio_source": "github_inference",
+    "fingerprint": "chen,yu-jie_"
+  },
+  {
+    "name": "Hao Chen",
+    "github_url": "https://github.com/azurechen",
+    "source": "GitHub",
+    "platforms": [
+      "github"
+    ],
+    "skills": [
+      "iOS",
+      "AI",
+      "Python",
+      "TypeScript",
+      "React",
+      "雲端",
+      "Java",
+      "Azure",
+      "前端",
+      "Swift"
+    ],
+    "languages": {
+      "Swift": 3,
+      "TypeScript": 1,
+      "Java": 1,
+      "Python": 1
+    },
+    "bio_source": "github_inference",
+    "fingerprint": "haochen_"
+  },
+  {
+    "name": "AndyKuan",
+    "github_url": "https://github.com/andy952737",
+    "source": "GitHub",
+    "platforms": [
+      "github"
+    ],
+    "skills": [
+      "Docker",
+      "Vue",
+      "AI",
+      "AWS",
+      "React",
+      "雲端",
+      "Java",
+      "Ruby",
+      "JavaScript",
+      "Node.js",
+      "前端"
+    ],
+    "languages": {
+      "Ruby": 4,
+      "JavaScript": 1,
+      "Java": 1
+    },
+    "bio_source": "github_inference",
+    "fingerprint": "andykuan_"
+  },
+  {
+    "name": "CHIRAG JINDAL",
+    "github_url": "https://github.com/chiragjindal123",
+    "source": "GitHub",
+    "platforms": [
+      "github"
+    ],
+    "skills": [
+      "Config",
+      "AI",
+      "Python",
+      "C++",
+      "Github-Config",
+      "Data Science",
+      "Machine Learning"
+    ],
+    "languages": {
+      "Python": 2,
+      "Jupyter Notebook": 1,
+      "C++": 1
+    },
+    "bio_source": "github_inference",
+    "fingerprint": "chiragjindal_"
+  }
+]

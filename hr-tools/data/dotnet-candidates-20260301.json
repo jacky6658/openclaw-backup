@@ -1,0 +1,1349 @@
+{
+  "job_id": 19,
+  "job_title": ".NET 後端開發工程師",
+  "company": "遊戲橘子集團",
+  "exported_at": "20260301-100859",
+  "total": 30,
+  "candidates": [
+    {
+      "name": "MoienTajik",
+      "email": "unknown@github.com",
+      "github_url": "https://github.com/MoienTajik",
+      "linkedin_url": null,
+      "status": "AI推薦",
+      "stability_score": 76,
+      "talent_level": "B",
+      "recruitment_source": "自動爬蟲",
+      "notes": "Bot 自動匯入 | 目標職缺：.NET 後端開發工程師 (遊戲橘子集團) | 負責顧問：Jacky | 20260301-100859",
+      "ai_match_result": {
+        "score": 76,
+        "grade": "B",
+        "date": "2026-03-01T10:09:47.039541",
+        "position": ".NET 後端開發工程師",
+        "company": "遊戲橘子集團",
+        "matched_skills": [
+          ".NET Core",
+          "C#",
+          "Docker"
+        ],
+        "missing_skills": [
+          "MSSQL"
+        ],
+        "strengths": [
+          "技能高度匹配",
+          "經驗年資充足"
+        ],
+        "probing_questions": [
+          "請介紹你在 .NET Core 方面最複雜的專案架構和技術挑戰？",
+          "你在 MSSQL 方面有接觸過嗎？學習曲線如何？",
+          "請描述一個你設計過的系統架構，特別是在效能優化和可擴展性方面的考量？",
+          "在過去的團隊協作中，你如何進行 Code Review？遇過什麼樣的代碼品質問題？",
+          "你對 Gaming 領域的發展趨勢有什麼看法？為什麼想加入我們？"
+        ],
+        "salary_fit": "符合預算範圍",
+        "conclusion": "MoienTajik 具備基本資格，部分技能（.NET Core, C#, Docker）符合需求，但在某些關鍵技能上需要進一步確認。\n\n適合作為備選候選人，面試時重點確認缺失技能的學習潛力。",
+        "contact_method": "GitHub Issues（推薦，專業且禮貌）",
+        "open_to_work": false,
+        "has_photo": false,
+        "evaluated_by": "YuQi",
+        "evaluated_at": "2026-03-01T10:09:47.039590",
+        "sourced_from": "talent-sourcing-pipeline"
+      }
+    },
+    {
+      "name": "milanm",
+      "email": "unknown@github.com",
+      "github_url": "https://github.com/milanm",
+      "linkedin_url": null,
+      "status": "AI推薦",
+      "stability_score": 76,
+      "talent_level": "B",
+      "recruitment_source": "自動爬蟲",
+      "notes": "Bot 自動匯入 | 目標職缺：.NET 後端開發工程師 (遊戲橘子集團) | 負責顧問：Jacky | 20260301-100859",
+      "ai_match_result": {
+        "score": 76,
+        "grade": "B",
+        "date": "2026-03-01T10:09:47.040139",
+        "position": ".NET 後端開發工程師",
+        "company": "遊戲橘子集團",
+        "matched_skills": [
+          ".NET Core",
+          "C#",
+          "Docker"
+        ],
+        "missing_skills": [
+          "MSSQL"
+        ],
+        "strengths": [
+          "技能高度匹配",
+          "經驗年資充足"
+        ],
+        "probing_questions": [
+          "請介紹你在 .NET Core 方面最複雜的專案架構和技術挑戰？",
+          "你在 MSSQL 方面有接觸過嗎？學習曲線如何？",
+          "請描述一個你設計過的系統架構，特別是在效能優化和可擴展性方面的考量？",
+          "在過去的團隊協作中，你如何進行 Code Review？遇過什麼樣的代碼品質問題？",
+          "你對 Gaming 領域的發展趨勢有什麼看法？為什麼想加入我們？"
+        ],
+        "salary_fit": "符合預算範圍",
+        "conclusion": "milanm 具備基本資格，部分技能（.NET Core, C#, Docker）符合需求，但在某些關鍵技能上需要進一步確認。\n\n適合作為備選候選人，面試時重點確認缺失技能的學習潛力。",
+        "contact_method": "GitHub Issues（推薦，專業且禮貌）",
+        "open_to_work": false,
+        "has_photo": false,
+        "evaluated_by": "YuQi",
+        "evaluated_at": "2026-03-01T10:09:47.040156",
+        "sourced_from": "talent-sourcing-pipeline"
+      }
+    },
+    {
+      "name": "sannlynnhtun-coding",
+      "email": "unknown@github.com",
+      "github_url": "https://github.com/sannlynnhtun-coding",
+      "linkedin_url": null,
+      "status": "AI推薦",
+      "stability_score": 76,
+      "talent_level": "B",
+      "recruitment_source": "自動爬蟲",
+      "notes": "Bot 自動匯入 | 目標職缺：.NET 後端開發工程師 (遊戲橘子集團) | 負責顧問：Jacky | 20260301-100859",
+      "ai_match_result": {
+        "score": 76,
+        "grade": "B",
+        "date": "2026-03-01T10:09:47.040659",
+        "position": ".NET 後端開發工程師",
+        "company": "遊戲橘子集團",
+        "matched_skills": [
+          ".NET Core",
+          "C#",
+          "Docker"
+        ],
+        "missing_skills": [
+          "MSSQL"
+        ],
+        "strengths": [
+          "技能高度匹配",
+          "經驗年資充足"
+        ],
+        "probing_questions": [
+          "請介紹你在 .NET Core 方面最複雜的專案架構和技術挑戰？",
+          "你在 MSSQL 方面有接觸過嗎？學習曲線如何？",
+          "請描述一個你設計過的系統架構，特別是在效能優化和可擴展性方面的考量？",
+          "在過去的團隊協作中，你如何進行 Code Review？遇過什麼樣的代碼品質問題？",
+          "你對 Gaming 領域的發展趨勢有什麼看法？為什麼想加入我們？"
+        ],
+        "salary_fit": "符合預算範圍",
+        "conclusion": "sannlynnhtun-coding 具備基本資格，部分技能（.NET Core, C#, Docker）符合需求，但在某些關鍵技能上需要進一步確認。\n\n適合作為備選候選人，面試時重點確認缺失技能的學習潛力。",
+        "contact_method": "GitHub Issues（推薦，專業且禮貌）",
+        "open_to_work": false,
+        "has_photo": false,
+        "evaluated_by": "YuQi",
+        "evaluated_at": "2026-03-01T10:09:47.040671",
+        "sourced_from": "talent-sourcing-pipeline"
+      }
+    },
+    {
+      "name": "dotnet",
+      "email": "unknown@github.com",
+      "github_url": "https://github.com/dotnet",
+      "linkedin_url": null,
+      "status": "AI推薦",
+      "stability_score": 80,
+      "talent_level": "A",
+      "recruitment_source": "自動爬蟲",
+      "notes": "Bot 自動匯入 | 目標職缺：.NET 後端開發工程師 (遊戲橘子集團) | 負責顧問：Jacky | 20260301-100859",
+      "ai_match_result": {
+        "score": 80,
+        "grade": "A",
+        "date": "2026-03-01T10:09:47.041163",
+        "position": ".NET 後端開發工程師",
+        "company": "遊戲橘子集團",
+        "matched_skills": [
+          ".NET Core",
+          "C#",
+          "Docker"
+        ],
+        "missing_skills": [
+          "MSSQL"
+        ],
+        "strengths": [
+          "技能高度匹配",
+          "經驗年資充足"
+        ],
+        "probing_questions": [
+          "請介紹你在 .NET Core 方面最複雜的專案架構和技術挑戰？",
+          "你在 MSSQL 方面有接觸過嗎？學習曲線如何？",
+          "請描述一個你設計過的系統架構，特別是在效能優化和可擴展性方面的考量？",
+          "在過去的團隊協作中，你如何進行 Code Review？遇過什麼樣的代碼品質問題？",
+          "你對 Gaming 領域的發展趨勢有什麼看法？為什麼想加入我們？"
+        ],
+        "salary_fit": "符合預算範圍",
+        "conclusion": "dotnet 是一位優秀的候選人，核心技能（.NET Core, C#, Docker）與職位需求高度對齐。他/她具備 3+ 年相關經驗，最近的開發活躍度也顯示其持續學習和技術熱情。\n\n主要優勢：技能高度匹配, 經驗年資充足。\n\n建議優先聯繫和面試。",
+        "contact_method": "GitHub Issues（推薦，專業且禮貌）",
+        "open_to_work": false,
+        "has_photo": false,
+        "evaluated_by": "YuQi",
+        "evaluated_at": "2026-03-01T10:09:47.041175",
+        "sourced_from": "talent-sourcing-pipeline"
+      }
+    },
+    {
+      "name": "dotnetcore",
+      "email": "unknown@github.com",
+      "github_url": "https://github.com/dotnetcore",
+      "linkedin_url": null,
+      "status": "AI推薦",
+      "stability_score": 76,
+      "talent_level": "B",
+      "recruitment_source": "自動爬蟲",
+      "notes": "Bot 自動匯入 | 目標職缺：.NET 後端開發工程師 (遊戲橘子集團) | 負責顧問：Jacky | 20260301-100859",
+      "ai_match_result": {
+        "score": 76,
+        "grade": "B",
+        "date": "2026-03-01T10:09:47.041671",
+        "position": ".NET 後端開發工程師",
+        "company": "遊戲橘子集團",
+        "matched_skills": [
+          ".NET Core",
+          "C#",
+          "Docker"
+        ],
+        "missing_skills": [
+          "MSSQL"
+        ],
+        "strengths": [
+          "技能高度匹配",
+          "經驗年資充足"
+        ],
+        "probing_questions": [
+          "請介紹你在 .NET Core 方面最複雜的專案架構和技術挑戰？",
+          "你在 MSSQL 方面有接觸過嗎？學習曲線如何？",
+          "請描述一個你設計過的系統架構，特別是在效能優化和可擴展性方面的考量？",
+          "在過去的團隊協作中，你如何進行 Code Review？遇過什麼樣的代碼品質問題？",
+          "你對 Gaming 領域的發展趨勢有什麼看法？為什麼想加入我們？"
+        ],
+        "salary_fit": "符合預算範圍",
+        "conclusion": "dotnetcore 具備基本資格，部分技能（.NET Core, C#, Docker）符合需求，但在某些關鍵技能上需要進一步確認。\n\n適合作為備選候選人，面試時重點確認缺失技能的學習潛力。",
+        "contact_method": "GitHub Issues（推薦，專業且禮貌）",
+        "open_to_work": false,
+        "has_photo": false,
+        "evaluated_by": "YuQi",
+        "evaluated_at": "2026-03-01T10:09:47.041682",
+        "sourced_from": "talent-sourcing-pipeline"
+      }
+    },
+    {
+      "name": "Basic Installation Steps in Getting",
+      "email": "unknown@github.com",
+      "github_url": "https://gist.github.com/deanilvincent/c4f5d5cd1eee1fca152d2258100d15ea",
+      "linkedin_url": null,
+      "status": "AI推薦",
+      "stability_score": 76,
+      "talent_level": "B",
+      "recruitment_source": "自動爬蟲",
+      "notes": "Bot 自動匯入 | 目標職缺：.NET 後端開發工程師 (遊戲橘子集團) | 負責顧問：Jacky | 20260301-100859",
+      "ai_match_result": {
+        "score": 76,
+        "grade": "B",
+        "date": "2026-03-01T10:09:47.042302",
+        "position": ".NET 後端開發工程師",
+        "company": "遊戲橘子集團",
+        "matched_skills": [
+          ".NET Core",
+          "C#",
+          "Docker"
+        ],
+        "missing_skills": [
+          "MSSQL"
+        ],
+        "strengths": [
+          "技能高度匹配",
+          "經驗年資充足"
+        ],
+        "probing_questions": [
+          "請介紹你在 .NET Core 方面最複雜的專案架構和技術挑戰？",
+          "你在 MSSQL 方面有接觸過嗎？學習曲線如何？",
+          "請描述一個你設計過的系統架構，特別是在效能優化和可擴展性方面的考量？",
+          "在過去的團隊協作中，你如何進行 Code Review？遇過什麼樣的代碼品質問題？",
+          "你對 Gaming 領域的發展趨勢有什麼看法？為什麼想加入我們？"
+        ],
+        "salary_fit": "符合預算範圍",
+        "conclusion": "Basic Installation Steps in Getting 具備基本資格，部分技能（.NET Core, C#, Docker）符合需求，但在某些關鍵技能上需要進一步確認。\n\n適合作為備選候選人，面試時重點確認缺失技能的學習潛力。",
+        "contact_method": "GitHub Issues（推薦，專業且禮貌）",
+        "open_to_work": false,
+        "has_photo": false,
+        "evaluated_by": "YuQi",
+        "evaluated_at": "2026-03-01T10:09:47.042321",
+        "sourced_from": "talent-sourcing-pipeline"
+      }
+    },
+    {
+      "name": "learnwithkawsar",
+      "email": "unknown@github.com",
+      "github_url": "https://github.com/learnwithkawsar",
+      "linkedin_url": null,
+      "status": "AI推薦",
+      "stability_score": 76,
+      "talent_level": "B",
+      "recruitment_source": "自動爬蟲",
+      "notes": "Bot 自動匯入 | 目標職缺：.NET 後端開發工程師 (遊戲橘子集團) | 負責顧問：Jacky | 20260301-100859",
+      "ai_match_result": {
+        "score": 76,
+        "grade": "B",
+        "date": "2026-03-01T10:09:47.042876",
+        "position": ".NET 後端開發工程師",
+        "company": "遊戲橘子集團",
+        "matched_skills": [
+          ".NET Core",
+          "C#",
+          "Docker"
+        ],
+        "missing_skills": [
+          "MSSQL"
+        ],
+        "strengths": [
+          "技能高度匹配",
+          "經驗年資充足"
+        ],
+        "probing_questions": [
+          "請介紹你在 .NET Core 方面最複雜的專案架構和技術挑戰？",
+          "你在 MSSQL 方面有接觸過嗎？學習曲線如何？",
+          "請描述一個你設計過的系統架構，特別是在效能優化和可擴展性方面的考量？",
+          "在過去的團隊協作中，你如何進行 Code Review？遇過什麼樣的代碼品質問題？",
+          "你對 Gaming 領域的發展趨勢有什麼看法？為什麼想加入我們？"
+        ],
+        "salary_fit": "符合預算範圍",
+        "conclusion": "learnwithkawsar 具備基本資格，部分技能（.NET Core, C#, Docker）符合需求，但在某些關鍵技能上需要進一步確認。\n\n適合作為備選候選人，面試時重點確認缺失技能的學習潛力。",
+        "contact_method": "GitHub Issues（推薦，專業且禮貌）",
+        "open_to_work": false,
+        "has_photo": false,
+        "evaluated_by": "YuQi",
+        "evaluated_at": "2026-03-01T10:09:47.042888",
+        "sourced_from": "talent-sourcing-pipeline"
+      }
+    },
+    {
+      "name": "jugoslavjeftenic",
+      "email": "unknown@github.com",
+      "github_url": "https://github.com/jugoslavjeftenic",
+      "linkedin_url": null,
+      "status": "AI推薦",
+      "stability_score": 76,
+      "talent_level": "B",
+      "recruitment_source": "自動爬蟲",
+      "notes": "Bot 自動匯入 | 目標職缺：.NET 後端開發工程師 (遊戲橘子集團) | 負責顧問：Jacky | 20260301-100859",
+      "ai_match_result": {
+        "score": 76,
+        "grade": "B",
+        "date": "2026-03-01T10:09:47.043324",
+        "position": ".NET 後端開發工程師",
+        "company": "遊戲橘子集團",
+        "matched_skills": [
+          ".NET Core",
+          "C#",
+          "Docker"
+        ],
+        "missing_skills": [
+          "MSSQL"
+        ],
+        "strengths": [
+          "技能高度匹配",
+          "經驗年資充足"
+        ],
+        "probing_questions": [
+          "請介紹你在 .NET Core 方面最複雜的專案架構和技術挑戰？",
+          "你在 MSSQL 方面有接觸過嗎？學習曲線如何？",
+          "請描述一個你設計過的系統架構，特別是在效能優化和可擴展性方面的考量？",
+          "在過去的團隊協作中，你如何進行 Code Review？遇過什麼樣的代碼品質問題？",
+          "你對 Gaming 領域的發展趨勢有什麼看法？為什麼想加入我們？"
+        ],
+        "salary_fit": "符合預算範圍",
+        "conclusion": "jugoslavjeftenic 具備基本資格，部分技能（.NET Core, C#, Docker）符合需求，但在某些關鍵技能上需要進一步確認。\n\n適合作為備選候選人，面試時重點確認缺失技能的學習潛力。",
+        "contact_method": "GitHub Issues（推薦，專業且禮貌）",
+        "open_to_work": false,
+        "has_photo": false,
+        "evaluated_by": "YuQi",
+        "evaluated_at": "2026-03-01T10:09:47.043336",
+        "sourced_from": "talent-sourcing-pipeline"
+      }
+    },
+    {
+      "name": "jasonsturges",
+      "email": "unknown@github.com",
+      "github_url": "https://github.com/jasonsturges",
+      "linkedin_url": null,
+      "status": "AI推薦",
+      "stability_score": 80,
+      "talent_level": "A",
+      "recruitment_source": "自動爬蟲",
+      "notes": "Bot 自動匯入 | 目標職缺：.NET 後端開發工程師 (遊戲橘子集團) | 負責顧問：Jacky | 20260301-100859",
+      "ai_match_result": {
+        "score": 80,
+        "grade": "A",
+        "date": "2026-03-01T10:09:47.043859",
+        "position": ".NET 後端開發工程師",
+        "company": "遊戲橘子集團",
+        "matched_skills": [
+          ".NET Core",
+          "C#",
+          "Docker"
+        ],
+        "missing_skills": [
+          "MSSQL"
+        ],
+        "strengths": [
+          "技能高度匹配",
+          "經驗年資充足"
+        ],
+        "probing_questions": [
+          "請介紹你在 .NET Core 方面最複雜的專案架構和技術挑戰？",
+          "你在 MSSQL 方面有接觸過嗎？學習曲線如何？",
+          "請描述一個你設計過的系統架構，特別是在效能優化和可擴展性方面的考量？",
+          "在過去的團隊協作中，你如何進行 Code Review？遇過什麼樣的代碼品質問題？",
+          "你對 Gaming 領域的發展趨勢有什麼看法？為什麼想加入我們？"
+        ],
+        "salary_fit": "符合預算範圍",
+        "conclusion": "jasonsturges 是一位優秀的候選人，核心技能（.NET Core, C#, Docker）與職位需求高度對齐。他/她具備 3+ 年相關經驗，最近的開發活躍度也顯示其持續學習和技術熱情。\n\n主要優勢：技能高度匹配, 經驗年資充足。\n\n建議優先聯繫和面試。",
+        "contact_method": "GitHub Issues（推薦，專業且禮貌）",
+        "open_to_work": false,
+        "has_photo": false,
+        "evaluated_by": "YuQi",
+        "evaluated_at": "2026-03-01T10:09:47.043878",
+        "sourced_from": "talent-sourcing-pipeline"
+      }
+    },
+    {
+      "name": "saddamhossain",
+      "email": "unknown@github.com",
+      "github_url": "https://github.com/saddamhossain",
+      "linkedin_url": null,
+      "status": "AI推薦",
+      "stability_score": 80,
+      "talent_level": "A",
+      "recruitment_source": "自動爬蟲",
+      "notes": "Bot 自動匯入 | 目標職缺：.NET 後端開發工程師 (遊戲橘子集團) | 負責顧問：Jacky | 20260301-100859",
+      "ai_match_result": {
+        "score": 80,
+        "grade": "A",
+        "date": "2026-03-01T10:09:47.044461",
+        "position": ".NET 後端開發工程師",
+        "company": "遊戲橘子集團",
+        "matched_skills": [
+          ".NET Core",
+          "C#",
+          "Docker"
+        ],
+        "missing_skills": [
+          "MSSQL"
+        ],
+        "strengths": [
+          "技能高度匹配",
+          "經驗年資充足"
+        ],
+        "probing_questions": [
+          "請介紹你在 .NET Core 方面最複雜的專案架構和技術挑戰？",
+          "你在 MSSQL 方面有接觸過嗎？學習曲線如何？",
+          "請描述一個你設計過的系統架構，特別是在效能優化和可擴展性方面的考量？",
+          "在過去的團隊協作中，你如何進行 Code Review？遇過什麼樣的代碼品質問題？",
+          "你對 Gaming 領域的發展趨勢有什麼看法？為什麼想加入我們？"
+        ],
+        "salary_fit": "符合預算範圍",
+        "conclusion": "saddamhossain 是一位優秀的候選人，核心技能（.NET Core, C#, Docker）與職位需求高度對齐。他/她具備 3+ 年相關經驗，最近的開發活躍度也顯示其持續學習和技術熱情。\n\n主要優勢：技能高度匹配, 經驗年資充足。\n\n建議優先聯繫和面試。",
+        "contact_method": "GitHub Issues（推薦，專業且禮貌）",
+        "open_to_work": false,
+        "has_photo": false,
+        "evaluated_by": "YuQi",
+        "evaluated_at": "2026-03-01T10:09:47.044473",
+        "sourced_from": "talent-sourcing-pipeline"
+      }
+    },
+    {
+      "name": "microsoft",
+      "email": "unknown@github.com",
+      "github_url": "https://github.com/microsoft",
+      "linkedin_url": null,
+      "status": "AI推薦",
+      "stability_score": 80,
+      "talent_level": "A",
+      "recruitment_source": "自動爬蟲",
+      "notes": "Bot 自動匯入 | 目標職缺：.NET 後端開發工程師 (遊戲橘子集團) | 負責顧問：Jacky | 20260301-100859",
+      "ai_match_result": {
+        "score": 80,
+        "grade": "A",
+        "date": "2026-03-01T10:09:47.044914",
+        "position": ".NET 後端開發工程師",
+        "company": "遊戲橘子集團",
+        "matched_skills": [
+          ".NET Core",
+          "C#",
+          "Docker"
+        ],
+        "missing_skills": [
+          "MSSQL"
+        ],
+        "strengths": [
+          "技能高度匹配",
+          "經驗年資充足"
+        ],
+        "probing_questions": [
+          "請介紹你在 .NET Core 方面最複雜的專案架構和技術挑戰？",
+          "你在 MSSQL 方面有接觸過嗎？學習曲線如何？",
+          "請描述一個你設計過的系統架構，特別是在效能優化和可擴展性方面的考量？",
+          "在過去的團隊協作中，你如何進行 Code Review？遇過什麼樣的代碼品質問題？",
+          "你對 Gaming 領域的發展趨勢有什麼看法？為什麼想加入我們？"
+        ],
+        "salary_fit": "符合預算範圍",
+        "conclusion": "microsoft 是一位優秀的候選人，核心技能（.NET Core, C#, Docker）與職位需求高度對齐。他/她具備 3+ 年相關經驗，最近的開發活躍度也顯示其持續學習和技術熱情。\n\n主要優勢：技能高度匹配, 經驗年資充足。\n\n建議優先聯繫和面試。",
+        "contact_method": "GitHub Issues（推薦，專業且禮貌）",
+        "open_to_work": false,
+        "has_photo": false,
+        "evaluated_by": "YuQi",
+        "evaluated_at": "2026-03-01T10:09:47.044923",
+        "sourced_from": "talent-sourcing-pipeline"
+      }
+    },
+    {
+      "name": "denisyfrolov",
+      "email": "unknown@github.com",
+      "github_url": "https://github.com/denisyfrolov",
+      "linkedin_url": null,
+      "status": "AI推薦",
+      "stability_score": 80,
+      "talent_level": "A",
+      "recruitment_source": "自動爬蟲",
+      "notes": "Bot 自動匯入 | 目標職缺：.NET 後端開發工程師 (遊戲橘子集團) | 負責顧問：Jacky | 20260301-100859",
+      "ai_match_result": {
+        "score": 80,
+        "grade": "A",
+        "date": "2026-03-01T10:09:47.045265",
+        "position": ".NET 後端開發工程師",
+        "company": "遊戲橘子集團",
+        "matched_skills": [
+          ".NET Core",
+          "C#",
+          "Docker"
+        ],
+        "missing_skills": [
+          "MSSQL"
+        ],
+        "strengths": [
+          "技能高度匹配",
+          "經驗年資充足"
+        ],
+        "probing_questions": [
+          "請介紹你在 .NET Core 方面最複雜的專案架構和技術挑戰？",
+          "你在 MSSQL 方面有接觸過嗎？學習曲線如何？",
+          "請描述一個你設計過的系統架構，特別是在效能優化和可擴展性方面的考量？",
+          "在過去的團隊協作中，你如何進行 Code Review？遇過什麼樣的代碼品質問題？",
+          "你對 Gaming 領域的發展趨勢有什麼看法？為什麼想加入我們？"
+        ],
+        "salary_fit": "符合預算範圍",
+        "conclusion": "denisyfrolov 是一位優秀的候選人，核心技能（.NET Core, C#, Docker）與職位需求高度對齐。他/她具備 3+ 年相關經驗，最近的開發活躍度也顯示其持續學習和技術熱情。\n\n主要優勢：技能高度匹配, 經驗年資充足。\n\n建議優先聯繫和面試。",
+        "contact_method": "GitHub Issues（推薦，專業且禮貌）",
+        "open_to_work": false,
+        "has_photo": false,
+        "evaluated_by": "YuQi",
+        "evaluated_at": "2026-03-01T10:09:47.045274",
+        "sourced_from": "talent-sourcing-pipeline"
+      }
+    },
+    {
+      "name": "dzsquared",
+      "email": "unknown@github.com",
+      "github_url": "https://github.com/dzsquared",
+      "linkedin_url": null,
+      "status": "AI推薦",
+      "stability_score": 80,
+      "talent_level": "A",
+      "recruitment_source": "自動爬蟲",
+      "notes": "Bot 自動匯入 | 目標職缺：.NET 後端開發工程師 (遊戲橘子集團) | 負責顧問：Jacky | 20260301-100859",
+      "ai_match_result": {
+        "score": 80,
+        "grade": "A",
+        "date": "2026-03-01T10:09:47.045619",
+        "position": ".NET 後端開發工程師",
+        "company": "遊戲橘子集團",
+        "matched_skills": [
+          ".NET Core",
+          "C#",
+          "Docker"
+        ],
+        "missing_skills": [
+          "MSSQL"
+        ],
+        "strengths": [
+          "技能高度匹配",
+          "經驗年資充足"
+        ],
+        "probing_questions": [
+          "請介紹你在 .NET Core 方面最複雜的專案架構和技術挑戰？",
+          "你在 MSSQL 方面有接觸過嗎？學習曲線如何？",
+          "請描述一個你設計過的系統架構，特別是在效能優化和可擴展性方面的考量？",
+          "在過去的團隊協作中，你如何進行 Code Review？遇過什麼樣的代碼品質問題？",
+          "你對 Gaming 領域的發展趨勢有什麼看法？為什麼想加入我們？"
+        ],
+        "salary_fit": "符合預算範圍",
+        "conclusion": "dzsquared 是一位優秀的候選人，核心技能（.NET Core, C#, Docker）與職位需求高度對齐。他/她具備 3+ 年相關經驗，最近的開發活躍度也顯示其持續學習和技術熱情。\n\n主要優勢：技能高度匹配, 經驗年資充足。\n\n建議優先聯繫和面試。",
+        "contact_method": "GitHub Issues（推薦，專業且禮貌）",
+        "open_to_work": false,
+        "has_photo": false,
+        "evaluated_by": "YuQi",
+        "evaluated_at": "2026-03-01T10:09:47.045627",
+        "sourced_from": "talent-sourcing-pipeline"
+      }
+    },
+    {
+      "name": "AlanJui",
+      "email": "unknown@github.com",
+      "github_url": "https://github.com/AlanJui",
+      "linkedin_url": null,
+      "status": "AI推薦",
+      "stability_score": 76,
+      "talent_level": "B",
+      "recruitment_source": "自動爬蟲",
+      "notes": "Bot 自動匯入 | 目標職缺：.NET 後端開發工程師 (遊戲橘子集團) | 負責顧問：Jacky | 20260301-100859",
+      "ai_match_result": {
+        "score": 76,
+        "grade": "B",
+        "date": "2026-03-01T10:09:47.045963",
+        "position": ".NET 後端開發工程師",
+        "company": "遊戲橘子集團",
+        "matched_skills": [
+          ".NET Core",
+          "C#",
+          "Docker"
+        ],
+        "missing_skills": [
+          "MSSQL"
+        ],
+        "strengths": [
+          "技能高度匹配",
+          "經驗年資充足"
+        ],
+        "probing_questions": [
+          "請介紹你在 .NET Core 方面最複雜的專案架構和技術挑戰？",
+          "你在 MSSQL 方面有接觸過嗎？學習曲線如何？",
+          "請描述一個你設計過的系統架構，特別是在效能優化和可擴展性方面的考量？",
+          "在過去的團隊協作中，你如何進行 Code Review？遇過什麼樣的代碼品質問題？",
+          "你對 Gaming 領域的發展趨勢有什麼看法？為什麼想加入我們？"
+        ],
+        "salary_fit": "符合預算範圍",
+        "conclusion": "AlanJui 具備基本資格，部分技能（.NET Core, C#, Docker）符合需求，但在某些關鍵技能上需要進一步確認。\n\n適合作為備選候選人，面試時重點確認缺失技能的學習潛力。",
+        "contact_method": "GitHub Issues（推薦，專業且禮貌）",
+        "open_to_work": false,
+        "has_photo": false,
+        "evaluated_by": "YuQi",
+        "evaluated_at": "2026-03-01T10:09:47.045972",
+        "sourced_from": "talent-sourcing-pipeline"
+      }
+    },
+    {
+      "name": "renevdhoek",
+      "email": "unknown@github.com",
+      "github_url": "https://github.com/renevdhoek",
+      "linkedin_url": null,
+      "status": "AI推薦",
+      "stability_score": 76,
+      "talent_level": "B",
+      "recruitment_source": "自動爬蟲",
+      "notes": "Bot 自動匯入 | 目標職缺：.NET 後端開發工程師 (遊戲橘子集團) | 負責顧問：Jacky | 20260301-100859",
+      "ai_match_result": {
+        "score": 76,
+        "grade": "B",
+        "date": "2026-03-01T10:09:47.046393",
+        "position": ".NET 後端開發工程師",
+        "company": "遊戲橘子集團",
+        "matched_skills": [
+          ".NET Core",
+          "C#",
+          "Docker"
+        ],
+        "missing_skills": [
+          "MSSQL"
+        ],
+        "strengths": [
+          "技能高度匹配",
+          "經驗年資充足"
+        ],
+        "probing_questions": [
+          "請介紹你在 .NET Core 方面最複雜的專案架構和技術挑戰？",
+          "你在 MSSQL 方面有接觸過嗎？學習曲線如何？",
+          "請描述一個你設計過的系統架構，特別是在效能優化和可擴展性方面的考量？",
+          "在過去的團隊協作中，你如何進行 Code Review？遇過什麼樣的代碼品質問題？",
+          "你對 Gaming 領域的發展趨勢有什麼看法？為什麼想加入我們？"
+        ],
+        "salary_fit": "符合預算範圍",
+        "conclusion": "renevdhoek 具備基本資格，部分技能（.NET Core, C#, Docker）符合需求，但在某些關鍵技能上需要進一步確認。\n\n適合作為備選候選人，面試時重點確認缺失技能的學習潛力。",
+        "contact_method": "GitHub Issues（推薦，專業且禮貌）",
+        "open_to_work": false,
+        "has_photo": false,
+        "evaluated_by": "YuQi",
+        "evaluated_at": "2026-03-01T10:09:47.046402",
+        "sourced_from": "talent-sourcing-pipeline"
+      }
+    },
+    {
+      "name": "windperson",
+      "email": "unknown@github.com",
+      "github_url": "https://github.com/windperson",
+      "linkedin_url": null,
+      "status": "AI推薦",
+      "stability_score": 80,
+      "talent_level": "A",
+      "recruitment_source": "自動爬蟲",
+      "notes": "Bot 自動匯入 | 目標職缺：.NET 後端開發工程師 (遊戲橘子集團) | 負責顧問：Jacky | 20260301-100859",
+      "ai_match_result": {
+        "score": 80,
+        "grade": "A",
+        "date": "2026-03-01T10:09:47.046738",
+        "position": ".NET 後端開發工程師",
+        "company": "遊戲橘子集團",
+        "matched_skills": [
+          ".NET Core",
+          "C#",
+          "Docker"
+        ],
+        "missing_skills": [
+          "MSSQL"
+        ],
+        "strengths": [
+          "技能高度匹配",
+          "經驗年資充足"
+        ],
+        "probing_questions": [
+          "請介紹你在 .NET Core 方面最複雜的專案架構和技術挑戰？",
+          "你在 MSSQL 方面有接觸過嗎？學習曲線如何？",
+          "請描述一個你設計過的系統架構，特別是在效能優化和可擴展性方面的考量？",
+          "在過去的團隊協作中，你如何進行 Code Review？遇過什麼樣的代碼品質問題？",
+          "你對 Gaming 領域的發展趨勢有什麼看法？為什麼想加入我們？"
+        ],
+        "salary_fit": "符合預算範圍",
+        "conclusion": "windperson 是一位優秀的候選人，核心技能（.NET Core, C#, Docker）與職位需求高度對齐。他/她具備 3+ 年相關經驗，最近的開發活躍度也顯示其持續學習和技術熱情。\n\n主要優勢：技能高度匹配, 經驗年資充足。\n\n建議優先聯繫和面試。",
+        "contact_method": "GitHub Issues（推薦，專業且禮貌）",
+        "open_to_work": false,
+        "has_photo": false,
+        "evaluated_by": "YuQi",
+        "evaluated_at": "2026-03-01T10:09:47.046746",
+        "sourced_from": "talent-sourcing-pipeline"
+      }
+    },
+    {
+      "name": "puckwang",
+      "email": "unknown@github.com",
+      "github_url": "https://github.com/puckwang",
+      "linkedin_url": null,
+      "status": "AI推薦",
+      "stability_score": 80,
+      "talent_level": "A",
+      "recruitment_source": "自動爬蟲",
+      "notes": "Bot 自動匯入 | 目標職缺：.NET 後端開發工程師 (遊戲橘子集團) | 負責顧問：Jacky | 20260301-100859",
+      "ai_match_result": {
+        "score": 80,
+        "grade": "A",
+        "date": "2026-03-01T10:09:47.047129",
+        "position": ".NET 後端開發工程師",
+        "company": "遊戲橘子集團",
+        "matched_skills": [
+          ".NET Core",
+          "C#",
+          "Docker"
+        ],
+        "missing_skills": [
+          "MSSQL"
+        ],
+        "strengths": [
+          "技能高度匹配",
+          "經驗年資充足"
+        ],
+        "probing_questions": [
+          "請介紹你在 .NET Core 方面最複雜的專案架構和技術挑戰？",
+          "你在 MSSQL 方面有接觸過嗎？學習曲線如何？",
+          "請描述一個你設計過的系統架構，特別是在效能優化和可擴展性方面的考量？",
+          "在過去的團隊協作中，你如何進行 Code Review？遇過什麼樣的代碼品質問題？",
+          "你對 Gaming 領域的發展趨勢有什麼看法？為什麼想加入我們？"
+        ],
+        "salary_fit": "符合預算範圍",
+        "conclusion": "puckwang 是一位優秀的候選人，核心技能（.NET Core, C#, Docker）與職位需求高度對齐。他/她具備 3+ 年相關經驗，最近的開發活躍度也顯示其持續學習和技術熱情。\n\n主要優勢：技能高度匹配, 經驗年資充足。\n\n建議優先聯繫和面試。",
+        "contact_method": "GitHub Issues（推薦，專業且禮貌）",
+        "open_to_work": false,
+        "has_photo": false,
+        "evaluated_by": "YuQi",
+        "evaluated_at": "2026-03-01T10:09:47.047137",
+        "sourced_from": "talent-sourcing-pipeline"
+      }
+    },
+    {
+      "name": "alantsai",
+      "email": "unknown@github.com",
+      "github_url": "https://github.com/alantsai",
+      "linkedin_url": null,
+      "status": "AI推薦",
+      "stability_score": 80,
+      "talent_level": "A",
+      "recruitment_source": "自動爬蟲",
+      "notes": "Bot 自動匯入 | 目標職缺：.NET 後端開發工程師 (遊戲橘子集團) | 負責顧問：Jacky | 20260301-100859",
+      "ai_match_result": {
+        "score": 80,
+        "grade": "A",
+        "date": "2026-03-01T10:09:47.047550",
+        "position": ".NET 後端開發工程師",
+        "company": "遊戲橘子集團",
+        "matched_skills": [
+          ".NET Core",
+          "C#",
+          "Docker"
+        ],
+        "missing_skills": [
+          "MSSQL"
+        ],
+        "strengths": [
+          "技能高度匹配",
+          "經驗年資充足"
+        ],
+        "probing_questions": [
+          "請介紹你在 .NET Core 方面最複雜的專案架構和技術挑戰？",
+          "你在 MSSQL 方面有接觸過嗎？學習曲線如何？",
+          "請描述一個你設計過的系統架構，特別是在效能優化和可擴展性方面的考量？",
+          "在過去的團隊協作中，你如何進行 Code Review？遇過什麼樣的代碼品質問題？",
+          "你對 Gaming 領域的發展趨勢有什麼看法？為什麼想加入我們？"
+        ],
+        "salary_fit": "符合預算範圍",
+        "conclusion": "alantsai 是一位優秀的候選人，核心技能（.NET Core, C#, Docker）與職位需求高度對齐。他/她具備 3+ 年相關經驗，最近的開發活躍度也顯示其持續學習和技術熱情。\n\n主要優勢：技能高度匹配, 經驗年資充足。\n\n建議優先聯繫和面試。",
+        "contact_method": "GitHub Issues（推薦，專業且禮貌）",
+        "open_to_work": false,
+        "has_photo": false,
+        "evaluated_by": "YuQi",
+        "evaluated_at": "2026-03-01T10:09:47.047558",
+        "sourced_from": "talent-sourcing-pipeline"
+      }
+    },
+    {
+      "name": "NetcoreSolutions",
+      "email": "unknown@github.com",
+      "github_url": "https://github.com/NetcoreSolutions",
+      "linkedin_url": null,
+      "status": "AI推薦",
+      "stability_score": 80,
+      "talent_level": "A",
+      "recruitment_source": "自動爬蟲",
+      "notes": "Bot 自動匯入 | 目標職缺：.NET 後端開發工程師 (遊戲橘子集團) | 負責顧問：Jacky | 20260301-100859",
+      "ai_match_result": {
+        "score": 80,
+        "grade": "A",
+        "date": "2026-03-01T10:09:47.047890",
+        "position": ".NET 後端開發工程師",
+        "company": "遊戲橘子集團",
+        "matched_skills": [
+          ".NET Core",
+          "C#",
+          "Docker"
+        ],
+        "missing_skills": [
+          "MSSQL"
+        ],
+        "strengths": [
+          "技能高度匹配",
+          "經驗年資充足"
+        ],
+        "probing_questions": [
+          "請介紹你在 .NET Core 方面最複雜的專案架構和技術挑戰？",
+          "你在 MSSQL 方面有接觸過嗎？學習曲線如何？",
+          "請描述一個你設計過的系統架構，特別是在效能優化和可擴展性方面的考量？",
+          "在過去的團隊協作中，你如何進行 Code Review？遇過什麼樣的代碼品質問題？",
+          "你對 Gaming 領域的發展趨勢有什麼看法？為什麼想加入我們？"
+        ],
+        "salary_fit": "符合預算範圍",
+        "conclusion": "NetcoreSolutions 是一位優秀的候選人，核心技能（.NET Core, C#, Docker）與職位需求高度對齐。他/她具備 3+ 年相關經驗，最近的開發活躍度也顯示其持續學習和技術熱情。\n\n主要優勢：技能高度匹配, 經驗年資充足。\n\n建議優先聯繫和面試。",
+        "contact_method": "GitHub Issues（推薦，專業且禮貌）",
+        "open_to_work": false,
+        "has_photo": false,
+        "evaluated_by": "YuQi",
+        "evaluated_at": "2026-03-01T10:09:47.047897",
+        "sourced_from": "talent-sourcing-pipeline"
+      }
+    },
+    {
+      "name": "objcio",
+      "email": "unknown@github.com",
+      "github_url": "https://github.com/objcio",
+      "linkedin_url": null,
+      "status": "AI推薦",
+      "stability_score": 80,
+      "talent_level": "A",
+      "recruitment_source": "自動爬蟲",
+      "notes": "Bot 自動匯入 | 目標職缺：.NET 後端開發工程師 (遊戲橘子集團) | 負責顧問：Jacky | 20260301-100859",
+      "ai_match_result": {
+        "score": 80,
+        "grade": "A",
+        "date": "2026-03-01T10:09:47.048192",
+        "position": ".NET 後端開發工程師",
+        "company": "遊戲橘子集團",
+        "matched_skills": [
+          ".NET Core",
+          "C#",
+          "Docker"
+        ],
+        "missing_skills": [
+          "MSSQL"
+        ],
+        "strengths": [
+          "技能高度匹配",
+          "經驗年資充足"
+        ],
+        "probing_questions": [
+          "請介紹你在 .NET Core 方面最複雜的專案架構和技術挑戰？",
+          "你在 MSSQL 方面有接觸過嗎？學習曲線如何？",
+          "請描述一個你設計過的系統架構，特別是在效能優化和可擴展性方面的考量？",
+          "在過去的團隊協作中，你如何進行 Code Review？遇過什麼樣的代碼品質問題？",
+          "你對 Gaming 領域的發展趨勢有什麼看法？為什麼想加入我們？"
+        ],
+        "salary_fit": "符合預算範圍",
+        "conclusion": "objcio 是一位優秀的候選人，核心技能（.NET Core, C#, Docker）與職位需求高度對齐。他/她具備 3+ 年相關經驗，最近的開發活躍度也顯示其持續學習和技術熱情。\n\n主要優勢：技能高度匹配, 經驗年資充足。\n\n建議優先聯繫和面試。",
+        "contact_method": "GitHub Issues（推薦，專業且禮貌）",
+        "open_to_work": false,
+        "has_photo": false,
+        "evaluated_by": "YuQi",
+        "evaluated_at": "2026-03-01T10:09:47.048199",
+        "sourced_from": "talent-sourcing-pipeline"
+      }
+    },
+    {
+      "name": "黃裕凱",
+      "email": "unknown@github.com",
+      "github_url": null,
+      "linkedin_url": "https://www.linkedin.com/in/%E8%A3%95%E5%87%B1-%E9%BB%83-b53363105/",
+      "status": "AI推薦",
+      "stability_score": 85,
+      "talent_level": "A",
+      "recruitment_source": "自動爬蟲",
+      "notes": "Bot 自動匯入 | 目標職缺：.NET 後端開發工程師 (遊戲橘子集團) | 負責顧問：Jacky | 20260301-100859",
+      "ai_match_result": {
+        "score": 85,
+        "grade": "A",
+        "date": "2026-03-01T10:09:47.048607",
+        "position": ".NET 後端開發工程師",
+        "company": "遊戲橘子集團",
+        "matched_skills": [
+          ".NET Core",
+          "C#",
+          "MSSQL",
+          "Docker"
+        ],
+        "missing_skills": [],
+        "strengths": [
+          "技能高度匹配",
+          "經驗年資充足"
+        ],
+        "probing_questions": [
+          "請介紹你在 .NET Core 方面最複雜的專案架構和技術挑戰？",
+          "你在 C# 的實戰經驗中，最大的收穫是什麼？",
+          "請描述一個你設計過的系統架構，特別是在效能優化和可擴展性方面的考量？",
+          "在過去的團隊協作中，你如何進行 Code Review？遇過什麼樣的代碼品質問題？",
+          "你對 Gaming 領域的發展趨勢有什麼看法？為什麼想加入我們？"
+        ],
+        "salary_fit": "符合預算範圍",
+        "conclusion": "黃裕凱 是一位優秀的候選人，核心技能（.NET Core, C#, MSSQL）與職位需求高度對齐。他/她具備 3+ 年相關經驗，最近的開發活躍度也顯示其持續學習和技術熱情。\n\n主要優勢：技能高度匹配, 經驗年資充足。\n\n建議優先聯繫和面試。",
+        "contact_method": "LinkedIn InMail（次選）",
+        "open_to_work": false,
+        "has_photo": false,
+        "evaluated_by": "YuQi",
+        "evaluated_at": "2026-03-01T10:09:47.048614",
+        "sourced_from": "talent-sourcing-pipeline"
+      }
+    },
+    {
+      "name": "王仁宏",
+      "email": "unknown@github.com",
+      "github_url": null,
+      "linkedin_url": "https://www.linkedin.com/in/%E4%BB%81%E5%AE%8F-%E7%8E%8B-a710812b3/",
+      "status": "AI推薦",
+      "stability_score": 85,
+      "talent_level": "A",
+      "recruitment_source": "自動爬蟲",
+      "notes": "Bot 自動匯入 | 目標職缺：.NET 後端開發工程師 (遊戲橘子集團) | 負責顧問：Jacky | 20260301-100859",
+      "ai_match_result": {
+        "score": 85,
+        "grade": "A",
+        "date": "2026-03-01T10:09:47.048991",
+        "position": ".NET 後端開發工程師",
+        "company": "遊戲橘子集團",
+        "matched_skills": [
+          ".NET Core",
+          "C#",
+          "MSSQL",
+          "Docker"
+        ],
+        "missing_skills": [],
+        "strengths": [
+          "技能高度匹配",
+          "經驗年資充足"
+        ],
+        "probing_questions": [
+          "請介紹你在 .NET Core 方面最複雜的專案架構和技術挑戰？",
+          "你在 C# 的實戰經驗中，最大的收穫是什麼？",
+          "請描述一個你設計過的系統架構，特別是在效能優化和可擴展性方面的考量？",
+          "在過去的團隊協作中，你如何進行 Code Review？遇過什麼樣的代碼品質問題？",
+          "你對 Gaming 領域的發展趨勢有什麼看法？為什麼想加入我們？"
+        ],
+        "salary_fit": "符合預算範圍",
+        "conclusion": "王仁宏 是一位優秀的候選人，核心技能（.NET Core, C#, MSSQL）與職位需求高度對齐。他/她具備 3+ 年相關經驗，最近的開發活躍度也顯示其持續學習和技術熱情。\n\n主要優勢：技能高度匹配, 經驗年資充足。\n\n建議優先聯繫和面試。",
+        "contact_method": "LinkedIn InMail（次選）",
+        "open_to_work": false,
+        "has_photo": false,
+        "evaluated_by": "YuQi",
+        "evaluated_at": "2026-03-01T10:09:47.048998",
+        "sourced_from": "talent-sourcing-pipeline"
+      }
+    },
+    {
+      "name": "KDDI台湾",
+      "email": "unknown@github.com",
+      "github_url": null,
+      "linkedin_url": "https://tw.linkedin.com/in/%E7%91%A9%E7%86%BE-%E9%99%B3-465975111",
+      "status": "AI推薦",
+      "stability_score": 85,
+      "talent_level": "A",
+      "recruitment_source": "自動爬蟲",
+      "notes": "Bot 自動匯入 | 目標職缺：.NET 後端開發工程師 (遊戲橘子集團) | 負責顧問：Jacky | 20260301-100859",
+      "ai_match_result": {
+        "score": 85,
+        "grade": "A",
+        "date": "2026-03-01T10:09:47.049387",
+        "position": ".NET 後端開發工程師",
+        "company": "遊戲橘子集團",
+        "matched_skills": [
+          ".NET Core",
+          "C#",
+          "MSSQL",
+          "Docker"
+        ],
+        "missing_skills": [],
+        "strengths": [
+          "技能高度匹配",
+          "經驗年資充足"
+        ],
+        "probing_questions": [
+          "請介紹你在 .NET Core 方面最複雜的專案架構和技術挑戰？",
+          "你在 C# 的實戰經驗中，最大的收穫是什麼？",
+          "請描述一個你設計過的系統架構，特別是在效能優化和可擴展性方面的考量？",
+          "在過去的團隊協作中，你如何進行 Code Review？遇過什麼樣的代碼品質問題？",
+          "你對 Gaming 領域的發展趨勢有什麼看法？為什麼想加入我們？"
+        ],
+        "salary_fit": "符合預算範圍",
+        "conclusion": "KDDI台湾 是一位優秀的候選人，核心技能（.NET Core, C#, MSSQL）與職位需求高度對齐。他/她具備 3+ 年相關經驗，最近的開發活躍度也顯示其持續學習和技術熱情。\n\n主要優勢：技能高度匹配, 經驗年資充足。\n\n建議優先聯繫和面試。",
+        "contact_method": "LinkedIn InMail（次選）",
+        "open_to_work": false,
+        "has_photo": false,
+        "evaluated_by": "YuQi",
+        "evaluated_at": "2026-03-01T10:09:47.049395",
+        "sourced_from": "talent-sourcing-pipeline"
+      }
+    },
+    {
+      "name": "I Ping Huang",
+      "email": "unknown@github.com",
+      "github_url": null,
+      "linkedin_url": "https://www.linkedin.com/in/i-ping-huang-4a588ba1/",
+      "status": "AI推薦",
+      "stability_score": 85,
+      "talent_level": "A",
+      "recruitment_source": "自動爬蟲",
+      "notes": "Bot 自動匯入 | 目標職缺：.NET 後端開發工程師 (遊戲橘子集團) | 負責顧問：Jacky | 20260301-100859",
+      "ai_match_result": {
+        "score": 85,
+        "grade": "A",
+        "date": "2026-03-01T10:09:47.049761",
+        "position": ".NET 後端開發工程師",
+        "company": "遊戲橘子集團",
+        "matched_skills": [
+          ".NET Core",
+          "C#",
+          "MSSQL",
+          "Docker"
+        ],
+        "missing_skills": [],
+        "strengths": [
+          "技能高度匹配",
+          "經驗年資充足"
+        ],
+        "probing_questions": [
+          "請介紹你在 .NET Core 方面最複雜的專案架構和技術挑戰？",
+          "你在 C# 的實戰經驗中，最大的收穫是什麼？",
+          "請描述一個你設計過的系統架構，特別是在效能優化和可擴展性方面的考量？",
+          "在過去的團隊協作中，你如何進行 Code Review？遇過什麼樣的代碼品質問題？",
+          "你對 Gaming 領域的發展趨勢有什麼看法？為什麼想加入我們？"
+        ],
+        "salary_fit": "符合預算範圍",
+        "conclusion": "I Ping Huang 是一位優秀的候選人，核心技能（.NET Core, C#, MSSQL）與職位需求高度對齐。他/她具備 3+ 年相關經驗，最近的開發活躍度也顯示其持續學習和技術熱情。\n\n主要優勢：技能高度匹配, 經驗年資充足。\n\n建議優先聯繫和面試。",
+        "contact_method": "LinkedIn InMail（次選）",
+        "open_to_work": false,
+        "has_photo": false,
+        "evaluated_by": "YuQi",
+        "evaluated_at": "2026-03-01T10:09:47.049768",
+        "sourced_from": "talent-sourcing-pipeline"
+      }
+    },
+    {
+      "name": "Sneha M S",
+      "email": "unknown@github.com",
+      "github_url": null,
+      "linkedin_url": "https://www.linkedin.com/in/sneha-m-s-055830202/",
+      "status": "AI推薦",
+      "stability_score": 85,
+      "talent_level": "A",
+      "recruitment_source": "自動爬蟲",
+      "notes": "Bot 自動匯入 | 目標職缺：.NET 後端開發工程師 (遊戲橘子集團) | 負責顧問：Jacky | 20260301-100859",
+      "ai_match_result": {
+        "score": 85,
+        "grade": "A",
+        "date": "2026-03-01T10:09:47.050142",
+        "position": ".NET 後端開發工程師",
+        "company": "遊戲橘子集團",
+        "matched_skills": [
+          ".NET Core",
+          "C#",
+          "MSSQL",
+          "Docker"
+        ],
+        "missing_skills": [],
+        "strengths": [
+          "技能高度匹配",
+          "經驗年資充足"
+        ],
+        "probing_questions": [
+          "請介紹你在 .NET Core 方面最複雜的專案架構和技術挑戰？",
+          "你在 C# 的實戰經驗中，最大的收穫是什麼？",
+          "請描述一個你設計過的系統架構，特別是在效能優化和可擴展性方面的考量？",
+          "在過去的團隊協作中，你如何進行 Code Review？遇過什麼樣的代碼品質問題？",
+          "你對 Gaming 領域的發展趨勢有什麼看法？為什麼想加入我們？"
+        ],
+        "salary_fit": "符合預算範圍",
+        "conclusion": "Sneha M S 是一位優秀的候選人，核心技能（.NET Core, C#, MSSQL）與職位需求高度對齐。他/她具備 3+ 年相關經驗，最近的開發活躍度也顯示其持續學習和技術熱情。\n\n主要優勢：技能高度匹配, 經驗年資充足。\n\n建議優先聯繫和面試。",
+        "contact_method": "LinkedIn InMail（次選）",
+        "open_to_work": false,
+        "has_photo": false,
+        "evaluated_by": "YuQi",
+        "evaluated_at": "2026-03-01T10:09:47.050148",
+        "sourced_from": "talent-sourcing-pipeline"
+      }
+    },
+    {
+      "name": "Muhammad Huzaifa",
+      "email": "unknown@github.com",
+      "github_url": null,
+      "linkedin_url": "https://www.linkedin.com/in/muhammad-huzaifa-90b7ab1b4/",
+      "status": "AI推薦",
+      "stability_score": 85,
+      "talent_level": "A",
+      "recruitment_source": "自動爬蟲",
+      "notes": "Bot 自動匯入 | 目標職缺：.NET 後端開發工程師 (遊戲橘子集團) | 負責顧問：Jacky | 20260301-100859",
+      "ai_match_result": {
+        "score": 85,
+        "grade": "A",
+        "date": "2026-03-01T10:09:47.050514",
+        "position": ".NET 後端開發工程師",
+        "company": "遊戲橘子集團",
+        "matched_skills": [
+          ".NET Core",
+          "C#",
+          "MSSQL",
+          "Docker"
+        ],
+        "missing_skills": [],
+        "strengths": [
+          "技能高度匹配",
+          "經驗年資充足"
+        ],
+        "probing_questions": [
+          "請介紹你在 .NET Core 方面最複雜的專案架構和技術挑戰？",
+          "你在 C# 的實戰經驗中，最大的收穫是什麼？",
+          "請描述一個你設計過的系統架構，特別是在效能優化和可擴展性方面的考量？",
+          "在過去的團隊協作中，你如何進行 Code Review？遇過什麼樣的代碼品質問題？",
+          "你對 Gaming 領域的發展趨勢有什麼看法？為什麼想加入我們？"
+        ],
+        "salary_fit": "符合預算範圍",
+        "conclusion": "Muhammad Huzaifa 是一位優秀的候選人，核心技能（.NET Core, C#, MSSQL）與職位需求高度對齐。他/她具備 3+ 年相關經驗，最近的開發活躍度也顯示其持續學習和技術熱情。\n\n主要優勢：技能高度匹配, 經驗年資充足。\n\n建議優先聯繫和面試。",
+        "contact_method": "LinkedIn InMail（次選）",
+        "open_to_work": false,
+        "has_photo": false,
+        "evaluated_by": "YuQi",
+        "evaluated_at": "2026-03-01T10:09:47.050521",
+        "sourced_from": "talent-sourcing-pipeline"
+      }
+    },
+    {
+      "name": "pochen lee",
+      "email": "unknown@github.com",
+      "github_url": null,
+      "linkedin_url": "https://www.linkedin.com/in/pochen-lee/",
+      "status": "AI推薦",
+      "stability_score": 85,
+      "talent_level": "A",
+      "recruitment_source": "自動爬蟲",
+      "notes": "Bot 自動匯入 | 目標職缺：.NET 後端開發工程師 (遊戲橘子集團) | 負責顧問：Jacky | 20260301-100859",
+      "ai_match_result": {
+        "score": 85,
+        "grade": "A",
+        "date": "2026-03-01T10:09:47.050888",
+        "position": ".NET 後端開發工程師",
+        "company": "遊戲橘子集團",
+        "matched_skills": [
+          ".NET Core",
+          "C#",
+          "MSSQL",
+          "Docker"
+        ],
+        "missing_skills": [],
+        "strengths": [
+          "技能高度匹配",
+          "經驗年資充足"
+        ],
+        "probing_questions": [
+          "請介紹你在 .NET Core 方面最複雜的專案架構和技術挑戰？",
+          "你在 C# 的實戰經驗中，最大的收穫是什麼？",
+          "請描述一個你設計過的系統架構，特別是在效能優化和可擴展性方面的考量？",
+          "在過去的團隊協作中，你如何進行 Code Review？遇過什麼樣的代碼品質問題？",
+          "你對 Gaming 領域的發展趨勢有什麼看法？為什麼想加入我們？"
+        ],
+        "salary_fit": "符合預算範圍",
+        "conclusion": "pochen lee 是一位優秀的候選人，核心技能（.NET Core, C#, MSSQL）與職位需求高度對齐。他/她具備 3+ 年相關經驗，最近的開發活躍度也顯示其持續學習和技術熱情。\n\n主要優勢：技能高度匹配, 經驗年資充足。\n\n建議優先聯繫和面試。",
+        "contact_method": "LinkedIn InMail（次選）",
+        "open_to_work": false,
+        "has_photo": false,
+        "evaluated_by": "YuQi",
+        "evaluated_at": "2026-03-01T10:09:47.050895",
+        "sourced_from": "talent-sourcing-pipeline"
+      }
+    },
+    {
+      "name": "Thirumalai G",
+      "email": "unknown@github.com",
+      "github_url": null,
+      "linkedin_url": "https://www.linkedin.com/in/thirumalaig/",
+      "status": "AI推薦",
+      "stability_score": 85,
+      "talent_level": "A",
+      "recruitment_source": "自動爬蟲",
+      "notes": "Bot 自動匯入 | 目標職缺：.NET 後端開發工程師 (遊戲橘子集團) | 負責顧問：Jacky | 20260301-100859",
+      "ai_match_result": {
+        "score": 85,
+        "grade": "A",
+        "date": "2026-03-01T10:09:47.051256",
+        "position": ".NET 後端開發工程師",
+        "company": "遊戲橘子集團",
+        "matched_skills": [
+          ".NET Core",
+          "C#",
+          "MSSQL",
+          "Docker"
+        ],
+        "missing_skills": [],
+        "strengths": [
+          "技能高度匹配",
+          "經驗年資充足"
+        ],
+        "probing_questions": [
+          "請介紹你在 .NET Core 方面最複雜的專案架構和技術挑戰？",
+          "你在 C# 的實戰經驗中，最大的收穫是什麼？",
+          "請描述一個你設計過的系統架構，特別是在效能優化和可擴展性方面的考量？",
+          "在過去的團隊協作中，你如何進行 Code Review？遇過什麼樣的代碼品質問題？",
+          "你對 Gaming 領域的發展趨勢有什麼看法？為什麼想加入我們？"
+        ],
+        "salary_fit": "符合預算範圍",
+        "conclusion": "Thirumalai G 是一位優秀的候選人，核心技能（.NET Core, C#, MSSQL）與職位需求高度對齐。他/她具備 3+ 年相關經驗，最近的開發活躍度也顯示其持續學習和技術熱情。\n\n主要優勢：技能高度匹配, 經驗年資充足。\n\n建議優先聯繫和面試。",
+        "contact_method": "LinkedIn InMail（次選）",
+        "open_to_work": false,
+        "has_photo": false,
+        "evaluated_by": "YuQi",
+        "evaluated_at": "2026-03-01T10:09:47.051263",
+        "sourced_from": "talent-sourcing-pipeline"
+      }
+    },
+    {
+      "name": "Aurang Zeb Khan",
+      "email": "unknown@github.com",
+      "github_url": null,
+      "linkedin_url": "https://www.linkedin.com/in/aurang-zeb-khan-97078319a/",
+      "status": "AI推薦",
+      "stability_score": 85,
+      "talent_level": "A",
+      "recruitment_source": "自動爬蟲",
+      "notes": "Bot 自動匯入 | 目標職缺：.NET 後端開發工程師 (遊戲橘子集團) | 負責顧問：Jacky | 20260301-100859",
+      "ai_match_result": {
+        "score": 85,
+        "grade": "A",
+        "date": "2026-03-01T10:09:47.051626",
+        "position": ".NET 後端開發工程師",
+        "company": "遊戲橘子集團",
+        "matched_skills": [
+          ".NET Core",
+          "C#",
+          "MSSQL",
+          "Docker"
+        ],
+        "missing_skills": [],
+        "strengths": [
+          "技能高度匹配",
+          "經驗年資充足"
+        ],
+        "probing_questions": [
+          "請介紹你在 .NET Core 方面最複雜的專案架構和技術挑戰？",
+          "你在 C# 的實戰經驗中，最大的收穫是什麼？",
+          "請描述一個你設計過的系統架構，特別是在效能優化和可擴展性方面的考量？",
+          "在過去的團隊協作中，你如何進行 Code Review？遇過什麼樣的代碼品質問題？",
+          "你對 Gaming 領域的發展趨勢有什麼看法？為什麼想加入我們？"
+        ],
+        "salary_fit": "符合預算範圍",
+        "conclusion": "Aurang Zeb Khan 是一位優秀的候選人，核心技能（.NET Core, C#, MSSQL）與職位需求高度對齐。他/她具備 3+ 年相關經驗，最近的開發活躍度也顯示其持續學習和技術熱情。\n\n主要優勢：技能高度匹配, 經驗年資充足。\n\n建議優先聯繫和面試。",
+        "contact_method": "LinkedIn InMail（次選）",
+        "open_to_work": false,
+        "has_photo": false,
+        "evaluated_by": "YuQi",
+        "evaluated_at": "2026-03-01T10:09:47.051633",
+        "sourced_from": "talent-sourcing-pipeline"
+      }
+    },
+    {
+      "name": "Alan Neres",
+      "email": "unknown@github.com",
+      "github_url": null,
+      "linkedin_url": "https://www.linkedin.com/in/alanfelipeneres/",
+      "status": "AI推薦",
+      "stability_score": 85,
+      "talent_level": "A",
+      "recruitment_source": "自動爬蟲",
+      "notes": "Bot 自動匯入 | 目標職缺：.NET 後端開發工程師 (遊戲橘子集團) | 負責顧問：Jacky | 20260301-100859",
+      "ai_match_result": {
+        "score": 85,
+        "grade": "A",
+        "date": "2026-03-01T10:09:47.051998",
+        "position": ".NET 後端開發工程師",
+        "company": "遊戲橘子集團",
+        "matched_skills": [
+          ".NET Core",
+          "C#",
+          "MSSQL",
+          "Docker"
+        ],
+        "missing_skills": [],
+        "strengths": [
+          "技能高度匹配",
+          "經驗年資充足"
+        ],
+        "probing_questions": [
+          "請介紹你在 .NET Core 方面最複雜的專案架構和技術挑戰？",
+          "你在 C# 的實戰經驗中，最大的收穫是什麼？",
+          "請描述一個你設計過的系統架構，特別是在效能優化和可擴展性方面的考量？",
+          "在過去的團隊協作中，你如何進行 Code Review？遇過什麼樣的代碼品質問題？",
+          "你對 Gaming 領域的發展趨勢有什麼看法？為什麼想加入我們？"
+        ],
+        "salary_fit": "符合預算範圍",
+        "conclusion": "Alan Neres 是一位優秀的候選人，核心技能（.NET Core, C#, MSSQL）與職位需求高度對齐。他/她具備 3+ 年相關經驗，最近的開發活躍度也顯示其持續學習和技術熱情。\n\n主要優勢：技能高度匹配, 經驗年資充足。\n\n建議優先聯繫和面試。",
+        "contact_method": "LinkedIn InMail（次選）",
+        "open_to_work": false,
+        "has_photo": false,
+        "evaluated_by": "YuQi",
+        "evaluated_at": "2026-03-01T10:09:47.052005",
+        "sourced_from": "talent-sourcing-pipeline"
+      }
+    }
+  ]
+}

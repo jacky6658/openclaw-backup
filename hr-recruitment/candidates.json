@@ -1,0 +1,40 @@
+{
+  "candidates": [
+    {
+      "id": "20260211-001",
+      "name": "張大明",
+      "email": "david.chang@example.com",
+      "phone": "0912-345-678",
+      "position": "AI工程師",
+      "score": 92,
+      "status": "pending",
+      "resume_path": "/Users/user/clawd/hr-recruitment/resumes/20260211-1111_張大明_AI工程師.txt",
+      "received_at": "2026-02-11T11:11:00+08:00",
+      "notes": "5年經驗，技術深度強，台大碩士，期望薪資略高"
+    },
+    {
+      "id": "20260211-002",
+      "name": "李小華",
+      "email": "lisa.lee@example.com",
+      "phone": "0987-654-321",
+      "position": "全端工程師",
+      "score": 78,
+      "status": "pending",
+      "resume_path": "/Users/user/clawd/hr-recruitment/resumes/20260211-1111_李小華_全端工程師.txt",
+      "received_at": "2026-02-11T11:11:00+08:00",
+      "notes": "3年經驗，React+Node.js，有電商實戰經驗"
+    },
+    {
+      "id": "20260211-003",
+      "name": "王美玲",
+      "email": "mary.wang@example.com",
+      "phone": "0922-111-222",
+      "position": "HR招募專員",
+      "score": 82,
+      "status": "pending",
+      "resume_path": "/Users/user/clawd/hr-recruitment/resumes/20260211-1111_王美玲_HR招募專員.txt",
+      "received_at": "2026-02-11T11:11:00+08:00",
+      "notes": "2年經驗，專注工程師招募，有證照，溝通能力佳"
+    }
+  ]
+}

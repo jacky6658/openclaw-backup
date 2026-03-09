@@ -1,0 +1,42 @@
+# 候選人履歷 - 張大明
+
+## 基本資訊
+- 姓名：張大明
+- Email: david.chang@example.com
+- 電話：0912-345-678
+- 目前職位：資深 AI 工程師
+- 工作年資：5 年
+- 期望薪資：100k-130k
+
+## 工作經歷
+
+### 資深 AI 工程師 | ABC 科技公司 (2021-現在)
+- 開發機器學習模型用於推薦系統，提升點擊率 35%
+- 使用 Python、TensorFlow、PyTorch 建立深度學習pipeline
+- 優化模型訓練流程，將訓練時間減少 50%
+- 導入 MLOps 實踐，建立 CI/CD pipeline
+- 帶領 3 人小組完成語音識別專案
+
+### AI 工程師 | XYZ 新創公司 (2019-2021)
+- 開發 NLP 模型用於文本分類和情感分析
+- 使用 FastAPI 建立模型服務 API
+- 參與數據收集和標註流程設計
+- 協助建立數據處理 pipeline
+
+## 技能
+**程式語言**: Python, JavaScript
+**機器學習**: TensorFlow, PyTorch, Scikit-learn, Keras
+**深度學習**: CNN, RNN, LSTM, Transformer
+**NLP**: BERT, GPT, Word2Vec
+**資料處理**: Pandas, NumPy, SQL
+**雲端**: AWS (EC2, S3, SageMaker), GCP
+**其他**: Docker, Git, Linux, Jupyter
+
+## 學歷
+- 國立台灣大學 資訊工程學系 碩士 (2017-2019)
+- 國立清華大學 電機工程學系 學士 (2013-2017)
+
+## 其他
+- 英文：精通（TOEIC 950）
+- 有多篇論文發表於 AAAI, NeurIPS
+- GitHub: github.com/david-chang (500+ stars)

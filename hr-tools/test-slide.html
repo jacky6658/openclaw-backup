@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>測試簡報</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+            color: #fff;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .slide {
+            display: none;
+            height: 100vh;
+            padding: 40px;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .slide.active { display: flex; }
+        h1 { font-size: 3em; margin-bottom: 20px; }
+        .controls {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            gap: 15px;
+            z-index: 1000;
+        }
+        button {
+            background: rgba(255,255,255,0.3);
+            border: 2px solid #fff;
+            color: #fff;
+            padding: 20px 40px;
+            font-size: 1.2em;
+            border-radius: 10px;
+            cursor: pointer;
+            min-width: 100px;
+            min-height: 60px;
+            font-weight: bold;
+        }
+        button:active {
+            background: rgba(255,255,255,0.5);
+        }
+        .info {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <div class="info">頁面 <span id="page">1</span>/3</div>
+    
+    <div class="slide active">
+        <h1>第 1 頁</h1>
+        <p>測試按鈕是否可以點擊</p>
+    </div>
+    
+    <div class="slide">
+        <h1>第 2 頁</h1>
+        <p>成功了！按鈕可以用</p>
+    </div>
+    
+    <div class="slide">
+        <h1>第 3 頁</h1>
+        <p>完美！</p>
+    </div>
+    
+    <div class="controls">
+        <button id="prevBtn">← 上一頁</button>
+        <button id="nextBtn">下一頁 →</button>
+    </div>
+    
+    <script>
+        let current = 0;
+        const slides = document.querySelectorAll('.slide');
+        const pageEl = document.getElementById('page');
+        
+        function show(n) {
+            slides[current].classList.remove('active');
+            current = (n + slides.length) % slides.length;
+            slides[current].classList.add('active');
+            pageEl.textContent = current + 1;
+        }
+        
+        document.getElementById('prevBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            show(current - 1);
+        });
+        
+        document.getElementById('nextBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            show(current + 1);
+        });
+        
+        // 觸控滑動
+        let startX = 0;
+        document.addEventListener('touchstart', e => {
+            startX = e.touches[0].clientX;
+        });
+        
+        document.addEventListener('touchend', e => {
+            const endX = e.changedTouches[0].clientX;
+            const diff = startX - endX;
+            if (Math.abs(diff) > 50) {
+                if (diff > 0) show(current + 1);
+                else show(current - 1);
+            }
+        });
+        
+        // 鍵盤
+        document.addEventListener('keydown', e => {
+            if (e.key === 'ArrowRight' || e.key === ' ') show(current + 1);
+            if (e.key === 'ArrowLeft') show(current - 1);
+        });
+    </script>
+</body>
+</html>

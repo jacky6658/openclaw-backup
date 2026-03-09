@@ -1,0 +1,32 @@
+# 候选人 PDF 档案映射表
+# 格式：原始档名 | 候选人姓名 | 分类
+# 请按照上传顺序填写（file_638 是最早的，file_656 是最晚的）
+
+# P0 优先联系（3位）
+file_638---9c956c8e-0454-4e30-b996-f0f1012c6b7c.pdf | Soun Mara | P0
+file_639---1ecde690-357b-4027-9b54-c66d258dd53b.pdf | Ingrid Ren | P0
+file_640---bc7c61b1-df03-4ae8-b149-344f2ab1d5ca.pdf | Malita Hout | P0
+
+# P1 待确认（3位）
+file_641---e1efd21c-f423-4e89-88c8-f99ae4c9ea19.pdf | Chong Chhe Chhit | P1
+file_642---a230eedb-7c66-4463-a0a6-d3b6bf1a6634.pdf | Mao Veasna | P1
+file_643---2535791e-bccf-4632-bec1-3f804a37b265.pdf | Chanmolen Chen | P1
+
+# P2 备选（5位）
+file_644---cc72c3ad-3600-4ba2-b6ad-f5c2128383fe.pdf | Nang Y Daly | P2
+file_645---6a0be366-3100-41f6-93d8-99ea5173f4f3.pdf | Hor Chhunly | P2
+file_646---4523ffd4-6ae0-48e1-9c63-338b8f5aca0c.pdf | Sona Rath | P2
+file_647---a3fe8543-8a97-4269-9028-be4c0844c586.pdf | SO Panharath | P2
+file_648---9905846e-6834-4a08-a0e6-096cce3b510a.pdf | Sann Cheng | P2
+
+# 其他-不适合（剩余候选人，请补充姓名）
+file_649---649951c0-bf51-4def-b794-cca66be70468.pdf | [待填写] | 其他
+file_650---fbcd5a41-6d46-4758-a7e6-8fb49deb20a3.pdf | [待填写] | 其他
+file_651---70c9fc48-b503-44e4-943f-706b42fa434f.pdf | [待填写] | 其他
+file_652---cbbf5594-a500-4edc-a94c-bc9f86318a21.pdf | [待填写] | 其他
+file_653---06e9609e-930c-4823-80c1-a9bfc807fdc1.pdf | [待填写] | 其他
+file_654---209b2f9f-733e-4e61-88ed-03195dd68f52.pdf | [待填写] | 其他
+file_655---cf1b5685-2824-4d30-9fd6-b61caa2da010.pdf | [待填写] | 其他
+file_656---fc0330c2-4af2-4056-8205-e189d541fbf4.pdf | [待填写] | 其他
+
+# 更多档案...（共39个，请继续补充）

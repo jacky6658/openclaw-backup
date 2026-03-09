@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>按鈕測試</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #0f2027;
+            color: white;
+            font-family: sans-serif;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        #page {
+            font-size: 3em;
+            margin-bottom: 50px;
+        }
+        
+        button {
+            background: white;
+            color: black;
+            border: none;
+            padding: 30px 50px;
+            font-size: 1.5em;
+            margin: 20px;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div id="page">第 1 頁</div>
+    <button onclick="test()">點我測試</button>
+    
+    <script>
+        let num = 1;
+        function test() {
+            num++;
+            document.getElementById('page').textContent = '第 ' + num + ' 頁';
+            alert('成功！按鈕可以點擊');
+        }
+    </script>
+</body>
+</html>

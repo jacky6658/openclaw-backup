@@ -1,0 +1,55 @@
+[
+  {
+    "name": "Tess Yu",
+    "github_url": "https://github.com/Tess10553",
+    "source": "GitHub",
+    "platforms": [
+      "github"
+    ],
+    "skills": [
+      "AI",
+      "Node.js",
+      "Java",
+      "JavaScript"
+    ],
+    "languages": {
+      "JavaScript": 3
+    },
+    "bio_source": "github_inference",
+    "fingerprint": "tessyu_"
+  },
+  {
+    "name": "Megan",
+    "github_url": "https://github.com/meganlwy",
+    "source": "GitHub",
+    "platforms": [
+      "github"
+    ],
+    "skills": [
+      "Python",
+      "AI",
+      "Machine Learning",
+      "Data Science"
+    ],
+    "languages": {
+      "Python": 5,
+      "Jupyter Notebook": 1
+    },
+    "bio_source": "github_inference",
+    "fingerprint": "megan_"
+  },
+  {
+    "name": "Ellen Lee",
+    "github_url": "https://github.com/Ellen-Lee",
+    "source": "GitHub",
+    "platforms": [
+      "github"
+    ],
+    "skills": [
+      "AI"
+    ],
+    "languages": {},
+    "bio_source": "github_inference",
+    "fingerprint": "ellenlee_"
+  }
+]

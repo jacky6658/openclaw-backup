@@ -1,0 +1,357 @@
+#!/usr/bin/env python3
+"""
+AI 配對演算法 v2 - 多維度智慧評分系統
+用途：為候選人與職缺配對評分（0-100），並分級為 P0/P1/P2
+"""
+
+import json
+import sys
+import re
+from datetime import datetime
+from typing import Dict, List, Tuple
+
+class CandidateMatcher:
+    def __init__(self):
+        # 評分權重（可動態調整）
+        self.weights = {
+            'skill_match': 0.40,      # 技能匹配度 40%
+            'experience': 0.30,       # 經驗年資 30%
+            'industry': 0.20,         # 產業相關性 20%
+            'bonus': 0.10             # 其他加分項 10%
+        }
+        
+        # 紅旗扣分項
+        self.red_flags = {
+            'frequent_job_hopping': -15,   # 頻繁跳槽
+            'skill_mismatch': -20,         # 技能完全不符
+            'location_mismatch': -10       # 地點不符且無遠端經驗
+        }
+    
+    def normalize_skill(self, skill: str) -> str:
+        """標準化技能名稱"""
+        skill = skill.lower().strip()
+        # 常見同義詞映射
+        synonyms = {
+            'js': 'javascript',
+            'ts': 'typescript',
+            'py': 'python',
+            'react.js': 'react',
+            'vue.js': 'vue',
+            'node.js': 'nodejs',
+            'mongo': 'mongodb',
+            'postgres': 'postgresql',
+            'k8s': 'kubernetes',
+            'ml': 'machine learning'
+            # 移除 'ai': 'artificial intelligence' 映射（與模糊匹配衝突）
+        }
+        return synonyms.get(skill, skill)
+    
+    def calculate_skill_match(self, candidate_skills: List[str], jd_required: List[str], jd_preferred: List[str] = None) -> Tuple[float, dict]:
+        """計算技能匹配度（0-40）- 使用模糊匹配"""
+        if jd_preferred is None:
+            jd_preferred = []
+        
+        # 標準化技能列表
+        candidate_skills_norm = [self.normalize_skill(s) for s in candidate_skills]
+        jd_required_norm = [self.normalize_skill(s) for s in jd_required]
+        jd_preferred_norm = [self.normalize_skill(s) for s in jd_preferred]
+        
+        # 必備技能匹配（模糊匹配：substring or reverse substring）
+        def fuzzy_match(jd_skill, candidate_skills):
+            """檢查 JD 技能是否匹配任一候選人技能"""
+            jd_lower = jd_skill.lower()
+            for c_skill in candidate_skills:
+                c_lower = c_skill.lower()
+                # substring matching: "ai" in "ai engineer" or "ai engineer" in "ai"
+                if jd_lower in c_lower or c_lower in jd_lower:
+                    return True
+            return False
+        
+        required_matches = sum(1 for skill in jd_required_norm if fuzzy_match(skill, candidate_skills_norm))
+        required_ratio = required_matches / len(jd_required_norm) if jd_required_norm else 0
+        
+        # 加分技能匹配（同樣使用模糊匹配）
+        preferred_matches = sum(1 for skill in jd_preferred_norm if fuzzy_match(skill, candidate_skills_norm))
+        preferred_ratio = preferred_matches / len(jd_preferred_norm) if jd_preferred_norm else 0
+        
+        # 計算分數
+        base_score = required_ratio * 35  # 必備技能最多 35 分
+        bonus_score = preferred_ratio * 5  # 加分技能最多 5 分
+        total_score = min(base_score + bonus_score, 40)  # 最高 40 分
+        
+        details = {
+            'required_match_count': required_matches,
+            'required_total': len(jd_required_norm),
+            'required_ratio': round(required_ratio, 2),
+            'preferred_match_count': preferred_matches,
+            'preferred_total': len(jd_preferred_norm),
+            'score': round(total_score, 1)
+        }
+        
+        return total_score, details
+    
+    def calculate_experience_score(self, candidate_years: int, jd_required_years: int) -> Tuple[float, dict]:
+        """計算經驗年資分數（0-30）"""
+        diff = candidate_years - jd_required_years
+        
+        if diff >= 0:
+            # 符合或超過要求
+            if diff == 0:
+                score = 30  # 剛好符合
+            elif diff <= 2:
+                score = 28  # 略高（經驗豐富但不會 overqualified）
+            else:
+                score = 25  # 遠超過（可能 overqualified）
+        else:
+            # 低於要求
+            if diff == -1:
+                score = 20  # 只差 1 年
+            elif diff == -2:
+                score = 10  # 差 2 年
+            else:
+                score = 5   # 差 3 年以上
+        
+        details = {
+            'candidate_years': candidate_years,
+            'required_years': jd_required_years,
+            'diff': diff,
+            'score': score
+        }
+        
+        return score, details
+    
+    def calculate_industry_score(self, candidate_industry: str, candidate_role: str, 
+                                 jd_industry: str, jd_role: str) -> Tuple[float, dict]:
+        """計算產業相關性分數（0-20）"""
+        industry_match = candidate_industry.lower() == jd_industry.lower()
+        role_match = candidate_role.lower() == jd_role.lower()
+        
+        if industry_match and role_match:
+            score = 20  # 同產業同職位
+        elif industry_match and not role_match:
+            score = 15  # 同產業不同職位
+        elif not industry_match and role_match:
+            score = 10  # 相關產業同職位
+        else:
+            score = 0   # 無相關
+        
+        details = {
+            'industry_match': industry_match,
+            'role_match': role_match,
+            'score': score
+        }
+        
+        return score, details
+    
+    def calculate_bonus_score(self, candidate: Dict) -> Tuple[float, dict]:
+        """計算其他加分項（0-10）"""
+        score = 0
+        details = {}
+        
+        # GitHub 活躍度
+        github_active = candidate.get('github_active', False)
+        if github_active:
+            score += 5
+            details['github_active'] = True
+        
+        # 知名公司背景
+        company_tier = candidate.get('company_tier', 'C')  # A/B/C
+        if company_tier == 'A':
+            score += 3
+            details['company_tier'] = 'A'
+        elif company_tier == 'B':
+            score += 2
+            details['company_tier'] = 'B'
+        
+        # 技術社群活躍
+        community_active = candidate.get('community_active', False)
+        if community_active:
+            score += 2
+            details['community_active'] = True
+        
+        details['score'] = score
+        return min(score, 10), details  # 最高 10 分
+    
+    def check_red_flags(self, candidate: Dict, jd: Dict) -> Tuple[float, List[str]]:
+        """檢查紅旗項目（扣分）"""
+        penalty = 0
+        flags = []
+        
+        # 頻繁跳槽（1 年內換 3 家）
+        job_changes = candidate.get('job_changes_last_year', 0)
+        if job_changes >= 3:
+            penalty += self.red_flags['frequent_job_hopping']
+            flags.append('frequent_job_hopping')
+        
+        # 技能完全不符（必備技能匹配率 < 30%）
+        skill_match_ratio = candidate.get('_skill_match_ratio', 1.0)
+        if skill_match_ratio < 0.3:
+            penalty += self.red_flags['skill_mismatch']
+            flags.append('skill_mismatch')
+        
+        # 地點不符且無遠端經驗
+        candidate_location = candidate.get('location', '').lower()
+        jd_location = jd.get('location', '').lower()
+        remote_ok = candidate.get('remote_experience', False) or jd.get('remote_ok', False)
+        if candidate_location != jd_location and not remote_ok:
+            penalty += self.red_flags['location_mismatch']
+            flags.append('location_mismatch')
+        
+        return penalty, flags
+    
+    def match(self, candidate: Dict, jd: Dict) -> Dict:
+        """主要配對函數"""
+        # 1. 技能匹配度
+        skill_score, skill_details = self.calculate_skill_match(
+            candidate.get('skills', []),
+            jd.get('required_skills', []),
+            jd.get('preferred_skills', [])
+        )
+        candidate['_skill_match_ratio'] = skill_details['required_ratio']
+        
+        # 2. 經驗年資
+        experience_score, experience_details = self.calculate_experience_score(
+            candidate.get('years_of_experience', 0),
+            jd.get('required_years', 0)
+        )
+        
+        # 3. 產業相關性
+        industry_score, industry_details = self.calculate_industry_score(
+            candidate.get('industry', ''),
+            candidate.get('current_role', ''),
+            jd.get('industry', ''),
+            jd.get('role', '')
+        )
+        
+        # 4. 其他加分項
+        bonus_score, bonus_details = self.calculate_bonus_score(candidate)
+        
+        # 5. 紅旗檢測
+        penalty, red_flags = self.check_red_flags(candidate, jd)
+        
+        # 總分計算
+        total_score = skill_score + experience_score + industry_score + bonus_score + penalty
+        total_score = max(0, min(100, total_score))  # 限制在 0-100
+        
+        # 信心分級
+        if total_score >= 80:
+            confidence = 'P0'
+            confidence_label = '高度符合'
+        elif total_score >= 60:
+            confidence = 'P1'
+            confidence_label = '可能符合'
+        elif total_score >= 40:
+            confidence = 'P2'
+            confidence_label = '待確認'
+        else:
+            confidence = 'REJECT'
+            confidence_label = '不推薦'
+        
+        # 組合結果
+        result = {
+            'candidate_id': candidate.get('id', candidate.get('name', 'unknown')),
+            'candidate_name': candidate.get('name', ''),
+            'source': candidate.get('source', ''),
+            'github_url': candidate.get('github_url', ''),
+            'linkedin_url': candidate.get('linkedin_url', ''),
+            'skills': candidate.get('skills', []),
+            'jd_id': jd.get('id', ''),
+            'jd_title': jd.get('title', ''),
+            'total_score': round(total_score, 1),
+            'confidence': confidence,
+            'confidence_label': confidence_label,
+            'breakdown': {
+                'skill_match': round(skill_score, 1),
+                'experience': round(experience_score, 1),
+                'industry': round(industry_score, 1),
+                'bonus': round(bonus_score, 1),
+                'penalty': penalty
+            },
+            'details': {
+                'skill': skill_details,
+                'experience': experience_details,
+                'industry': industry_details,
+                'bonus': bonus_details,
+                'red_flags': red_flags
+            },
+            'matched_at': datetime.now().isoformat()
+        }
+        
+        return result
+
+def main():
+    """測試用主函數"""
+    # 測試資料：JD
+    jd = {
+        'id': 'AI工程師-001',
+        'title': 'AI工程師',
+        'industry': '科技',
+        'role': 'AI工程師',
+        'required_skills': ['python', 'tensorflow', 'pytorch', 'machine learning'],
+        'preferred_skills': ['kubernetes', 'docker', 'aws'],
+        'required_years': 3,
+        'location': 'taipei',
+        'remote_ok': True
+    }
+    
+    # 測試資料：候選人 1（高度符合）
+    candidate1 = {
+        'id': 'c001',
+        'name': '王小明',
+        'skills': ['python', 'tensorflow', 'pytorch', 'machine learning', 'docker', 'aws'],
+        'years_of_experience': 4,
+        'industry': '科技',
+        'current_role': 'AI工程師',
+        'location': 'taipei',
+        'github_active': True,
+        'company_tier': 'A',
+        'job_changes_last_year': 0
+    }
+    
+    # 測試資料：候選人 2（可能符合）
+    candidate2 = {
+        'id': 'c002',
+        'name': '李小華',
+        'skills': ['python', 'tensorflow', 'scikit-learn'],
+        'years_of_experience': 2,
+        'industry': '金融',
+        'current_role': '資料分析師',
+        'location': 'taipei',
+        'github_active': False,
+        'company_tier': 'B',
+        'job_changes_last_year': 1
+    }
+    
+    # 測試資料：候選人 3（不推薦）
+    candidate3 = {
+        'id': 'c003',
+        'name': '張大同',
+        'skills': ['java', 'spring', 'mysql'],
+        'years_of_experience': 1,
+        'industry': '傳產',
+        'current_role': '後端工程師',
+        'location': 'kaohsiung',
+        'github_active': False,
+        'company_tier': 'C',
+        'job_changes_last_year': 3
+    }
+    
+    # 執行配對
+    matcher = CandidateMatcher()
+    
+    print("=== AI 配對演算法 v2 測試 ===\n")
+    print(f"JD: {jd['title']} ({jd['id']})\n")
+    
+    for candidate in [candidate1, candidate2, candidate3]:
+        result = matcher.match(candidate, jd)
+        print(f"候選人: {result['candidate_name']}")
+        print(f"總分: {result['total_score']} / 100")
+        print(f"分級: {result['confidence']} - {result['confidence_label']}")
+        print(f"分數拆解: {json.dumps(result['breakdown'], ensure_ascii=False, indent=2)}")
+        if result['details']['red_flags']:
+            print(f"⚠️  紅旗: {', '.join(result['details']['red_flags'])}")
+        print("-" * 50)
+        print()
+
+if __name__ == '__main__':
+    main()

@@ -1,0 +1,687 @@
+{
+  "last_processed_row": 69,
+  "total_processed": 52,
+  "total_success": 52,
+  "total_failed": 0,
+  "start_time": "2026-02-12T14:09:04.708174",
+  "last_update": "2026-02-12T14:29:48.086245",
+  "failed_companies": [],
+  "success_companies": [
+    {
+      "row": 4,
+      "name": "和運租車股份有限公司",
+      "data": {
+        "phone": "014004003",
+        "email": null,
+        "website": "http://www.jv-holding.com",
+        "address": null,
+        "industry": "- heading \"電話\" [ref=e29] [level=3]",
+        "services": "/ 服務項目\" [ref=e38] [level=2]"
+      },
+      "timestamp": "2026-02-12T14:09:30.990390"
+    },
+    {
+      "row": 6,
+      "name": "台泥企業團_台泥儲能科技股份有限公司",
+      "data": {
+        "phone": "014004003",
+        "email": null,
+        "website": "http://www.jv-holding.com",
+        "address": null,
+        "industry": "- heading \"電話\" [ref=e29] [level=3]",
+        "services": "/ 服務項目\" [ref=e38] [level=2]"
+      },
+      "timestamp": "2026-02-12T14:09:53.307115"
+    },
+    {
+      "row": 8,
+      "name": "矽格股份有限公司",
+      "data": {
+        "phone": "014004003",
+        "email": null,
+        "website": "http://www.jv-holding.com",
+        "address": null,
+        "industry": "- heading \"電話\" [ref=e29] [level=3]",
+        "services": "/ 服務項目\" [ref=e38] [level=2]"
+      },
+      "timestamp": "2026-02-12T14:10:15.642247"
+    },
+    {
+      "row": 11,
+      "name": "怡凡得股份有限公司",
+      "data": {
+        "phone": "014004003",
+        "email": null,
+        "website": "http://www.jv-holding.com",
+        "address": null,
+        "industry": "- heading \"電話\" [ref=e29] [level=3]",
+        "services": "/ 服務項目\" [ref=e38] [level=2]"
+      },
+      "timestamp": "2026-02-12T14:10:43.104579"
+    },
+    {
+      "row": 15,
+      "name": "承映資訊網路有限公司",
+      "data": {
+        "phone": "014004003",
+        "email": null,
+        "website": "http://www.jv-holding.com",
+        "address": null,
+        "industry": "- heading \"電話\" [ref=e29] [level=3]",
+        "services": "/ 服務項目\" [ref=e38] [level=2]"
+      },
+      "timestamp": "2026-02-12T14:11:07.070400"
+    },
+    {
+      "row": 17,
+      "name": "網訊電通",
+      "data": {
+        "phone": "014004003",
+        "email": null,
+        "website": "http://www.jv-holding.com",
+        "address": null,
+        "industry": "- heading \"電話\" [ref=e29] [level=3]",
+        "services": "/ 服務項目\" [ref=e38] [level=2]"
+      },
+      "timestamp": "2026-02-12T14:11:34.759479"
+    },
+    {
+      "row": 18,
+      "name": "緯穎科技服務",
+      "data": {
+        "phone": "014004003",
+        "email": null,
+        "website": "http://www.jv-holding.com",
+        "address": null,
+        "industry": "- heading \"電話\" [ref=e29] [level=3]",
+        "services": "/ 服務項目\" [ref=e38] [level=2]"
+      },
+      "timestamp": "2026-02-12T14:11:56.564841"
+    },
+    {
+      "row": 19,
+      "name": "Pinkoi_香港商果翼科技股份有限公司台灣分公司",
+      "data": {
+        "phone": "014004003",
+        "email": null,
+        "website": "http://www.jv-holding.com",
+        "address": null,
+        "industry": "- heading \"電話\" [ref=e29] [level=3]",
+        "services": "/ 服務項目\" [ref=e38] [level=2]"
+      },
+      "timestamp": "2026-02-12T14:12:18.838173"
+    },
+    {
+      "row": 20,
+      "name": "智星網路科技有限公司",
+      "data": {
+        "phone": "014004003",
+        "email": null,
+        "website": "http://www.jv-holding.com",
+        "address": null,
+        "industry": "- heading \"電話\" [ref=e29] [level=3]",
+        "services": "/ 服務項目\" [ref=e38] [level=2]"
+      },
+      "timestamp": "2026-02-12T14:12:43.716805"
+    },
+    {
+      "row": 21,
+      "name": "國泰人壽保險股份有限公司_高銓通訊處(謝明華)",
+      "data": {
+        "phone": "014004003",
+        "email": null,
+        "website": "http://www.jv-holding.com",
+        "address": null,
+        "industry": "- heading \"電話\" [ref=e29] [level=3]",
+        "services": "/ 服務項目\" [ref=e38] [level=2]"
+      },
+      "timestamp": "2026-02-12T14:13:09.824228"
+    },
+    {
+      "row": 22,
+      "name": "N/A",
+      "data": {
+        "phone": "014004003",
+        "email": null,
+        "website": "http://www.jv-holding.com",
+        "address": null,
+        "industry": "- heading \"電話\" [ref=e29] [level=3]",
+        "services": "/ 服務項目\" [ref=e38] [level=2]"
+      },
+      "timestamp": "2026-02-12T14:13:33.361499"
+    },
+    {
+      "row": 23,
+      "name": "BitstreetX Co., Ltd._三川通證股份有限公司",
+      "data": {
+        "phone": "014004003",
+        "email": null,
+        "website": "http://www.jv-holding.com",
+        "address": null,
+        "industry": "- heading \"電話\" [ref=e29] [level=3]",
+        "services": "/ 服務項目\" [ref=e38] [level=2]"
+      },
+      "timestamp": "2026-02-12T14:13:55.327436"
+    },
+    {
+      "row": 24,
+      "name": "PressPlay_瑞奧股份有限公司",
+      "data": {
+        "phone": "014004003",
+        "email": null,
+        "website": "http://www.jv-holding.com",
+        "address": null,
+        "industry": "- heading \"電話\" [ref=e29] [level=3]",
+        "services": "/ 服務項目\" [ref=e38] [level=2]"
+      },
+      "timestamp": "2026-02-12T14:14:20.549565"
+    },
+    {
+      "row": 25,
+      "name": "鉅亨網_鉅亨金融科技股份有限公司",
+      "data": {
+        "phone": "014004003",
+        "email": null,
+        "website": "http://www.jv-holding.com",
+        "address": null,
+        "industry": "- heading \"電話\" [ref=e29] [level=3]",
+        "services": "/ 服務項目\" [ref=e38] [level=2]"
+      },
+      "timestamp": "2026-02-12T14:14:43.910704"
+    },
+    {
+      "row": 26,
+      "name": "晧飛思科技股份有限公司",
+      "data": {
+        "phone": "014004003",
+        "email": null,
+        "website": "http://www.jv-holding.com",
+        "address": null,
+        "industry": "- heading \"電話\" [ref=e29] [level=3]",
+        "services": "/ 服務項目\" [ref=e38] [level=2]"
+      },
+      "timestamp": "2026-02-12T14:15:06.176752"
+    },
+    {
+      "row": 27,
+      "name": "中冠資訊股份有限公司",
+      "data": {
+        "phone": "014004003",
+        "email": null,
+        "website": "http://www.jv-holding.com",
+        "address": null,
+        "industry": "- heading \"電話\" [ref=e29] [level=3]",
+        "services": "/ 服務項目\" [ref=e38] [level=2]"
+      },
+      "timestamp": "2026-02-12T14:15:32.559702"
+    },
+    {
+      "row": 28,
+      "name": "智平衡健康事業股份有限公司",
+      "data": {
+        "phone": "014004003",
+        "email": null,
+        "website": "http://www.jv-holding.com",
+        "address": null,
+        "industry": "- heading \"電話\" [ref=e29] [level=3]",
+        "services": "/ 服務項目\" [ref=e38] [level=2]"
+      },
+      "timestamp": "2026-02-12T14:15:57.801728"
+    },
+    {
+      "row": 29,
+      "name": "卡繆科技有限公司",
+      "data": {
+        "phone": "014004003",
+        "email": null,
+        "website": "http://www.jv-holding.com",
+        "address": null,
+        "industry": "- heading \"電話\" [ref=e29] [level=3]",
+        "services": "/ 服務項目\" [ref=e38] [level=2]"
+      },
+      "timestamp": "2026-02-12T14:16:22.174232"
+    },
+    {
+      "row": 31,
+      "name": "錦明集團_錦明實業股份有限公司",
+      "data": {
+        "phone": "014004003",
+        "email": null,
+        "website": "http://www.jv-holding.com",
+        "address": null,
+        "industry": "- heading \"電話\" [ref=e29] [level=3]",
+        "services": "/ 服務項目\" [ref=e38] [level=2]"
+      },
+      "timestamp": "2026-02-12T14:16:43.467218"
+    },
+    {
+      "row": 32,
+      "name": "愛比科技股份有限公司",
+      "data": {
+        "phone": "014004003",
+        "email": null,
+        "website": "http://www.jv-holding.com",
+        "address": null,
+        "industry": "- heading \"電話\" [ref=e29] [level=3]",
+        "services": "/ 服務項目\" [ref=e38] [level=2]"
+      },
+      "timestamp": "2026-02-12T14:17:07.200548"
+    },
+    {
+      "row": 33,
+      "name": "超越數位股份有限公司",
+      "data": {
+        "phone": "014004003",
+        "email": null,
+        "website": "http://www.jv-holding.com",
+        "address": null,
+        "industry": "- heading \"電話\" [ref=e29] [level=3]",
+        "services": "/ 服務項目\" [ref=e38] [level=2]"
+      },
+      "timestamp": "2026-02-12T14:17:31.578495"
+    },
+    {
+      "row": 34,
+      "name": "新普科技股份有限公司",
+      "data": {
+        "phone": "014004003",
+        "email": null,
+        "website": "http://www.jv-holding.com",
+        "address": null,
+        "industry": "- heading \"電話\" [ref=e29] [level=3]",
+        "services": "/ 服務項目\" [ref=e38] [level=2]"
+      },
+      "timestamp": "2026-02-12T14:17:57.877737"
+    },
+    {
+      "row": 35,
+      "name": "世界先進積體電路股份有限公司",
+      "data": {
+        "phone": "014004003",
+        "email": null,
+        "website": "http://www.jv-holding.com",
+        "address": null,
+        "industry": "- heading \"電話\" [ref=e29] [level=3]",
+        "services": "/ 服務項目\" [ref=e38] [level=2]"
+      },
+      "timestamp": "2026-02-12T14:18:19.177143"
+    },
+    {
+      "row": 36,
+      "name": "頻光半導體股份有限公司",
+      "data": {
+        "phone": "014004003",
+        "email": null,
+        "website": "http://www.jv-holding.com",
+        "address": null,
+        "industry": "- heading \"電話\" [ref=e29] [level=3]",
+        "services": "/ 服務項目\" [ref=e38] [level=2]"
+      },
+      "timestamp": "2026-02-12T14:18:41.911173"
+    },
+    {
+      "row": 37,
+      "name": "(ASML)台灣艾司摩爾科技股份有限公司",
+      "data": {
+        "phone": "014004003",
+        "email": null,
+        "website": "http://www.jv-holding.com",
+        "address": null,
+        "industry": "- heading \"電話\" [ref=e29] [level=3]",
+        "services": "/ 服務項目\" [ref=e38] [level=2]"
+      },
+      "timestamp": "2026-02-12T14:19:09.957593"
+    },
+    {
+      "row": 38,
+      "name": "台灣栢和國際實業有限公司",
+      "data": {
+        "phone": "014004003",
+        "email": null,
+        "website": "http://www.jv-holding.com",
+        "address": null,
+        "industry": "- heading \"電話\" [ref=e29] [level=3]",
+        "services": "/ 服務項目\" [ref=e38] [level=2]"
+      },
+      "timestamp": "2026-02-12T14:19:32.141959"
+    },
+    {
+      "row": 39,
+      "name": "瑞昱半導體股份有限公司",
+      "data": {
+        "phone": "014004003",
+        "email": null,
+        "website": "http://www.jv-holding.com",
+        "address": null,
+        "industry": "- heading \"電話\" [ref=e29] [level=3]",
+        "services": "/ 服務項目\" [ref=e38] [level=2]"
+      },
+      "timestamp": "2026-02-12T14:19:59.863791"
+    },
+    {
+      "row": 40,
+      "name": "台灣杰斯特半導體設備技術股份有限公司",
+      "data": {
+        "phone": "014004003",
+        "email": null,
+        "website": "http://www.jv-holding.com",
+        "address": null,
+        "industry": "- heading \"電話\" [ref=e29] [level=3]",
+        "services": "/ 服務項目\" [ref=e38] [level=2]"
+      },
+      "timestamp": "2026-02-12T14:20:23.385110"
+    },
+    {
+      "row": 41,
+      "name": "昇陽國際半導體股份有限公司",
+      "data": {
+        "phone": "014004003",
+        "email": null,
+        "website": "http://www.jv-holding.com",
+        "address": null,
+        "industry": "- heading \"電話\" [ref=e29] [level=3]",
+        "services": "/ 服務項目\" [ref=e38] [level=2]"
+      },
+      "timestamp": "2026-02-12T14:20:44.695183"
+    },
+    {
+      "row": 42,
+      "name": "穩懋半導體股份有限公司",
+      "data": {
+        "phone": "014004003",
+        "email": null,
+        "website": "http://www.jv-holding.com",
+        "address": null,
+        "industry": "- heading \"電話\" [ref=e29] [level=3]",
+        "services": "/ 服務項目\" [ref=e38] [level=2]"
+      },
+      "timestamp": "2026-02-12T14:21:11.966100"
+    },
+    {
+      "row": 44,
+      "name": "正崴精密工業股份有限公司",
+      "data": {
+        "phone": "014004003",
+        "email": null,
+        "website": "http://www.jv-holding.com",
+        "address": null,
+        "industry": "- heading \"電話\" [ref=e29] [level=3]",
+        "services": "/ 服務項目\" [ref=e38] [level=2]"
+      },
+      "timestamp": "2026-02-12T14:21:33.850896"
+    },
+    {
+      "row": 47,
+      "name": "網聯資訊有限公司",
+      "data": {
+        "phone": "014004003",
+        "email": null,
+        "website": "http://www.jv-holding.com",
+        "address": null,
+        "industry": "- heading \"電話\" [ref=e29] [level=3]",
+        "services": "/ 服務項目\" [ref=e38] [level=2]"
+      },
+      "timestamp": "2026-02-12T14:21:56.422638"
+    },
+    {
+      "row": 48,
+      "name": "偉康科技股份有限公司",
+      "data": {
+        "phone": "014004003",
+        "email": null,
+        "website": "http://www.jv-holding.com",
+        "address": null,
+        "industry": "- heading \"電話\" [ref=e29] [level=3]",
+        "services": "/ 服務項目\" [ref=e38] [level=2]"
+      },
+      "timestamp": "2026-02-12T14:22:20.247797"
+    },
+    {
+      "row": 50,
+      "name": "Cooler Master_訊凱國際股份有限公司",
+      "data": {
+        "phone": "014004003",
+        "email": null,
+        "website": "http://www.jv-holding.com",
+        "address": null,
+        "industry": "- heading \"電話\" [ref=e29] [level=3]",
+        "services": "/ 服務項目\" [ref=e38] [level=2]"
+      },
+      "timestamp": "2026-02-12T14:22:42.963553"
+    },
+    {
+      "row": 51,
+      "name": "易可思科技股份有限公司",
+      "data": {
+        "phone": "014004003",
+        "email": null,
+        "website": "http://www.jv-holding.com",
+        "address": null,
+        "industry": "- heading \"電話\" [ref=e29] [level=3]",
+        "services": "/ 服務項目\" [ref=e38] [level=2]"
+      },
+      "timestamp": "2026-02-12T14:23:04.265154"
+    },
+    {
+      "row": 52,
+      "name": "大數據股份有限公司",
+      "data": {
+        "phone": "014004003",
+        "email": null,
+        "website": "http://www.jv-holding.com",
+        "address": null,
+        "industry": "- heading \"電話\" [ref=e29] [level=3]",
+        "services": "/ 服務項目\" [ref=e38] [level=2]"
+      },
+      "timestamp": "2026-02-12T14:23:26.764998"
+    },
+    {
+      "row": 54,
+      "name": "阿瘦實業股份有限公司",
+      "data": {
+        "phone": "014004003",
+        "email": null,
+        "website": "http://www.jv-holding.com",
+        "address": null,
+        "industry": "- heading \"電話\" [ref=e29] [level=3]",
+        "services": "/ 服務項目\" [ref=e38] [level=2]"
+      },
+      "timestamp": "2026-02-12T14:23:48.630100"
+    },
+    {
+      "row": 55,
+      "name": "永聯物流開發股份有限公司",
+      "data": {
+        "phone": "014004003",
+        "email": null,
+        "website": "http://www.jv-holding.com",
+        "address": null,
+        "industry": "- heading \"電話\" [ref=e29] [level=3]",
+        "services": "/ 服務項目\" [ref=e38] [level=2]"
+      },
+      "timestamp": "2026-02-12T14:24:14.974922"
+    },
+    {
+      "row": 56,
+      "name": "台灣大哥大股份有限公司",
+      "data": {
+        "phone": "014004003",
+        "email": null,
+        "website": "http://www.jv-holding.com",
+        "address": null,
+        "industry": "- heading \"電話\" [ref=e29] [level=3]",
+        "services": "/ 服務項目\" [ref=e38] [level=2]"
+      },
+      "timestamp": "2026-02-12T14:24:41.614208"
+    },
+    {
+      "row": 57,
+      "name": "世銳顧問有限公司",
+      "data": {
+        "phone": "014004003",
+        "email": null,
+        "website": "http://www.jv-holding.com",
+        "address": null,
+        "industry": "- heading \"電話\" [ref=e29] [level=3]",
+        "services": "/ 服務項目\" [ref=e38] [level=2]"
+      },
+      "timestamp": "2026-02-12T14:25:08.119071"
+    },
+    {
+      "row": 58,
+      "name": "烽泰科技有限公司",
+      "data": {
+        "phone": "014004003",
+        "email": null,
+        "website": "http://www.jv-holding.com",
+        "address": null,
+        "industry": "- heading \"電話\" [ref=e29] [level=3]",
+        "services": "/ 服務項目\" [ref=e38] [level=2]"
+      },
+      "timestamp": "2026-02-12T14:25:33.548496"
+    },
+    {
+      "row": 59,
+      "name": "PChome Online_網路家庭國際資訊(股)公司",
+      "data": {
+        "phone": "014004003",
+        "email": null,
+        "website": "http://www.jv-holding.com",
+        "address": null,
+        "industry": "- heading \"電話\" [ref=e29] [level=3]",
+        "services": "/ 服務項目\" [ref=e38] [level=2]"
+      },
+      "timestamp": "2026-02-12T14:25:59.011380"
+    },
+    {
+      "row": 60,
+      "name": "TVBS_聯利媒體股份有限公司",
+      "data": {
+        "phone": "014004003",
+        "email": null,
+        "website": "http://www.jv-holding.com",
+        "address": null,
+        "industry": "- heading \"電話\" [ref=e29] [level=3]",
+        "services": "/ 服務項目\" [ref=e38] [level=2]"
+      },
+      "timestamp": "2026-02-12T14:26:21.023364"
+    },
+    {
+      "row": 61,
+      "name": "富邦媒體科技股份有限公司(富邦momo)",
+      "data": {
+        "phone": "014004003",
+        "email": null,
+        "website": "http://www.jv-holding.com",
+        "address": null,
+        "industry": "- heading \"電話\" [ref=e29] [level=3]",
+        "services": "/ 服務項目\" [ref=e38] [level=2]"
+      },
+      "timestamp": "2026-02-12T14:26:47.320561"
+    },
+    {
+      "row": 62,
+      "name": "CRIF TAIWAN_中華徵信所企業股份有限公司",
+      "data": {
+        "phone": "014004003",
+        "email": null,
+        "website": "http://www.jv-holding.com",
+        "address": null,
+        "industry": "- heading \"電話\" [ref=e29] [level=3]",
+        "services": "/ 服務項目\" [ref=e38] [level=2]"
+      },
+      "timestamp": "2026-02-12T14:27:09.990008"
+    },
+    {
+      "row": 63,
+      "name": "信義房屋股份有限公司",
+      "data": {
+        "phone": "014004003",
+        "email": null,
+        "website": "http://www.jv-holding.com",
+        "address": null,
+        "industry": "- heading \"電話\" [ref=e29] [level=3]",
+        "services": "/ 服務項目\" [ref=e38] [level=2]"
+      },
+      "timestamp": "2026-02-12T14:27:33.848024"
+    },
+    {
+      "row": 64,
+      "name": "威摩科技股份有限公司",
+      "data": {
+        "phone": "014004003",
+        "email": null,
+        "website": "http://www.jv-holding.com",
+        "address": null,
+        "industry": "- heading \"電話\" [ref=e29] [level=3]",
+        "services": "/ 服務項目\" [ref=e38] [level=2]"
+      },
+      "timestamp": "2026-02-12T14:27:57.681766"
+    },
+    {
+      "row": 65,
+      "name": "水星數位科技有限公司",
+      "data": {
+        "phone": "014004003",
+        "email": null,
+        "website": "http://www.jv-holding.com",
+        "address": null,
+        "industry": "- heading \"電話\" [ref=e29] [level=3]",
+        "services": "/ 服務項目\" [ref=e38] [level=2]"
+      },
+      "timestamp": "2026-02-12T14:28:19.544444"
+    },
+    {
+      "row": 66,
+      "name": "三泰科技股份有限公司",
+      "data": {
+        "phone": "014004003",
+        "email": null,
+        "website": "http://www.jv-holding.com",
+        "address": null,
+        "industry": "- heading \"電話\" [ref=e29] [level=3]",
+        "services": "/ 服務項目\" [ref=e38] [level=2]"
+      },
+      "timestamp": "2026-02-12T14:28:40.794304"
+    },
+    {
+      "row": 67,
+      "name": "欣盟科技有限公司",
+      "data": {
+        "phone": "014004003",
+        "email": null,
+        "website": "http://www.jv-holding.com",
+        "address": null,
+        "industry": "- heading \"電話\" [ref=e29] [level=3]",
+        "services": "/ 服務項目\" [ref=e38] [level=2]"
+      },
+      "timestamp": "2026-02-12T14:29:02.701669"
+    },
+    {
+      "row": 68,
+      "name": "光星骨科復健器材股份有限公司",
+      "data": {
+        "phone": "014004003",
+        "email": null,
+        "website": "http://www.jv-holding.com",
+        "address": null,
+        "industry": "- heading \"電話\" [ref=e29] [level=3]",
+        "services": "/ 服務項目\" [ref=e38] [level=2]"
+      },
+      "timestamp": "2026-02-12T14:29:24.765658"
+    },
+    {
+      "row": 69,
+      "name": "九典聯合建築師事務所 Bio-architecture Formosana (BaF)",
+      "data": {
+        "phone": "014004003",
+        "email": null,
+        "website": "http://www.jv-holding.com",
+        "address": null,
+        "industry": "- heading \"電話\" [ref=e29] [level=3]",
+        "services": "/ 服務項目\" [ref=e38] [level=2]"
+      },
+      "timestamp": "2026-02-12T14:29:48.086165"
+    }
+  ]
+}

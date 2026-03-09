@@ -1,0 +1,292 @@
+[
+  {
+    "name": "Hong-Kuan Wu",
+    "github_url": "https://github.com/maxam2017",
+    "source": "GitHub",
+    "platforms": [
+      "github"
+    ],
+    "skills": [
+      "JavaScript",
+      "Pinned-Gist",
+      "Awesome-Pinned-Gists",
+      "Github",
+      "Gh-Cli",
+      "前端",
+      "TypeScript",
+      "Shell",
+      "React",
+      "Bash",
+      "Ssh-Keygen",
+      "Node.js",
+      "Linux"
+    ],
+    "languages": {
+      "TypeScript": 5,
+      "Shell": 2,
+      "JavaScript": 1
+    },
+    "bio_source": "github_inference"
+  },
+  {
+    "name": "Shiny",
+    "github_url": "https://github.com/ShinyChang",
+    "source": "GitHub",
+    "platforms": [
+      "github"
+    ],
+    "skills": [
+      "JavaScript",
+      "Multiline",
+      "Sublime-Text",
+      "Sublime-Text-3",
+      "Ellipsis",
+      "前端",
+      "TypeScript",
+      "Sublime",
+      "React",
+      "Configuration",
+      "Node.js",
+      "Truncate"
+    ],
+    "languages": {
+      "JavaScript": 3,
+      "TypeScript": 1
+    },
+    "bio_source": "github_inference"
+  },
+  {
+    "name": "Leo Chiu",
+    "github_url": "https://github.com/leochiu-a",
+    "source": "GitHub",
+    "platforms": [
+      "github"
+    ],
+    "skills": [
+      "ERP",
+      "Gemini",
+      "自動化",
+      "Slidev",
+      "Claude",
+      "Github-Pages",
+      "TypeScript",
+      "Git",
+      "Config",
+      "Github-Config",
+      "Pnpm-Workspace"
+    ],
+    "languages": {
+      "TypeScript": 5
+    },
+    "bio_source": "github_inference"
+  },
+  {
+    "name": "Jacob Hsu",
+    "github_url": "https://github.com/JacobHsu",
+    "source": "GitHub",
+    "platforms": [
+      "github"
+    ],
+    "skills": [
+      "JavaScript",
+      "Leafletjs",
+      "Gh-Pages",
+      "Html",
+      "Docs",
+      "Python",
+      "Node.js"
+    ],
+    "languages": {
+      "Python": 4,
+      "JavaScript": 2
+    },
+    "bio_source": "github_inference"
+  },
+  {
+    "name": "Michael Lo",
+    "github_url": "https://github.com/Michael0520",
+    "source": "GitHub",
+    "platforms": [
+      "github"
+    ],
+    "skills": [
+      "Linux",
+      "Bash",
+      "TypeScript",
+      "Shell"
+    ],
+    "languages": {
+      "TypeScript": 4,
+      "Shell": 1
+    },
+    "bio_source": "github_inference"
+  },
+  {
+    "name": "YY Chang",
+    "github_url": "https://github.com/x3388638",
+    "source": "GitHub",
+    "platforms": [
+      "github"
+    ],
+    "skills": [
+      "Ncnu",
+      "Userscript",
+      "Github-Calendar",
+      "Gallery",
+      "Multicast",
+      "Slider",
+      "Create-React-App",
+      "Puppeteer",
+      "Frontend",
+      "Responsive-Carousel",
+      "React-Native",
+      "Chat",
+      "Android",
+      "React",
+      "Node-Telegram-Bot-Api",
+      "Node.js",
+      "React-Router",
+      "React-Carousel",
+      "Github",
+      "Github-Heatmap",
+      "爬蟲",
+      "Decentralized",
+      "TypeScript",
+      "Monaco-Editor",
+      "Github-Contributions",
+      "Reactstrap",
+      "Telegram-Bot",
+      "React-Component",
+      "JavaScript",
+      "Crawler",
+      "Carousel",
+      "Stock",
+      "Svelte",
+      "前端",
+      "Firebase",
+      "Styled-Components",
+      "Image",
+      "Ios",
+      "財務",
+      "Docker",
+      "Yahoo-Finance",
+      "Grid",
+      "Starter"
+    ],
+    "languages": {
+      "JavaScript": 7,
+      "TypeScript": 1
+    },
+    "bio_source": "github_inference"
+  },
+  {
+    "name": "Michelle Chen",
+    "github_url": "https://github.com/michellechens",
+    "source": "GitHub",
+    "platforms": [
+      "github"
+    ],
+    "skills": [
+      "Data Science",
+      "JavaScript",
+      "Node.js",
+      "Typescript",
+      "Mern-Stack",
+      "Nextjs",
+      "Vue",
+      "前端",
+      "TypeScript",
+      "Expressjs",
+      "Socket-Io",
+      "Liveblocks",
+      "Electron",
+      "Nodejs",
+      "Python",
+      "Fabricjs",
+      "Machine Learning",
+      "Vue3"
+    ],
+    "languages": {
+      "JavaScript": 3,
+      "TypeScript": 2,
+      "Jupyter Notebook": 1
+    },
+    "bio_source": "github_inference"
+  },
+  {
+    "name": "Danny Chen",
+    "github_url": "https://github.com/Dannyisadog",
+    "source": "GitHub",
+    "platforms": [
+      "github"
+    ],
+    "skills": [
+      "JavaScript",
+      "Authentication",
+      "Nextjs",
+      "Bash",
+      "Authjs",
+      "TypeScript",
+      "Shell",
+      "AWS",
+      "Prisma",
+      "Python",
+      "Node.js",
+      "Linux",
+      "雲端"
+    ],
+    "languages": {
+      "TypeScript": 6,
+      "Shell": 1,
+      "Python": 1,
+      "JavaScript": 1
+    },
+    "bio_source": "github_inference"
+  },
+  {
+    "name": "Kalan",
+    "github_url": "https://github.com/kjj6198",
+    "source": "GitHub",
+    "platforms": [
+      "github"
+    ],
+    "skills": [
+      "JavaScript",
+      "Build-Your-Own-X",
+      "AI",
+      "Corenfc",
+      "Felica",
+      "Swift",
+      "Node.js",
+      "iOS",
+      "Website"
+    ],
+    "languages": {
+      "JavaScript": 3,
+      "Swift": 1
+    },
+    "bio_source": "github_inference"
+  },
+  {
+    "name": "Don Hsieh [FCOM-FE]",
+    "github_url": "https://github.com/dontw",
+    "source": "GitHub",
+    "platforms": [
+      "github"
+    ],
+    "skills": [
+      "JavaScript",
+      "Bash",
+      "Shell",
+      "前端",
+      "React",
+      "Node.js",
+      "Linux"
+    ],
+    "languages": {
+      "JavaScript": 3,
+      "Shell": 1
+    },
+    "bio_source": "github_inference"
+  }
+]

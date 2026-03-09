@@ -1,0 +1,252 @@
+[
+  {
+    "name": "KD Chang",
+    "github_url": "https://github.com/kdchang",
+    "source": "GitHub",
+    "platforms": [
+      "github"
+    ],
+    "skills": [
+      "Redux",
+      "前端",
+      "Es2015",
+      "Ecmascript",
+      "React-Native",
+      "Front-End",
+      "Andriod",
+      "Java",
+      "Ios",
+      "Es2017",
+      "Reactjs",
+      "Vue",
+      "TypeScript",
+      "Es6",
+      "Node.js",
+      "Graphql",
+      "Ecmascript2015",
+      "React",
+      "React-Tutorial",
+      "Mobile",
+      "Python",
+      "Ecosystem",
+      "JavaScript",
+      "Flux",
+      "Relay",
+      "Javascript",
+      "Immutablejs"
+    ],
+    "languages": {
+      "JavaScript": 3,
+      "TypeScript": 1,
+      "Python": 1
+    },
+    "bio_source": "github_inference",
+    "fingerprint": "kdchang_"
+  },
+  {
+    "name": "Youjun Yu(余佑駿)",
+    "github_url": "https://github.com/littlefish0331",
+    "source": "GitHub",
+    "platforms": [
+      "github"
+    ],
+    "skills": [
+      "Python",
+      "Data Science",
+      "Machine Learning",
+      "MySQL",
+      "AI",
+      "資料庫",
+      "Docker"
+    ],
+    "languages": {
+      "Jupyter Notebook": 2
+    },
+    "bio_source": "github_inference",
+    "fingerprint": "youjunyu(余佑駿)_"
+  },
+  {
+    "name": "ETBlue",
+    "github_url": "https://github.com/ETBlue",
+    "source": "GitHub",
+    "platforms": [
+      "github"
+    ],
+    "skills": [
+      "React",
+      "前端",
+      "JavaScript",
+      "Node.js",
+      "TypeScript"
+    ],
+    "languages": {
+      "JavaScript": 5,
+      "TypeScript": 3
+    },
+    "bio_source": "github_inference",
+    "fingerprint": "etblue_"
+  },
+  {
+    "name": "Quiny Hsieh",
+    "github_url": "https://github.com/QuinHsieh",
+    "source": "GitHub",
+    "platforms": [
+      "github"
+    ],
+    "skills": [
+      "JavaScript",
+      "PHP",
+      "MySQL",
+      "資料庫",
+      "Node.js"
+    ],
+    "languages": {
+      "JavaScript": 3,
+      "PHP": 1
+    },
+    "bio_source": "github_inference",
+    "fingerprint": "quinyhsieh_"
+  },
+  {
+    "name": "eeyellow",
+    "github_url": "https://github.com/eeyellow",
+    "source": "GitHub",
+    "platforms": [
+      "github"
+    ],
+    "skills": [
+      "前端",
+      ".NET",
+      "Linux",
+      "Bash",
+      "JavaScript",
+      "Docker",
+      "ERP",
+      "Shell",
+      "Vue",
+      "Node.js",
+      "C#"
+    ],
+    "languages": {
+      "JavaScript": 4,
+      "C#": 4,
+      "Shell": 1
+    },
+    "bio_source": "github_inference",
+    "fingerprint": "eeyellow_"
+  },
+  {
+    "name": "SAM LEE",
+    "github_url": "https://github.com/RoninGAO",
+    "source": "GitHub",
+    "platforms": [
+      "github"
+    ],
+    "skills": [
+      "Redux",
+      "前端",
+      "Vuex",
+      "Vue",
+      "Html",
+      ".NET",
+      "Vue-Router",
+      "Bootstrap3",
+      "React",
+      "Nextui",
+      "Dotnet",
+      "Dotnet-Core",
+      "Jquery",
+      "Python",
+      "JavaScript",
+      "Csharp",
+      "Javascript",
+      "Node.js",
+      "C#"
+    ],
+    "languages": {
+      "JavaScript": 2,
+      "C#": 2,
+      "Python": 1
+    },
+    "bio_source": "github_inference",
+    "fingerprint": "samlee_"
+  },
+  {
+    "name": "Ray",
+    "github_url": "https://github.com/Genie0228",
+    "source": "GitHub",
+    "platforms": [
+      "github"
+    ],
+    "skills": [
+      "Docker"
+    ],
+    "languages": {},
+    "bio_source": "github_inference",
+    "fingerprint": "ray_"
+  },
+  {
+    "name": "Hsiang Lee",
+    "github_url": "https://github.com/whalesingswee",
+    "source": "GitHub",
+    "platforms": [
+      "github"
+    ],
+    "skills": [
+      "自動化",
+      "JavaScript",
+      "Ruby",
+      "ERP",
+      "Node.js"
+    ],
+    "languages": {
+      "JavaScript": 3,
+      "Ruby": 2
+    },
+    "bio_source": "github_inference",
+    "fingerprint": "hsianglee_"
+  },
+  {
+    "name": "Wen yu-chi",
+    "github_url": "https://github.com/Wen9324",
+    "source": "GitHub",
+    "platforms": [
+      "github"
+    ],
+    "skills": [
+      "Data Science",
+      "Machine Learning",
+      "Java",
+      "Python"
+    ],
+    "languages": {
+      "Jupyter Notebook": 8,
+      "Java": 1
+    },
+    "bio_source": "github_inference",
+    "fingerprint": "wenyu-chi_"
+  },
+  {
+    "name": "Drewyuchen",
+    "github_url": "https://github.com/Tsuyu0510",
+    "source": "GitHub",
+    "platforms": [
+      "github"
+    ],
+    "skills": [
+      "自動化",
+      "Python",
+      "Linux",
+      "Bash",
+      "Machine Learning",
+      "ERP",
+      "Shell"
+    ],
+    "languages": {
+      "Python": 6,
+      "Shell": 1
+    },
+    "bio_source": "github_inference",
+    "fingerprint": "drewyuchen_"
+  }
+]

@@ -1,0 +1,13 @@
+{
+  "timestamp": "2026-02-12T14:29:02.703253",
+  "stats": {
+    "total_processed": 50,
+    "total_success": 50,
+    "total_failed": 0,
+    "success_rate": 100.0,
+    "elapsed_minutes": 19,
+    "elapsed_seconds": 57,
+    "remaining_minutes": 100,
+    "last_row": 67
+  }
+}

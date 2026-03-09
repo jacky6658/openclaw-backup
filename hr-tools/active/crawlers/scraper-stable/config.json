@@ -1,0 +1,12 @@
+{
+  "sheet_id": "1bkI7_cCh_Bs4qVa3HlXiy0CFzmItZlA-DYGHSPS4InE",
+  "gog_account": "aijessie88@step1ne.com",
+  "delay_min": 8,
+  "delay_max": 15,
+  "max_retries": 3,
+  "retry_delay": 5,
+  "batch_report_size": 5,
+  "telegram_chat_id": "8365775688",
+  "auto_pause_fail_rate": 0.7,
+  "save_interval": 5
+}

@@ -1,0 +1,291 @@
+[
+  {
+    "name": "Vongola",
+    "github_url": "https://github.com/vongola12324",
+    "source": "GitHub",
+    "platforms": [
+      "github"
+    ],
+    "skills": [
+      "網路",
+      "爬蟲",
+      "Python",
+      "JavaScript",
+      "CTF",
+      "Security",
+      "PHP",
+      "資安",
+      "VPN",
+      "Golang",
+      "Node.js",
+      "Go"
+    ],
+    "languages": {
+      "JavaScript": 4,
+      "PHP": 2,
+      "Go": 1,
+      "Python": 1
+    },
+    "bio_source": "github_inference"
+  },
+  {
+    "name": "0xmmq",
+    "github_url": "https://github.com/mmqeth",
+    "source": "GitHub",
+    "platforms": [
+      "github"
+    ],
+    "skills": [
+      "Markdown",
+      "Blockchain",
+      "Comptia",
+      "I18Next",
+      "Profile-Readme",
+      "Sql",
+      "Unity",
+      "Password-Generator",
+      "遊戲開發",
+      "資安",
+      "TypeScript",
+      "Awesome-Readme",
+      "Reactjs",
+      "Seating",
+      "Nft-Verifier",
+      "Llm",
+      "Cryptocurrency",
+      "React",
+      "Nft",
+      "Profile",
+      "Javascript",
+      "Cpp",
+      "Discord-Bot",
+      "Security",
+      "Spreadsheet",
+      "Typescript",
+      "Bun",
+      "Tailwindcss",
+      "Sqlite",
+      "Rag",
+      "Web3",
+      "Html5",
+      "JavaScript",
+      "Learning",
+      "C++",
+      "前端",
+      "Vite",
+      "Python",
+      "Dexscreener",
+      "Node.js"
+    ],
+    "languages": {
+      "JavaScript": 3,
+      "TypeScript": 2,
+      "C++": 1,
+      "Python": 1
+    },
+    "bio_source": "github_inference"
+  },
+  {
+    "name": "ChenYing Kuo (CY)",
+    "github_url": "https://github.com/evshary",
+    "source": "GitHub",
+    "platforms": [
+      "github"
+    ],
+    "skills": [
+      "網路",
+      "Python",
+      "C++",
+      "Shell",
+      "JavaScript",
+      "Security",
+      "Bash",
+      "資安",
+      "Rust",
+      "Node.js",
+      "Linux"
+    ],
+    "languages": {
+      "C++": 1,
+      "Shell": 1,
+      "JavaScript": 1,
+      "Rust": 1,
+      "Python": 1
+    },
+    "bio_source": "github_inference"
+  },
+  {
+    "name": "Shoui",
+    "github_url": "https://github.com/a05110511t",
+    "source": "GitHub",
+    "platforms": [
+      "github"
+    ],
+    "skills": [
+      "滲透測試",
+      "Data Science",
+      "Writeups",
+      "Machine Learning",
+      ".NET",
+      "資安",
+      "Ctf",
+      "CTF",
+      "Security",
+      "Csharp",
+      "Python",
+      "C#",
+      "Golang",
+      "Ruby",
+      "Go"
+    ],
+    "languages": {
+      "Python": 2,
+      "Jupyter Notebook": 1,
+      "Ruby": 1,
+      "Go": 1,
+      "C#": 1
+    },
+    "bio_source": "github_inference"
+  },
+  {
+    "name": "Zac Chengkang Chen",
+    "github_url": "https://github.com/soyccan",
+    "source": "GitHub",
+    "platforms": [
+      "github"
+    ],
+    "skills": [
+      "逆向工程",
+      "Spring",
+      "Shell",
+      "CTF",
+      "Security",
+      "Bash",
+      "資安",
+      "Rust",
+      "Java",
+      "Golang",
+      "Linux",
+      "Go"
+    ],
+    "languages": {
+      "Shell": 2,
+      "Rust": 2,
+      "Go": 1
+    },
+    "bio_source": "github_inference"
+  },
+  {
+    "name": "RetrO9",
+    "github_url": "https://github.com/Elven9",
+    "source": "GitHub",
+    "platforms": [
+      "github"
+    ],
+    "skills": [
+      "Assembly",
+      "網路",
+      "C++",
+      "JavaScript",
+      "Security",
+      "X86-64",
+      "資安",
+      "Node.js"
+    ],
+    "languages": {
+      "C++": 3,
+      "JavaScript": 2
+    },
+    "bio_source": "github_inference"
+  },
+  {
+    "name": "Huan912",
+    "github_url": "https://github.com/Huan912",
+    "source": "GitHub",
+    "platforms": [
+      "github"
+    ],
+    "skills": [
+      "AI",
+      "逆向工程",
+      "C++",
+      "Security",
+      "資安"
+    ],
+    "languages": {
+      "C++": 4
+    },
+    "bio_source": "github_inference"
+  },
+  {
+    "name": "Will Huang",
+    "github_url": "https://github.com/Will03",
+    "source": "GitHub",
+    "platforms": [
+      "github"
+    ],
+    "skills": [
+      "逆向工程",
+      "資安",
+      "C++",
+      "Security",
+      "Python"
+    ],
+    "languages": {
+      "Python": 2,
+      "C++": 1
+    },
+    "bio_source": "github_inference"
+  },
+  {
+    "name": "Alvin Che-Chia Chang",
+    "github_url": "https://github.com/gagachang",
+    "source": "GitHub",
+    "platforms": [
+      "github"
+    ],
+    "skills": [
+      "Security",
+      "資安"
+    ],
+    "languages": {},
+    "bio_source": "github_inference"
+  },
+  {
+    "name": "CXPhoenix",
+    "github_url": "https://github.com/CXPhoenix",
+    "source": "GitHub",
+    "platforms": [
+      "github"
+    ],
+    "skills": [
+      "Vitepress",
+      "FastAPI",
+      "Software-Development",
+      "Jinja2",
+      "資安",
+      "TypeScript",
+      "Cybersecurity",
+      "Education",
+      "Vitepress-Blog",
+      "Software-Engineering",
+      "Security",
+      "Fastapi",
+      "Rust",
+      "Blog",
+      "Tech",
+      "JavaScript",
+      "CTF",
+      "Penetration-Testing",
+      "Python",
+      "Node.js"
+    ],
+    "languages": {
+      "TypeScript": 2,
+      "JavaScript": 2,
+      "Python": 1,
+      "Rust": 1
+    },
+    "bio_source": "github_inference"
+  }
+]

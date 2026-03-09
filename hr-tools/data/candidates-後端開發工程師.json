@@ -1,0 +1,317 @@
+[
+  {
+    "name": "Kenny Chen",
+    "github_url": "https://github.com/KennyChenFight",
+    "source": "GitHub",
+    "platforms": [
+      "github"
+    ],
+    "skills": [
+      "Golang",
+      "Go",
+      "資料庫",
+      "Kubernetes",
+      "K8s",
+      "PostgreSQL",
+      "Rabbitmq"
+    ],
+    "languages": {
+      "Go": 3
+    },
+    "bio_source": "github_inference"
+  },
+  {
+    "name": "RuiSiang",
+    "github_url": "https://github.com/RuiSiang",
+    "source": "GitHub",
+    "platforms": [
+      "github"
+    ],
+    "skills": [
+      "Nodejs",
+      "Waf",
+      "會計",
+      "AI",
+      "C++",
+      "Monero-Integrations",
+      "JavaScript",
+      "Privacy-Protection",
+      "Swagger-Ui",
+      "Machine-Learning",
+      "Typescript",
+      "Spam-Protection",
+      "Onion",
+      "Restful-Api",
+      "React",
+      "Monero",
+      "Ddos-Mitigation",
+      "網路",
+      "Software",
+      "Biometrics",
+      "Golang",
+      "Go",
+      "TypeScript",
+      "前端",
+      "Face-Recognition",
+      "Cpp",
+      "Ddos-Protection",
+      "Security",
+      "Proxy-Server",
+      "Node.js",
+      "Privacy",
+      "Proof-Of-Work",
+      "Ddos",
+      "資安",
+      "Koa2",
+      "Networking",
+      "Network-Security",
+      "Machine Learning",
+      "Monero-Wallet-Rpc",
+      "Monero-Api",
+      "ERP",
+      "Spam-Filtering",
+      "Identification",
+      "Netsec",
+      "Cybersecurity"
+    ],
+    "languages": {
+      "JavaScript": 2,
+      "TypeScript": 2,
+      "C++": 1,
+      "Go": 1
+    },
+    "bio_source": "github_inference"
+  },
+  {
+    "name": "libterty",
+    "github_url": "https://github.com/libterty",
+    "source": "GitHub",
+    "platforms": [
+      "github"
+    ],
+    "skills": [
+      "Golang",
+      "Go",
+      "TypeScript",
+      "Python",
+      "JavaScript",
+      "Node.js"
+    ],
+    "languages": {
+      "TypeScript": 2,
+      "Go": 2,
+      "Python": 1,
+      "JavaScript": 1
+    },
+    "bio_source": "github_inference"
+  },
+  {
+    "name": "Hash Lin",
+    "github_url": "https://github.com/hashman",
+    "source": "GitHub",
+    "platforms": [
+      "github"
+    ],
+    "skills": [
+      "Docker",
+      "PHP",
+      "Shell",
+      "Nginx",
+      "Bash",
+      "遊戲開發",
+      "Linux",
+      "Python",
+      "JavaScript",
+      "Unity",
+      "Java",
+      "Node.js"
+    ],
+    "languages": {
+      "Dockerfile": 2,
+      "Shell": 2,
+      "Java": 1,
+      "JavaScript": 1,
+      "Python": 1
+    },
+    "bio_source": "github_inference"
+  },
+  {
+    "name": "jaychung",
+    "github_url": "https://github.com/ken8203",
+    "source": "GitHub",
+    "platforms": [
+      "github"
+    ],
+    "skills": [
+      "Redis",
+      "Docker",
+      "Golang",
+      "TypeScript",
+      "Go",
+      "ERP",
+      "JavaScript",
+      "Node.js"
+    ],
+    "languages": {
+      "TypeScript": 2,
+      "Go": 1,
+      "JavaScript": 1
+    },
+    "bio_source": "github_inference"
+  },
+  {
+    "name": "Clouding",
+    "github_url": "https://github.com/cloudingcity",
+    "source": "GitHub",
+    "platforms": [
+      "github"
+    ],
+    "skills": [
+      "Boop",
+      "Gitlab-Api",
+      "Secret",
+      "Linux",
+      "Library",
+      "Zsh",
+      "Cli",
+      "Chat",
+      "Fasthttp",
+      "Gool",
+      "Grpc-Go",
+      "Bash",
+      "Grpc",
+      "Command-Line-Tool",
+      "Gitlab",
+      "Homebrew",
+      "Golang",
+      "Go",
+      "Toolkit",
+      "Fasthttpclient",
+      "CI/CD",
+      "Http",
+      "Http-Client",
+      "Password-Generator",
+      "Ruby",
+      "Dotfiles",
+      "Password",
+      "Shell",
+      "GitLab",
+      "Golab"
+    ],
+    "languages": {
+      "Go": 6,
+      "Shell": 2,
+      "Ruby": 1
+    },
+    "bio_source": "github_inference"
+  },
+  {
+    "name": "Vongola",
+    "github_url": "https://github.com/vongola12324",
+    "source": "GitHub",
+    "platforms": [
+      "github"
+    ],
+    "skills": [
+      "資安",
+      "Golang",
+      "Go",
+      "VPN",
+      "PHP",
+      "爬蟲",
+      "Security",
+      "Python",
+      "CTF",
+      "JavaScript",
+      "Node.js",
+      "網路"
+    ],
+    "languages": {
+      "JavaScript": 4,
+      "PHP": 2,
+      "Go": 1,
+      "Python": 1
+    },
+    "bio_source": "github_inference"
+  },
+  {
+    "name": "nyo",
+    "github_url": "https://github.com/nyorc",
+    "source": "GitHub",
+    "platforms": [
+      "github"
+    ],
+    "skills": [
+      "Vimrc",
+      "Static-Site",
+      "About-Me",
+      "Linux",
+      "JavaScript",
+      "Tmux-Conf",
+      "Hugo",
+      "Stow",
+      "Infrastructure",
+      "Bash",
+      "Infrastructure as Code",
+      "Golang",
+      "Go",
+      "Zshrc",
+      "TypeScript",
+      "Terraform",
+      "Dotfiles",
+      "Node.js",
+      "Blog",
+      "Shell",
+      "Makefile"
+    ],
+    "languages": {
+      "Shell": 1,
+      "TypeScript": 1,
+      "HCL": 1,
+      "Go": 1,
+      "JavaScript": 1
+    },
+    "bio_source": "github_inference"
+  },
+  {
+    "name": "Johnny You",
+    "github_url": "https://github.com/LittleWhiteYA",
+    "source": "GitHub",
+    "platforms": [
+      "github"
+    ],
+    "skills": [
+      "DevOps",
+      "C++",
+      "Python",
+      "JavaScript",
+      "Node.js"
+    ],
+    "languages": {
+      "Python": 3,
+      "C++": 2,
+      "JavaScript": 1
+    },
+    "bio_source": "github_inference"
+  },
+  {
+    "name": "Mason Chang",
+    "github_url": "https://github.com/changmason",
+    "source": "GitHub",
+    "platforms": [
+      "github"
+    ],
+    "skills": [
+      "前端",
+      "Ruby",
+      "React",
+      "JavaScript",
+      "Node.js"
+    ],
+    "languages": {
+      "Ruby": 3,
+      "JavaScript": 3
+    },
+    "bio_source": "github_inference"
+  }
+]

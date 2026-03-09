@@ -1,0 +1,193 @@
+[
+  {
+    "id": "Jiahui Xie",
+    "name": "Jiahui Xie",
+    "contact": "https://www.linkedin.com/in/jiahui-xie-9990572b5/",
+    "role": "專案經理(PM)",
+    "current_role": "專案經理(PM)",
+    "skills": [
+      "SDET@UniUni | Software Test Lead | Project Manager"
+    ],
+    "experience": "",
+    "years_of_experience": 0,
+    "education": "",
+    "industry": "科技",
+    "file_url": "https://www.linkedin.com/in/jiahui-xie-9990572b5/",
+    "source": "履歷池",
+    "platforms": [
+      "履歷池"
+    ],
+    "fingerprint": "jiahuixie_"
+  },
+  {
+    "id": "吳建宏 (ChianHung Wu)",
+    "name": "吳建宏 (ChianHung Wu)",
+    "contact": "",
+    "role": "BIM 研發組長",
+    "current_role": "BIM 研發組長",
+    "skills": [
+      "大陸工程 | BIM 自動化 / 研發 / 流程優化"
+    ],
+    "experience": "",
+    "years_of_experience": 0,
+    "education": "",
+    "industry": "科技",
+    "file_url": "https://tw.linkedin.com/in/chianhung-wu-01319b179",
+    "source": "履歷池",
+    "platforms": [
+      "履歷池"
+    ],
+    "fingerprint": "吴建宏(chianhungwu)_"
+  },
+  {
+    "id": "Ellen Kang",
+    "name": "Ellen Kang",
+    "contact": "尤米爾科技",
+    "role": "測試工程師",
+    "current_role": "測試工程師",
+    "skills": [
+      "https://www.linkedin.com/in/ellen-kang-5b6735108/"
+    ],
+    "experience": "台北市",
+    "years_of_experience": 0,
+    "education": "測試工程",
+    "industry": "科技",
+    "file_url": "不明",
+    "source": "履歷池",
+    "platforms": [
+      "履歷池"
+    ],
+    "fingerprint": "ellenkang_"
+  },
+  {
+    "id": "PING-HSUAN HO",
+    "name": "PING-HSUAN HO",
+    "contact": "Castles Technology",
+    "role": "QA Engineer",
+    "current_role": "QA Engineer",
+    "skills": [
+      "https://www.linkedin.com/in/ping-hsuan-ho-332033140/"
+    ],
+    "experience": "新北市",
+    "years_of_experience": 0,
+    "education": "QA Testing",
+    "industry": "科技",
+    "file_url": "不明",
+    "source": "履歷池",
+    "platforms": [
+      "履歷池"
+    ],
+    "fingerprint": "ping-hsuanho_"
+  },
+  {
+    "id": "李承恩",
+    "name": "李承恩",
+    "contact": "一帆科技",
+    "role": "DevOps & QA",
+    "current_role": "DevOps & QA",
+    "skills": [
+      "https://www.linkedin.com/in/%E6%89%BF%E6%81%A9-%E6%9D%8E-3228a8a2/"
+    ],
+    "experience": "台北",
+    "years_of_experience": 0,
+    "education": "DevOps / QA / Git / Redmine",
+    "industry": "科技",
+    "file_url": "2016-2018",
+    "source": "履歷池",
+    "platforms": [
+      "履歷池"
+    ],
+    "fingerprint": "李承恩_"
+  },
+  {
+    "id": "Aidan Holm",
+    "name": "Aidan Holm",
+    "contact": "https://www.linkedin.com/in/aidan-holm-076900191/",
+    "role": "自動化測試工程師",
+    "current_role": "自動化測試工程師",
+    "skills": [
+      "Python (Google Python readability lead)"
+    ],
+    "experience": "Senior Software Engineer",
+    "years_of_experience": 0,
+    "education": "",
+    "industry": "科技",
+    "file_url": "",
+    "source": "履歷池",
+    "platforms": [
+      "履歷池"
+    ],
+    "fingerprint": "aidanholm_"
+  },
+  {
+    "id": "方嘉隆",
+    "name": "方嘉隆",
+    "contact": "https://www.linkedin.com/in/嘉隆-方-428007147/",
+    "role": "自動化測試工程師",
+    "current_role": "自動化測試工程師",
+    "skills": [
+      "BIOS/BMC FW測試",
+      "測試工具/腳本開發"
+    ],
+    "experience": "15年 系統整合測試工程師",
+    "years_of_experience": 0,
+    "education": "",
+    "industry": "科技",
+    "file_url": "",
+    "source": "履歷池",
+    "platforms": [
+      "履歷池"
+    ],
+    "fingerprint": "方嘉隆_"
+  },
+  {
+    "id": "李冠霆",
+    "name": "李冠霆",
+    "contact": "https://www.linkedin.com/in/冠霆-李-a0724b165/",
+    "role": "自動化測試工程師",
+    "current_role": "自動化測試工程師",
+    "skills": [
+      "自動化測試腳本開發",
+      "NI FPGA",
+      "PXI",
+      "Teststand"
+    ],
+    "experience": "Software Engineer",
+    "years_of_experience": 0,
+    "education": "",
+    "industry": "科技",
+    "file_url": "",
+    "source": "履歷池",
+    "platforms": [
+      "履歷池"
+    ],
+    "fingerprint": "李冠霆_"
+  },
+  {
+    "name": "qaz9517532846",
+    "github_url": "https://github.com/qaz9517532846",
+    "source": "GitHub",
+    "platforms": [
+      "github"
+    ],
+    "fingerprint": "qaz9517532846_"
+  },
+  {
+    "name": "Ashut90",
+    "github_url": "https://github.com/Ashut90",
+    "source": "GitHub",
+    "platforms": [
+      "github"
+    ],
+    "fingerprint": "ashut90_"
+  },
+  {
+    "name": "Alanliang666",
+    "github_url": "https://github.com/Alanliang666",
+    "source": "GitHub",
+    "platforms": [
+      "github"
+    ],
+    "fingerprint": "alanliang666_"
+  }
+]

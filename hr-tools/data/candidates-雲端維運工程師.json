@@ -1,0 +1,185 @@
+[
+  {
+    "name": "Jim",
+    "github_url": "https://github.com/yysu",
+    "source": "GitHub",
+    "platforms": [
+      "github"
+    ],
+    "skills": [
+      "DevOps",
+      "Python",
+      "Java",
+      "K8s",
+      "Kubernetes",
+      "Algorithm",
+      "AWS",
+      "雲端",
+      "Datastructures",
+      "Infrastructure as Code",
+      "Terraform"
+    ],
+    "languages": {
+      "Python": 3,
+      "Java": 1
+    },
+    "bio_source": "github_inference"
+  },
+  {
+    "name": "Dr. Yi Huang",
+    "github_url": "https://github.com/yi-john-huang",
+    "source": "GitHub",
+    "platforms": [
+      "github"
+    ],
+    "skills": [
+      "DevOps",
+      "Python",
+      "Golang",
+      "Shell",
+      "Kubernetes",
+      "Spring",
+      "AI",
+      "Java",
+      "Linux",
+      "JavaScript",
+      "Bash",
+      "Go",
+      "Infrastructure",
+      "自動化",
+      "Terraform",
+      "TypeScript",
+      "Node.js",
+      "AWS",
+      "雲端",
+      "Infrastructure as Code"
+    ],
+    "languages": {
+      "Python": 2,
+      "TypeScript": 2,
+      "Go": 1,
+      "HCL": 1,
+      "Shell": 1
+    },
+    "bio_source": "github_inference"
+  },
+  {
+    "name": "fung-hei-man",
+    "github_url": "https://github.com/fung-hei-man",
+    "source": "GitHub",
+    "platforms": [
+      "github"
+    ],
+    "skills": [
+      "Gmm",
+      "DevOps",
+      "Color-Segmentation",
+      "Ansible",
+      "Python",
+      "資安",
+      "Java",
+      "Gaussian-Mixture-Models",
+      "Kubernetes",
+      "自動化",
+      "Music-Genre-Classification",
+      "Spring",
+      "Security"
+    ],
+    "languages": {
+      "Python": 4
+    },
+    "bio_source": "github_inference"
+  },
+  {
+    "name": "WeiCheng Fang",
+    "github_url": "https://github.com/abelite-fang",
+    "source": "GitHub",
+    "platforms": [
+      "github"
+    ],
+    "skills": [
+      "資料庫",
+      "Prometheus",
+      "DevOps",
+      "MongoDB",
+      "會計",
+      "Python",
+      "PHP",
+      "Java",
+      "K8s",
+      "監控",
+      "Shell",
+      "Kubernetes",
+      "Linux",
+      "Spring",
+      "Bash"
+    ],
+    "languages": {
+      "Python": 2,
+      "Shell": 1,
+      "PHP": 1
+    },
+    "bio_source": "github_inference"
+  },
+  {
+    "name": "Corey",
+    "github_url": "https://github.com/Kuanlin-Chen",
+    "source": "GitHub",
+    "platforms": [
+      "github"
+    ],
+    "skills": [
+      "DevOps",
+      "Python",
+      "Jenkins",
+      "Java",
+      "Infrastructure",
+      "C#",
+      "React",
+      "前端",
+      "AWS",
+      "雲端",
+      "Infrastructure as Code",
+      "CI/CD",
+      "Terraform"
+    ],
+    "languages": {
+      "HCL": 2,
+      "Java": 1
+    },
+    "bio_source": "github_inference"
+  },
+  {
+    "name": "Jun Wei",
+    "github_url": "https://github.com/ljwun",
+    "source": "GitHub",
+    "platforms": [
+      "github"
+    ],
+    "skills": [
+      "VPN",
+      "Bytetrack",
+      "DevOps",
+      "TypeScript",
+      "AI",
+      "網路",
+      "Ml-Landing",
+      "Python",
+      "Deep Learning",
+      "Yolox",
+      "K8s",
+      "Golang",
+      "Kubernetes",
+      "ERP",
+      "Deep-Learning",
+      "Docker",
+      "Go"
+    ],
+    "languages": {
+      "Go": 3,
+      "Python": 2,
+      "TypeScript": 1
+    },
+    "bio_source": "github_inference"
+  }
+]
