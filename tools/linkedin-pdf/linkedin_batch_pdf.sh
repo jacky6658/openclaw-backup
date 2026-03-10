@@ -5,6 +5,10 @@
 
 API_BASE="https://backendstep1ne.zeabur.app"
 MAPPING_FILE="/tmp/pdf_mapping.json"
+DAILY_QUOTA=40           # 每天最多下載幾份
+DAILY_COUNT_FILE="/tmp/li_daily_count_$(date +%Y%m%d).txt"
+CONSECUTIVE_FAIL=0       # 連續失敗計數
+MAX_CONSECUTIVE_FAIL=3   # 熔斷閾值
 
 # ===== 防護：只在白天跑 =====
 check_time() {
@@ -12,6 +16,42 @@ check_time() {
     if [ "$hour" -lt 9 ] || [ "$hour" -ge 22 ]; then
         echo "⏰ 現在是 $(date '+%H:%M')，超出允許時段（09:00-22:00），停止執行"
         exit 0
+    fi
+}
+
+# ===== 防護：每日配額 =====
+check_quota() {
+    today_count=0
+    if [ -f "$DAILY_COUNT_FILE" ]; then
+        today_count=$(cat "$DAILY_COUNT_FILE")
+    fi
+    if [ "$today_count" -ge "$DAILY_QUOTA" ]; then
+        echo "🚫 今日配額已達上限（${DAILY_QUOTA} 份），明天再繼續"
+        exit 0
+    fi
+    echo "📊 今日已下載：${today_count}/${DAILY_QUOTA}"
+}
+
+increment_quota() {
+    today_count=0
+    if [ -f "$DAILY_COUNT_FILE" ]; then
+        today_count=$(cat "$DAILY_COUNT_FILE")
+    fi
+    echo $((today_count + 1)) > "$DAILY_COUNT_FILE"
+}
+
+# ===== 防護：偵測 CAPTCHA / 登出 =====
+check_kill_switch() {
+    page_title=$(osascript -e 'tell application "Google Chrome" to get title of active tab of front window' 2>/dev/null)
+    page_url=$(osascript -e 'tell application "Google Chrome" to get URL of active tab of front window' 2>/dev/null)
+
+    if echo "$page_title $page_url" | grep -qi "security\|captcha\|checkpoint\|challenge"; then
+        echo "🚨 偵測到驗證碼/安全檢查！腳本緊急停止"
+        exit 1
+    fi
+    if echo "$page_url" | grep -qi "linkedin.com/login\|linkedin.com/uas/login"; then
+        echo "🚨 偵測到登出/Session 失效！腳本緊急停止"
+        exit 1
     fi
 }
 
@@ -76,6 +116,9 @@ download_pdf() {
     # 等待下載（4-7秒）
     sleep $((RANDOM % 4 + 4))
 
+    # 防護：下載前檢查熔斷條件
+    check_kill_switch
+
     after=$(ls ~/Downloads/Profile*.pdf 2>/dev/null | wc -l | tr -d ' ')
 
     if [ "$after" -gt "$before" ]; then
@@ -96,13 +139,18 @@ total=$(echo "$candidates" | jq length)
 echo "🚀 Starting batch download of $total LinkedIn PDFs..."
 echo "=================================================="
 
+# 啟動前檢查
+check_time
+check_quota
+
 success=0
 failed=0
 mapping="[]"
 
 for i in $(seq 0 $((total-1))); do
-    # 防護：每個候選人前檢查時間
+    # 防護：每個候選人前檢查時間與配額
     check_time
+    check_quota
 
     id=$(echo "$candidates" | jq -r ".[$i].id")
     name=$(echo "$candidates" | jq -r ".[$i].name")
@@ -119,18 +167,28 @@ for i in $(seq 0 $((total-1))); do
     if [ -f "$pdf_path" ]; then
         mapping=$(echo "$mapping" | jq --arg id "$id" --arg name "$name" --arg pdf "$pdf_path" '. + [{id: $id, name: $name, pdf: $pdf}]')
         ((success++))
+        CONSECUTIVE_FAIL=0
+        increment_quota
     else
         newest=$(ls -t ~/Downloads/Profile*.pdf 2>/dev/null | head -1)
         if [ -n "$newest" ]; then
             mapping=$(echo "$mapping" | jq --arg id "$id" --arg name "$name" --arg pdf "$newest" '. + [{id: $id, name: $name, pdf: $pdf}]')
             ((success++))
+            CONSECUTIVE_FAIL=0
+            increment_quota
         else
             ((failed++))
+            ((CONSECUTIVE_FAIL++))
+            echo "  ⚠️  連續失敗：${CONSECUTIVE_FAIL}/${MAX_CONSECUTIVE_FAIL}"
+            if [ "$CONSECUTIVE_FAIL" -ge "$MAX_CONSECUTIVE_FAIL" ]; then
+                echo "🚨 連續失敗 ${MAX_CONSECUTIVE_FAIL} 次，熔斷停止！"
+                break
+            fi
         fi
     fi
 
-    # ===== 防護：隨機間隔 50-100 秒 =====
-    wait_sec=$((RANDOM % 51 + 50))
+    # ===== 防護：隨機間隔 180-420 秒（3-7 分鐘）=====
+    wait_sec=$((RANDOM % 241 + 180))
     echo "  ⏱️  等待 ${wait_sec}s..."
     sleep $wait_sec
 
