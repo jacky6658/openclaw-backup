@@ -74,8 +74,8 @@ for i in $(seq 0 $((total-1))); do
     
     sleep 60
 
-    # 每 5 個休息 2 分鐘
-    batch_pos=$(( (i + 1) % 5 ))
+    # 每 10 個休息 2 分鐘
+    batch_pos=$(( (i + 1) % 10 ))
     if [ "$batch_pos" -eq 0 ] && [ "$i" -lt "$((total-1))" ]; then
         echo ""
         echo "⏸️  完成第 $((i+1)) 位，批次休息 2 分鐘..."
