@@ -1259,6 +1259,57 @@ fi
 
 ---
 
+## LinkedIn PDF 批量下載工作流程（2026-03-10）✅
+
+### 核心突破：固定座標點擊法
+LinkedIn 的「存為 PDF」選單由 React 渲染，JS dispatchEvent / Peekaboo 元素偵測都失敗。
+**解法**：先用 JS 找出「存為 PDF」元素座標一次，之後直接用 cliclick 固定座標點擊。
+
+### 固定座標（MacBook 環境）
+- **More 按鈕**：`cliclick c:339,719`
+- **存為 PDF**：`cliclick c:446,508`
+
+### 完整流程
+
+```bash
+# 1. 導向 LinkedIn profile
+osascript -e 'tell application "Google Chrome" to set URL of active tab...'
+sleep 4  # 等頁面完全載入
+
+# 2. 開 More 選單
+cliclick c:339,719
+sleep 0.8
+
+# 3. 點「存為 PDF」
+cliclick c:446,508
+sleep 5  # 等下載完成
+
+# 4. 偵測新 PDF
+ls -t ~/Downloads/Profile*.pdf | head -1
+```
+
+### 批量腳本
+- 腳本：`/tmp/linkedin_batch_pdf.sh`
+- 候選人列表：`/tmp/li_candidates.json`（格式：`[{id, name, linkedin_url}]`）
+- 成功率：約 75%（25/34），失敗通常是頁面載入太慢
+
+### PDF 解析 + 上傳
+- 解析腳本：`/tmp/parse_and_upload.py`
+- 用 `pdftotext {pdf}.pdf -` 提取文字
+- 提取：current_position、skills（熱門技能段落）、education（教育程度段落）、work_history
+- PATCH 到 `https://backendstep1ne.zeabur.app/api/candidates/{id}`
+- actor 帶 `"Jacky-aibot"`
+
+### PDF 下載失敗的 fallback
+Web Search 搜尋 `{name} LinkedIn {linkedin_url_slug}` → 從搜尋結果摘要提取職位/技能/學歷 → 直接 PATCH API
+
+### 注意事項
+- LinkedIn 每次下載的 PDF 命名：`Profile.pdf`, `Profile (1).pdf`, `Profile (2).pdf`...
+- 需要對照成功/失敗 log 建立 id → pdf 的 mapping 才能正確解析
+- 兩次點擊之間至少等 0.8s，否則選單會來不及出現
+
+---
+
 ## Step1ne 獵頭系統操作指南（2026-03-09）
 
 ### 基本設定
