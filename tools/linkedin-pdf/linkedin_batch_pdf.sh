@@ -73,6 +73,15 @@ for i in $(seq 0 $((total-1))); do
     fi
     
     sleep 60
+
+    # 每 5 個休息 2 分鐘
+    batch_pos=$(( (i + 1) % 5 ))
+    if [ "$batch_pos" -eq 0 ] && [ "$i" -lt "$((total-1))" ]; then
+        echo ""
+        echo "⏸️  完成第 $((i+1)) 位，批次休息 2 分鐘..."
+        sleep 120
+        echo "▶️  繼續..."
+    fi
 done
 
 echo ""
