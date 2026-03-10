@@ -72,7 +72,7 @@ for i in $(seq 0 $((total-1))); do
         fi
     fi
     
-    sleep 2
+    sleep 60
 done
 
 echo ""
