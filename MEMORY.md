@@ -1426,3 +1426,55 @@ POST /api/talent-sourcing/find-candidates
 - **遊戲橘子集團**、**蟻力股份有限公司**、**優服** → 三家公司共用同一份合約
 - 優服已更新為「合作中」（已簽約）
 - 簽約客戶總數更新為 **34 家**
+
+---
+
+## Step1ne 候選人卡片更新 API — 重要規則（2026-03-11）
+
+### 兩個端點，功能嚴格分開
+
+| 端點 | 方法 | 處理欄位 |
+|------|------|---------|
+| `/api/candidates/:id` | **PUT** | `status`, `notes`, `consultant`, `progressTracking`, `aiMatchResult` |
+| `/api/candidates/:id` | **PATCH** | `position`, `skills`, `education`, `work_history`, `education_details`, `target_job_id`, `recruiter`, `talent_level`, `years`, `jobChanges`, `avgTenure`, `lastGap`, `stabilityScore` 等 |
+
+### 關鍵注意事項
+- **不能混用**：aiMatchResult 只能 PUT，target_job_id 只能 PATCH
+- **PUT 會覆蓋 notes**：先 GET 取舊 notes 帶入，否則會清空
+- **PATCH 回傳 snake_case**，GET 回傳 camelCase（正常現象）
+- `target_job_id` 用 snake_case（PATCH body），不是 `targetJobId`
+- `recruiter` 欄位（PATCH）→ 對應前端顧問指派
+
+### aiMatchResult 必填欄位
+```json
+{
+  "score": 85,
+  "grade": "A",
+  "recommendation": "推薦",
+  "job_title": "職位名稱",
+  "company": "公司名稱",
+  "matched_skills": [],
+  "missing_skills": [],
+  "strengths": [],
+  "probing_questions": ["問題1","問題2","問題3","問題4","問題5"],
+  "salary_fit": "薪資說明",
+  "conclusion": "評分結語",
+  "suggestion": "建議",
+  "evaluated_by": "Jacky-aibot",
+  "evaluated_at": "YYYY-MM-DD",
+  "github_url": ""
+}
+```
+
+### 職缺狀態更新
+- 端點：`PATCH /api/jobs/:id/status`
+- body：`{"job_status": "關閉", "actor": "Jacky-aibot"}`
+- 有效值：`招募中` / `暫停` / `已滿額` / `關閉`
+
+### 完整教學檔案
+- 位置：`~/lobster2-workspace/tools/linkedin-pdf/候選人卡片更新教學.md`
+
+### OpenClaw 本地 AI API
+- URL: `http://localhost:18789/v1/chat/completions`
+- Token: `9b3cb3f2d661fe14d0d267a2380c3da397b4b6673539bcd7`
+- 模型: `anthropic/claude-sonnet-4-5`（用於 process_resume.py AI解析）

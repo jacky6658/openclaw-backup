@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: "PingFang TC","Heiti TC","Microsoft JhengHei",sans-serif; color: #222; background: white; font-size: 14px; }
+
+  .cover { background: linear-gradient(160deg, #0f3460 0%, #1a5276 60%, #1e8bc3 100%); color: white; padding: 80px 70px 60px; min-height: 260px; }
+  .cover .doc-type { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 18px; }
+  .cover h1 { font-size: 26px; font-weight: 900; line-height: 1.4; margin-bottom: 10px; }
+  .cover h2 { font-size: 14px; font-weight: normal; color: rgba(255,255,255,0.7); margin-bottom: 36px; }
+  .cover-meta { display: flex; gap: 40px; }
+  .cover-meta .meta-item .label { font-size: 10px; color: rgba(255,255,255,0.5); letter-spacing: 2px; margin-bottom: 4px; }
+  .cover-meta .meta-item .value { font-size: 14px; font-weight: 700; }
+
+  .body { padding: 48px 70px; }
+
+  .section { margin-bottom: 40px; page-break-inside: avoid; }
+  .section-header { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+  .section-num { background: #0f3460; color: white; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 900; flex-shrink: 0; }
+  .section-title { font-size: 17px; font-weight: 800; color: #0f3460; border-bottom: 2px solid #0f3460; padding-bottom: 6px; flex: 1; }
+
+  .content-box { background: #f8fafc; border-left: 4px solid #1e8bc3; padding: 20px 24px; border-radius: 0 8px 8px 0; line-height: 1.9; }
+  .content-box p { margin-bottom: 8px; }
+  .content-box p:last-child { margin-bottom: 0; }
+
+  .info-row { display: flex; gap: 4px; margin-bottom: 8px; }
+  .info-row .key { font-weight: 700; color: #0f3460; min-width: 90px; flex-shrink: 0; }
+  .info-row .val { color: #333; }
+
+  .day-block { border: 1px solid #d6e4f0; border-radius: 8px; overflow: hidden; margin-bottom: 14px; }
+  .day-header { background: #0f3460; color: white; padding: 10px 18px; font-weight: 700; font-size: 14px; display: flex; justify-content: space-between; align-items: center; }
+  .day-header .hrs { font-size: 12px; color: rgba(255,255,255,0.7); font-weight: normal; }
+  .day-items { padding: 12px 18px; }
+  .day-item { padding: 8px 0; border-bottom: 1px solid #edf2f7; display: flex; align-items: flex-start; gap: 10px; }
+  .day-item:last-child { border-bottom: none; }
+  .day-item .dot { width: 8px; height: 8px; background: #1e8bc3; border-radius: 50%; margin-top: 6px; flex-shrink: 0; }
+  .day-item .text { line-height: 1.6; color: #333; }
+  .day-item .tag { font-size: 10px; background: #e8f4fd; color: #1e8bc3; border-radius: 3px; padding: 1px 6px; font-weight: 600; flex-shrink: 0; margin-top: 4px; }
+
+  .teacher-card { background: #f0f7ff; border-radius: 10px; padding: 20px 24px; }
+  .teacher-name { font-size: 18px; font-weight: 900; color: #0f3460; margin-bottom: 4px; }
+  .teacher-title { font-size: 13px; color: #555; margin-bottom: 16px; }
+  .teacher-section { margin-top: 12px; }
+  .teacher-section .label { font-size: 11px; color: #1e8bc3; font-weight: 700; letter-spacing: 1px; margin-bottom: 6px; }
+  .teacher-section .value { line-height: 1.8; color: #333; }
+
+  .eval-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .eval-item { background: #f0f7ff; border-radius: 8px; padding: 16px 18px; }
+  .eval-item .eval-num { font-size: 11px; font-weight: 700; color: #1e8bc3; letter-spacing: 1px; margin-bottom: 6px; }
+  .eval-item .eval-title { font-size: 14px; font-weight: 700; color: #0f3460; margin-bottom: 6px; }
+  .eval-item .eval-desc { font-size: 13px; color: #555; line-height: 1.7; }
+
+  .footer { background: #0f3460; color: rgba(255,255,255,0.5); text-align: center; padding: 16px; font-size: 11px; }
+
+  @media print {
+    .section { page-break-inside: avoid; }
+    .day-block { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="doc-type">Training Course Plan ｜ 課程規劃書</div>
+  <h1>AI 智能代理應用與<br>獵頭顧問實務工作坊</h1>
+  <h2>AI Agent Applications & Talent Acquisition Practice Workshop</h2>
+  <div class="cover-meta">
+    <div class="meta-item">
+      <div class="label">辦理單位</div>
+      <div class="value">德仁管理顧問股份有限公司</div>
+    </div>
+    <div class="meta-item">
+      <div class="label">總培訓時數</div>
+      <div class="value">12 小時（2日）</div>
+    </div>
+    <div class="meta-item">
+      <div class="label">授課講師</div>
+      <div class="value">陳厚瑞 Jacky Chen</div>
+    </div>
+  </div>
+</div>
+
+<div class="body">
+
+  <!-- 一、課程目的及效益 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">一</div>
+      <div class="section-title">培訓課程目的及效益</div>
+    </div>
+    <div class="content-box">
+      <p>本課程旨在協助企業員工掌握 AI 智能代理（AI Agent）工具之實務操作能力，以提升數位工作效率、加速企業數位轉型。</p>
+      <p>課程以實作為主，幫助學員將 AI 工具直接應用於日常業務流程，包含 AI 輔助資料分析、自動化任務處理、智慧客戶溝通及內容生成等面向，有效降低人力成本並提升工作產值。</p>
+    </div>
+  </div>
+
+  <!-- 二、課程規劃內容 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">二</div>
+      <div class="section-title">培訓課程規劃內容</div>
+    </div>
+
+    <div style="margin-bottom: 20px;">
+      <div class="info-row"><span class="key">課程名稱</span><span class="val">AI 智能代理應用與獵頭顧問實務工作坊</span></div>
+      <div class="info-row"><span class="key">課程類型</span><span class="val">實體授課</span></div>
+      <div class="info-row"><span class="key">總時數</span><span class="val">12 小時（分兩日進行，每日 6 小時）</span></div>
+      <div class="info-row"><span class="key">前備知識</span><span class="val">不需具備技術背景，會使用電腦及手機即可</span></div>
+    </div>
+
+    <div class="day-block">
+      <div class="day-header">
+        Day 1 — 基礎建立與核心工具實作
+        <span class="hrs">6 小時</span>
+      </div>
+      <div class="day-items">
+        <div class="day-item">
+          <div class="dot"></div>
+          <div class="text">AI 概論與 AI Agent 入門</div>
+          <div class="tag">理論</div>
+        </div>
+        <div class="day-item">
+          <div class="dot"></div>
+          <div class="text">ChatGPT / Claude 實戰操作</div>
+          <div class="tag">實作</div>
+        </div>
+        <div class="day-item">
+          <div class="dot"></div>
+          <div class="text">AI 人才搜尋自動化</div>
+          <div class="tag">實作</div>
+        </div>
+        <div class="day-item">
+          <div class="dot"></div>
+          <div class="text">AI 協作流程設計與個人 SOP 建立</div>
+          <div class="tag">實作</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-block">
+      <div class="day-header">
+        Day 2 — 進階應用與綜合演練
+        <span class="hrs">6 小時</span>
+      </div>
+      <div class="day-items">
+        <div class="day-item">
+          <div class="dot"></div>
+          <div class="text">AI 配對分析與資料評估</div>
+          <div class="tag">進階</div>
+        </div>
+        <div class="day-item">
+          <div class="dot"></div>
+          <div class="text">自動化流程建置與批量處理</div>
+          <div class="tag">進階</div>
+        </div>
+        <div class="day-item">
+          <div class="dot"></div>
+          <div class="text">AI 輔助客戶溝通與提案生成</div>
+          <div class="tag">應用</div>
+        </div>
+        <div class="day-item">
+          <div class="dot"></div>
+          <div class="text">綜合實作與成果展示</div>
+          <div class="tag">實作</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 三、授課教師簡歷 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">三</div>
+      <div class="section-title">授課教師簡歷</div>
+    </div>
+    <div class="teacher-card">
+      <div class="teacher-name">陳厚瑞（Jacky Chen）</div>
+      <div class="teacher-title">德仁管理顧問股份有限公司 ｜ 顧問</div>
+      <div class="teacher-section">
+        <div class="label">專長領域</div>
+        <div class="value">AI 工具應用、企業數位轉型、人力資源管理顧問</div>
+      </div>
+      <div class="teacher-section">
+        <div class="label">授課實績</div>
+        <div class="value">
+          2026年1月於德仁管理顧問股份有限公司辦理「AI 智能代理應用與獵頭顧問實務工作坊」，實體課程12小時，學員5人，內容涵蓋 AI 工具實作操作、自動化招募流程設計及 AI 輔助業務應用，學員滿意度優良。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 四、課後評估機制 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">四</div>
+      <div class="section-title">課後評估機制</div>
+    </div>
+    <div class="eval-grid">
+      <div class="eval-item">
+        <div class="eval-num">ITEM 01</div>
+        <div class="eval-title">課中實作測驗</div>
+        <div class="eval-desc">每日課程結束前進行分組演練，講師現場評量學員操作成果。</div>
+      </div>
+      <div class="eval-item">
+        <div class="eval-num">ITEM 02</div>
+        <div class="eval-title">課後問卷</div>
+        <div class="eval-desc">課程結束後填寫學習滿意度與技能應用問卷，評估課程目標達成率。</div>
+      </div>
+      <div class="eval-item">
+        <div class="eval-num">ITEM 03</div>
+        <div class="eval-title">結訓證書</div>
+        <div class="eval-desc">完成全程12小時課程之學員，由辦理單位核發結訓證書。</div>
+      </div>
+      <div class="eval-item">
+        <div class="eval-num">ITEM 04</div>
+        <div class="eval-title">課後追蹤</div>
+        <div class="eval-desc">結訓後30日內，講師提供線上諮詢支援，協助學員將所學應用於實際工作。</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  德仁管理顧問股份有限公司 ｜ 課程規劃書 ｜ AI 智能代理應用與獵頭顧問實務工作坊 ｜ 2026年3月
+</div>
+</body>
+</html>
