@@ -209,7 +209,8 @@ def process_candidate(item):
     
     info = extract_info(text, name)
     if drive_url and drive_url != "uploaded":
-        info["resumeLink"] = drive_url
+        # Append Drive URL to notes (resumeLink field not supported by Step1ne API)
+        info["notes"] = info.get("notes", "") + f" | Drive: {drive_url}"
 
     # 4. Upload to Step1ne
     success = upload_to_step1ne(cid, info)
