@@ -106,7 +106,7 @@ download_pdf() {
 
     # 防護：滑鼠漂移後點擊 More 按鈕
     random_mouse_drift 339 719
-    cliclick c:339,719
+    cliclick c:360,719
     sleep $((RANDOM % 2 + 1)).$((RANDOM % 9))
 
     # 點擊 Save as PDF
