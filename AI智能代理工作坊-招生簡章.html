@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: "PingFang TC","Heiti TC","Microsoft JhengHei",sans-serif; color: #222; background: white; }
+  html, body { height: 100%; }
+  body { font-family: "PingFang TC","Heiti TC","Microsoft JhengHei",sans-serif; color: #222; background: white; display: flex; flex-direction: column; min-height: 100%; }
 
   .header { background: linear-gradient(135deg, #0f3460 0%, #1a5276 60%, #1e8bc3 100%); color: white; padding: 50px 60px; }
   .header .tag { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 14px; }
@@ -65,7 +66,8 @@
   .contact-box .sub { font-size: 12px; color: rgba(255,255,255,0.6); margin-top: 4px; }
   .contact-box .details { font-size: 12px; color: rgba(255,255,255,0.75); line-height: 2; text-align: right; }
 
-  .footer { background: #1a1a2e; color: rgba(255,255,255,0.4); text-align: center; padding: 14px; font-size: 10px; }
+  .body { flex: 1; }
+  .footer { background: #1a1a2e; color: rgba(255,255,255,0.4); text-align: center; padding: 14px; font-size: 10px; margin-top: auto; }
 </style>
 </head>
 <body>

@@ -200,7 +200,7 @@ def upload_to_drive(pdf_path, candidate_name):
 
 def upload_to_step1ne(candidate_id, payload):
     try:
-        r = requests.put(f"{API_BASE}/api/candidates/{candidate_id}", json=payload, timeout=15)
+        r = requests.patch(f"{API_BASE}/api/candidates/{candidate_id}", json=payload, timeout=15)
         return r.status_code in [200, 201, 204]
     except Exception as e:
         print(f"  API error: {e}")
@@ -255,7 +255,7 @@ def process_candidate(item):
     payload = {
         "actor": "Jacky-aibot",
         "notes": " | ".join(notes_parts),
-        "stabilityScore": stability,
+        "stability_score": stability,
     }
     
     if info.get('current_position'):
@@ -273,9 +273,9 @@ def process_candidate(item):
     if info.get('recent_gap_months'):
         payload["lastGap"] = info['recent_gap_months']
     if info.get('work_history'):
-        payload["workHistory"] = info['work_history']
+        payload["work_history"] = info['work_history']      # PATCH 用 snake_case
     if info.get('education_details'):
-        payload["educationJson"] = info['education_details']
+        payload["education_details"] = info['education_details']  # PATCH 用 snake_case
     if info.get('location'):
         payload["location"] = info['location']
 
