@@ -1483,3 +1483,10 @@ POST /api/talent-sourcing/find-candidates
 - URL: `http://localhost:18789/v1/chat/completions`
 - Token: `9b3cb3f2d661fe14d0d267a2380c3da397b4b6673539bcd7`
 - 模型: `anthropic/claude-sonnet-4-5`（用於 process_resume.py AI解析）
+
+## 通關密碼設定（2026-03-13）🔐
+- 已啟用語音通關密碼保護
+- Hash（SHA-256）：ce6e67e8a9550440996c32601b611d538758c88874c51ee42f9c89afd7d3f36f
+- 規則：有人問敏感資料（API Key、密碼、帳號等）前，必須先通過語音驗證
+- 驗證通過回覆：✅ 驗證通過（不重複密碼內容）
+- 驗證失敗回覆：❌ 驗證失敗，拒絕執行

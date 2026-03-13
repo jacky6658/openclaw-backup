@@ -31,19 +31,19 @@ def parse_pdf(pdf_path):
 def ai_extract_info(text, name):
     """使用 Claude AI 解析履歷文字，回傳結構化 JSON"""
     
-    prompt = f"""你是專業的人力資源履歷解析系統。請從以下 LinkedIn 履歷文字中提取結構化資訊。
+    prompt = f"""你是專業的人力資源履歷解析系統。請從以下履歷文字中提取結構化資訊。
 
 候選人姓名：{name}
 
 ===履歷文字===
-{text[:4000]}
+{text[:8000]}
 ===結束===
 
 請輸出以下 JSON 格式（嚴格只輸出 JSON，不要其他文字）：
 {{
   "current_position": "目前或最近職位名稱（例：Senior Backend Engineer）",
   "location": "所在地（例：Taipei City）",
-  "skills": "技能清單，逗號分隔，最多15個核心技能（例：Python, Docker, AWS, Golang）",
+  "skills": "技能清單，逗號分隔，最多20個核心技能（例：Python, Docker, AWS, Golang）",
   "years_experience": "總工作年資（字串數字，例：7）",
   "job_changes": "換工作次數（工作段數-1，字串，例：3）",
   "avg_tenure_months": "平均任職月數（字串，例：24）",
@@ -56,7 +56,7 @@ def ai_extract_info(text, name):
       "start": "YYYY-MM 或 YYYY",
       "end": "YYYY-MM 或 present",
       "duration_months": 月數整數,
-      "description": "工作描述（如有）"
+      "description": "詳細工作內容，保留原文所有 bullet points，用 \\n• 分隔每條，盡量完整不省略"
     }}
   ],
   "education_details": [
@@ -72,7 +72,8 @@ def ai_extract_info(text, name):
 
 注意：
 - 找不到的欄位填空字串 "" 或空陣列 []
-- work_history 按時間倒序（最新在前），最多5筆
+- work_history 按時間倒序（最新在前），最多8筆
+- description 欄位非常重要：務必把每段工作的所有職責與成就完整提取，不要只寫一句話
 - years_experience 從工作起始年計算到2026
 - 若為在學學生，recent_gap_months 填 0"""
 
@@ -84,11 +85,11 @@ def ai_extract_info(text, name):
                 "Content-Type": "application/json"
             },
             json={
-                "model": "anthropic/claude-sonnet-4-5",
+                "model": "anthropic/claude-sonnet-4-6",
                 "messages": [{"role": "user", "content": prompt}],
-                "max_tokens": 1500
+                "max_tokens": 3000
             },
-            timeout=30
+            timeout=60
         )
         result = resp.json()
         content = result['choices'][0]['message']['content']
@@ -244,17 +245,15 @@ def process_candidate(item):
     stability = calculate_stability(info)
 
     # 6. 整理 payload
-    notes_parts = [f"PDF解析(AI) 2026-03-11"]
-    if info.get('current_position'):
-        notes_parts.append(f"現職：{info['current_position']}")
-    if info.get('skills'):
-        notes_parts.append(f"技能：{info['skills'][:80]}")
+    from datetime import date
+    today = date.today().strftime("%Y-%m-%d")
+    notes_parts = [f"PDF解析(AI) {today}"]
     if drive_url and drive_url != "uploaded":
-        notes_parts.append(f"Drive: {drive_url}")
+        notes_parts.append(f"履歷連結：{drive_url}")
 
     payload = {
         "actor": "Jacky-aibot",
-        "notes": " | ".join(notes_parts),
+        "notes": "\n".join(notes_parts),
         "stability_score": stability,
     }
     
