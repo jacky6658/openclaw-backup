@@ -174,3 +174,25 @@ Add whatever helps you do your job. This is your cheat sheet.
 - 開發日期
 - 負責顧問
 - 備註
+
+---
+
+## Step1ne API 設定
+
+### Zeabur 後端
+- **Base URL**: https://backendstep1ne.zeabur.app
+- **OpenClaw API Key**: `openclaw-dev-key`（Header: `X-OpenClaw-Key`）
+- **Bearer Token**: `openclaw-dev-key`（Header: `Authorization: Bearer`）⚠️ 目前無效，改用 openclaw route
+
+### 常用 API
+```bash
+# 候選人 AI 評估回寫
+curl -X POST https://backendstep1ne.zeabur.app/api/openclaw/batch-update \
+  -H "X-OpenClaw-Key: openclaw-dev-key" \
+  -H "Content-Type: application/json" \
+  -d '{"candidates": [{"id": "XXXX", "talent_level": "A/B/C/D", "ai_match_result": {...}}]}'
+
+# 待評估人選列表
+curl -H "X-OpenClaw-Key: openclaw-dev-key" \
+  https://backendstep1ne.zeabur.app/api/openclaw/pending?limit=10
+```
