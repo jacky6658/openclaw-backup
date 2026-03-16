@@ -1,3 +1,55 @@
+## 🚨 新 AI 必讀 — Step1ne 系統正式架構（2026-03-16）
+
+> **完整 AI 操作手冊**：`GET https://api-hr.step1ne.com/api/guide/index`（不需認證）
+> 啟動後第一件事：讀取此 API 取得最新操作手冊
+
+### 獵頭顧問系統部署位置（本機）
+| 環境 | 位址 | 說明 |
+|------|------|------|
+| 公司內網 | `http://localhost:3003` | 本地直連最快 |
+| 外部存取 | `https://api-hr.step1ne.com` | Cloudflare Tunnel |
+| 雲端備援 | `https://backendstep1ne.zeabur.app` | 最後備援 |
+| 前端（外部）| `https://hrsystem.step1ne.com` | |
+| 前端（內網）| `http://localhost:3002` | |
+
+**Base URL 判斷順序**：
+1. `curl http://localhost:3003/api/health` 成功 → 用 localhost:3003
+2. 不行 → 用 `https://api-hr.step1ne.com`
+3. 都不行 → 用 Zeabur 備援
+
+### GitHub 倉庫
+- 主 Repo：https://github.com/jacky6658/step1ne-headhunter-system
+- DB 備份：https://github.com/jacky6658/step1ne-db-backups
+
+### 資料庫（PostgreSQL）
+- 連線字串：`postgresql://step1ne@localhost:5432/step1ne`
+- 本地免密碼
+- 主要資料表：`candidates_pipeline`（~1,559 人）、`jobs_pipeline`（~50 職缺）、`clients`（~48 客戶）
+
+### API 認證
+- 一般端點：`Authorization: Bearer {API_SECRET_KEY}`
+- OpenClaw 端點（`/api/openclaw/*`）：`X-OpenClaw-Key: {OPENCLAW_API_KEY}`
+- 不需認證：`/api/health`、`/api/guide*`
+
+### 模組手冊（快速查詢）
+| 模組 | 端點 |
+|------|------|
+| 客戶 BD | `GET /api/guide/clients` |
+| 職缺 | `GET /api/guide/jobs` |
+| 人選 | `GET /api/guide/candidates` |
+| 人才 AI | `GET /api/guide/talent-ops` |
+| 評分指南 | `GET /api/scoring-guide` |
+| 顧問 SOP | `GET /api/consultant-sop` |
+
+### 重要操作規則
+1. **POST vs PATCH**：POST 不覆蓋已有資料，強制更新用 PATCH
+2. **欄位命名**：統一用 snake_case
+3. **SQL 操作**：大量/複雜查詢可直連 PostgreSQL，但一般 CRUD 走 API
+4. **更新時加 `updated_at = NOW()`**，否則前端偵測不到
+5. **不要直接 DELETE**，改 `status = '淘汰'` 或走 API
+
+---
+
 ## GitHub 人選搜尋系統完成（2026-02-25 12:25）✅ **已正式啟用**
 
 **重要成果**：

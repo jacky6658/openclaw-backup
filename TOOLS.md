@@ -177,6 +177,20 @@ Add whatever helps you do your job. This is your cheat sheet.
 
 ---
 
+## Step1ne 獵頭顧問系統（正式架構 2026-03-16）
+
+### 系統部署（本機）
+- **前端**：https://hrsystem.step1ne.com
+- **後端**：https://api-hr.step1ne.com
+- **資料庫**：`postgresql://step1ne@localhost:5432/step1ne`
+- **主倉庫**：https://github.com/jacky6658/step1ne-headhunter-system
+- **DB 備份倉庫**：https://github.com/jacky6658/step1ne-db-backups
+
+### 新 AI 必讀
+所有新加入的 AI 助理，請先讀這個區塊，確認系統架構後再執行任何操作。
+
+---
+
 ## Step1ne API 設定
 
 ### Zeabur 後端
@@ -196,3 +210,18 @@ curl -X POST https://backendstep1ne.zeabur.app/api/openclaw/batch-update \
 curl -H "X-OpenClaw-Key: openclaw-dev-key" \
   https://backendstep1ne.zeabur.app/api/openclaw/pending?limit=10
 ```
+
+---
+
+## Step1ne 系統回報群（2026-03-16 設定）
+
+### Topic 1360 — Step1ne 系統回報
+- **群組**: HR AI招募自動化 (`-1003231629634`)
+- **Topic ID**: `1360`
+- **用途**: 內部人員回報 Step1ne 系統相關事項
+- **回報類型**:
+  - 🧠 學習中心新增（提示詞、組織圖、知識）
+  - 🐛 系統功能問題 / Bug
+  - 💡 功能需求建議
+- **我的角色**: 監聽 → 整理分類 → 在此 topic 回報並 tag @jackyyuqi
+- **回報格式**: 直接在 Topic 1360 回覆，並 tag @jackyyuqi
