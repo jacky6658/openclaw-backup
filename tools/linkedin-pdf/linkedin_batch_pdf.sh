@@ -3,7 +3,7 @@
 # 流程：下載 → 改名 → 上傳 Drive → 解析匯入 Step1ne → 刪除本地
 # 防護：隨機間隔、滑鼠漂移、時間限制、分批大休息
 
-API_BASE="https://backendstep1ne.zeabur.app"
+API_BASE="https://api-hr.step1ne.com"
 MAPPING_FILE="/tmp/pdf_mapping.json"
 DAILY_QUOTA=40           # 每天最多下載幾份
 DAILY_COUNT_FILE="/tmp/li_daily_count_$(date +%Y%m%d).txt"

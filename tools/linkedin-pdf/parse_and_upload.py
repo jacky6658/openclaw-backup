@@ -7,7 +7,7 @@ import re
 import requests
 import time
 
-API_BASE = "https://backendstep1ne.zeabur.app"
+API_BASE = "https://api-hr.step1ne.com"
 
 def parse_pdf(pdf_path):
     """Extract text from PDF using pdftotext"""

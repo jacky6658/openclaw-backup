@@ -143,6 +143,14 @@ Add whatever helps you do your job. This is your cheat sheet.
 
 ---
 
+## LinkedIn 帳號使用規則（2026-03-17 Jacky 確認）
+
+**LinkedIn 帳號規則**：
+- ❌ Jacky 個人 LinkedIn 帳號 — 禁止任何自動化
+- `jackychenworld@gmail.com` — **只能用於 LinkedIn 發文**，其他用途全禁
+
+---
+
 ## BD 客戶開發自動化（新增 2026-02-10）
 
 ### 觸發位置

@@ -16,7 +16,7 @@ import time
 import os
 import sys
 
-API_BASE = "https://backendstep1ne.zeabur.app"
+API_BASE = "https://api-hr.step1ne.com"
 DRIVE_FOLDER_ID = "1nLVrxKDai3mxdNpNkyjk2tPwRoiyC8eM"
 DRIVE_ACCOUNT = "aiagentg888@gmail.com"
 OPENCLAW_TOKEN = "9b3cb3f2d661fe14d0d267a2380c3da397b4b6673539bcd7"
