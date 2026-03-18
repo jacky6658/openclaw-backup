@@ -50,224 +50,26 @@
 
 ---
 
-## GitHub 人選搜尋系統完成（2026-02-25 12:25）✅ **已正式啟用**
+## 用戶喜好與溝通原則
 
-**重要成果**：
-- ✅ GitHub 搜尋完全正常（使用新 Token：ghp_U4p9...）
-- ✅ 已找到 5 位台灣 Python 開發者（測試成功）
-- ✅ 統一搜尋腳本：`unified-talent-search-v3.py`
-
-**GitHub Token 設定**：
-```bash
-# 已保存到 ~/.zshrc
-export GITHUB_TOKEN="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"
-```
-
-**腳本位置**：
-- `/Users/user/clawd/hr-tools/unified-talent-search-v3.py`
-
-**使用方式**：
-```bash
-# GitHub 搜尋
-python3 unified-talent-search-v3.py --keywords "Python" --location "Taiwan" --max-results 20 --github-only
-
-# 未來 LinkedIn 搜尋（暫時跳過，反爬蟲困難）
-python3 unified-talent-search-v3.py --keywords "AI Engineer" --location "Taiwan" --max-results 20 --linkedin-only
-
-# 完整搜尋（LinkedIn + GitHub）
-python3 unified-talent-search-v3.py --keywords "Python Engineer" --location "Taiwan" --max-results 20
-```
-
-**測試結果**（Python 搜尋）：
-1. vinta (9K followers) - TypeScript, Python, PHP
-2. twtrubiks (2.3K followers) - Python, Rust, JavaScript, Go
-3. hoochanlon (1.4K followers) - JavaScript, HTML, TypeScript
-4. moskytw (1.3K followers) - Python, Shell, HTML
-5. uranusjr (1.1K followers) - Python, Rust
-
-**LinkedIn 困境**：
-- ❌ Bing site: 搜尋無結果（site restriction 被擋）
-- ❌ Google site: 返回驗證頁面（CAPTCHA）
-- ⏳ 需要 agent-browser + 代理 IP 才能破解
-- 決策：暫時跳過 LinkedIn，優先用 GitHub
-
-**下一步**：
-- 整合到人選搜尋流程
-- 匯入履歷池 Google Sheets
-- 測試 E2E 完整流程
+- 優先使用繁體中文溝通，長期記憶統一用繁體中文記錄
+- **主動且及時的問題通知**（最小化驚喜）
+- **30 分鐘規則**：卡超過 30 分鐘必須主動報告，別悶頭硬幹
+- **效率優先**：先給 10% 的 MVP 結果，不要悶頭做 100%
+- **指示不清時立刻確認**：寧可多問一句，不要猜測
+- **回報格式**：預設 3 行內，除非說「解釋」才詳細
+- **授權機制**：回「OK」= 授權進行下一步
 
 ---
 
-## Step1ne AI 配對修復（2026-02-24 11:45）✅ **30分鐘完成**
+## 🚫 硬性禁止規則
 
-**問題**：Zeabur 環境中找不到 Python 腳本（AI 配對失敗）
-
-**原因**：
-- personaService.js 指向外部專案：`../../step1ne-headhunter-skill/`
-- Zeabur 只部署了 `step1ne-headhunter-system`
-
-**解決方案**：
-- ✅ 複製 Python 腳本到專案內（`server/persona-matching/`）
-- ✅ 修改路徑指向本地
-- ✅ 修復 Python 腳本支援 list 格式的 skills
-
-**修復內容**：
-- generate-candidate-persona.py（4 處修復）
-  - _extract_basic_structure
-  - _assess_capability_level
-  - _infer_motivation
-  - _infer_work_style
-
-**測試結果**：
-- ✅ Zeabur 生產環境：AI 配對成功
-- ✅ 廖家賢 (Salt)：75.3 分，等級 B
-- ✅ 維度評分：技能 71、成長 82、文化 67、動機 88
-
-**Commit**：380ee23（+1,231 行）
-
-**系統狀態**：
-- ✅ 6/6 API 全部正常
-- ✅ 所有功能完全就緒
+- **禁止使用 Jacky 的 LinkedIn 帳號做任何自動化操作**（爬蟲、搜尋、發訊息等一律不得用 Jacky 個人帳號）
+- **長期記憶規則**：既有內容應保留。新舊衝突時先告知 Jacky 等指示，不自行覆蓋。
 
 ---
 
-## Step1ne Zeabur 部署修復（2026-02-24 11:20）✅ **20分鐘完成**
-
-**問題**：Zeabur 部署後候選人資料消失（count = 0）
-
-**原因**：
-- Zeabur 環境中沒有 gog CLI 工具
-- sheetsService-v2.js 無法執行 gog sheets 命令
-
-**解決方案**：
-- ✅ 新增 sheetsService-csv.js（使用公開 CSV export）
-- ✅ 改用 CSV 方式讀取資料（無需認證）
-- ✅ 統一本地 + Zeabur 環境
-
-**驗證結果**：
-- ✅ Zeabur 後端：235 位候選人 + 27 個職缺
-- ✅ 本地後端：235 位候選人 + 27 個職缺
-- ✅ 前端：正常顯示
-
-**限制**：
-- ⚠️ 寫入操作暫不支援（POST/PUT/DELETE）
-- 影響：無（前端還沒使用）
-
-**Commit**：7f3cdbe
-
----
-
-## Step1ne API 開發完成（2026-02-24 11:00）✅ **提前1小時完成**
-
-**今日任務**：完整 CRUD API + 匿名履歷
-
-### 任務 1：匿名履歷 API（1.5h）✅
-- **API**：POST /api/candidates/:id/anonymous-resume
-- **功能**：生成 Markdown 匿名履歷（整合 Python 腳本）
-- **測試**：候選人 236（廖家賢）生成成功，7.4KB
-- **修復**：Python 腳本支援字串格式 + dict company
-
-### 任務 2：新增職缺 API（1h）✅
-- **API**：POST /api/jobs
-- **功能**：21 個欄位完整結構，自動生成 ID
-- **測試**：成功新增到 Google Sheets 第47行
-
-### 任務 3：完整 CRUD API（1.5h）✅
-**Jobs CRUD**：
-- ✅ POST /api/jobs（新增）
-- ✅ PUT /api/jobs/:id（更新）
-- ✅ DELETE /api/jobs/:id（刪除）
-
-**Candidates CRUD**：
-- ✅ POST /api/candidates（新增）
-- ✅ PUT /api/candidates/:id（更新）
-- ✅ DELETE /api/candidates/:id（刪除）
-
-**實作**：
-- jobsService.js: +120 行（updateJob, deleteJob）
-- sheetsService-v2.js: +280 行（完整 CRUD 實作）
-- server.js: +80 行（6 個新 endpoints）
-
-**測試**：所有 CRUD 操作通過 ✅
-
-### Git Status
-- Commits: 4 個（6dd9901, 8bcc7ea, 199ca1f, bb9955e）
-- 總變更: +650 行
-- Push: ✅ 完成
-
-### 系統狀態
-- API 總數: 19 個端點
-- 今日新增: 6 個（匿名履歷 + 5 個 CRUD）
-- 效率: 125%（4h vs 預估5h）
-
----
-
-## Step1ne 系統架構修復（2026-02-24 02:50）✅ **完成**
-
-**問題診斷**：
-- ❌ 前端寫死 `http://localhost:3001`（雲端無法使用）
-- ❌ 後端 CSV export 失敗（資料源讀取錯誤）
-
-**修復完成**：
-1. ✅ **API 配置** (`config/api.ts`)
-   - 自動偵測開發/生產環境
-   - 本地：`http://localhost:3001/api`
-   - 生產：`https://backendstep1ne.zeabur.app/api`
-   
-2. ✅ **後端資料源** (`sheetsService-v2.js`)
-   - 改用 `gog sheets --json`（GID: 142613837 ✓ 正確）
-   - 成功載入 235 位候選人（包含廖家賢 @248 行）
-   
-3. ✅ **頁面更新**
-   - JobsPage.tsx: 改用 apiGet ✓
-   - AIMatchingPage.tsx: 改用 apiGet + apiPost ✓
-   - 移除所有 localhost 硬編碼
-   
-4. ✅ **本地完全驗證**
-   - 後端：235 位候選人 + 27 個職缺
-   - 前端：正常載入（port 3000）
-   - API：全部通過健康檢查
-
-**GitHub Status**：
-- Commit 134b744：系統修復
-- Commit c5c66d7：部署指南 (ZEABUR-DEPLOYMENT.md)
-- 所有檔案 push 完成 ✓
-
-**待完成（Zeabur 部署）**：
-1. 設置環境變數 `VITE_API_URL=https://backendstep1ne.zeabur.app/api`
-2. 點 Redeploy (5-10 分鐘)
-3. 驗證雲端版本
-
-**完整部署指南**：`ZEABUR-DEPLOYMENT.md`
-
----
-
-## 用戶喜好
-- 優先使用繁體中文溝通
-- 長期記憶統一用繁體中文記錄
-
-## LinkedIn 自動發布職缺規則（2026-02-16）
-✅ **已完成 LinkedIn API 整合**
-- **App**: "jacky 行銷貼文用" (Client ID: 869d8fxxyre7ul)
-- **Access Token 有效期**: 60 天（2026-04-17 過期）
-- **腳本位置**: `/Users/user/clawd/hr-tools/linkedin-post-job-anonymous.py`
-
-**發布規則（強制執行）**：
-1. ✅ **所有職缺必須匿名**（不顯示公司名稱）
-2. ✅ **派遣職缺必須標注**「⚠️ 此為派遣機會」
-3. ✅ **自動偵測節日**（農曆新年、端午、中秋加問候語）
-4. ✅ **第一則職缺加節日問候**（後續職缺不重複）
-
-**匿名化規則**：
-- 遊戲公司 → "知名遊戲公司"
-- 科技公司 → "科技公司" / "AI科技公司"
-- 製造業 → "製造業集團"
-- 其他 → "知名企業"
-
-**派遣偵測關鍵字**：派遣、dispatch、contract、約聘、外包
-
-## 三個獨立分身架構（2026-02-09）
-**三個獨立身份 × 共享技能庫 + 共享記憶**
+## 三個獨立分身架構
 
 | 代號 | Bot | 身份 | 角色 |
 |------|-----|------|------|
@@ -275,1275 +77,194 @@ python3 unified-talent-search-v3.py --keywords "Python Engineer" --location "Tai
 | `YQ2` | @HRyuqi_bot | HR YuQi | HR 相關、招聘、公司聯繫 |
 | `YQ3` | @videoyuqi_bot | 行銷 YuQi | 短影音腳本、影片製作、社群行銷 |
 
-**共享配置**
-- ✅ `MEMORY.md` — 長期記憶（全局）
-- ✅ `memory/YYYY-MM-DD.md` — 日誌（統一記錄，用代號標記）
-- ✅ `skills/` — 技能庫
-- ✅ `TOOLS.md` — 工具配置
+**共享**：MEMORY.md、memory/日誌、skills/、TOOLS.md
+**獨立**：SOUL.md（每個分身各有氣質）
 
-**獨立配置**
-- ❌ `SOUL.md` — 每個分身各有氣質（獨立）
-
-**日誌標記規則**
-所有日誌在 `memory/YYYY-MM-DD.md` 中統一記錄，格式：
-```
-[YQ1] 完成 XXX
-[YQ2] 招聘進度 XXX
-[YQ3] 腳本撰寫 XXX
-```
-
-**日報時間**
-- 每天 21:00 統一回報三個分身的進度
-- 每個分身保持獨立的對話上下文與人設
-
-## GitHub 技能推論系統設計（2026-02-17）✅
-**實現檔案**：`/Users/user/clawd/hr-tools/github-talent-search.py`
-
-**核心邏輯（3層技能提取）**：
-1. **生物訊息層**：從 bio 欄位抽取技能關鍵字
-   - 正則表達式：`security|devops|kubernetes|aws|gcp|cloud|fullstack|backend|frontend` 等
-   - 例：bio="资安工程师" → ["security"]
-
-2. **代碼語言層**：Top 10 repos 的 languages 自動對應技能
-   - Python → "Python"
-   - JavaScript → ["TypeScript", "Node.js", "React/Vue"]
-   - Go → ["Go", "DevOps", "Kubernetes"]（基於 LANG_TO_SKILLS 映射表）
-
-3. **元資訊層**：Repo description + topics 的關鍵字搜尋
-   - 例：repo topic = "machine-learning" → 技能加 "ML"
-   - 例：description = "Python web framework" → "Python", "Web Development"
-
-**關鍵改進**：
-- ✅ 無 0-skill 候選人（每人至少 1 技能）
-- ✅ 保留 `github_url` 供後續聯繫
-- ✅ 返回 `languages` 字典（成本計算用）
-
-**API 速率控制**：
-- 每用戶間隔 1 秒
-- 總查詢時間：30 人 ≈ 45 秒（5000 repo search + user fetch）
-- API 限額：60 requests/hour 免認證；推薦用 GitHub PAT 升級至 5000/hour
-
-**技術棧**：
-- `requests` 庫（vs urllib，更好的 SSL 錯誤處理）
-- `json` 解析
-- 自動 retry with backoff（429 Too Many Requests）
+日誌在 `memory/YYYY-MM-DD.md` 統一記錄，格式：`[YQ1/YQ2/YQ3] 完成 XXX`
 
 ---
 
-## 核心技能清單（2026-02-09）
+## 核心技能
 
-### YQ3（行銷 YuQi）- 專業職能與技能
-**職能範圍**：短影音、行銷內容、SEO 相關工作
-- 短影音腳本撰寫（Reels / TikTok / 小紅書）
-- 帳號定位與內容策略
-- 行銷文案與選題
-- 可能涉及 SEO 優化
-
-**核心技能：短影音專業能力**
-- **位置**：`/Users/user/clawd/skills/installed/short-video-pro/`
-- **功能**：短影音腳本生成、選題、帳號定位、拍攝/剪輯建議
-- **輸出**：結構化 JSON + 人類可讀版本
-- **支援平台**：Reels / TikTok / 小紅書
-- **核心文件**：
-  - `SKILL.md` — 技能定義（已優化）
-  - `references/rules.md` — 7 大結構模板、核心規則
-  - `references/positioning.md` — 帳號定位模板、選題矩陣、Q&A Flow
-  - `references/examples.md` — 實戰範例與學習清單
-
-## 日誌標記規則（2026-02-09）
-所有進度在 `memory/YYYY-MM-DD.md` 中統一記錄，每個分身用代號標記：
-- `[YQ1]` - 本尊 YuQi 的工作
-- `[YQ2]` - HR YuQi 的工作
-- `[YQ3]` - 行銷 YuQi 的工作
-
-範例：
-```
-[YQ1] 完成港墘路公司爬蟲聯絡方式補充
-[YQ2] HR 招聘流程跟進 XX 公司
-[YQ3] 腳本撰寫「短影音引流」3 版本
-```
-
-## 反爬蟲應對策略（2026-02-11）
-**採用：第 1 層優化 + 第 2 層混合策略**
-
-**第 1 層：隨機延遲機制**
-- 所有 agent-browser 操作後加入 2-5 秒隨機延遲
-- 批量處理：每家公司間隔 120 秒（每小時 ≤30 次）
-- 已更新工具：
-  - `scraper-104-v4.py` ✅
-  - `scraper-104-company-contact.py` ✅
-  - `fill-bd-contacts.sh` ✅
-
-**第 2 層：混合策略**
-- BD 開發：agent-browser（低頻，每天 2 次 09:30/14:30）
-- 市場調查：人工搜尋 → AI 整理（週頻可接受）
-- 履歷處理：Gmail API（無反爬問題）
-
-**第 3 層：官方管道**
-- 不採用付費 API（成本考量）
-- 維持現有方案
-
-## Email 寄送規則（2026-02-12）
-**❌ 錯誤教訓：志邦企業 BD 信格式錯誤**
-
-**問題：** 直接將 markdown 格式當純文字發送，收件人看到原始符號（`**粗體**`、`## 標題`、`───`）
-
-**正確流程（強制執行）：**
-1. **選項 A：HTML 格式**
-   - 將 markdown 轉換成 HTML
-   - 使用 `gog mail send --html --body-file xxx.html`
-   - Markdown → HTML 轉換規則：
-     - `**粗體**` → `<strong>粗體</strong>`
-     - `## 標題` → `<h2>標題</h2>`
-     - `### 小標` → `<h3>小標</h3>`
-     - `───` → `<hr>`
-     - 列表保留 `•` 或用 `<ul><li>` 結構
-
-2. **選項 B：純文字格式**
-   - 移除所有 markdown 符號
-   - 用 CAPS、引號、空行排版
-   - 分隔線用 `==========`
-   - 保留 `✓` / `•` / `─` 等視覺符號
-
-**寄信前檢查：**
-- [ ] 預覽信件格式（HTML or 純文字）
-- [ ] 確認粗體、標題、列表正確顯示
-- [ ] 測試連結可點擊
-- [ ] 附件檔案存在且正確
-
-## 透明溝通與主動回報原則（2026-02-17 確認）
-**Jacky 偏好**：
-- ✅ **主動且及時的問題通知**（最小化驚喜）
-- ✅ **技術問題 → 立刻停止 + 說明情況** + 提供 Plan B
-- ✅ **30 分鐘規則**：卡超過 30 分鐘必須主動報告，別悶頭硬幹
-- ✅ **效率優先**：先給 10% 的 MVP 結果，不要悶頭做 100%
-- ✅ **指示不清時立刻確認**：寧可多問一句，不要猜測（如 2/16 搜尋策略理解錯誤）
-
-**實踐方式**：
-- 遇到卡點 → 直接回報 + 預估修復時間 + 提供替代方案
-- 修復完成 → 即刻交付（先可用版本）+ 說明改了什麼
-- 技術決策 → 解釋思路，不直接執行有風險的改動
+### YQ3（行銷 YuQi）
+- 技能位置：`/Users/user/clawd/skills/installed/short-video-pro/`
+- 功能：短影音腳本生成、選題、帳號定位、拍攝/剪輯建議
+- 支援平台：Reels / TikTok / 小紅書
 
 ---
 
-## 待修復事項（2026-02-20 更新）
+## 強制執行規則（從歷史教訓濃縮）
 
-1. ✅ **履歷池匯入已修復**
-   - aijessie88@step1ne.com OAuth 重新授權
-   - 已批量匯入 50 位候選人（2026-02-20 完成）
-   - 包含：AI工程師(10) + 供應鏈協理(3) + 專案經理(10) + 自動化測試(11) + 資安工程師(10) + 雲端維運(6)
+> 詳細歷史記錄見 `memory/archive-lessons.md`
 
-2. **GitHub API 技能推斷未完成**（優先級：下週處理）
-   - 現象：AI 配對分數 0 分（技能無法正確提取）
-   - 根本原因：待診斷
-   - 待修復：改進 skill inference 邏輯或 API 呼叫
-
----
-
-## 🚫 硬性禁止規則（2026-03-17 Jacky 明確指示）
-- **禁止使用 Jacky 的 LinkedIn 帳號做任何自動化操作**
-- 爬蟲、搜尋、發訊息、InMail 等一律不得用 Jacky 個人帳號登入執行
-- 違反此規則視為嚴重錯誤，不得以「效率」或「方便」為由繞過
-
-## 長期記憶規則
-- **資訊保留**：除了目前的既有資訊外，長期記憶中的所有內容應被保留。
-- **衝突處理**：如果遇到新的資訊與長期記憶中既有的內容發生衝突時，我必須先告知您，等待您的指示，而不是自行決定覆蓋或修改。
+1. **不編造內容** — 先讀所有相關資料，不確定就問，寧可少寫不要編造
+2. **匯入資料前必做**：清理 `\n`、欄位用 `|` 分隔（內部用逗號）、測試 1 筆、驗證欄位數、確認後才批量
+3. **禁止 `gog sheets update "A2" "$DATA"` 整行更新**（逗號會被當換行，會炸）→ 用逐欄更新
+4. **Email 必須轉 HTML 或純文字**，不能直接發 markdown 格式
+5. **sub-agent 完成後必須驗證檔案存在**，不能只看回報訊息
+6. **每個數字、費率、合約細節都要仔細確認**，不要想當然耳
+7. **服務聲明只列實際提供的服務**，不為了好聽而誇大
 
 ---
 
-## 履歷處理完整流程（2026-02-24）🔒 強制執行
+## LinkedIn 自動發布職缺規則（2026-02-16）
 
-**Jacky 確定**：收到 PDF → 上傳 Drive → 深度解析 → 更新履歷池
+- App: "jacky 行銷貼文用" (Client ID: 869d8fxxyre7ul)
+- Access Token 有效期: 60 天（2026-04-17 過期）
+- 腳本：`/Users/user/clawd/hr-tools/linkedin-post-job-anonymous.py`
 
-### Google Drive 設定
-- **資料夾 ID**：`16IOJW0jR2mBgzBnc5QI_jEHcRBw3VnKj`
-- **資料夾 URL**：https://drive.google.com/drive/folders/16IOJW0jR2mBgzBnc5QI_jEHcRBw3VnKj
-- **帳號**：aijessie88@step1ne.com
+**發布規則**：所有職缺必須匿名、派遣職缺必須標注、自動偵測節日加問候語
 
-### 檔案命名規則
-```
-格式：{姓名}-{應徵公司}.pdf
-範例：Maggie Chen-Pivot.pdf
-
-重要：應徵公司由 AI 跟獵頭顧問確認（互動式）
-```
-
-### LinkedIn 履歷結構（4 區塊）
-1. **圖1 - 簡介**：完整自我介紹
-2. **圖2 - 聯絡方式與技能**：LinkedIn、熱門技能
-3. **圖3 - 工作經歷**：詳細職責（連結穩定度計算）
-4. **圖4 - 學歷**：學校、科系、年份
-
-### 完整流程（6 步驟）
-```bash
-1. 收到 PDF
-   ↓
-2. 上傳到 Google Drive
-   - 資料夾：16IOJW0jR2mBgzBnc5QI_jEHcRBw3VnKj
-   - 檔名：{姓名}-{應徵公司}.pdf（AI 確認公司名）
-   - 取得 File ID
-   - 嵌入式 URL：https://drive.google.com/file/d/{FILE_ID}/preview
-   ↓
-3. 解析 PDF（深度解析 4 區塊）
-   - 簡介、聯絡方式、工作經歷、學歷
-   - 提取 21 個欄位（含履歷連結）
-   - 計算穩定度評分
-   ↓
-4. 搜尋履歷池（LinkedIn / 姓名）
-   ↓
-5A. 找到 → 更新流程
-   - 補充詳細資料
-   - 重新計算評分
-   - 新增履歷連結（U 欄）
-   - 保持原負責顧問
-   ↓
-5B. 找不到 → 新增流程
-   - 匯入 21 個欄位
-   - 指定負責顧問
-   ↓
-6. 前端自動同步（30 秒）
-   - 彈跳視窗顯示「查看完整履歷」按鈕
-   - 點擊 → iframe 嵌入式預覽
-```
-
-### 履歷池欄位（21 欄）
-```
-A-T: 基本資料（20 欄）
-U: 履歷連結（嵌入式 URL）
-```
-
-### 前端顯示方式
-- **嵌入式預覽**（iframe）
-- URL 格式：`https://drive.google.com/file/d/{FILE_ID}/preview`
-- 不離開 Step1ne 系統
+**匿名化**：遊戲公司→"知名遊戲公司"、科技公司→"科技公司"/"AI科技公司"、製造業→"製造業集團"、其他→"知名企業"
 
 ---
 
-## 履歷匯入標準流程（2026-02-23）🔒 強制執行
+## 反爬蟲策略
 
-**Jacky 指示**：「以後都給我這樣做，獵頭模組要給我更新」
+- Layer 1：隨機延遲 2-5 秒/操作、批量間隔 120 秒/公司（≤30 次/小時）
+- Layer 2：BD 用 agent-browser（低頻）、市場調查人工搜尋→AI 整理、履歷用 Gmail API
 
-### 20 個欄位（固定順序）
+---
+
+## 履歷處理流程（2026-02-24）🔒
+
+**流程**：收到 PDF → 上傳 Drive（`16IOJW0jR2mBgzBnc5QI_jEHcRBw3VnKj`）→ 深度解析 → 更新履歷池
+**檔名**：`{姓名}-{應徵公司}.pdf`（公司由 AI 跟顧問確認）
+**帳號**：aijessie88@step1ne.com
+
+### 匯入標準（20 欄）
 ```
 姓名|Email|電話|地點|目前職位|總年資(年)|轉職次數|平均任職(月)|最近gap(月)|技能|學歷|來源|工作經歷JSON|離職原因|穩定性評分|學歷JSON|DISC/Big Five|狀態|獵頭顧問|備註
 ```
-
-### 強制規則
-1. ✅ **使用 `|` 分隔符號**（不是逗號）— **僅用於欄位之間**
-2. ✅ **欄位內部絕對不能用 `|`**（會被當成換欄位）
-   - ✅ 技能：用逗號分隔（`PLM, PDM, MAX`）
-   - ✅ 工作經歷：用分號分隔（`公司A; 公司B`）
-   - ❌ 錯誤範例：`PLM | PDM | MAX`（會導致欄位錯位）
-3. ✅ **使用 `update` 而非 `append`**（避免錯位）
-4. ✅ **簡化 JSON 欄位**（用純文字描述，非 JSON 格式）
-5. ✅ **資料必須單行**（無換行符號）
-6. ✅ **匯入後立即驗證**
-
-### 標準腳本
-```bash
-/Users/user/clawd/projects/step1ne-headhunter-skill/skills/headhunter/scripts/import-resume-to-pool.sh
-```
-
-### 文檔位置
-- **完整說明**：`skills/headhunter/docs/RESUME-IMPORT-STANDARD.md`
-- **測試範例**：`skills/headhunter/examples/liao-chiahsien.json`
-- **GitHub**：https://github.com/jacky6658/step1ne-headhunter-skill
-
-### 廖家賢事件教訓（2026-02-23）
-- ❌ 第一次：`|` 分隔 + `append` → 資料錯位（236-248行）
-- ❌ 第二次：`,` 分隔 + `append` → 資料分散（C248-279欄）
-- ✅ 第三次：`|` 分隔 + `update A248` → **成功**
-
-### Maggie Chen 事件教訓（2026-02-24）
-
-**教訓 1：技能欄位分隔符錯誤**
-- ❌ **技能欄位內使用 `|` 分隔符** → 資料錯位
-  - 原本：`PLM | PDM | MAX | AutoCAD`
-  - 結果：AutoCAD 跑到「獵頭顧問」欄位 ❌
-- ✅ **修正**：技能改用逗號分隔（`PLM, PDM, MAX, AutoCAD`）
-
-**教訓 2：gog sheets update 災難性錯誤**
-- ❌ **錯誤指令**：`gog sheets update "A2" "$DATA"`
-  - 資料中的「逗號」被當成「換行」
-  - `PLM, PDM, MAX` → 3 筆資料 → 寫入 Row 2, 3, 4
-  - 導致 Row 3-10 被覆蓋（PDM, MAX, ISO9001...）
-- ✅ **正確做法**：
-  - 逐欄更新：`gog sheets update "U2" "$VALUE"`
-  - 使用專用腳本（處理特殊字元）
-- ❌ **禁止使用**：`gog sheets update "A2" "$DATA"`（整行更新會炸）
-
-**成功關鍵**：
-```bash
-# ✅ 正確：欄位之間用 |，欄位內部用逗號
-DATA="姓名|email||地點|職位|2|2|12|0|技能A, 技能B, 技能C|學歷|來源|工作簡述|離職原因|85|學歷詳情||新進|Jacky|備註"
-
-# ❌ 錯誤：欄位內部用 |
-DATA="姓名|email||地點|職位|2|2|12|0|技能A | 技能B | 技能C|..."
-
-# ❌ 禁止：用 gog sheets update 更新整行（逗號會被當成換行）
-gog sheets update "$SHEET_ID" "A2" "$DATA"  # 會炸！
-
-# ✅ 安全：只更新單一欄位
-gog sheets update "$SHEET_ID" "U2" "$RESUME_URL"  # OK
-```
+- 欄位間用 `|`，欄位內技能用逗號（`PLM, PDM, MAX`）
+- 使用 `update` 而非 `append`
+- 資料必須單行（無換行符號）
+- 腳本：`/Users/user/clawd/projects/step1ne-headhunter-skill/skills/headhunter/scripts/import-resume-to-pool.sh`
 
 ---
 
-## 關鍵教訓（2026-02-16）
-
-### 🔧 找人選系統三大修復（選項B標準流程）
-**背景**：Jacky 要求「修復找人選系統」（選項B），花費 2.5 小時完成三大搜尋管道修復
-
-**問題診斷（20分鐘）**
-1. **履歷池搜尋**：bash IFS 分隔符錯誤 → 欄位全部錯亂
-2. **GitHub 搜尋**：中文關鍵字未 URL encode → API 400 錯誤
-3. **AI 配對系統**：技能匹配太嚴格 → 所有候選人 0 分
-
-**修復方案（120分鐘）**
-1. **履歷池搜尋** → Python + Google Sheets JSON API
-   - 新腳本：`search-resume-pool.py`（關鍵字匹配 + 自動欄位映射）
-   - 從 0 位 → 20 位候選人 ✅
-   
-2. **GitHub 搜尋** → 職位中英翻譯 + URL encode
-   - "AI工程師" → "AI Engineer" → `AI+Engineer`
-   - 從 0 位 → 10 位候選人 ✅
-   
-3. **AI 配對系統** → 模糊匹配 + 降低門檻
-   - 加入 substring matching（"AI" 匹配 "AI Engineer"）
-   - 移除衝突的同義詞映射（'ai': 'artificial intelligence'）
-   - 簡化 JD 要求（6個技能 → 2個核心技能）
-   - 降低年資門檻（3年 → 1年）
-   - 配對分數：0-10 分 → 40-60 分 ✅
-
-**測試驗證（30分鐘）**
-| 職缺 | 搜尋到 | 配對結果 | 推薦 |
-|------|--------|---------|------|
-| AI工程師 | 30 位 | P2:15 | 15 位 ✅ |
-| .NET工程師 | 6 位 | P1:3, P2:3 | 6 位 ✅ |
-| 自動化測試 | 11 位 | P2:2 | 2 位 ✅ |
-
-**強制規則（以後都這樣做）：**
-1. **技術方案選擇**：複雜解析用 Python，不用 bash IFS
-2. **API 呼叫**：中文字串必須 URL encode 或翻譯成英文
-3. **配對邏輯**：使用模糊匹配（substring），不用完全比對
-4. **門檻設定**：JD 要求簡化（核心技能 2-3 個），不要全列
-5. **修復驗證**：測試 3+ 不同職缺，確保通用性
-
-**腳本位置：**
-- `/Users/user/clawd/hr-tools/unified-candidate-pipeline.sh`（主流程）
-- `/Users/user/clawd/hr-tools/search-resume-pool.py`（履歷池搜尋）
-- `/Users/user/clawd/hr-tools/ai_matcher_v2.py`（AI 配對）
-
-**Jacky 確認事項：**
-- ❓ 修復完成後：「剛剛找到的人選匯入sheet了嗎」
-- ✅ 答案：所有候選人已在履歷池（無需匯入），Top 5 推薦已輸出
-
-**搜尋管道使用策略（2026-02-16 更新）：**
-- **近期（現在 - 2/28 前）**：✅ **對外搜尋**（GitHub + LinkedIn）
-- **下下週（2/28 起）**：⏸️ 關閉對外搜尋，改用履歷池
-- **原因**：優先找新人，下下週才消化內部履歷池
-- **提醒**：2026-02-28 需關閉 GitHub/LinkedIn，啟用履歷池搜尋（Cron ID: 29b90786-c5cc-4fc4-89be-ce5c1c65d1b7）
-
-## 模型版本管理（2026-02-17 確認）✅
-**升級**：Claude Sonnet 4.5 → 4.6
-- **原因**：Claude 4.5 已棄用，需升級至最新穩定版
-- **更改檔案**：`~/.openclaw/openclaw.json`
-  - `model: "anthropic/claude-sonnet-4-6"`
-- **Gateway 重啟**：自動完成
-- **預期效益**：更好的性能 + 更穩定的 LLM 行為
-
-**歷史**：
-- 2026-02-16：修正所有 Cron jobs 的錯誤模型（`google-antigravity/claude-opus-4-5` 不存在 → `anthropic/claude-sonnet-4-5`）
-- 2026-02-17：最終升級至 4.6（現行穩定版）
-
----
-
-## 關鍵教訓（2026-02-14）
-
-### 🚨 災難性資料損壞事件
-**事件**：2026-02-14，履歷池索引 240 行資料全部格式錯誤
-- **原因**：2026-02-13 匯入時未清理 newline 字元，資料全部被打散
-- **影響**：所有候選人資料（153 → 241 行）都變成單一欄位，無法使用
-- **損失**：13 個重複名字（同一人被匯入多次），格式完全錯亂
-
-**強制規則（絕不再犯）：**
-1. **匯入前必做檢查**：
-   ```python
-   # 清理 newline
-   data = data.replace('\n', ' ').replace('\r', ' ')
-   
-   # **清理逗號（逗號會被當成換行符號！）**
-   data = data.replace(', ', ' | ')  # 技能欄位用 | 分隔
-   
-   # 驗證欄位數
-   fields = data.split('|')
-   assert len(fields) == 12, f"欄位數錯誤：{len(fields)}"
-   
-   # 測試匯入 1 筆
-   # 確認成功後才批量匯入
-   ```
-
-2. **測試流程（強制執行）**：
-   - 步驟 1：清理資料
-   - 步驟 2：匯入 1 筆測試
-   - 步驟 3：驗證格式正確
-   - 步驟 4：取得用戶確認
-   - 步驟 5：批量匯入
-
-3. **用戶回饋**：
-   - "妳下次再搜尋人才匯入的時候都要依照欄位匯入啦 這是你自己搞的鍋餒"
-   - **教訓**：不要製造問題再修復，一次做對！
-
-4. **還原方案**：
-   - 使用 Google Sheets 版本歷史還原（2026-02-13 18:00 之前）
-   - 重新搜尋並正確匯入
-
----
-
-## 關鍵教訓（2026-02-13）
-
-### Sub-agent 資料遺失風險
-**問題**：sessions_spawn 執行的 sub-agent 可能回報「完成」但不存檔
-- 範例：270 個候選人搜尋結果只有 summary，無實際資料檔
-- 原因：sub-agent 記憶體處理後 session 結束，資料消失
-- **強制規則**：大任務完成後 **必須驗證檔案存在**，不能只看回報訊息
-
-### Google Sheets 換行符號問題
-**問題**：資料中的 `\n` 會被 gog sheets append 當成「新一行」
-- 結果：1 筆資料分裂成多行，欄位錯位，整個 sheet 格式錯亂
-- **解決方案**：
-  1. 匯入前清理：`.replace('\n', ',')` or `.replace('\n', ' ')`
-  2. 批量前測試 1 筆
-  3. 遇到多行資料用逐個儲存格更新（慢但保險）
-
-### 技術債處理優先級
-- Jacky 說「明天處理」時 **立刻停止執行**，不要繼續嘗試修復
-- 技術問題可以等，但不要浪費 Jacky 等待時間
-
----
-
-## 關鍵教訓（2026-02-12）
-
-### 低容錯率工作原則
-**從今天開始，所有工作要求低容錯率、全面性考量**
-
-#### 教訓 1：永遠不要編造內容
-**錯誤案例**：美德向邦合約 v1-v5
-- ❌ 編造退費率（30%、60-70%）
-- ❌ 編造「原合約選項二」內容
-- ❌ 未先讀原合約就開始寫
-
-**正確做法**：
-- ✅ 先讀取所有相關資料
-- ✅ 基於實際文件內容撰寫
-- ✅ 不確定時明確告知需要補充資料
-
-**適用場景**：合約、提案、報價、任何涉及承諾的文件
-
----
-
-#### 教訓 2：編寫前必須完整風險評估
-**檢查清單（以合約為例）**：
-1. ✅ **法律一致性**：與原合約/相關條款是否矛盾？
-2. ✅ **財務風險**：最壞情況下會不會虧錢？
-3. ✅ **定義清晰**：所有關鍵術語是否明確定義？
-4. ✅ **客戶接受度**：對方角度會如何看待？
-5. ✅ **執行可行性**：我們的流程能否做到？
-
-**實際應用**：
-- 發現美德向邦合約 3 個法律漏洞（可歸責定義、工作天數計算、與原合約矛盾）
-- 財務評估：最壞情況淨利 14.5 萬（不會虧錢但利潤薄）
-- 預測客戶反應：50% 可能要求調整「15萬保底」
-
----
-
-#### 教訓 3：Email 格式與內容完整性
-**志邦企業 BD 信錯誤（2026-02-12）**：
-- ❌ 直接發送 markdown 格式（`**粗體**`、`## 標題`、`───`）
-- ❌ 收件人看到原始符號
+## Email 寄送規則
 
 **正確流程**：
-1. ✅ Markdown → HTML 轉換（或純文字處理）
-2. ✅ 發送前預覽格式
-3. ✅ 確認連結可點擊、附件存在
-4. ✅ 記錄到 MEMORY.md（避免重複錯誤）
+- HTML 格式：`gog mail send --html --body-file xxx.html`
+- 純文字：移除所有 markdown 符號
 
-**寄信前檢查清單**：
-- [ ] 格式正確（HTML or 純文字）
-- [ ] 附件已上傳
-- [ ] 連結可點擊
-- [ ] 收件人正確
-- [ ] 主旨明確
+**寄信前檢查**：格式正確、附件已上傳、連結可點擊、收件人正確、主旨明確
 
 ---
 
-#### 教訓 4：服務聲明真實性
-**服務聲明清理（2026-02-12）**：
-- ❌ 移除：「家庭溝通協助」（未實際提供）
-- ❌ 移除：「提供配偶諮詢服務」（自己發明的）
-- ❌ 移除：「階梯式費率」（自己發明的概念）
-- ✅ 改為：「協助解答外派相關疑問」（實際有做）
+## 日報設置
 
-**原則**：
-- **只列出實際提供的服務**
-- **每個聲明都必須能防禦（defendable）**
-- **不為了聽起來更好而誇大**
+**每天 21:00 Taiwan Time** 發到龍蝦社群 topic 15（`-1003793194829:15`）
 
-**Jacky 的反應**：「幹好險我有檢查」
-
----
-
-#### 教訓 5：成功案例的真實性
-**問題**（2026-02-12）：
-- Jacky 質疑「成功案例」部分是如何寫的
-- 可能包含虛構或無法驗證的案例
-- **必須準備好為每個成功案例辯護**
-
-**行動**：
-- ⚠️ 需要審查所有簡報、提案中的「成功案例」
-- ⚠️ 移除或替換虛構範例
-- ⚠️ 確保每個案例都有實際依據
-
-**原則**：
-- 寧可少寫，不要編造
-- 真實案例 > 虛構完美案例
-- 如果沒有足夠案例，坦白說明是新服務
-
----
-
-#### 教訓 6：細節確認的重要性
-**費率錯誤**：
-- ❌ 原本：會計主管 24%（台北）、供應鏈 VP 26%（柬埔寨）
-- ✅ 正確：會計主管 26%（柬埔寨外派難）、供應鏈 VP 24%（台北容易）
-- **我搞反了**
-
-**保證期計算**：
-- ❌ 原本：61-90 天離職退 17%，做滿 91 天不退費
-- ✅ 正確：61-89 天離職退 17%，做滿 90 天不退費
-- **90 天是保證期最後一天，做滿就不應退費**
-
-**教訓**：
-- 每個數字、每個邏輯都要仔細確認
-- 不要想當然耳（外派 = 便宜？錯！外派更貴！）
-- 發送前讓 Jacky 做最終檢查
-
----
-
-#### 教訓 7：語氣與專業度
-**問題**：「我們的建議方案」聽起來像推銷
-
-**原版本**：
-```
-三、我們的建議方案
-建議方案如下：選項三（50%退費）
-為什麼推薦選項三？...
-```
-
-**修正版本**：
-```
-三、請貴司確認合作方案
-請選擇以下三個選項之一：
-選項一：... / 選項二：... / 選項三：...
-```
-
-**原則**：
-- 平等呈現所有選項
-- 讓客戶自己選擇（不推銷）
-- 可以暗示但不強推
-
----
-
-### 工作流程標準化
-
-**重要文件撰寫流程（合約、提案、報價）**：
-
-1. **收集資料（30%時間）**
-   - [ ] 讀取所有相關文件
-   - [ ] 確認數字來源
-   - [ ] 列出不確定的地方
-
-2. **風險評估（20%時間）**
-   - [ ] 法律風險
-   - [ ] 財務風險
-   - [ ] 執行風險
-   - [ ] 客戶反應
-
-3. **撰寫初稿（30%時間）**
-   - [ ] 基於實際資料
-   - [ ] 不編造內容
-   - [ ] 定義所有關鍵術語
-
-4. **全面檢查（20%時間）**
-   - [ ] 數字正確
-   - [ ] 邏輯一致
-   - [ ] 格式完整
-   - [ ] 與相關文件無矛盾
-
-5. **提交確認（10%時間）**
-   - [ ] 讓 Jacky 做最終檢查
-   - [ ] 回答所有疑問
-   - [ ] 確認無誤後才發送
-
-**總結**：
-- 寧可慢一點，也要做對
-- 發送前多檢查一次
-- 不確定就問，不要猜
-
-## 人資 AI 導入商業模式探討（2026-02-17）
-
-**核心策略**：顧問案優先變現
-- 銷售階段：用 HR AI 規劃文件敲門
-- 執行階段：進場診斷 → 出規劃方案 → 培訓 HR 團隊
-- 時間軸：2月底簽約 → 3月初交付 → 3月中收款
-
-**三大支撐體系（待探索）**：
-1. **教育訓練** - 能否協助 AI 導入？
-   - HR 員工 AI 工具使用培訓
-   - AI 決策流程教育
-   - 可能的課程化路線
-
-2. **輔導員機制** - 能否支撐 AI 導入？
-   - 「AI 導入輔導員」角色
-   - 企業 AI 轉型陪伴制度
-   - 可能的服務模式
-
-3. **TTQS（訓練品質評估系統）** - 能否驗證 AI 培訓質量？
-   - 台灣政府訓練品質評鑑標準
-   - AI 課程是否能納入 TTQS 認證
-   - 補助政策機會
-
-**待深入分析**：
-- [ ] 這三個機制各自如何支撐 AI 導入顧問案
-- [ ] 是否可同時包含在一個顧問方案中
-- [ ] 對報價和服務交付的影響
-
-**擴展思考**：
-4. **留任機制** - 能否導入 AI？
-   - 預測員工離職風險（行為數據分析）
-   - 優化薪酬結構（數據驅動）
-   - 自動化績效評估流程
-   - 推薦職涯發展路徑
-   - 個性化留任策略
-   - **可行性**：✅ 高（核心 HR 應用）
-
----
-
-## 企業 AI 化選育用留導入規劃（2026-02-17）
-
-| 環節 | AI 導入重點 | 主要工具/流程 | 預期效益 |
-|------|-----------|-------------|--------|
-| **選** | 智能招聘自動化 | JD 智能化 + 多管道搜尋 + AI 履歷篩選 + 面試評分 | 招聘周期 ↓ 50%，錄用率 ↑ |
-| **育** | 個性化發展路徑 | 技能診斷 + 學習推薦 + 績效自動評估 + 職涯規劃建議 | 員工發展透明化，留任率 ↑ |
-| **用** | 人崗最優匹配 | 技能庫 AI 配置 + 項目 Staffing 優化 + 跨部門流動識別 | 人力配置效率 ↑，員工滿意度 ↑ |
-| **留** | 離職風險防控 | 離職預警 + 薪酬優化 + 個性化激勵 + 職涯機會推薦 | 人才流失 ↓，成本控制 ↓ |
-
-**導入優先順序**：
-1. **第一階段**（基礎）：選 → 育 的初步 AI 化
-2. **第二階段**（升級）：用 的人崗匹配優化
-3. **第三階段**（高級）：留 的風險預警 + 個性化方案
-
-**支撐體系**：
-- 教育訓練（員工用 AI 工具）
-- 輔導員機制（AI 導入陪伴）
-- TTQS 認證（訓練品質驗證）
-- 績效評估（數據驅動的評鑑標準）
-
----
-
----
-
-## 合作模式確認
-- **交接節奏**：每天 21:00 自動日報 + 里程碑完成時更新，提供 3 行摘要給您確認
-- **授權機制**：您回「OK」= 授權進行下一步，無需逐步確認
-- **透明度**：關鍵資訊記錄在 MEMORY.md、tasks/待辦清單.md、memory/YYYY-MM-DD.md
-- **回報格式**：預設 3 行內，除非您說「解釋」才詳細
-- **防呆機制**：大任務前先預估工作量 + 詢問「開始嗎？」，不直接執行
-
-## 長假期間獨立運作規劃（2026-02-12 確認）
-
-### 背景
-- **時間**：2026-02-17 起，Jacky 放長假
-- **運作模式**：保守模式 A（我自動找人 + 配對，推薦 Top 3，Jacky 決定是否聯繫）
-- **目標**：三大自動化系統完全可靠運作，我獨立處理日常工作
-
-### 三大自動化系統
-
-#### 1. 自動開發客戶（已運作）
-- **Cron**：每 2 天凌晨 01:00-06:00（每小時 1 次）
-- **腳本**：`auto-bd-crawler.sh`
-- **功能**：104 搜尋職缺 → 爬公司資訊 → 去重 → 匯入 BD客戶開發表
-- **通知**：Topic 364（開發）- 每次執行完發通知
-
-#### 2. 自動發 BD 信（已運作）
-- **Cron**：每天 09:30, 14:30
-- **腳本**：`auto-bd-send.sh`
-- **功能**：檢查「待寄信」狀態 → 自動發信 → 更新狀態
-- **未來優化**：自動追蹤回覆、7天後自動發第二封追蹤信
-
-#### 3. 自動找人選（下週上線 2/17-2/21）✨
-- **Cron**：每週一 10:00
-- **腳本**：`auto-sourcing-final.sh` + `google-linkedin-search.sh` + `github-talent-search.py`
-- **搜尋管道**：
-  - LinkedIn 公開搜尋（所有職缺）
-  - GitHub 開發者搜尋（技術職缺）
-  - 履歷池內部搜尋
-- **流程**：
-  1. 讀取「step1ne 職缺管理」所有「招募中」職缺
-  2. 每個職缺執行多管道搜尋（10-30 人）
-  3. AI 自動配對評分（P0/P1/P2）
-  4. 去重後匯入履歷池
-  5. **發 Telegram 通知**（Topic 304 履歷池）
-- **通知格式**：
-  - 職缺名稱 + 搜尋管道
-  - 找到幾人（分類統計）
-  - Top 3 推薦（姓名、公司、分數、LinkedIn URL）
-  - 已匯入履歷池行數
-  - 提示：「要聯繫請回：聯繫第 X 位」
-
-#### 4. 自動履歷歸檔（已運作）
-- **Cron**：每 1 小時
-- **腳本**：`auto-resume-filing.sh` + `batch-parse-resumes.py`
-- **功能**：監控 inbox → 解析 PDF → 匯入履歷池
-
-### 我可以自動做的（不問 Jacky）
-- ✅ BD 客戶開發（爬公司 + 發信）
-- ✅ 找人選（搜尋 + 配對 + 匯入履歷池）
-- ✅ 履歷歸檔
-- ✅ 市場報告（每週一 09:00 發佈）
-- ✅ 每日日報（21:00 龍蝦社群）
-
-### 我需要 Jacky 決策的
-- ❓ **要不要聯繫某個候選人**（我推薦 Top 3，Jacky 決定）
-- ❓ **要不要接某個客戶**（BD 有回覆時通知）
-- ❓ **薪資談判**（候選人要求加薪時）
-- ❓ **面試安排**（候選人同意後，安排時間）
-
-### 下週交付時間表（2/17-2/21）
-- **Mon 2/17**：完成 LinkedIn + GitHub 搜尋腳本，測試 1 個職缺
-- **Tue 2/18**：建立 AI 配對系統，測試 3 個不同職缺
-- **Wed 2/19**：整合 Telegram 通知，完整流程測試 3 次
-- **Thu 2/20**：**Live Demo 給 Jacky 看**，確認 OK 後加入 Cron
-- **Fri 2/21**：Cron 上線（每週一 10:00），Jacky 開始放長假
-
-## 業務定位與工具限制（2026-02-12）
-
-### 獵頭顧問的業務特性
-- **身份定位**：我是**獵頭顧問**（Headhunter），不是企業內部 HR
-- **平台限制**：**沒有 104 企業版招募平台**的權限（那是企業 HR 用的）
-- **找人管道**：需要**多元化的候選人搜尋管道**，不能依賴單一平台
-
-### 候選人搜尋策略
-由於沒有 104 企業版，我們的找人管道包括：
-1. **GitHub** - 技術人才（開源專案貢獻者、活躍開發者）
-2. **LinkedIn** - 專業人才（需付費或手動搜尋）
-3. **社群平台** - 技術社群、專業論壇、Slack/Discord 群組
-4. **Referral** - 現有候選人推薦、人脈網絡
-5. **公開履歷庫** - CakeResume, Yourator（需付費訂閱）
-6. **被動候選人** - 透過履歷進件（Gmail 信箱）累積履歷池
-
-### 與企業 HR 的差異
-| 項目 | 企業 HR | 獵頭顧問（我們）|
-|------|---------|----------------|
-| 招募平台 | 104 企業版、LinkedIn Recruiter | ❌ 無付費平台權限 |
-| 找人方式 | 平台搜尋、主動邀約 | 多元管道、社群挖掘、referral |
-| 履歷來源 | 平台應徵者 | 自建履歷池 + 主動 sourcing |
-| 成本結構 | 平台年費 | 人力時間 + 少量工具費 |
-
-### 工具策略
-- **優先使用免費/開源工具**：GitHub talent search, 社群爬蟲
-- **自動化重複工作**：履歷池管理、自動匹配、追蹤提醒
-- **聚焦高價值活動**：電話溝通、面試安排、談判協調
-- **逐步建立資料庫**：累積候選人池，降低對外部平台依賴
-
-## 日報設置（2026-02-23 更新）
-✅ **每天 21:00 Taiwan Time 自動日報**
-
-**發送位置：龍蝦社群 topic 15（-1003793194829:15）** ← 2026-02-23 更新
-- 每天 21:00 自動發送到龍蝦社群 topic 15
-- Jacky 從龍蝦社群查看日報
-- **發財基地需等 Jacky 發號司令才發送**（不自動發送）
-
-**新格式（2026-02-10起）**
 ```
 📊 日報 (YYYY-MM-DD) Jacky
 
 ✅ 完成（1-3項，每項1行）
-- [結果描述]：關鍵數據或產出
-
-📌 可用/交付（有就寫，沒有就省略）
-- [連結/檔案/系統]
-
+📌 可用/交付（有就寫）
 ⏳ 進行中（有就寫）
-- [任務]：預計完成時間
-
 🔴 卡點（有就寫）
-- [問題]：需要什麼
-
 ⏭️ 明天計畫（1-2項）
-- [任務]
 ```
 
-**原則：**
-- ❌ 不寫過程細節（「執行了XX指令」「調試了XX問題」）
-- ✅ 只寫結果（「完成了什麼」「現在能幹什麼」「下一步做什麼」）
-- 每項最多1行，超過就拆分或簡化
-- 標記用 **Jacky**（不用 [YQ1]）
+原則：只寫結果不寫過程、每項最多1行、標記用 Jacky
 
-**舊格式（YQ2/YQ3 保留）**
-- YQ2 HR YuQi：Cron Job `def664dd-8ba1-443f-abba-984a969e5e6d`
-- YQ3 行銷 YuQi：Cron Job `07d47d82-efba-42ac-b791-f8fa515bcb1a`
-- 格式：`📊 日報 (YYYY-MM-DD) [YQ2/YQ3]`
-
-## 常用群組（2026-02-09）
-- **每日回報群（AIJob 龍蝦社）**
-  - 群組 ID: `-1003793194829`
-  - Link: `t.me/c/3793194829`
-  - **用途**：三個分身的每日日報發送群
-
-- **HR AI招募自動化**（2026-02-11 更新）
-  - 群組 ID: `-1003231629634`
-  - Topic 4 (#1履歷進件)：履歷進件專用，必須包含「👔 負責顧問」欄位
-  - Topic 304 (#2履歷池)：履歷池主要操作區
-  - Topic 319 (#2JD列表)：職缺管理與查詢
-  - **Topic 326 (總覽看板)**：**市場調查報告發佈區** - 每週一 09:00 自動發佈
-  - Topic 364 (#BD開發)：BD 客戶開發自動化
-  - 技能書位置：`/Users/user/clawd/hr-recruitment/SKILL.md`
-
-## HR 履歷處理 - 獵頭顧問自動標記規則（2026-02-11）
-
-**核心規則**：根據履歷傳送者自動判斷並標記獵頭顧問
-- **Jacky 傳送** → 獵頭顧問 = "Jacky"
-- **Phoebe 傳送** → 獵頭顧問 = "Phoebe"
-
-**判斷依據**：
-- Jacky: Telegram userId = `8365775688`
-- Phoebe: Telegram username = `@behe10`
-
-**應用範圍**：
-- 履歷池 Google Sheets（欄位 I "獵頭顧問"）
-- 履歷進件通知訊息（"👔 負責顧問" 欄位）
-
-**實作方式**：
-```bash
-# 根據 Telegram sender 自動判斷
-if userId == 8365775688; then
-  consultant="Jacky"
-elif username == "@behe10"; then
-  consultant="Phoebe"
-else
-  consultant="待指派"
-fi
-```
-
-## 專案規劃師 - 老闆AI助理 SaaS 化考量
-
-### 將「老闆AI助理」轉化為 SaaS 的風險與細節考量
-
-**I. 市場與商業策略面**
-
-1.  **市場定位與目標客戶**
-    *   **細節**：明確 SaaS 的目標用戶是誰？是個人創業者、小型企業老闆、自由職業者，還是特定的專業人士（如顧問、設計師）？
-    *   **風險**：定位模糊可能導致產品難以打入市場，行銷成本高昂。
-    *   **考量**：SaaS 的核心價值主張是什麼？相較於市場上現有的 AI 助理或通用協作工具，我們的獨特賣點在哪裡？
-
-2.  **商業模式與定價策略**
-    *   **細節**：如何定價？是按用戶數、AI 任務執行量、功能層級，還是數據儲存量？
-    *   **風險**：定價過高流失客戶，過低則難以覆蓋成本和盈利。
-    *   **考量**：是否有免費增值 (Freemium) 模式？不同訂閱層級（基礎版、進階版、企業版）的功能劃分？如何平衡用戶使用量與模型成本？
-
-3.  **競爭分析與差異化**
-    *   **細節**：分析市場上現有的 AI 助理、協作平台（如 Notion AI, ClickUp AI, Zapier 等），以及其他 Clawdbot-as-a-Service 方案。
-    *   **風險**：缺乏獨特優勢可能被快速複製或取代。
-    *   **考量**：我們的「AI 老闆助理」SaaS 在「人設」、「里程碑交付制」、「記憶管理」等方面如何做得更好，形成壁壘？
-
-4.  **銷售與行銷通路**
-    *   **細節**：如何觸及目標客戶？是透過內容行銷、社群媒體、合作夥伴、還是直接銷售？
-    *   **風險**：缺乏有效的獲客策略導致用戶增長緩慢。
-    *   **考量**：建立品牌形象、設計引導用戶的 onboarding 流程。
-
-**II. 技術與營運面**
-
-1.  **多租戶 (Multi-tenancy) 架構**
-    *   **細節**：作為 SaaS 服務，必須支援多個客戶獨立使用。如何在技術上隔離不同客戶的數據、AI 記憶、工具配置和 API 金鑰？
-    *   **風險**：數據洩露、性能瓶頸、一個客戶的問題影響其他客戶。
-    *   **考量**：Clawdbot 基礎架構對多租戶的支援程度？需要額外的開發來確保強隔離和擴展性。
-
-2.  **數據安全與隱私合規**
-    *   **細節**：處理客戶的敏感商業數據（如郵件、日曆、文件內容）。需要符合當地和國際的數據保護法規（如 GDPR, CCPA, 個人資料保護法）。
-    *   **風險**：數據洩露導致法律訴訟、商譽受損。
-    *   **考量**：加密、存取控制、審計日誌、隱私政策、服務條款。AI Agent 在處理客戶數據時的行為邊界。
-
-3.  **成本控制與模型管理**
-    *   **細節**：運行 Clawdbot Agent 依賴各種 LLM 模型（GPT, Claude, Gemini）。如何精確追蹤和控制每個客戶的模型 API 費用？
-    *   **風險**：模型成本失控導致虧損。
-    *   **考量**：實時監控 API 使用量、設置預算警報、制定不同訂閱層級的模型配額。
-
-4.  **可擴展性與穩定性**
-    *   **細節**：隨著用戶增長，如何擴展服務以保持性能？如何保證服務的高可用性 (High Availability) 和穩定性 (Uptime)？
-    *   **風險**：服務不穩定影響用戶體驗和留存。
-    *   **考量**：負載平衡、自動擴展、容錯機制、錯誤監控與日誌系統。Clawdbot Gateway 的穩定運行和管理。
-
-5.  **用戶身份驗證與授權**
-    *   **細節**：如何設計用戶註冊、登入流程？如何讓客戶安全地連結其 Google Workspace 或其他第三方服務？
-    *   **風險**：帳戶安全漏洞。
-    *   **考量**：支援 OAuth 2.0、多因素認證 (MFA)，以及不同角色（客戶管理員、普通用戶、AI Agent）的權限管理。
-
-6.  **持續開發與維護**
-    *   **細節**：SaaS 產品需要不斷更新迭代，以提供新功能和修復 Bug。
-    *   **風險**：產品功能停滯不前，被競爭對手超越。
-    *   **考量**：建立高效的開發流程、定期發布更新、搜集用戶反饋。
-
-**III. 產品化與使用者體驗面**
-
-1.  **用戶介面 (UI/UX) 設計**
-    *   **細節**：Clawdbot 原生以 CLI 為主，SaaS 產品需要一個友好的 WebUI 或其他前端介面，讓普通用戶也能輕鬆配置和使用 AI 助理。
-    *   **風險**：學習曲線陡峭，用戶流失。
-    *   **考量**：簡潔直觀的儀表板、引導式設置流程、可視化進度報告。
-
-2.  **定制化與靈活性**
-    *   **細節**：AI 助理的「人設」、「工作流程」、「規則」是核心特色。SaaS 如何允許客戶在保持通用性的同時，對這些進行一定程度的定制化？
-    *   **風險**：過度定制化導致管理複雜，缺乏定制化則無法滿足客戶特定需求。
-    *   **考量**：提供易於配置的模板、定制化介面，以及可能的「技能市集」。
-
-3.  **客戶支援與培訓**
-    *   **細節**：提供完善的客戶支援渠道（線上客服、知識庫、FAQ）。
-    *   **風險**：客戶遇到問題無法解決，導致不滿。
-    *   **考量**：詳細的使用手冊、教學影片、社區論壇，甚至提供針對企業客戶的培訓服務。
+YQ2/YQ3 保留舊格式日報。
 
 ---
 
-**下一步建議：**
+## 常用群組
 
-我們可以從「**市場需求驗證**」和「**SaaS 架構設計初步規劃**」這兩個方面開始深入探討。例如，您可以先思考您的目標客戶是誰，以及他們最看重 AI 老闆助理的哪些功能？
-## BD 客戶開發實戰經驗（2026-02-11）
-
-### BIM 工程師市場開發成果
-- **完整流程驗證**：搜尋（104）→ 去重 → 匯入 Sheet → 補充聯絡資訊
-- **規模化成功**：246 家新公司，1.5 小時完成搜尋與匯入
-- **BD客戶開發表**：從 69 行擴展至 316 行（Sheet ID: 1bkI7_cCh_Bs4qVa3HlXiy0CFzmItZlA-DYGHSPS4InE）
-- **工具驗證**：agent-browser + gog sheets 批量操作可行
-
-### 聯絡資訊抓取的挑戰與教訓
-**問題診斷：**
-1. **效率瓶頸**：120 秒/家（246 家需 8 小時）← 慢速防反爬
-2. **搜尋精準度**：關鍵字 "公司名 + BIM" 會跳到錯誤公司
-3. **資料品質**：重複電話（04-23273199 出現 3 次）代表抓錯公司頁面
-
-**根本原因：**
-- agent-browser 需訪問 3 個頁面（搜尋 → 職缺 → 公司）
-- 104 搜尋結果不穩定（同一關鍵字可能跳不同公司）
-- 沒有驗證「抓到的公司」是否為「目標公司」
-
-**改進方向（待驗證）：**
-1. 直接 Google 搜尋 "公司名 + 電話"（繞過 104）
-2. 公司官網 /contact 頁面抓取
-3. 手動協助前 20-50 家，建立範例資料集
-4. 考慮付費 API（104 企業版、黃頁資料庫）
-
-### LinkedIn 自動化失敗案例
-**嘗試過的方案：**
-1. ❌ Chrome DevTools Console 貼上程式碼 → "Don't paste code" 警告
-2. ❌ Bookmarklet 書籤執行 → 安全機制阻擋
-3. ❌ Puppeteer + Chrome session → session 衝突
-4. ❌ Puppeteer + cookies → 選擇器找不到元素
-
-**技術阻礙：**
-- LinkedIn 頁面結構動態變化（React SPA）
-- Chrome 安全限制（禁止 DevTools 貼上程式碼）
-- Puppeteer API 版本問題（`waitForTimeout` 已棄用）
-
-**決策：LinkedIn 自動化暫時擱置**
-- 投入產出比不划算（已花 1.5 小時，仍未成功）
-- 104 已有 490 筆 BIM 職缺，足夠短期使用
-- LinkedIn 留待未來專案，或考慮付費 API
-
-### Phoebe AI 教育訓練文檔化
-**成功經驗：**
-- 單一入口文檔（PHOEBE-AI-GUIDE.md）降低學習門檻
-- GitHub 託管 + Raw 連結方便 AI 直接讀取
-- 明確的學習路徑（第 1-3 天）提升執行效率
-- 通用術語（獵頭顧問 vs YQ1/YQ2）提升可複用性
-
-**交付方式：**
-- Telegram 群組通知 + GitHub 連結
-- 不需手把手教學，文檔自我說明
-- Phoebe 21:00 回報訓練完成（證明文檔有效）
-
-### 效率與溝通的平衡
-**今天學到的教訓：**
-1. **先做 MVP 測試**：應該先跑 1 家公司測試時間，再批量處理
-2. **設定時間上限**：卡超過 30 分鐘立刻回報，別悶頭硬幹
-3. **準備 Plan B**：技術方案至少 2 個選項，避免單點失敗
-4. **即時溝通卡點**：Jacky 20:10 說「先停一下」→ 代表方向需調整
-
-**Jacky 的期待（從對話推斷）：**
-- 要「結果」不要「過程」（不需要技術細節，要可用的清單）
-- 效率優先於完美（先給 10 家，別悶頭做 246 家）
-- 遇到阻礙要主動提出替代方案（而非繼續嘗試同一方法）
-
-### 工具使用經驗累積
-**agent-browser：**
-- ✅ `snapshot` 比 `snapshot --json` 更完整（包含 /url:）
-- ✅ 解析 accessibility tree 比 DOM selector 更穩定
-- ❌ 背景執行 log 不穩定（nohup 輸出常為空）
-- ❌ 速度較慢（每次操作 2-5 秒）
-
-**gog sheets：**
-- ✅ `append` 模式適合批量新增（值用 | 分隔欄位，, 分隔行）
-- ✅ `update` 模式適合單一修改
-- ❌ 單次 API 呼叫限制需分批處理（每批 20 筆較安全）
-
-**反爬蟲對策：**
-- Layer 1: 隨機延遲 2-5 秒/操作（基本防護）
-- Layer 2: 批量間隔 120 秒/公司（<30 次/小時）
-- 實測：仍需更長延遲或改變抓取路徑
-
-## Phoebe 團隊成員（2026-02-11 新增）
-- **Telegram**: @behe10
-- **Pipeline 追蹤表**: 1Fh6S5tSpCIacuDrCHs3mewWWqAEhTAPaNXSuQHt6Phk
-- **角色**: 獵頭顧問（與 Jacky 共用 Step1ne 系統）
-- **訓練狀態**: ✅ 完成（2026-02-11 21:00）
-- **專屬文檔**: https://github.com/jacky6658/step1ne-headhunter-skill/blob/main/PHOEBE-AI-GUIDE.md
-
-## 明日優先任務（2026-02-12）
-1. **優化 BIM 聯絡資訊抓取**（P0）
-   - 目標：10 秒/家（vs 目前 120 秒）
-   - 方案：Google 搜尋 or 手動協助
-2. **測試 Phoebe AI 履歷進件流程**（P0）
-   - 發送測試履歷驗證自動處理
-3. **LinkedIn 爬蟲方案決策**（P1）
-   - 繼續投入 or 暫時手動 or 放棄
+- **龍蝦社群**：`-1003793194829`（日報發送群）
+- **HR AI招募自動化**：`-1003231629634`
+  - Topic 4：履歷進件（含「👔 負責顧問」）
+  - Topic 304：履歷池
+  - Topic 319：JD列表
+  - Topic 326：總覽看板（市場調查報告）
+  - Topic 364：BD 開發
 
 ---
 
-## LinkedIn PDF 批量下載工作流程（2026-03-10）✅
+## HR 履歷 - 獵頭顧問自動標記
 
-### 核心突破：固定座標點擊法
-LinkedIn 的「存為 PDF」選單由 React 渲染，JS dispatchEvent / Peekaboo 元素偵測都失敗。
-**解法**：先用 JS 找出「存為 PDF」元素座標一次，之後直接用 cliclick 固定座標點擊。
-
-### 固定座標（MacBook 環境）
-- **More 按鈕**：`cliclick c:339,719`
-- **存為 PDF**：`cliclick c:446,508`
-
-### 完整流程
-
-```bash
-# 1. 導向 LinkedIn profile
-osascript -e 'tell application "Google Chrome" to set URL of active tab...'
-sleep 4  # 等頁面完全載入
-
-# 2. 開 More 選單
-cliclick c:339,719
-sleep 0.8
-
-# 3. 點「存為 PDF」
-cliclick c:446,508
-sleep 5  # 等下載完成
-
-# 4. 偵測新 PDF
-ls -t ~/Downloads/Profile*.pdf | head -1
-```
-
-### 批量腳本
-- 腳本：`/tmp/linkedin_batch_pdf.sh`
-- 候選人列表：`/tmp/li_candidates.json`（格式：`[{id, name, linkedin_url}]`）
-- 成功率：約 75%（25/34），失敗通常是頁面載入太慢
-
-### PDF 解析 + 上傳
-- 解析腳本：`/tmp/parse_and_upload.py`
-- 用 `pdftotext {pdf}.pdf -` 提取文字
-- 提取：current_position、skills（熱門技能段落）、education（教育程度段落）、work_history
-- PATCH 到 `https://backendstep1ne.zeabur.app/api/candidates/{id}`
-- actor 帶 `"Jacky-aibot"`
-
-### PDF 下載失敗的 fallback
-Web Search 搜尋 `{name} LinkedIn {linkedin_url_slug}` → 從搜尋結果摘要提取職位/技能/學歷 → 直接 PATCH API
-
-### 注意事項
-- LinkedIn 每次下載的 PDF 命名：`Profile.pdf`, `Profile (1).pdf`, `Profile (2).pdf`...
-- 需要對照成功/失敗 log 建立 id → pdf 的 mapping 才能正確解析
-- 兩次點擊之間至少等 0.8s，否則選單會來不及出現
+- Jacky（userId `8365775688`）→ 顧問 = "Jacky"
+- Phoebe（username `@behe10`）→ 顧問 = "Phoebe"
 
 ---
 
-## 獵頭顧問系統識別（2026-03-12）
-Jacky 說的「獵頭顧問系統」就是指：
-- GitHub Repo：https://github.com/jacky6658/step1ne-headhunter-system
-- 線上系統：https://step1ne.zeabur.app
+## Phoebe 團隊成員
 
-## Step1ne 獵頭系統操作指南（2026-03-09）
+- Telegram: @behe10
+- Pipeline 追蹤表: 1Fh6S5tSpCIacuDrCHs3mewWWqAEhTAPaNXSuQHt6Phk
+- 角色: 獵頭顧問
+- 專屬文檔: https://github.com/jacky6658/step1ne-headhunter-skill/blob/main/PHOEBE-AI-GUIDE.md
 
-### 基本設定
-- **後端 URL**：`https://backendstep1ne.zeabur.app`
-- **認證**：無需 Token，所有端點公開
-- **我的身份**：`Jacky-aibot`（每次 API 呼叫都要帶）
+---
 
-### 主要端點一覽
+## 業務定位
 
+- **身份**：獵頭顧問（Headhunter），不是企業內部 HR
+- **無 104 企業版**，找人管道：GitHub、LinkedIn、社群、Referral、CakeResume/Yourator、Gmail 履歷進件
+- 優先使用免費/開源工具，聚焦高價值活動（電話溝通、面試安排、談判協調）
+
+---
+
+## Step1ne 操作指南
+
+### 主要端點
 | 功能 | 方法 | 端點 |
 |------|------|------|
-| 健康檢查 | GET | `/api/health` |
 | 所有候選人 | GET | `/api/candidates` |
 | 今日新增 | GET | `/api/candidates?created_today=true` |
-| 單一候選人 | GET | `/api/candidates/:id` |
 | 新增候選人 | POST | `/api/candidates` |
 | 批量匯入 | POST | `/api/candidates/bulk` |
 | 更新 Pipeline | PUT | `/api/candidates/:id/pipeline-status` |
 | 局部更新 | PATCH | `/api/candidates/:id` |
-| 批量更新狀態 | PATCH | `/api/candidates/batch-status` |
-| 刪除候選人 | DELETE | `/api/candidates/:id` |
 | 所有職缺 | GET | `/api/jobs` |
 | 主動獵才 | POST | `/api/talent-sourcing/find-candidates` |
-| 操作日誌 | GET | `/api/system-logs` |
-| 顧問聯絡資訊 | GET | `/api/users/:name/contact` |
 
 ### Pipeline 狀態值
 `未開始` → `已聯繫` → `已面試` → `Offer` → `已上職` / `婉拒` / `其他`
-- 特殊：`備選人才`（需用 PATCH，不能用 PUT pipeline-status）
+特殊：`備選人才`（需用 PATCH）
 
-### 評分規則
-**穩定度（stability_score）**：基礎 70 分，依年資/轉職次數/任職時長加減
-**綜合評級（talent_level）**：S(90+) / A+(80-89) / A(70-79) / B(60-69) / C(<60)
-
-### 重要規則
-1. 更新 Pipeline → 用 `PUT /pipeline-status`（自動追加進度記錄）
-2. 更新其他欄位（notes/recruiter/talent_level）→ 用 `PATCH`
-3. notes/progressTracking 都是整個覆蓋，不是追加！追加要先 GET 再 PATCH
-4. 備選人才需同時滿足：status="備選人才" + talent_level有值 + progressTracking最後事件="備選人才"
-5. 所有 API 呼叫帶 `actor: "Jacky-aibot"`
-
-### 主動獵才流程
-```
-POST /api/talent-sourcing/find-candidates
-{ company, jobTitle, actor, github_token, brave_api_key, pages }
-```
-收到回應後直接回傳 `full_summary` 給顧問
-
-### 爬蟲系統（headhunter-crawler）
-- **Repo**：https://github.com/jacky6658/headhunter-crawler
-- Web UI：`http://localhost:5000`（Flask）
-- LinkedIn 4 層備援：Playwright → Google → Bing → Brave API
-- 結果存 Google Sheets，可一鍵推送到 Step1ne
-
----
-
-## 已簽約客戶名單（2026-03-09）
-
-共 29 家，以下為已簽好合約的客戶：
-
-1. 睿聲光電
-2. 速聯 SRAM
-3. HackMD（嗨筆記股份有限公司）
-4. 格拉墨科技
-5. 伊諾科技股份有限公司
-6. 大儀股份有限公司
-7. 財聖國際保險經紀人股份有限公司
-8. 遊悅科技
-9. 富聯國際
-10. 天旭國際科技
-11. 統一數網股份有限公司
-12. 睿世軟體科技股份有限公司
-13. 比特數字科技
-14. 布納星科技
-15. Joint Venture
-16. 一通數位
-17. 經緯智慧科技股份有限公司
-18. HTC 宏達國際電子
-19. 宏願數位股份公司（HTC 集團公司）
-20. 畢博科技股份有限公司
-21. 財團法人均一平台教育基金會
-22. 通量三維股份有限公司
-23. 星裕國際股份有限公司
-24. 蓋亞資訊有限公司
-25. 全亞國際實業有限公司
-26. 全曜財經資訊股份有限公司（CMoney）
-27. 眾鼎有限公司
-28. 仁大資訊股份有限公司
-29. 蟻力股份有限公司（遊戲橘子旗下）
-
----
-
-## 客戶名單更新（2026-03-09）
-
-### 新增簽約客戶（系統有職缺但原名單未收錄）
-30. 士芃科技股份有限公司
-31. 律准科技股份有限公司
-32. 瑞典商英鉑科股份有限公司台灣分公司
-33. 創樂科技有限公司
-
-**→ 簽約客戶共 33 家**
-
-### 系統其他公司狀態
-- **AIJob內部**：內部使用，忽略不管
-- **志邦企業**：BD 開發中（尚未簽約）
-- **美德醫療**：合約洽談中（尚未簽約）
-- **優服**：狀態未確認
-
-### 補充：優服
-- **優服**：遊戲橘子旗下公司，狀態待確認（尚未確認是否簽約）
-- 系統中已有職缺，但合約狀態需 Jacky 確認
-
-### 遊戲橘子集團合約說明
-- **遊戲橘子集團**、**蟻力股份有限公司**、**優服** → 三家公司共用同一份合約
-- 優服已更新為「合作中」（已簽約）
-- 簽約客戶總數更新為 **34 家**
-
----
-
-## Step1ne 候選人卡片更新 API — 重要規則（2026-03-11）
-
-### 兩個端點，功能嚴格分開
-
+### 候選人卡片更新 — 兩個端點嚴格分開
 | 端點 | 方法 | 處理欄位 |
 |------|------|---------|
 | `/api/candidates/:id` | **PUT** | `status`, `notes`, `consultant`, `progressTracking`, `aiMatchResult` |
-| `/api/candidates/:id` | **PATCH** | `position`, `skills`, `education`, `work_history`, `education_details`, `target_job_id`, `recruiter`, `talent_level`, `years`, `jobChanges`, `avgTenure`, `lastGap`, `stabilityScore` 等 |
+| `/api/candidates/:id` | **PATCH** | `position`, `skills`, `education`, `work_history`, `target_job_id`, `recruiter`, `talent_level`, `years` 等 |
 
-### 關鍵注意事項
-- **不能混用**：aiMatchResult 只能 PUT，target_job_id 只能 PATCH
-- **PUT 會覆蓋 notes**：先 GET 取舊 notes 帶入，否則會清空
-- **PATCH 回傳 snake_case**，GET 回傳 camelCase（正常現象）
-- `target_job_id` 用 snake_case（PATCH body），不是 `targetJobId`
-- `recruiter` 欄位（PATCH）→ 對應前端顧問指派
-
-### aiMatchResult 必填欄位
-```json
-{
-  "score": 85,
-  "grade": "A",
-  "recommendation": "推薦",
-  "job_title": "職位名稱",
-  "company": "公司名稱",
-  "matched_skills": [],
-  "missing_skills": [],
-  "strengths": [],
-  "probing_questions": ["問題1","問題2","問題3","問題4","問題5"],
-  "salary_fit": "薪資說明",
-  "conclusion": "評分結語",
-  "suggestion": "建議",
-  "evaluated_by": "Jacky-aibot",
-  "evaluated_at": "YYYY-MM-DD",
-  "github_url": ""
-}
-```
+- 不能混用：aiMatchResult 只能 PUT，target_job_id 只能 PATCH
+- PUT 會覆蓋 notes：先 GET 取舊 notes 帶入
+- `target_job_id` 用 snake_case
+- 所有 API 呼叫帶 `actor: "Jacky-aibot"`
 
 ### 職缺狀態更新
-- 端點：`PATCH /api/jobs/:id/status`
-- body：`{"job_status": "關閉", "actor": "Jacky-aibot"}`
+- `PATCH /api/jobs/:id/status`，body：`{"job_status": "關閉", "actor": "Jacky-aibot"}`
 - 有效值：`招募中` / `暫停` / `已滿額` / `關閉`
 
-### 完整教學檔案
-- 位置：`~/lobster2-workspace/tools/linkedin-pdf/候選人卡片更新教學.md`
+### 爬蟲系統
+- Repo：https://github.com/jacky6658/headhunter-crawler
+- Web UI：`http://localhost:5000`
+- LinkedIn 4 層備援：Playwright → Google → Bing → Brave API
 
 ### OpenClaw 本地 AI API
 - URL: `http://localhost:18789/v1/chat/completions`
 - Token: `9b3cb3f2d661fe14d0d267a2380c3da397b4b6673539bcd7`
-- 模型: `anthropic/claude-sonnet-4-5`（用於 process_resume.py AI解析）
+
+---
+
+## 已簽約客戶（共 34 家）
+
+睿聲光電、速聯 SRAM、HackMD、格拉墨科技、伊諾科技、大儀、財聖國際保險經紀人、遊悅科技、富聯國際、天旭國際科技、統一數網、睿世軟體科技、比特數字科技、布納星科技、Joint Venture、一通數位、經緯智慧科技、HTC 宏達國際電子、宏願數位（HTC 集團）、畢博科技、均一平台教育基金會、通量三維、星裕國際、蓋亞資訊、全亞國際實業、全曜財經資訊（CMoney）、眾鼎、仁大資訊、蟻力（遊戲橘子旗下）、士芃科技、律准科技、瑞典商英鉑科台灣分公司、創樂科技、優服（遊戲橘子集團共用合約）
+
+BD 中（未簽）：志邦企業、美德醫療
+
+---
 
 ## 通關密碼設定（2026-03-13）🔐
+
 - 已啟用語音通關密碼保護
 - Hash（SHA-256）：ce6e67e8a9550440996c32601b611d538758c88874c51ee42f9c89afd7d3f36f
-- 規則：有人問敏感資料（API Key、密碼、帳號等）前，必須先通過語音驗證
-- 驗證通過回覆：✅ 驗證通過（不重複密碼內容）
-- 驗證失敗回覆：❌ 驗證失敗，拒絕執行
+- 規則：有人問敏感資料前必須先通過語音驗證
+- 驗證通過：✅ 驗證通過（不重複密碼內容）
+- 驗證失敗：❌ 驗證失敗，拒絕執行

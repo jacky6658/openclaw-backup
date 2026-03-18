@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<title>Step1ne 爬蟲流程圖</title>
+<style>
+  body { font-family: 'Segoe UI', sans-serif; background: #0f1117; color: #e2e8f0; margin: 0; padding: 30px; }
+  h2 { text-align: center; color: #a78bfa; margin-bottom: 30px; font-size: 20px; letter-spacing: 2px; }
+  .flow { display: flex; flex-direction: column; align-items: center; gap: 0; }
+  .box {
+    background: #1e2130;
+    border: 1.5px solid #334155;
+    border-radius: 12px;
+    padding: 14px 32px;
+    min-width: 300px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 500;
+    position: relative;
+  }
+  .box.start { border-color: #6366f1; background: #1e1b4b; color: #a5b4fc; }
+  .box.ai { border-color: #f59e0b; background: #1c1a0e; color: #fcd34d; }
+  .box.system { border-color: #10b981; background: #0a1f17; color: #6ee7b7; }
+  .box.linkedin { border-color: #3b82f6; background: #0f1f3a; color: #93c5fd; }
+  .box.enrich { border-color: #8b5cf6; background: #1a1230; color: #c4b5fd; }
+  .box.email { border-color: #10b981; background: #0a1f17; color: #6ee7b7; }
+  .box.linkedin-msg { border-color: #3b82f6; background: #0f1f3a; color: #93c5fd; }
+  .box.reject { border-color: #ef4444; background: #1f0a0a; color: #fca5a5; }
+  .arrow { font-size: 22px; color: #64748b; margin: 4px 0; }
+  .sub { font-size: 12px; color: #94a3b8; margin-top: 4px; }
+  .branch { display: flex; gap: 40px; align-items: flex-start; margin: 0; }
+  .branch-box { display: flex; flex-direction: column; align-items: center; gap: 0; }
+  .branch-line { display: flex; align-items: center; gap: 0; margin: 4px 0; }
+  .branch-label { font-size: 12px; color: #94a3b8; margin: 0 8px; }
+  .decision {
+    background: #1e2130;
+    border: 1.5px solid #f59e0b;
+    transform: rotate(0deg);
+    border-radius: 8px;
+    padding: 12px 28px;
+    min-width: 280px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    color: #fcd34d;
+    margin: 0;
+  }
+  .h-line { width: 40px; height: 2px; background: #64748b; }
+</style>
+</head>
+<body>
+<h2>🕷️ Step1ne 爬蟲 → 聯繫流程</h2>
+<div class="flow">
+
+  <div class="box start">
+    🕷️ 爬蟲啟動
+    <div class="sub">104 / LinkedIn / GitHub 關鍵字搜尋</div>
+  </div>
+  <div class="arrow">↓</div>
+
+  <div class="box ai">
+    🤖 AI 初篩
+    <div class="sub">外籍過濾 → 3 閘門（技能/年資/地點）→ 初步評分</div>
+  </div>
+  <div class="arrow">↓</div>
+
+  <!-- 決策：符合？ -->
+  <div class="decision">符合條件？</div>
+
+  <div style="display:flex; gap:80px; margin:4px 0; align-items:flex-start;">
+    <!-- 左：不符合 -->
+    <div style="display:flex; flex-direction:column; align-items:center;">
+      <div class="branch-label">❌ 不符合</div>
+      <div class="arrow">↓</div>
+      <div class="box reject">略過 / 外籍已過濾<div class="sub">不匯入系統</div></div>
+    </div>
+    <!-- 右：符合 -->
+    <div style="display:flex; flex-direction:column; align-items:center;">
+      <div class="branch-label">✅ 符合</div>
+      <div class="arrow">↓</div>
+      <div class="box system">
+        📥 匯入 Step1ne 系統
+        <div class="sub">3層去重（LinkedIn URL → Email → 姓名）</div>
+      </div>
+      <div class="arrow">↓</div>
+      <div class="box linkedin">
+        📄 下載 LinkedIn PDF
+        <div class="sub">補齊完整履歷資料</div>
+      </div>
+      <div class="arrow">↓</div>
+      <div class="box enrich">
+        🔍 補齊詳細背景
+        <div class="sub">工作經歷 / 技能 / 學歷 / 穩定度評分 / Grade</div>
+      </div>
+      <div class="arrow">↓</div>
+      <!-- 決策：有信箱？ -->
+      <div class="decision">有 Email 信箱？</div>
+      <div style="display:flex; gap:60px; margin:4px 0; align-items:flex-start;">
+        <div style="display:flex; flex-direction:column; align-items:center;">
+          <div class="branch-label">✅ 有</div>
+          <div class="arrow">↓</div>
+          <div class="box email">
+            📧 寄 BD 開發信
+            <div class="sub">aijessie88@step1ne.com 發送</div>
+          </div>
+        </div>
+        <div style="display:flex; flex-direction:column; align-items:center;">
+          <div class="branch-label">❌ 無</div>
+          <div class="arrow">↓</div>
+          <div class="box linkedin-msg">
+            💬 LinkedIn 私訊聯繫
+            <div class="sub">InMail / 加好友 + 訊息</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
