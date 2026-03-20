@@ -189,8 +189,9 @@ Add whatever helps you do your job. This is your cheat sheet.
 
 ### 系統部署（本機）
 - **前端**：https://hrsystem.step1ne.com
-- **後端**：https://api-hr.step1ne.com
+- **後端**：https://api-hr.step1ne.com（外部）/ http://localhost:3003（內網）
 - **資料庫**：`postgresql://step1ne@localhost:5432/step1ne`
+- ⚠️ Zeabur 已停用，勿再使用 backendstep1ne.zeabur.app
 - **主倉庫**：https://github.com/jacky6658/step1ne-headhunter-system
 - **DB 備份倉庫**：https://github.com/jacky6658/step1ne-db-backups
 

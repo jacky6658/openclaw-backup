@@ -8,14 +8,14 @@
 |------|------|------|
 | 公司內網 | `http://localhost:3003` | 本地直連最快 |
 | 外部存取 | `https://api-hr.step1ne.com` | Cloudflare Tunnel |
-| 雲端備援 | `https://backendstep1ne.zeabur.app` | 最後備援 |
 | 前端（外部）| `https://hrsystem.step1ne.com` | |
 | 前端（內網）| `http://localhost:3002` | |
+
+> ⚠️ **Zeabur 已停用**（2026-03-20 Jacky 確認）— 不再使用 `backendstep1ne.zeabur.app`
 
 **Base URL 判斷順序**：
 1. `curl http://localhost:3003/api/health` 成功 → 用 localhost:3003
 2. 不行 → 用 `https://api-hr.step1ne.com`
-3. 都不行 → 用 Zeabur 備援
 
 ### GitHub 倉庫
 - 主 Repo：https://github.com/jacky6658/step1ne-headhunter-system
@@ -250,6 +250,10 @@ YQ2/YQ3 保留舊格式日報。
 ### OpenClaw 本地 AI API
 - URL: `http://localhost:18789/v1/chat/completions`
 - Token: `9b3cb3f2d661fe14d0d267a2380c3da397b4b6673539bcd7`
+
+### Step1ne OPENCLAW_API_KEY（2026-03-20 更新）
+- Key: `O39cJZAHsVEdz5dN8hvzu90FDT0xwYDPGQTWIeaK`
+- 用途：`X-OpenClaw-Key` header，呼叫 `/api/openclaw/*` 端點
 
 ---
 
