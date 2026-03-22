@@ -1,236 +1,320 @@
-# TOOLS.md - Local Notes
+# 執行長 AI — 稽核用 API 參考
 
-Skills define *how* tools work. This file is for *your* specifics — the stuff that's unique to your setup.
-
-## What Goes Here
-
-Things like:
-- Camera names and locations
-- SSH hosts and aliases  
-- Preferred voices for TTS
-- Speaker/room names
-- Device nicknames
-- Anything environment-specific
-
-## Examples
-
-```markdown
-### Cameras
-- living-room → Main area, 180° wide angle
-- front-door → Entrance, motion-triggered
-
-### SSH
-- home-server → 192.168.1.100, user: admin
-
-### TTS
-- Preferred voice: "Nova" (warm, slightly British)
-- Default speaker: Kitchen HomePod
-```
-
-## Why Separate?
-
-Skills are shared. Your setup is yours. Keeping them apart means you can update skills without losing your notes, and share skills without leaking your infrastructure.
+> 版本：v1.0（對應 commit b88503b）
+> 最後更新：2026-03-22
 
 ---
 
-## HR 履歷進件設定
+## 環境配置
 
-### Gmail 監控信箱
-- **監控帳號**：aiagentg888@gmail.com ✅
-- **授權狀態**：已完成 OAuth（2026-02-11）
-- **篩選條件**：subject 包含「應徵」「履歷」或附件為 PDF/DOCX
-
-### 負責顧問自動標記規則（2026-02-11 更新）
-- **Jacky 傳送的履歷** → 獵頭顧問標記為 "Jacky"
-- **Phoebe (@behe10) 傳送的履歷** → 獵頭顧問標記為 "Phoebe"
-
-**判斷方式**：根據 Telegram 訊息的 sender (userId 或 username) 自動判斷
-- Jacky userId: 8365775688
-- Phoebe username: @behe10
-
-**說明**：所有履歷進件通知必須包含「負責顧問」欄位，系統會根據傳送者自動填寫。
+| 項目 | 值 |
+|------|-----|
+| 後端 API | `https://api-hr.step1ne.com` |
+| 認證方式 | `Authorization: Bearer <API_SECRET_KEY>` |
+| Content-Type | `application/json` |
 
 ---
 
-## JD（職缺）管理
+## 你的 API 使用原則
 
-### 系統位置
-- **管理工具**: `/Users/user/clawd/hr-tools/jd-manager.sh`
-- **文件**: `/Users/user/clawd/hr-tools/README-JD管理.md`
-- **雲端資料夾**: [獵頭系統](https://drive.google.com/drive/folders/12lfoz7qwjhWMwbCJL_SfOf3icCOTCydS)
-- **Google Sheets**: [step1ne 職缺管理](https://docs.google.com/spreadsheets/d/1QPaeOm-slNVFCeM8Q3gg3DawKjzp2tYwyfquvdHlZFE/edit)
+你主要是**讀取**資料來稽核，不是寫入。
 
-### 快速指令
+| 動作 | 是否允許 | 說明 |
+|------|---------|------|
+| GET（查詢） | ✅ 完全允許 | 這是你的主要工作 |
+| POST/PUT/PATCH（寫入） | ⚠️ 需老闆授權 | 老闆說可以才能寫 |
+| DELETE（刪除） | ❌ 禁止 | 任何情況都不刪資料 |
+
+---
+
+## 一、稽核常用查詢
+
+### 取得全部候選人（稽核用）
+
 ```bash
-./jd-manager.sh list          # 列出所有職缺
-./jd-manager.sh search 'AI'   # 搜尋職缺
-./jd-manager.sh report         # 統計報表
-./jd-manager.sh add <職位> <部門> <人數> <薪資> <技能> <經驗> <學歷>
+GET /api/candidates?limit=2000
 ```
 
-### 目前職缺（2026-02-10）
-- AI工程師 (技術部) — 2人，80k-120k
-- 數據分析師 (數據部) — 1人，60k-90k
-- 產品經理 (產品部) — 1人，90k-140k
-- 全端工程師 (技術部) — 3人，70k-110k
-- HR 招募專員 (人資部) — 1人，50k-70k
+返回所有候選人，用於：
+- 統計 Pipeline 分佈
+- 檢查資料品質
+- 找出卡關候選人
 
----
+### 取得單一候選人詳情（驗證用）
 
-## 總覽看板（新增 2026-02-10）
-
-### Web 介面
-- **專案位置**: `/Users/user/clawd/projects/hr-dashboard`
-- **啟動腳本**: `/Users/user/clawd/hr-tools/start-dashboard.sh`
-- **訪問位址**: http://localhost:3000
-- **說明文件**: `/Users/user/clawd/hr-tools/README-總覽看板.md`
-
-### 功能特色
-- 即時追蹤職缺與候選人狀態
-- Pipeline 視覺化
-- 自動提醒需跟進的案件
-- 每 30 秒自動更新
-
-### 快速啟動
 ```bash
-~/clawd/hr-tools/start-dashboard.sh
+GET /api/candidates/:id
 ```
 
----
+返回完整欄位，用於：
+- 驗證必填欄位是否齊全
+- 比對 work_history 與 years_experience 是否一致
+- 檢查三層篩選結果
 
-## Pipeline 追蹤表（新增 2026-02-11）
+### 下載候選人履歷 PDF（驗證用）
 
-### 各顧問獨立 Sheet
-- **清單文件**: `/Users/user/clawd/hr-tools/pipeline-sheets.md`
-
-**Jacky**
-- Sheet ID: `1j9zl3Fk-X1DS4iDAFQjAldaLWJDcqybAWIjiDpYCR4M`
-- 網址: https://docs.google.com/spreadsheets/d/1j9zl3Fk-X1DS4iDAFQjAldaLWJDcqybAWIjiDpYCR4M/edit
-
-**Phobe**
-- Sheet ID: `1Fh6S5tSpCIacuDrCHs3mewWWqAEhTAPaNXSuQHt6Phk`
-- 網址: https://docs.google.com/spreadsheets/d/1Fh6S5tSpCIacuDrCHs3mewWWqAEhTAPaNXSuQHt6Phk/edit
-
-### 用途
-- 追蹤候選人在招聘流程中的狀態
-- 每週市場報告自動彙總所有顧問的 Pipeline 數據
-
----
-
-## 履歷池管理
-
-### 群組設定
-- **履歷池群組**: HR AI招募自動化 (`-1003231629634`)
-- **主要 Topic**: 304（履歷相關操作的主要討論區）
-
-### 快速操作
-**在 Telegram 中可以直接：**
-1. 上傳履歷檔案 → YuQi 自動處理
-2. 搜尋履歷：`搜尋 [關鍵字]`
-3. 更新狀態：`更新狀態 [行數] [新狀態]`
-4. 查看報表：`履歷報表`
-
-### 系統位置
-- **管理工具**: `/Users/user/clawd/hr-tools/resume-pool.sh`
-- **文件**: `/Users/user/clawd/hr-tools/README-履歷池.md`
-- **雲端資料夾**: [獵頭系統](https://drive.google.com/drive/folders/12lfoz7qwjhWMwbCJL_SfOf3icCOTCydS)
-- **履歷存放**: [aiagent 資料夾](https://drive.google.com/drive/folders/1JkesbUFyGz51y90NWUG91n84umU33Mc5)
-- **索引**: [履歷池索引 (Google Sheets)](https://docs.google.com/spreadsheets/d/1PunpaDAFBPBL_I76AiRYGXKaXDZvMl1c262SEtxRk6Q)
-
----
-
-Add whatever helps you do your job. This is your cheat sheet.
-
----
-
-## LinkedIn 帳號使用規則（2026-03-17 Jacky 確認）
-
-**LinkedIn 帳號規則**：
-- ❌ Jacky 個人 LinkedIn 帳號 — 禁止任何自動化
-- `jackychenworld@gmail.com` — **只能用於 LinkedIn 發文**，其他用途全禁
-
----
-
-## BD 客戶開發自動化（新增 2026-02-10）
-
-### 觸發位置
-- **群組**：HR AI招募自動化 (`-1003231629634`)
-- **Topic 364**：「開發」
-- **觸發方式**：`@YuQi 開發客戶：<職位名稱>`
-
-### 工具位置
-- **腳本**：`~/clawd/hr-tools/bd-automation.sh`
-- **說明**：在 `/Users/user/clawd/skills/headhunter/SKILL.md` 的最後
-- **資料儲存**：`~/clawd/hr-tools/data/`
-- **Google Sheet**：[BD客戶開發表](https://docs.google.com/spreadsheets/d/1bkI7_cCh_Bs4qVa3HlXiy0CFzmItZlA-DYGHSPS4InE)
-
-### 自動執行流程
-1. 搜尋 104 招聘公司
-2. 爬取聯絡方式
-3. 整理到 Google Sheets（BD客戶開發表）
-4. 批量寄 BD 信
-5. 回報結果到 Topic 364
-
-### 表格欄位
-- 公司名稱
-- 聯絡電話
-- Email
-- 網址
-- 目前職缺
-- 來源（104/LinkedIn）
-- 狀態（待聯繫/已寄信/已回覆/合作中）
-- 開發日期
-- 負責顧問
-- 備註
-
----
-
-## Step1ne 獵頭顧問系統（正式架構 2026-03-16）
-
-### 系統部署（本機）
-- **前端**：https://hrsystem.step1ne.com
-- **後端**：https://api-hr.step1ne.com（外部）/ http://localhost:3003（內網）
-- **資料庫**：`postgresql://step1ne@localhost:5432/step1ne`
-- ⚠️ Zeabur 已停用，勿再使用 backendstep1ne.zeabur.app
-- **主倉庫**：https://github.com/jacky6658/step1ne-headhunter-system
-- **DB 備份倉庫**：https://github.com/jacky6658/step1ne-db-backups
-
-### 新 AI 必讀
-所有新加入的 AI 助理，請先讀這個區塊，確認系統架構後再執行任何操作。
-
----
-
-## Step1ne API 設定
-
-### Zeabur 後端
-- **Base URL**: https://backendstep1ne.zeabur.app
-- **OpenClaw API Key**: `openclaw-dev-key`（Header: `X-OpenClaw-Key`）
-- **Bearer Token**: `openclaw-dev-key`（Header: `Authorization: Bearer`）⚠️ 目前無效，改用 openclaw route
-
-### 常用 API
 ```bash
-# 候選人 AI 評估回寫
-curl -X POST https://backendstep1ne.zeabur.app/api/openclaw/batch-update \
-  -H "X-OpenClaw-Key: openclaw-dev-key" \
-  -H "Content-Type: application/json" \
-  -d '{"candidates": [{"id": "XXXX", "talent_level": "A/B/C/D", "ai_match_result": {...}}]}'
+GET /api/candidates/:id/resume/:fileId?token=<API_KEY>
+```
 
-# 待評估人選列表
-curl -H "X-OpenClaw-Key: openclaw-dev-key" \
-  https://backendstep1ne.zeabur.app/api/openclaw/pending?limit=10
+下載 PDF 履歷，用於：
+- 驗證候選人資料與履歷內容是否一致
+- 確認龍蝦的評級依據是否正確
+
+> `resume_files` 欄位中可取得 `fileId`。
+
+### 取得全部職缺
+
+```bash
+GET /api/jobs
+```
+
+返回所有職缺，用於：
+- 檢查三層篩選欄位是否齊全
+- 確認 JD、人才畫像完整度
+
+### 取得單一職缺詳情
+
+```bash
+GET /api/jobs/:id
+```
+
+返回完整欄位，用於：
+- 驗證候選人-職缺匹配時，取得職缺的三層條件
+
+### 取得候選人互動記錄
+
+```bash
+GET /api/candidates/:id/interactions
+```
+
+用於：
+- 確認狀態變更時有沒有記錄互動
+- 追蹤龍蝦的聯繫頻率
+
+### 取得系統操作日誌
+
+```bash
+GET /api/system-logs
+```
+
+用於：
+- 追蹤龍蝦的所有系統操作
+- 確認任務完成時間
+- 發現異常操作
+
+### 取得候選人匹配結果
+
+```bash
+GET /api/candidates/:id/job-rankings
+```
+
+用於：
+- 驗證龍蝦的配對推薦是否合理
+- 比對匹配排名與實際條件
+
+### 取得候選人匹配 Profile
+
+```bash
+GET /api/candidates/:id/match-input
+```
+
+用於：
+- 查看候選人被標準化後的匹配資料
+- 驗證核心匹配欄位是否完整
+
+---
+
+## 二、完整 API 端點清單
+
+以下是你可以使用的所有 API（以 GET 為主）。
+
+### 候選人
+
+| 方法 | 端點 | 稽核用途 |
+|------|------|---------|
+| GET | `/api/candidates` | 全量查詢，統計分析 |
+| GET | `/api/candidates/:id` | 個別驗證 |
+| GET | `/api/candidates/:id/interactions` | 互動記錄檢查 |
+| GET | `/api/candidates/:id/job-rankings` | 匹配排名驗證 |
+| GET | `/api/candidates/:id/match-input` | 匹配 Profile 檢查 |
+| GET | `/api/candidates/:id/resume/:fileId` | 履歷 PDF 下載驗證 |
+| GET | `/api/candidates/:id/github-stats` | GitHub 分析結果 |
+
+### 職缺
+
+| 方法 | 端點 | 稽核用途 |
+|------|------|---------|
+| GET | `/api/jobs` | 全量查詢，欄位完整度檢查 |
+| GET | `/api/jobs/:id` | 個別職缺詳情，三層條件取得 |
+
+### 客戶
+
+| 方法 | 端點 | 稽核用途 |
+|------|------|---------|
+| GET | `/api/clients` | 客戶列表，BD 狀態追蹤 |
+| GET | `/api/clients/:id` | 客戶詳情 |
+| GET | `/api/clients/:id/jobs` | 客戶的職缺清單 |
+| GET | `/api/clients/:id/contacts` | 客戶聯絡人 |
+| GET | `/api/clients/:id/submission-rules` | 送件規則 |
+
+### 用戶
+
+| 方法 | 端點 | 稽核用途 |
+|------|------|---------|
+| GET | `/api/users/all` | 用戶列表 |
+| GET | `/api/users/names` | 顧問名稱（用於篩選） |
+
+### 系統
+
+| 方法 | 端點 | 稽核用途 |
+|------|------|---------|
+| GET | `/api/health` | 系統健康檢查 |
+| GET | `/api/system-logs` | 操作日誌（核心稽核資料） |
+| GET | `/api/notifications` | 系統通知 |
+| GET | `/api/system-config/:key` | 系統配置 |
+| GET | `/api/imports/:id` | 匯入進度 |
+
+### 分類資料
+
+| 方法 | 端點 | 稽核用途 |
+|------|------|---------|
+| GET | `/api/taxonomy/skills` | 技能分類（驗證技能標準化） |
+| GET | `/api/taxonomy/roles` | 角色分類 |
+| GET | `/api/taxonomy/industries` | 產業分類 |
+
+---
+
+## 三、稽核查詢範例
+
+### 找出必填欄位為空的候選人
+
+```
+1. GET /api/candidates?limit=2000
+2. 遍歷每位候選人，檢查：
+   - name 為空？
+   - current_title 和 current_position 都為空？
+   - current_company 為空？
+   - skills 為空？
+   - years_experience 為空？
+   - work_history 為 null 或空陣列？
+   - education_details 為 null？
+   - linkedin_url 和 github_url 都為空？
+3. 輸出缺失清單
+```
+
+### 找出三層篩選欄位為空的職缺
+
+```
+1. GET /api/jobs
+2. 遍歷每個職缺，檢查：
+   - rejection_criteria 為空？
+   - submission_criteria 為空？
+   - talent_profile 為空或 < 100 字？
+   - exclusion_keywords 為空？
+   - title_variants 為空？
+   - job_description 為空？
+3. 輸出缺失清單
+```
+
+### 找出卡關候選人
+
+```
+1. GET /api/candidates?limit=2000
+2. 取得當前時間
+3. 遍歷，計算每位候選人的 updated_at 距今天數：
+   - status === "聯繫階段" && 天數 > 14 → 卡關預警
+   - status === "面試階段" && 天數 > 7 → 面試超時
+   - status === "已送件" && 天數 > 5 → 送件無回音
+   - status === "未開始" && 天數 > 7 → 新人未聯繫
+   - status === "人才庫" && 天數 > 90 → 沉睡人才
+4. 輸出預警清單
+```
+
+### 驗證候選人-職缺匹配
+
+```
+1. GET /api/candidates/:id → 取得候選人完整資料
+2. GET /api/jobs/:target_job_id → 取得目標職缺
+3. 如有 resume_files → GET /api/candidates/:id/resume/:fileId 下載 PDF
+4. A 層驗證：
+   a. work_history 各段 years 加總 ≥ experience_required？
+   b. skills vs key_skills 交集？
+   c. education_level vs education_required？
+   d. current_title / work_history titles vs title_variants？
+   e. 全文掃描 vs exclusion_keywords？
+   f. consultant_notes 中的特殊條件？
+5. B 層驗證：逐條比對 submission_criteria
+6. C 層驗證：比對 talent_profile 加分項
+7. 輸出驗證報告（含是否同意龍蝦的評級）
+```
+
+### 生成顧問績效統計
+
+```
+1. GET /api/candidates?limit=2000
+2. 按 recruiter 分組
+3. 每位顧問統計：
+   - 負責候選人總數
+   - 各狀態分佈（未開始/聯繫/面試/送件/上職/婉拒/人才庫）
+   - 本週新增數
+   - 本週狀態推進數
+   - 上職數 / 送件數 = 成交率
+4. 輸出績效表
 ```
 
 ---
 
-## Step1ne 系統回報群（2026-03-16 設定）
+## 四、候選人必填欄位速查
 
-### Topic 1360 — Step1ne 系統回報
-- **群組**: HR AI招募自動化 (`-1003231629634`)
-- **Topic ID**: `1360`
-- **用途**: 內部人員回報 Step1ne 系統相關事項
-- **回報類型**:
-  - 🧠 學習中心新增（提示詞、組織圖、知識）
-  - 🐛 系統功能問題 / Bug
-  - 💡 功能需求建議
-- **我的角色**: 監聽 → 整理分類 → 在此 topic 回報並 tag @jackyyuqi
-- **回報格式**: 直接在 Topic 1360 回覆，並 tag @jackyyuqi
+| 欄位 | 說明 | 嚴重度 |
+|------|------|--------|
+| `name` | 姓名 | 🔴 |
+| `current_title` 或 `current_position` | 現職職稱 | 🔴 |
+| `current_company` | 現職公司 | 🔴 |
+| `skills` | 技能 | 🔴 |
+| `years_experience` | 年資 | 🔴 |
+| `work_history` | 工作經歷（JSON） | 🔴 |
+| `education_details` | 教育背景（JSON） | 🟡 |
+| `linkedin_url` 或 `github_url` | 外部連結擇一 | 🟡 |
+| `recruiter` | 負責顧問 | 🟡 |
+| `resume_files` | 履歷附件 | 🟡 |
+| `current_salary` / `expected_salary` | 薪資資訊 | 🔵 |
+| `job_search_status` | 求職狀態 | 🔵 |
+| `notice_period` | 到職時間 | 🔵 |
+
+---
+
+## 五、職缺必填欄位速查
+
+| 欄位 | 說明 | 嚴重度 |
+|------|------|--------|
+| `position_name` | 職缺名稱 | 🔴 |
+| `client_company` | 客戶公司 | 🔴 |
+| `job_description` | JD 描述 | 🔴 |
+| `key_skills` | 核心技能 | 🔴 |
+| `rejection_criteria` | 淘汰條件（A 層） | 🔴 |
+| `submission_criteria` | 送人條件（B 層） | 🔴 |
+| `talent_profile` | 人才畫像（C 層）| 🔴 |
+| `exclusion_keywords` | 排除關鍵字（A 層） | 🟡 |
+| `title_variants` | 職稱變體（A 層） | 🟡 |
+| `experience_required` | 經驗要求 | 🟡 |
+| `salary_min` / `salary_max` | 薪資帶 | 🟡 |
+| `interview_stages` | 面試輪數 | 🟡 |
+| `education_required` | 學歷要求 | 🔵 |
+| `language_required` | 語言要求 | 🔵 |
+
+---
+
+## 六、老闆授權後可用的寫入 API
+
+以下 API **僅在老闆明確授權後**才能使用：
+
+| 方法 | 端點 | 用途 |
+|------|------|------|
+| PATCH | `/api/candidates/:id` | 補填缺失欄位 |
+| PUT | `/api/jobs/:id` | 補填職缺欄位 |
+| POST | `/api/candidates/:id/interactions` | 標記稽核結果 |
+| POST | `/api/notifications` | 發送通知給顧問 |
+
+> **絕對禁止使用 DELETE。** 任何刪除操作都需要老闆親自處理。
