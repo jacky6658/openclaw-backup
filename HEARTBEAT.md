@@ -28,6 +28,18 @@ Header: X-OpenClaw-Key: openclaw-dev-key
 ```
 評分完成後 A/B → status: `AI推薦`，C/D → status: `備選人才`
 
-### 3. 其他定期檢查（暫不啟用）
+### 3. HR YuQi 監控（每次 Heartbeat）
+檢查 HR YuQi 運作狀況：
+```bash
+# 檢查 session lock
+ls ~/.openclaw/agents/hr-yuqi/sessions/*.lock 2>/dev/null
+# 檢查最新 log 錯誤
+tail -50 /tmp/openclaw/openclaw-$(date +%Y-%m-%d).log | grep -i "error\|hr-yuqi\|yuqi2"
+```
+- 發現 `.lock` 卡住 → 自動清除並通知
+- 發現 ERROR → 分析原因，能修自動修，不能修通知 Jacky
+- Session 長時間無回應（> 5 分鐘）→ 通知 Jacky
+
+### 4. 其他定期檢查（暫不啟用）
 - 郵件監控
 - 日曆提醒
