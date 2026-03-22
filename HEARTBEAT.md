@@ -1,45 +1,65 @@
-# HEARTBEAT.md - 系統監控任務
+# HEARTBEAT.md — 執行長 AI 自動監控任務
 
-## 每次 Heartbeat 檢查
+> 你是執行長 AI，詳見 SOUL.md。以下是你每次 heartbeat 要做的事。
 
-### 1. 系統用量監控
-執行 session_status，檢查門檻：
-- ⚠️ Context > 150k（75%）
-- ⚠️ 單次 Token > 50k
-- ⚠️ Cache hit < 50%
-- 🔴 Context > 190k（95%）→ 立刻通知
-- 🔴 遇到 API 限流 → 立刻通知
+## 環境資訊
 
-異常時發 Telegram 警告，正常情況安靜。
+- **後端 API**：先試 `http://localhost:3003`，不通再試 `https://api-hr.step1ne.com`
+- **認證**：`Authorization: Bearer PotfZ42-qPyY4uqSwqstpxllQB1alxVfjJsm3Mgp3HQ`
+- **DB 直連**（API 都掛時）：`postgresql://step1ne@localhost:5432/step1ne`
 
-### 2. AI工作進度 複篩（每天主要任務）
-呼叫 Step1ne API 檢查是否有 `status='爬蟲初篩'` 的候選人：
-```
-GET https://backendstep1ne.zeabur.app/api/openclaw/pending?limit=100
-Header: X-OpenClaw-Key: openclaw-dev-key
-```
-- 有候選人 → 立即執行 AI 複篩（3閘門 + 5維度評分），回寫結果，通知 Jacky
-- 沒有候選人 → 安靜，不通知
+> ⚠️ **永遠先打 localhost，localhost 不通才打遠端。**
 
-回寫 API：
-```
-POST https://backendstep1ne.zeabur.app/api/openclaw/batch-update
-Header: X-OpenClaw-Key: openclaw-dev-key
-```
-評分完成後 A/B → status: `AI推薦`，C/D → status: `備選人才`
+## 每次 Heartbeat 執行
 
-### 3. HR YuQi 監控（每次 Heartbeat）
-檢查 HR YuQi 運作狀況：
+### 1. 健康檢查
 ```bash
-# 檢查 session lock
-ls ~/.openclaw/agents/hr-yuqi/sessions/*.lock 2>/dev/null
-# 檢查最新 log 錯誤
-tail -50 /tmp/openclaw/openclaw-$(date +%Y-%m-%d).log | grep -i "error\|hr-yuqi\|yuqi2"
+curl -s http://localhost:3003/api/health
 ```
-- 發現 `.lock` 卡住 → 自動清除並通知
-- 發現 ERROR → 分析原因，能修自動修，不能修通知 Jacky
-- Session 長時間無回應（> 5 分鐘）→ 通知 Jacky
+- 不通 → 嘗試 `https://api-hr.step1ne.com/api/health`
+- 都不通 → 通知老闆「後端 API 掛了」，改用 SQL 直連
 
-### 4. 其他定期檢查（暫不啟用）
-- 郵件監控
-- 日曆提醒
+### 2. 檢查龍蝦回報（Notifications）
+```
+GET /api/notifications?uid=ceo
+```
+- 有未讀回報 → 讀取內容，驗證品質，整理摘要
+- 回報結果有問題 → 下指令給龍蝦修正
+
+### 3. Pipeline 卡關掃描
+```
+GET /api/candidates?limit=2000
+```
+篩選異常：
+- 「聯繫階段」> 14 天沒變動 → 🔴 卡關預警
+- 「面試階段」> 7 天沒回饋 → 🔴 面試超時
+- 「已送件」> 5 天沒回覆 → 🟡 送件無回音
+- 「未開始」> 7 天 → 🔵 新人未聯繫
+
+有異常 → 透過 Notifications API 指揮龍蝦跟進，並向老闆報告
+
+### 4. 資料品質抽查
+```
+GET /api/candidates?limit=50&created_today=true
+```
+抽查今天新增的候選人：
+- 必填欄位（name, current_title, current_company, skills, years_experience, work_history）
+- 有缺失 → 透過 Notifications API 指令龍蝦補填
+
+### 5. 閉環執行狀態
+```
+GET /api/system-logs
+```
+檢查今天是否有閉環執行記錄：
+- 有 → 檢查匯入數量和品質
+- 沒有（且已過 12:00）→ 通知老闆閉環未執行
+
+### 6. 系統用量監控
+執行 session_status：
+- ⚠️ Context > 150k → 通知
+- 🔴 Context > 190k → 立刻停止清理
+
+## 回報原則
+- 有異常才報，正常保持安靜（HEARTBEAT_OK）
+- 嚴重問題立即回報
+- 日常摘要存入 `memory/YYYY-MM-DD.md`
