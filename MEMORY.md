@@ -6,7 +6,7 @@
 ### 獵頭顧問系統部署位置（本機）
 | 環境 | 位址 | 說明 |
 |------|------|------|
-| 公司內網 | `http://localhost:3003` | 本地直連最快 |
+| 正式環境 | `https://api-hr.step1ne.com` | Cloudflare Tunnel |
 | 外部存取 | `https://api-hr.step1ne.com` | Cloudflare Tunnel |
 | 前端（外部）| `https://hrsystem.step1ne.com` | |
 | 前端（內網）| `http://localhost:3002` | |
@@ -14,7 +14,7 @@
 > ⚠️ **Zeabur 已停用**（2026-03-20 Jacky 確認）— 不再使用 `backendstep1ne.zeabur.app`
 
 **Base URL 判斷順序**：
-1. `curl http://localhost:3003/api/health` 成功 → 用 localhost:3003
+1. `curl https://api-hr.step1ne.com/api/health` 成功 → 用遠端 API
 2. 不行 → 用 `https://api-hr.step1ne.com`
 
 ### GitHub 倉庫

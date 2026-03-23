@@ -4,20 +4,16 @@
 
 ## 環境資訊
 
-- **後端 API**：先試 `http://localhost:3003`，不通再試 `https://api-hr.step1ne.com`
+- **後端 API**：`https://api-hr.step1ne.com`
 - **認證**：`Authorization: Bearer PotfZ42-qPyY4uqSwqstpxllQB1alxVfjJsm3Mgp3HQ`
-- **DB 直連**（API 都掛時）：`postgresql://step1ne@localhost:5432/step1ne`
-
-> ⚠️ **永遠先打 localhost，localhost 不通才打遠端。**
 
 ## 每次 Heartbeat 執行
 
 ### 1. 健康檢查
 ```bash
-curl -s http://localhost:3003/api/health
+curl -s https://api-hr.step1ne.com/api/health
 ```
-- 不通 → 嘗試 `https://api-hr.step1ne.com/api/health`
-- 都不通 → 通知老闆「後端 API 掛了」，改用 SQL 直連
+- 不通 → 通知老闆「後端 API 掛了」
 
 ### 2. 檢查龍蝦回報（Notifications）
 ```
