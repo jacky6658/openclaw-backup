@@ -244,7 +244,7 @@ YQ2/YQ3 保留舊格式日報。
 
 ### 爬蟲系統
 - Repo：https://github.com/jacky6658/headhunter-crawler
-- Web UI：`http://localhost:5000`
+- Web UI：`http://localhost:5001`
 - LinkedIn 4 層備援：Playwright → Google → Bing → Brave API
 
 ### OpenClaw 本地 AI API
